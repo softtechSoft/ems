@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="author" content="SoftTech">
+    <meta http-equiv="pragma" content="no-cache">
+    <title>ソフトテク株式会社-社内管理システム</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <link rel="shortcut" href="../public/icon.ico"/>
+    <link rel="shortcut icon" href="../public/icon.ico" type="image/x-icon"/>
+    <link rel="icon" href="../public/icon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="../public/public.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/index.css"/>
+    <script type="text/javascript" charset="UTF-8" src="../public/public.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="./js/index.js"></script>
+</head>
+<body>
+    <div class="title">
+        <h1>ソフトテク株式会社</h1>
+        <h2>Softtech&nbsp;co.&nbsp;,Ltd</h2>
+    </div>
+    <div class="login">
+        <h3>社内管理システム</h3>
+        <!--onblur 失去焦点的时候触发，onfocus获得焦点的时候触发-->
+        <input id="user" class="user" type="text" autocomplete="off" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="メールアドレス" title="メールアドレスを入力してください">
+        <p id="userMessage"></p>
+        <input id="password" class="password" type="password" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="パスワード" title="パスワードを入力してください">
+        <p id="passwordMessage"></p>
+        <button class="enter" onclick="login()">ログイン</button>
+    </div>
+    <footer>Copyright&nbsp;&copy;2020-2030&nbsp;Softtech&nbsp;All&nbsp;Rights&nbsp;Reserved.</footer>
+</body>
+</html>
