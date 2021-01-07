@@ -1,4 +1,4 @@
-package com.itsofttech.controller;
+package com.ems.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -17,8 +17,8 @@ import com.itsofttech.pojo.Employee;
 import com.itsofttech.service.CompanyService;
 import com.itsofttech.service.EmployeeService;
 
-//@RestController 标注类不会被视图解析器解析,可方便内部执行
-//@RequestMapping("/hello") 标注到类上会多一层路径
+//@RestController 鏍囨敞绫讳笉浼氳瑙嗗浘瑙ｆ瀽鍣ㄨВ鏋�,鍙柟渚垮唴閮ㄦ墽琛�
+//@RequestMapping("/hello") 鏍囨敞鍒扮被涓婁細澶氫竴灞傝矾寰�
 @Controller
 public class EmployeeController
 {

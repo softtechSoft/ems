@@ -1,4 +1,4 @@
-package com.itsofttech.pojo;
+package com.ems.entity;
 
 import java.io.Serializable;
 
