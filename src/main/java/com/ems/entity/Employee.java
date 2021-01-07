@@ -1,8 +1,6 @@
 package com.ems.entity;
 
-import java.io.Serializable;
-
-public class Employee implements Serializable
+public class Employee
 {
 	/**
 	 * 

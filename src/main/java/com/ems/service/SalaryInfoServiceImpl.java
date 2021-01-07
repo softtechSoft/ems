@@ -19,7 +19,4 @@ public class SalaryInfoServiceImpl implements SalaryInfoService
 	{
 		return salaryInfoMapper.querySalaryInfo(map);
 	}
-
-
-
 }

@@ -41,13 +41,10 @@ public class SalaryInfoController
 			salary = new SalaryInfo();
 		}
 
-		//検索出したコメントと情報を集める
 		Map<String,Object> map = new HashMap<>();
 		map.put("column", null);
 		map.put("data", salary);
-		//mapをjsonフォーマットに転換する
 		String result = jsonMapper.writeValueAsString(map);
-		//データを返す
 		return result;
 
 
