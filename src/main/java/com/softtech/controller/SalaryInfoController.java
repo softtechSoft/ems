@@ -25,9 +25,6 @@ public class SalaryInfoController
 	@ResponseBody
 	public String salaryinfo(@RequestParam("yearMonth") String yearMonth,HttpSession session) throws JsonProcessingException
 	{
-
-		session.setAttribute("employeeID", "E001");
-
 		ObjectMapper jsonMapper=new ObjectMapper();
 		//SQLのparam作成
 		Map<String,String> sqlParam = new HashMap<>();
@@ -46,8 +43,6 @@ public class SalaryInfoController
 		map.put("data", salary);
 		String result = jsonMapper.writeValueAsString(map);
 		return result;
-
-
 	}
 
 }

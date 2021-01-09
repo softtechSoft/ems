@@ -26,23 +26,22 @@ public class LoginController
 		Employee employee = new Employee();
 		ObjectMapper jsonMapper = new ObjectMapper();
 		Map<String,String> map = jsonMapper.readValue(data, Map.class);
-
-			employee = employeeService.queryEmployee(map.get("user"));
-			if(employee!=null)
+		employee = employeeService.queryEmployee(map.get("user"));
+		if(employee!=null)
+		{
+			if(map.get("password").equals(employee.getPassword()))
 			{
-				if(map.get("password").equals(employee.getPassword()))
-				{
-					session.setAttribute("userLoginInfo", employee.getMailAdress());
-					return "111";
-				}
-				else
-				{
-					return "002";
-				}
+				session.setAttribute("userLoginInfo", employee.getMailAdress());
+				return "111";
 			}
 			else
 			{
-				return "001";
+				return "002";
 			}
+		}
+		else
+		{
+			return "001";
+		}
 	}
 }

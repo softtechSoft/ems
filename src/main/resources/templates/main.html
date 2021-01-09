@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="author" content="SoftTech">
+    <meta http-equiv="pragma" content="no-cache">
+    <title>ソフトテク株式会社-社内管理システム</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <link rel="shortcut" th:href="@{/public/icon.ico}"/>
+    <link rel="shortcut icon" th:href="@{/public/icon.ico}" type="image/x-icon"/>
+    <link rel="icon" th:href="@{/public/icon.ico}" type="image/x-icon"/>
+	<link rel="stylesheet" type="text/css" media="screen" th:href="@{/public/public.css}"/>
+	<link rel="stylesheet" th:href="@{/main/iconfont/iconfont.css}">
+    <link rel="stylesheet" type="text/css" media="screen" th:href="@{/main/css/main.css}"/>
+    <script type="text/javascript" charset="UTF-8" th:src="@{/public/public.js}"></script>
+    <script type="text/javascript" charset="UTF-8" th:src="@{/main/js/main.js}"></script>
+</head>
+<body>
+	<header>
+		<div class="logo">
+			<img th:src="@{/main/images/logo.png}">
+		</div>
+		<ul>
+			
+		</ul>
+	</header>
+	<div class="right-block">
+		<div class="right-header">
+			<h1>社内管理システム</h1>
+			<div class="user">
+				<span class="iconfont icon">&#xe619;</span>ユーザー：<span >Admin</span>
+				<input type="button" class="exit" onclick="exit()" value="退出"/>
+			</div>
+		</div>
+		<div class="right-body">
+			<iframe src="../ems/public-body.html" ></iframe>
+		</div>
+	</div>
+</body>
+</html>
