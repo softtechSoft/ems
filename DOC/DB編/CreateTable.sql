@@ -25,7 +25,7 @@ drop table if exists ofcfunction;
 create table ofcfunction(
 functionID varchar(2) not null primary key comment'機能ID',
 functionName varchar(12) not null comment'機能名称',
-functionDisplayNm varchar(6) not null comment'機能表示名称',
+functionText varchar(200) not null comment'機能表示名称',
 authority varchar(1) not null comment'権限',
 functionLink varchar(50) not null comment'機能URL',
 displayNo varchar(2) comment'表示順',
@@ -33,6 +33,17 @@ deleteFlg varchar(1) not null comment'削除フラグ',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日'
 ) comment'機能情報';
+
+Insert into ofcfunction values
+('S1','社員情報管理' ,"<li title='employee'><a href='javascript:execute(this)'><span class='iconfont icon'>&#xe666;</span>社員情報管理</a></li>",'1','/employee','0' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S2','取引先情報管理' ,"<li title='company'><a href='javascript:execute(this)'><span class='iconfont icon'>&#xe65c;</span>取引先情報管理</a><li>",'1','/company','1' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S3','契約情報管理' ,"<li title='contract'><a href='javascript:execute(this)'><span class='iconfont icon'>&#xe65d;</span>契約情報管理</a><li>",'1','/contract','2' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S4','勤怠情報管理' ,"<li title='workInfo'><a href='javascript:execute(this)'><span class='iconfont icon'>&#xe672;</span>勤怠情報管理</a><li>",'1','/workInfo','3' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S5','請求情報管理' ,"<li title='claim'><a href='javascript:execute(this)'><span class='iconfont icon'>&#xe681;</span>請求情報管理</a><li>",'1','/claim','4' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S6','交通情報管理' ,"<li title='transport'><a href='javascript:execute(this)'><span class='iconfont icon'>&#xe612;</span>交通情報管理</a><li>",'1','/transport','6' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S7','給料情報管理' ,"<li title='salaryInfo'><a href='javascript:execute(this)'><span class='iconfont icon'>&#xe60c;</span>給料情報管理</a><li>",'1','/salaryInfo','7' ,'1',date_format(now(),'%Y%m%d') ,null),
+('A8','給料明細' ,"<li title='salaryInfo'><a href='javascript:execute(this)'><span class='iconfont icon'>&#xe60c;</span>給料明細</a><li>",'0','/salaryInfo','0' ,'1',date_format(now(),'%Y%m%d') ,null),
+('A9','パスワード変更' ,"<li title='salaryInfo'><a href='javascript:execute(this)'><span class='iconfont icon'>&#xe696;</span>パスワード変更</a><li>",'2','/salaryInfo','1' ,'0',date_format(now(),'%Y%m%d') ,null);
 
 drop table if exists company;
 create table company(

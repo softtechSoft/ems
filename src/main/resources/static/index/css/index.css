@@ -1,8 +1,9 @@
 body
 {
     background: url(../images/background.jpg) no-repeat;
-    background-position: center;
+    background-position: center top;
     background-attachment: fixed;
+    background-size:cover;
     font-family: "Microsoft YaHei";
     padding-top: 25px;
 }
