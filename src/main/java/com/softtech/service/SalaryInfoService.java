@@ -1,8 +1,8 @@
-package com.ems.service;
+package com.softtech.service;
 
 import java.util.Map;
 
-import com.ems.entity.SalaryInfo;
+import com.softtech.entity.SalaryInfo;
 
 public interface SalaryInfoService
 {

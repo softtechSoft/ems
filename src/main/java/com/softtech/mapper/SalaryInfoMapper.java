@@ -1,8 +1,9 @@
-package com.ems.mapper;
+package com.softtech.mapper;
 
 import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
-import com.ems.entity.SalaryInfo;
+
+import com.softtech.entity.SalaryInfo;
 
 @Mapper
 public interface SalaryInfoMapper

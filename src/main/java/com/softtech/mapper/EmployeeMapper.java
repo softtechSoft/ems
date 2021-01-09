@@ -1,10 +1,11 @@
-package com.ems.mapper;
+package com.softtech.mapper;
 
 import java.util.List;
 import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import com.ems.entity.Employee;
+
+import com.softtech.entity.Employee;
 
 @Mapper
 public interface EmployeeMapper

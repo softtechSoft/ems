@@ -1,4 +1,4 @@
-package com.ems.entity;
+package com.softtech.entity;
 
 public class Employee
 {

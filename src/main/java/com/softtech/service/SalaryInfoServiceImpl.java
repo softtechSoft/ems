@@ -1,12 +1,12 @@
-package com.ems.service;
+package com.softtech.service;
 
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ems.entity.SalaryInfo;
-import com.ems.mapper.SalaryInfoMapper;
+import com.softtech.entity.SalaryInfo;
+import com.softtech.mapper.SalaryInfoMapper;
 
 @Service
 public class SalaryInfoServiceImpl implements SalaryInfoService

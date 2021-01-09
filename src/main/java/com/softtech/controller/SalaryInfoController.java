@@ -1,4 +1,4 @@
-package com.ems.controller;
+package com.softtech.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ems.entity.SalaryInfo;
-import com.ems.service.SalaryInfoServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.softtech.entity.SalaryInfo;
+import com.softtech.service.SalaryInfoServiceImpl;
 @Controller
 public class SalaryInfoController
 {

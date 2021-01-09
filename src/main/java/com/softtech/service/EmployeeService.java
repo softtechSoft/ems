@@ -1,10 +1,10 @@
-package com.ems.service;
+package com.softtech.service;
 
 
 import java.util.List;
 import java.util.Map;
 
-import com.ems.entity.Employee;
+import com.softtech.entity.Employee;
 
 public interface EmployeeService 
 {

@@ -1,4 +1,4 @@
-package com.ems.controller;
+package com.softtech.controller;
 
 import java.util.Map;
 import javax.servlet.http.HttpSession;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ems.entity.Employee;
-import com.ems.service.EmployeeService;
+import com.softtech.entity.Employee;
+import com.softtech.service.EmployeeService;
 
 @Controller
 public class LoginController 
