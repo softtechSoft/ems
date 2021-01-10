@@ -4,7 +4,7 @@
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <!--namespace=Dao/Mapper-->      
-<mapper namespace="com.softtech.dao.EmployeeMapper">
+<mapper namespace="com.softtech.mapper.EmployeeMapper">
 	<select id="queryEmployee" parameterType="string" resultType="Employee">
 		select * from ems.employee where status = '0'
 		<if test = "email!=null">

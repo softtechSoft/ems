@@ -11,18 +11,15 @@ public class EmsInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception
 	{
-//		response.addHeader("Access-Control-Allow-Origin", "*");
-//		return true;
 		HttpSession session=request.getSession();
-		if(session.getAttribute("userLoginInfo")!=null)
+		if(session.getAttribute("userMailAdress")!=null)
 		{
-			response.sendRedirect("/main");
 			return true;
 		}
 		else
 		{
 			response.sendRedirect("/");
-			return true;
+			return false;
 		}
 	}
 }

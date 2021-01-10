@@ -14,27 +14,20 @@ function ajaxSend(model,url,func,varName,json)
     {
         if(xmlhttp.readyState==4 && xmlhttp.status==200)
         {
-            //如果无返回数据
-            if(xmlhttp.responseText=="null")
-            {
-                document.querySelector(".messagebox").style.display="block";
-            }
-            else
-            {
-                //如果有返回的数据转换为对象
-                func(xmlhttp.responseText);
-            }
+        	if(func!=null)
+        	{
+        		func(xmlhttp.responseText);
+        	}
         }
     }
-    //根据model执行发送方式
     if(model.toUpperCase()=="GET")
     {
-        xmlhttp.open("GET",url+(varName!=null&&varName!=""?("?"+varName+"="+json):""),true);
+        xmlhttp.open("GET",url+(varName!=null&&varName!=""?("?"+varName+"="+json):""),false);
         xmlhttp.send();
     }
     else if(model.toUpperCase()=="POST")
     {
-        xmlhttp.open("POST",url,true);
+        xmlhttp.open("POST",url,false);
         xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;"); 
         xmlhttp.send(varName+"="+json);
     }
