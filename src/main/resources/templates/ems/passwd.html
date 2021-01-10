@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" th:href="@{src/public/public.css}">
+	<link rel="stylesheet" th:href="@{src/ems/css/passwd.css}">
+	<script type="text/javascript" th:src="@{src/ems/js/passwd.js}"></script>
+</head>
+<body>
+	<header>
+		<h3>パスワード変更</h3>
+	</header>
+	<div id="boder" class="boder">
+		<div class="wapper">
+			<input id="OldPassword" class="password" type="password" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="古いパスワード" title="古いパスワードを入力してください">
+			<p id="OldPasswordMessage"></p>
+			<input id="FirstPassword" class="password" type="password" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="新しいパスワード" title="新しいパスワードを入力してください">
+			<input id="SecondNewPassword" class="password" type="password" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="再確認パスワード" title="再確認パスワードを入力してください">
+			<p id="PasswordMessage"></p>
+		</div>
+		<div class="button">
+			<button class="enter" onclick="check()">確認</button>
+			<button class="cancel" onclick="cancel()">キャンセル</button>
+		</div>
+	</div>
+</body>
+</html>

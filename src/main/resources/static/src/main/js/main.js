@@ -9,6 +9,10 @@ function()
     bodyblock.style.height=window.innerHeight-88+"px";
     window.addEventListener('resize', function(){leftblock.style.height=window.innerHeight+"px";rightblock.style.height=window.innerHeight+"px";bodyblock.style.height=window.innerHeight-88+"px";},false);    
 },false);
+function navigation(actor)
+{
+	document.getElementById("iframe").src=actor;
+}
 function exit()
 {
     ajaxSend("GET","/exit");

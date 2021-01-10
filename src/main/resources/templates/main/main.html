@@ -22,8 +22,8 @@
 		<div class="logo">
 			<img th:src="@{/src/main/images/logo.png}">
 		</div>
-		<ul th:each="ofcfunction:${list}">
-			<li th:utext="${ofcfunction.functionText}"></li>
+		<ul>
+			<li th:each="ofcfunction:${list}" th:utext="${ofcfunction.functionText}" th:onclick="navigation([[${ofcfunction.functionLink}]])"></li>
 		</ul>
 	</header>
 	<div class="right-block">
@@ -35,7 +35,7 @@
 			</div>
 		</div>
 		<div class="right-body">
-		<iframe th:src="@{/welcome}"></iframe>
+		<iframe id="iframe" th:src="@{/welcome}"></iframe>
 		</div>
 	</div>
 </body>

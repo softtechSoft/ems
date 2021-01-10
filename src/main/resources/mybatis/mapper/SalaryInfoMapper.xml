@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softtech.mapper.SalaryInfoMapper">
+
+	<select id="queryAllSalaryInfo" parameterType="string" resultType="SalaryInfo">
+		select * from ems.salaryinfo
+	</select>
+
+	<select id="querySalaryInfo" parameterType="map" resultType="SalaryInfo">
+		select e.employeeName,s.* from salaryInfo s inner join employee e on s.employeeID = e.employeeID and s.employeeID=#{employeeID} and month=#{yearMonth}
+	</select>
+
+	<update id="updateSalaryInfo" parameterType="map">
+		update ems.salaryinfo set password = #{password} where employeeID=#{employeeID}
+	</update>
+
+	<insert id="uploadSalaryInfo" parameterType="string">
+		${slry}
+	</insert>
+	<select id="querySalaryInfoComment" resultType="SalaryInfoComment">
+		select COLUMN_NAME columnName, COLUMN_COMMENT comment from INFORMATION_SCHEMA.COLUMNS Where table_name = 'employee' AND table_schema = 'ems' AND column_Name like "employeeName" union all select COLUMN_NAME columnName, COLUMN_COMMENT comment from INFORMATION_SCHEMA.COLUMNS Where table_name = 'salaryInfo' AND table_schema = 'ems';
+	</select>
+</mapper>
