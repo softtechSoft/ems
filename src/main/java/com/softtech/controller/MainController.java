@@ -23,11 +23,17 @@ public class MainController
 	MainService mainService;
 	
 	@RequestMapping("/main")
-	public String emsMain(Model model) throws JsonProcessingException
+	public String emsMain(Model model,HttpSession session) throws JsonProcessingException
 	{
-		List<Ofcfunction> list= mainService.queryOfcfunction("0");
+		List<Ofcfunction> list= mainService.queryOfcfunction((String)session.getAttribute("userAuthority"));
 		model.addAttribute("list", list);
-		return "/main";
+		return "/main/main";
+	}
+	
+	@RequestMapping("/welcome")
+	public String welcome()
+	{
+		return "/main/welcome";
 	}
 	
 	@RequestMapping("/exit")

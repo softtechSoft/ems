@@ -1,0 +1,29 @@
+body
+{
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden; 
+    overflow-y:hidden;
+}
+header
+{
+    background-color: #ffffff;
+    margin: 0px;
+    height: 80px;
+}
+
+.boder
+{
+    width: 96%;
+    height: 630px;
+    margin-left: 2%;
+    background-color: #ffffff;
+    border: #d8d7d7 solid 1px;
+    margin-top: 40px;
+    font-size: 22px;
+    font-weight: 400;
+    text-align: center;
+    line-height: 600px;
+    color: #868686;
+}
+

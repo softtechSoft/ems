@@ -22,8 +22,8 @@
 		<div class="logo">
 			<img th:src="@{/src/main/images/logo.png}">
 		</div>
-		<ul>
-			
+		<ul th:each="ofcfunction:${list}">
+			<li th:utext="${ofcfunction.functionText}"></li>
 		</ul>
 	</header>
 	<div class="right-block">
@@ -35,6 +35,7 @@
 			</div>
 		</div>
 		<div class="right-body">
+		<iframe th:src="@{/welcome}"></iframe>
 		</div>
 	</div>
 </body>
