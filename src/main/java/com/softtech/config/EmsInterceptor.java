@@ -18,7 +18,6 @@ public class EmsInterceptor implements HandlerInterceptor{
 		}
 		else
 		{
-			response.sendRedirect("/");
 			return false;
 		}
 	}

@@ -15,12 +15,27 @@ import com.softtech.entity.Employee;
 import com.softtech.entity.Ofcfunction;
 import com.softtech.service.EmployeeService;
 
+/**
+ * 概要：ログイン機能
+ *
+ * 作成者：○○@ソフトテク
+ * 作成日：2021/1/13
+ */
 @Controller
 public class LoginController 
 {
 	@Autowired
 	private EmployeeService employeeService;
 	
+	
+/**
+ * 機能：ログイン画面初期化と遷移
+ *
+ * @param session
+ * @return /indexと/main
+ * @exception なし
+ * @author ○○@ソフトテク
+ */
 	@RequestMapping("/")
 	public String login(HttpSession session)
 	{
@@ -33,9 +48,17 @@ public class LoginController
 			return "/index";
 		}
 	}
-	
+
+/**
+ * 機能：ログイン判断
+ *
+ * @param dataとsession
+ * @return "111"と"002"と"001"
+ * @exception JsonMappingException
+ * @author ○○@ソフトテク 
+ */
 	@RequestMapping("/enter")
-	@ResponseBody
+	@ResponseBody		
 	public String enter(@RequestParam("data") String data,HttpSession session) throws JsonMappingException, JsonProcessingException 
 	{ 
 		Employee employee = new Employee();
@@ -52,7 +75,7 @@ public class LoginController
 				return "111";
 			}
 			else
-			{
+			{	
 				return "002";
 			}
 		}

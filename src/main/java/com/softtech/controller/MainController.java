@@ -15,6 +15,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.softtech.entity.Ofcfunction;
 import com.softtech.service.MainService;
 
+/**
+ * 概要：画面遷移機能
+ *
+ * 作成者：○○@ソフトテク
+ * 作成日：2021/1/13
+ */
 @Controller
 public class MainController 
 {
@@ -22,20 +28,52 @@ public class MainController
 	@Qualifier("mainServiceImpl")
 	MainService mainService;
 	
+	/**
+	 * 機能：画面初期化と遷移
+	 *
+	 * @param modelとsession
+	 * @return /mainと/index
+	 * @exception JsonProcessingException
+	 * @author ○○@ソフトテク
+	 */
 	@RequestMapping("/main")
 	public String emsMain(Model model,HttpSession session) throws JsonProcessingException
 	{
-		List<Ofcfunction> list= mainService.queryOfcfunction((String)session.getAttribute("userAuthority"));
-		model.addAttribute("list", list);
-		return "/main/main";
+		if(session.getAttribute("userMailAdress")!=null) 
+		{
+			List<Ofcfunction> list= mainService.queryOfcfunction((String)session.getAttribute("userAuthority"));
+			model.addAttribute("list", list);
+			return "/main/main";
+		}
+		else 
+		{
+			return "redirect:/index";
+		}
 	}
 	
+	
+	/**
+	 * 機能：画面遷移
+	 *
+	 * @param なし
+	 * @return /welcome
+	 * @exception なし
+	 * @author ○○@ソフトテク
+	 */
 	@RequestMapping("/welcome")
 	public String welcome()
 	{
 		return "/main/welcome";
 	}
 	
+	/**
+	 * 機能：画面遷移
+	 *
+	 * @param session
+	 * @return /welcome
+	 * @exception なし
+	 * @author ソフトテク教育グループ 
+	 */
 	@RequestMapping("/exit")
 	@ResponseBody
 	public void exit(HttpSession session)

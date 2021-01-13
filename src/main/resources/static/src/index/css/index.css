@@ -20,7 +20,7 @@ body
     color: #006e6b;
 }
 h1
-{
+{	
     font-size: 27px;
     font-weight: 500;
     line-height: 2px;
@@ -105,10 +105,12 @@ p
     cursor:pointer;
     border-radius: 20px;
 }
-.enter:hover {
+.enter:hover 
+{
     background-color: #ff0000;
 }
-.enter:active {
+.enter:active 
+{
     background-color: #000000;
 }
 footer

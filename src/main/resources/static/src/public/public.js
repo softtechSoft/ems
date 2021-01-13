@@ -1,4 +1,3 @@
-//向服务端请求,model(请求方式)，url(请求地址),func(处理函数),varName(传递参数名)，data(传递的参数)
 function ajaxSend(model,url,func,varName,json)
 {
     var xmlhttp;

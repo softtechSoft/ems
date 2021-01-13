@@ -10,11 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softtech.entity.SalaryInfo;
 import com.softtech.entity.SalaryInfoComment;
 import com.softtech.service.SalaryInfoServiceImpl;
 
+/**
+ * 概要：給料明細機能
+ *
+ * 作成者：○○@ソフトテク
+ * 作成日：2021/1/13
+ */
 @Controller
 public class SalaryInfoController
 {
@@ -27,6 +34,14 @@ public class SalaryInfoController
 		return "/ems/salarydetails";
 	}
 	
+/**
+ * 機能：給料明細
+ *
+ * @param yearMonthとsession
+ * @return result
+ * @exception JsonMappingException
+ * @author ○○@ソフトテク
+ */
 	@RequestMapping("/request-salarydetails")
 	@ResponseBody
 	public String salaryinfo(@RequestParam("yearMonth") String yearMonth,HttpSession session) throws JsonProcessingException

@@ -4,8 +4,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="stylesheet" th:href="@{src/public/public.css}">
-	<link rel="stylesheet" th:href="@{src/ems/css/passwd.css}">
+	<link rel="stylesheet" th:href="@{/src/public/public.css}">
+	<link rel="stylesheet" th:href="@{/src/ems/css/passwd.css}">
+	<script type="text/javascript" th:src="@{src/public/public.js}"></script>
 	<script type="text/javascript" th:src="@{src/ems/js/passwd.js}"></script>
 </head>
 <body>
@@ -14,15 +15,24 @@
 	</header>
 	<div id="boder" class="boder">
 		<div class="wapper">
-			<input id="OldPassword" class="password" type="password" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="古いパスワード" title="古いパスワードを入力してください">
-			<p id="OldPasswordMessage"></p>
-			<input id="FirstPassword" class="password" type="password" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="新しいパスワード" title="新しいパスワードを入力してください">
-			<input id="SecondNewPassword" class="password" type="password" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="再確認パスワード" title="再確認パスワードを入力してください">
-			<p id="PasswordMessage"></p>
+			<input id="oldPassword" class="password" type="password" onfocus="messageStyleRestore('oldPasswordMessage')" placeholder="古いパスワード" title="古いパスワードを入力してください">
+			<p id="oldPasswordMessage"></p>
+			<input id="firstPassword" class="password" type="password" onfocus="messageStyleRestore('firstPasswordMessage')" placeholder="新しいパスワード" title="新しいパスワードを入力してください">
+			<p id="firstPasswordMessage"></p>
+			<input id="secondPassword" class="password" type="password" onfocus="messageStyleRestore('secondPasswordMessage')" placeholder="再確認パスワード" title="再確認パスワードを入力してください">
+			<p id="secondPasswordMessage"></p>
 		</div>
 		<div class="button">
-			<button class="enter" onclick="check()">確認</button>
+			<button class="enter" onclick="chengePsw()">確認</button>
 			<button class="cancel" onclick="cancel()">キャンセル</button>
+		</div>
+	</div>
+	<div class="messagebox">
+		<div class="messagecanvas">
+			<div class="message-header"><span class="message-exit" onclick="messagetExit()">×</span></div>
+			<div id="message-img" class="message-img"><img id="mylogo" th:src="@{./src/ems/images/triumph.gif}" alt=""></div>
+			<div class="message">パスワードが変更されました</div>
+			<div class="message-button"><button class="message-quit" onclick="messagetExit()">確認</button></div>
 		</div>
 	</div>
 </body>

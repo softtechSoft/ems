@@ -22,9 +22,7 @@
 		joinedTime = #{joinedTime},postCode = #{postCode},address = #{address},phoneNumber = #{phoneNumber},
 		authority = #{authority},mailAdress = #{mailAdress} where employeeID =#{employeeID}
 	</update>
-	
-	
-	
+		
 	<update id="updateStatus" parameterType="map">
 		update ems.employee set status = '9' where employeeID =#{employeeID}
 	</update>
