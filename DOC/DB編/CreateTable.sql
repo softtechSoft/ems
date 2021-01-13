@@ -43,7 +43,7 @@ Insert into ofcfunction values
 ('S6','交通情報管理' ,"<a><span class='iconfont icon'>&#xe612;</span>交通情報管理</a>",'1','/transport','6' ,'1',date_format(now(),'%Y%m%d') ,null),
 ('S7','給料情報管理' ,"<a><span class='iconfont icon'>&#xe60c;</span>給料情報管理</a>",'1','/salaryInfo','7' ,'1',date_format(now(),'%Y%m%d') ,null),
 ('A8','給料明細' ,"<a><span class='iconfont icon'>&#xe60c;</span>給料明細</a>",'0','/salaryInfo','0' ,'1',date_format(now(),'%Y%m%d') ,null),
-('A9','パスワード変更' ,"<a><span class='iconfont icon'>&#xe696;</span>パスワード変更</a>",'2','/salaryInfo','1' ,'0',date_format(now(),'%Y%m%d') ,null);
+('A9','パスワード変更' ,"<a><span class='iconfont icon'>&#xe696;</span>パスワード変更</a>",'2','/salaryInfo','99' ,'0',date_format(now(),'%Y%m%d') ,null);
 
 drop table if exists company;
 create table company(
