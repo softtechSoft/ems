@@ -158,11 +158,4 @@ public class SalaryInfo
 	public void setSum(String sum) {
 		this.sum = sum;
 	}
-	public String getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
-	}
-	private String updateDate="0";
 }

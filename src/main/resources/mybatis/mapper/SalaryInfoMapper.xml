@@ -21,6 +21,6 @@
 		${slry}
 	</insert>
 	<select id="querySalaryInfoComment" resultType="SalaryInfoComment">
-		select COLUMN_NAME columnName, COLUMN_COMMENT comment from INFORMATION_SCHEMA.COLUMNS Where table_name = 'employee' AND table_schema = 'ems' AND column_Name like "employeeName" union all select COLUMN_NAME columnName, COLUMN_COMMENT comment from INFORMATION_SCHEMA.COLUMNS Where table_name = 'salaryInfo' AND table_schema = 'ems';
+		select COLUMN_NAME columnName, COLUMN_COMMENT comment from INFORMATION_SCHEMA.COLUMNS Where table_name = 'employee' AND table_schema = 'ems' AND COLUMN_NAME like "employeeName" union all select COLUMN_NAME columnName, COLUMN_COMMENT comment from INFORMATION_SCHEMA.COLUMNS Where table_name = 'salaryInfo' AND table_schema = 'ems' AND COLUMN_NAME not like 'deleteFlg' AND COLUMN_NAME not like 'insertDate' AND COLUMN_NAME not like 'updateDate';
 	</select>
 </mapper>
