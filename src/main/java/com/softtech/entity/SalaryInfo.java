@@ -25,9 +25,6 @@ public class SalaryInfo
 	private String rental="0";
 	private String rentalMgmtFee="0";
 	private String sum="0";
-	private String deleteFlg="0";
-	private String insertDate="0";
-
 
 	public String getEmployeeName() {
 		return employeeName;
@@ -160,18 +157,6 @@ public class SalaryInfo
 	}
 	public void setSum(String sum) {
 		this.sum = sum;
-	}
-	public String getDeleteFlg() {
-		return deleteFlg;
-	}
-	public void setDeleteFlg(String deleteFlg) {
-		this.deleteFlg = deleteFlg;
-	}
-	public String getInsertDate() {
-		return insertDate;
-	}
-	public void setInsertDate(String insertDate) {
-		this.insertDate = insertDate;
 	}
 	public String getUpdateDate() {
 		return updateDate;
