@@ -41,6 +41,13 @@
       "unicode_decimal": 58898
     },
     {
+      "icon_id": "5485634",
+      "name": "列表",
+      "font_class": "liebiao",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
       "icon_id": "6063124",
       "name": "合同",
       "font_class": "huabanfuben",

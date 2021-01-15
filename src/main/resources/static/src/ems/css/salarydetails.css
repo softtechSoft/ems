@@ -1,10 +1,3 @@
-body
-{
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden; 
-    overflow-y:hidden;
-}
 header
 {
     background-color: #ffffff;
@@ -91,10 +84,12 @@ a:active
     background-color: #ffffff;
     border: #d8d7d7 solid 1px;
     margin-top: 20px;
+    margin-bottom: 58px;
 }
 .salryinfo-table
 {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     margin: auto;
 }
 .salryinfo-table tr td

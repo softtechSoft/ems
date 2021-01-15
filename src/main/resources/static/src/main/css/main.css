@@ -1,44 +1,40 @@
-html
-{
-    width: 100%;
-    overflow-y: hidden;
-}
 body
 {
-    min-width: 1600px;
-    min-height: 800px;
+	height: 100%;
 }
-
 .logo
 {
     background-color: #00B38B;
-    width: 100%;
-    height:88px;
+    width:100%;
+    min-width: 110px;
+    height:40px;
+    padding-top:70px;
+    background-image:url(../images/logo.png);
+    background-repeat:no-repeat;
+    background-size:80px;
+    background-position:center 18px;
+    color: #ffffff;
+    font-size: 22px;
+    text-align:center;
 }
-.logo img
-{
-    width: 150px;
-    height: 28px;
-    margin-top:32px;
-    margin-left:16%;
-}
-
 header
 {
-    float: left;
-    width:12%;
+	position: fixed;
+    width: 12%;
+    height: 100%;
     background-color: #313541;
+    left:0px;
 }
 
 ul
 {
-    width: 100%;
+	width:150px;
+    margin:auto;
     margin-top: 14px;
 }
 ul li
 {
-    width: 100%;
-    padding-left: 20%;
+    width: 150px;
 }
 ul li a
 {
@@ -53,31 +49,38 @@ ul li a .icon
 }
 .right-block
 {
-    float: left;
+    float: right;
     width: 88%;
+    height: 100%;
     overflow: hidden;
 }
 .right-header
 {
-    height: 88px;
+    height: 110px;
     border-bottom: #e5e4ee solid 1px;
+}
+.list
+{
+	font-size:26px;
+	position:fixed;
 }
 h1
 {
-    display: block;
-    float: left;
     font-weight: normal;
     font-size: 28px;
     color: #454545;
     margin-left: 2%;
-    line-height: 40px;
+    margin-top:0px;
+    margin-bottom:0px;
+    padding-top:29px;
 }
 .user
 {
-    float: right;
-    margin-top: 32px;
-    margin-right: 20px;
+	text-align: right;
+	width: 100%;
+	height: 20px;
     color: #000000;
+    margin-top:14px;
 }
 .user *
 {
@@ -90,17 +93,18 @@ h1
 .user .icon
 {
     font-size: 20px;
-    margin-right: 12px;
+    margin:0px 0px;
 }
 .exit
 {
     width: 50px;
-border-color:#333333;
+	border-color:#333333;
     background-color: #333333;
     color: #ffffff;
-
+    margin-right:2%;
 }
 .right-body
 {
     background-color: #f6f5fa;
+    height: calc(100vh - 110px);
 }

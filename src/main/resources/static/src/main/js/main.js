@@ -1,14 +1,30 @@
 window.addEventListener('DOMContentLoaded',
 function()
 {
-    var leftblock=document.querySelector('header');
-    leftblock.style.height=window.innerHeight+"px";
-    var rightblock=document.querySelector('.right-block');
-    rightblock.style.height=window.innerHeight+"px";
-    var bodyblock=document.querySelector('.right-body');
-    bodyblock.style.height=window.innerHeight-88+"px";
-    window.addEventListener('resize', function(){leftblock.style.height=window.innerHeight+"px";rightblock.style.height=window.innerHeight+"px";bodyblock.style.height=window.innerHeight-88+"px";},false);    
+	if(window.innerWidth<1230)
+	{
+		document.getElementById("header").style.left="-200px";
+		document.getElementById("right-block").style.width="100%";
+		document.getElementById("company").style.textAlign="center";
+	}
+    window.addEventListener('resize', 
+    	function()
+    	{
+    		if(window.innerWidth<1230)
+    		{
+    			document.getElementById("header").style.left="-150px";
+    			document.getElementById("right-block").style.width="100%";
+    			document.getElementById("company").style.textAlign="center";
+    		}
+    		else
+    		{
+    			document.getElementById("header").style.left="0px";
+    			document.getElementById("right-block").style.width="88%";
+    			document.getElementById("company").style.textAlign="left";
+    		}
+    	},false);    
 },false);
+				
 function navigation(actor)
 {
 	document.getElementById("iframe").src=actor;

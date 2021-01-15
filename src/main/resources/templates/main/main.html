@@ -18,19 +18,18 @@
     <script type="text/javascript" charset="UTF-8" th:src="@{/src/main/js/main.js}"></script>
 </head>
 <body>
-	<header>
-		<div class="logo">
-			<img th:src="@{/src/main/images/logo.png}">
-		</div>
+	<header id="header">
+		<div class="logo">ソフトテク</div>
 		<ul>
 			<li th:each="ofcfunction:${list}" th:utext="${ofcfunction.functionText}" th:onclick="navigation([[${ofcfunction.functionLink}]])"></li>
 		</ul>
 	</header>
-	<div class="right-block">
+	<div id="right-block" class="right-block">
 		<div class="right-header">
-			<h1>社内管理システム</h1>
+			<a class="iconfont list">&#xe60d;</a>
+			<h1 id="company">社内管理システム</h1>
 			<div class="user">
-				<span class="iconfont icon">&#xe619;</span>ユーザー：<span th:text="${session.userMailAdress}">Admin</span>
+				<span class="iconfont icon">&#xe619;</span><span th:text="${session.userMailAdress}">Admin</span>
 				<input type="button" class="exit" onclick="exit()" value="退出"/>
 			</div>
 		</div>

@@ -15,16 +15,16 @@
 	</header>
 	<div id="boder" class="boder">
 		<div class="wapper">
-			<input id="oldPassword" class="password" type="password" onfocus="messageStyleRestore('oldPasswordMessage')" placeholder="古いパスワード" title="古いパスワードを入力してください">
+			<input id="oldPassword" class="password" type="password" maxlength="6" onfocus="messageStyleRestore('oldPasswordMessage')" placeholder="古いパスワード" title="古いパスワードを入力してください">
 			<p id="oldPasswordMessage"></p>
-			<input id="firstPassword" class="password" type="password" onfocus="messageStyleRestore('firstPasswordMessage')" placeholder="新しいパスワード" title="新しいパスワードを入力してください">
+			<input id="firstPassword" class="password" type="password" maxlength="6" onfocus="messageStyleRestore('firstPasswordMessage')" placeholder="新しいパスワード" title="新しいパスワードを入力してください">
 			<p id="firstPasswordMessage"></p>
-			<input id="secondPassword" class="password" type="password" onfocus="messageStyleRestore('secondPasswordMessage')" placeholder="再確認パスワード" title="再確認パスワードを入力してください">
+			<input id="secondPassword" class="password" type="password" maxlength="6" onfocus="messageStyleRestore('secondPasswordMessage')" placeholder="再確認パスワード" title="再確認パスワードを入力してください">
 			<p id="secondPasswordMessage"></p>
-		</div>
-		<div class="button">
+			<div class="button">
 			<button class="enter" onclick="chengePsw()">確認</button>
 			<button class="cancel" onclick="cancel()">キャンセル</button>
+			</div>
 		</div>
 	</div>
 	<div class="messagebox">

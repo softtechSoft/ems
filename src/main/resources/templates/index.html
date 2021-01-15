@@ -25,7 +25,7 @@
         <h3>社内管理システム</h3>
         <input id="user" class="user" type="text" autocomplete="off" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="メールアドレス" title="メールアドレスを入力してください">
         <p id="userMessage"></p>
-        <input id="password" class="password" type="password" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="パスワード" title="パスワードを入力してください">    
+        <input id="password" class="password" type="password" maxlength="6" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="パスワード" title="パスワードを入力してください">    
         <p id="passwordMessage"></p>
         <button class="enter" onclick="login()">ログイン</button>
     </div>

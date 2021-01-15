@@ -17,9 +17,9 @@ mailAdress varchar(20) not null comment'メール',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日')comment'社員情報';
 Insert into employee values
-(“E001” ,”王明” ,”123456” ,”0” ,”0” ,”19860101” ,”34“,”20190101“,”2“,”2310859“,”横浜市中区“,”07012344321“,”0“, “ming@gmail.com”,date_format(now(),'%Y%m%d') ,null),
-(“E002” ,”王光” ,”123456” ,”0” ,”0” ,”19860102” ,”34“,”20190101“,”2“,”2310859“,”横浜市中区“,”07012344322“,”0“, “guang@gmail.com”,date_format(now(),'%Y%m%d') ,null),
-(“E003” ,”王明光” ,”123456” ,”0” ,”0” ,”19860103” ,”34“,”20190101“,”2“,”2310859“,”横浜市中区“,”07012344323“,”0“,“wang@gmail.com”,date_format(now(),'%Y%m%d') ,null);
+('E001' ,'王明' ,'123456' ,'0' ,'0' ,'19860101' ,'34','20190101','2','2310859','横浜市中区','07012344321','0', 'ming@gmail.com',date_format(now(),'%Y%m%d') ,null),
+('E002' ,'王光' ,'123456' ,'0' ,'0' ,'19860102' ,'34','20190101','2','2310859','横浜市中区','07012344322','0', 'guang@gmail.com',date_format(now(),'%Y%m%d') ,null),
+('E003' ,'王明光' ,'123456' ,'0' ,'0' ,'19860103' ,'34','20190101','2','2310859','横浜市中区','07012344323','0','wang@gmail.com',date_format(now(),'%Y%m%d') ,null);
 
 drop table if exists ofcfunction;
 create table ofcfunction(
@@ -61,9 +61,9 @@ level varchar(1) comment'評判レベル',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日')comment'取引先情報';
 Insert into company values
-(“C001”,”木の葉隠れの里株式会社”,”0”,”2310859“,”横浜市西区“,”20200101”,”07012340000“,”火影綱手“, “aaa@gmail.com”,”0”,”0”,date_format(now(), '%Y%m%d'), null),
-(“C002”,”霧隠れの里株式会社”,”0”,”2310859“,”横浜市西区“,”20200101”,”07012340001“,”水影照美冥“, “bbb@gmail.com”,”0”,”0”,date_format(now(), '%Y%m%d'), null),
-(“C003”,”岩隠れの里株式会社”,”0”,”2310859“,”横浜市西区“,”20200101”,”07012340001“,”土影大野木“, “ccc@gmail.com”,”0”,”0”,date_format(now(), '%Y%m%d'), null);
+('C001','木の葉隠れの里株式会社','0','2310859','横浜市西区','20200101','07012340000','火影綱手', 'aaa@gmail.com','0','0',date_format(now(), '%Y%m%d'), null),
+('C002','霧隠れの里株式会社','0','2310859','横浜市西区','20200101','07012340001','水影照美冥', 'bbb@gmail.com','0','0',date_format(now(), '%Y%m%d'), null),
+('C003','岩隠れの里株式会社','0','2310859','横浜市西区','20200101','07012340001','土影大野木', 'ccc@gmail.com','0','0',date_format(now(), '%Y%m%d'), null);
 
 drop table if exists contract;
 create table contract(
@@ -87,9 +87,9 @@ updateDate varchar(8) comment'更新日',
 foreign key(employeeID) references employee(employeeID) on delete restrict on update cascade,
 foreign key(companyID) references company(companyID) on delete restrict on update cascade)comment'契約情報';
 Insert into contract values
-(“CT001“,”火遁忍術開発支援”,”E001”,”C001”,600000,”0”,150,1000,200,1000,”20210101”,”20210131”,”10”,”0”,” 火遁忍術開発支援”, date_format(now(), '%Y%m%d'), null),
-(“CT002“,”水遁忍術開発支援”,”E002”,”C002”,600000,”0”,150,1000,200,1000,”20210101”,”20210131”,”10”,”0”,” 水遁忍術開発支援”, date_format(now(), '%Y%m%d'), null),
-(“CT003“,”水遁忍術開発支援”,”E003”,”C003”,600000,”0”,150,1000,200,1000,”20210101”,”20210131”,”10”,”0”,” 土遁忍術開発支援”, date_format(now(), '%Y%m%d'), null);
+('CT001','火遁忍術開発支援','E001','C001',600000,'0',150,1000,200,1000,'20210101','20210131','10','0',' 火遁忍術開発支援', date_format(now(), '%Y%m%d'), null),
+('CT002','水遁忍術開発支援','E002','C002',600000,'0',150,1000,200,1000,'20210101','20210131','10','0',' 水遁忍術開発支援', date_format(now(), '%Y%m%d'), null),
+('CT003','水遁忍術開発支援','E003','C003',600000,'0',150,1000,200,1000,'20210101','20210131','10','0',' 土遁忍術開発支援', date_format(now(), '%Y%m%d'), null);
 
 drop table if exists workInfo;
 create table workInfo(
@@ -109,9 +109,9 @@ primary key(workInfoID,contractID,workMonth),
 foreign key(contractID) references contract(contractID) on delete restrict on update cascade)comment'勤怠情報';
 drop table if exists claim;
 Insert into workInfo values
-(“W001”,”CT001”,”202101”,”20210101”,”20210131”,180,”D:\\Sheet\\”,10000,2500,”D:\\TName\\”, date_format(now(), '%Y%m%d'), null),
-(“W002”,”CT002”,”202101”,”20210101”,”20210131”,180,”D:\\Sheet\\”,10000,2500,”D:\\TName\\”, date_format(now(), '%Y%m%d'), null),
-(“W003”,”CT003”,”202101”,”20210101”,”20210131”,180,”D:\\Sheet\\”,10000,2500,”D:\\TName\\”, date_format(now(), '%Y%m%d'), null);
+('W001','CT001','202101','20210101','20210131',180,'D:\\Sheet\\',10000,2500,'D:\\TName\\', date_format(now(), '%Y%m%d'), null),
+('W002','CT002','202101','20210101','20210131',180,'D:\\Sheet\\',10000,2500,'D:\\TName\\', date_format(now(), '%Y%m%d'), null),
+('W003','CT003','202101','20210101','20210131',180,'D:\\Sheet\\',10000,2500,'D:\\TName\\', date_format(now(), '%Y%m%d'), null);
 
 create table claim(
 claimID varchar(10) not null primary key comment'請求ID',
