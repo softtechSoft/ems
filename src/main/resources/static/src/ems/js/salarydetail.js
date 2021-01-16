@@ -51,6 +51,6 @@ function querytData()
     {
         yearMonth=year.value+""+month.value;
     }
-    ajaxSend("get","/request-salarydetails",inserttable,"yearMonth",yearMonth);
+    ajaxSend("get","/request-salarydetail",inserttable,"yearMonth",yearMonth);
 }
 

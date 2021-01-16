@@ -28,10 +28,10 @@ public class SalaryInfoController
 	@Autowired
 	SalaryInfoServiceImpl salaryInfoService;
 
-	@RequestMapping("/salarydetails")
+	@RequestMapping("/salarydetail")
 	public String salarydetails()
 	{
-		return "/ems/salarydetails";
+		return "/ems/salarydetail";
 	}
 	
 /**
@@ -42,7 +42,7 @@ public class SalaryInfoController
  * @exception JsonMappingException
  * @author ○○@ソフトテク
  */
-	@RequestMapping("/request-salarydetails")
+	@RequestMapping("/request-salarydetail")
 	@ResponseBody
 	public String salaryinfo(@RequestParam("yearMonth") String yearMonth,HttpSession session) throws JsonProcessingException
 	{
