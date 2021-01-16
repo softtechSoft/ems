@@ -35,15 +35,15 @@ updateDate varchar(8) comment'更新日'
 ) comment'機能情報';
 
 Insert into ofcfunction values
-('S1','社員情報管理' ,"<a><span class='iconfont icon'>&#xe666;</span>社員情報管理</a>",'1','/employee','0' ,'0',date_format(now(),'%Y%m%d') ,null),
-('S2','取引先情報管理' ,"<a><span class='iconfont icon'>&#xe65c;</span>取引先情報管理</a>",'1','/company','1' ,'0',date_format(now(),'%Y%m%d') ,null),
-('S3','契約情報管理' ,"<a><span class='iconfont icon'>&#xe65d;</span>契約情報管理</a>",'1','/contract','2' ,'1',date_format(now(),'%Y%m%d') ,null),
-('S4','勤怠情報管理' ,"<a><span class='iconfont icon'>&#xe672;</span>勤怠情報管理</a>",'1','/workInfo','3' ,'1',date_format(now(),'%Y%m%d') ,null),
-('S5','請求情報管理' ,"<a><span class='iconfont icon'>&#xe681;</span>請求情報管理</a>",'1','/claim','4' ,'1',date_format(now(),'%Y%m%d') ,null),
-('S6','交通情報管理' ,"<a><span class='iconfont icon'>&#xe612;</span>交通情報管理</a>",'1','/transport','6' ,'1',date_format(now(),'%Y%m%d') ,null),
-('S7','給料情報管理' ,"<a><span class='iconfont icon'>&#xe60c;</span>給料情報管理</a>",'1','/salaryInfo','7' ,'1',date_format(now(),'%Y%m%d') ,null),
-('A8','給料明細' ,"<a><span class='iconfont icon'>&#xe60c;</span>給料明細</a>",'0','/salarydetails','0' ,'0',date_format(now(),'%Y%m%d') ,null),
-('A9','パスワード変更' ,"<a><span class='iconfont icon'>&#xe696;</span>パスワード変更</a>",'2','/passwd','99' ,'0',date_format(now(),'%Y%m%d') ,null);
+('S1','employee' ,"&#xe666;&emsp;社員情報管理",'1','/employee','0' ,'0',date_format(now(),'%Y%m%d') ,null),
+('S2','company' ,"&#xe65c;&emsp;取引先情報管理",'1','/company','1' ,'0',date_format(now(),'%Y%m%d') ,null),
+('S3','contract' ,"&#xe65d;&emsp;契約情報管理",'1','/contract','2' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S4','workInfo' ,"&#xe672;&emsp;勤怠情報管理",'1','/workInfo','3' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S5','claim' ,"&#xe681;&emsp;請求情報管理",'1','/claim','4' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S6','transport' ,"&#xe612;&emsp;交通情報管理",'1','/transport','6' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S7','salaryInfo' ,"&#xe60c;&emsp;給料情報管理",'1','/salaryInfo','7' ,'1',date_format(now(),'%Y%m%d') ,null),
+('A8','salarydetails' ,"&#xe60c;&emsp;給料明細",'0','/salarydetails','0' ,'0',date_format(now(),'%Y%m%d') ,null),
+('A9','password' ,"&#xe696;&emsp;パスワード変更",'2','/passwd','99' ,'0',date_format(now(),'%Y%m%d') ,null);
 
 drop table if exists company;
 create table company(

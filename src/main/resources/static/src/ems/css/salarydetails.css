@@ -7,8 +7,8 @@ h3
 {
     margin: 0px;
     line-height: 60px;
-    font-weight: normal;
-    font-size: 22px;
+    font-weight: 500;
+    font-size: 18px;
     color: #454545;
     margin-left: 2%;
 }
@@ -79,7 +79,7 @@ a:active
 .table
 {
     width: 96%;
-    height: 640px;
+    height: 630px;
     margin-left: 2%;
     background-color: #ffffff;
     border: #d8d7d7 solid 1px;
@@ -91,12 +91,13 @@ a:active
     width: 100%;
     max-width: 400px;
     margin: auto;
+    margin-top:36px;
 }
 .salryinfo-table tr td
 {
     width: 200px;
 }
-.salryinfo-table tr:nth-child(even)
+.salryinfo-table tr:nth-child(odd)
 {
     background-color:#e5d9b6;
 }

@@ -3,12 +3,19 @@ header
     background-color: #ffffff;
     margin: 0px;
     height: 60px;
+    line-height: 60px;
+	font-weight: 500;
+    font-size: 18px;
+    color: #454545;
 }
-
+.employeeName
+{
+	margin-left: 2%;
+}
 .boder
 {
     width: 96%;
-    height: 640px;
+    height: 630px;
     margin-left: 2%;
     background-color: #ffffff;
     border: #d8d7d7 solid 1px;
@@ -20,4 +27,3 @@ header
     line-height: 600px;
     color: #868686;
 }
-

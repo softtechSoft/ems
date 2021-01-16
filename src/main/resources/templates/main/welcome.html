@@ -6,9 +6,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link rel="stylesheet" th:href="@{src/public/public.css}">
 	<link rel="stylesheet" th:href="@{src/welcome/css/welcome.css}">
+	<script type="text/javascript" charset="UTF-8" th:src="@{/src/welcome/js/welcome.js}"></script>
 </head>
 <body>
 	<header>
+		<span class="employeeName" th:text="${session.userEmployeeName}">Admin</span><span id="greet"></span>
 	</header>
 	<div id="boder" class="boder">ようこそ！</div>
 </body>

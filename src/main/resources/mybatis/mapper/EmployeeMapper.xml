@@ -13,7 +13,7 @@
 	</select>
 	
 	<update id="updatePassword" parameterType="map">
-		update ems.employee set password = #{password} where mailAdress=#{email}
+		update ems.employee set password = #{password},updateDate = date_format(now(),'%Y%m%d') where mailAdress=#{email}
 	</update>
 
   	<update id="updateEmployee" parameterType="map">

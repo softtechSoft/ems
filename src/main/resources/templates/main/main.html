@@ -17,24 +17,34 @@
     <script type="text/javascript" charset="UTF-8" th:src="@{/src/public/public.js}"></script>
     <script type="text/javascript" charset="UTF-8" th:src="@{/src/main/js/main.js}"></script>
 </head>
-<body>
+<body th:onload="onload([[${session.userUpdatePsw}]])">
 	<header id="header">
+		<button id="menuBlur" class="iconfont list" onclick="menuBlur()">&#xe60d;</button>
 		<div class="logo">ソフトテク</div>
 		<ul>
-			<li th:each="ofcfunction:${list}" th:utext="${ofcfunction.functionText}" th:onclick="navigation([[${ofcfunction.functionLink}]])"></li>
+			<li th:each="ofcfunction:${list}" th:id="${ofcfunction.functionName}" th:onclick="navigation([[${ofcfunction.functionLink}]]);onStyle(this)"><span class='iconfont icon' th:utext="${ofcfunction.functionText}">TEXT</span></li>
 		</ul>
 	</header>
+	<div id="shade" class="shade" onclick="menuBlur()"></div>
 	<div id="right-block" class="right-block">
-		<div class="right-header">
-			<a class="iconfont list">&#xe60d;</a>
-			<h1 id="company">社内管理システム</h1>
+		<button id="menu" class="iconfont list" onclick="menu()">&#xe60d;</button>
+		<div id="right-header" class="right-header">
+			<h1 id="sysTitle">社内管理システム</h1>
 			<div class="user">
 				<span class="iconfont icon">&#xe619;</span><span th:text="${session.userMailAdress}">Admin</span>
 				<input type="button" class="exit" onclick="exit()" value="退出"/>
 			</div>
 		</div>
-		<div class="right-body">
+		<div id="right-body" class="right-body">
 		<iframe id="iframe" th:src="@{/welcome}"></iframe>
+		</div>
+	</div>
+	<div id="messagebox" class="messagebox">
+		<div class="messagecanvas">
+			<div class="message-header"><span class="message-exit" onclick="messagetExit()">×</span></div>
+			<div id="message-img" class="message-img"><img id="mylogo" th:src="@{./src/ems/images/please.gif}" alt=""></div>
+			<div class="message">初期パスワードを変更ください</div>
+			<div class="message-button"><button class="message-quit" onclick="toPasswd()">確認</button></div>
 		</div>
 	</div>
 </body>

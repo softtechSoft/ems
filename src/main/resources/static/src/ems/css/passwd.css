@@ -12,15 +12,15 @@ h3
 {
     margin: 0px;
     line-height: 60px;
-    font-weight: normal;
-    font-size: 22px;
+    font-weight: 500;
+    font-size: 18px;
     color: #454545;
     margin-left: 2%;
 }
 .boder
 {
     width: 96%;
-    height: 640px;
+    height: 630px;
     margin-left: 2%;
     background-color: #ffffff;
     border: #d8d7d7 solid 1px;
@@ -125,8 +125,8 @@ p
 .messagecanvas
 {
     background-color: #ffffff;
-    width: 410px;
-    height: 300px;
+    width: 360px;
+    height: 280px;
     position: fixed;
     margin: auto;
     top: 0px;
@@ -140,15 +140,15 @@ p
     width: 100px;
     height: 100px;
     margin: auto;
-    margin-top: 21px;
+    margin-top: 18px;
 }
 .message
 {
     width: 342px;
-    height: 46px;
+    height: 40px;
     margin: auto;
     color: #454545;
-    margin-top: 20px;
+    margin-top: 18px;
     font-size: 16px;
     text-align: center;
 }
@@ -164,7 +164,7 @@ p
     height: 34px;
     font-size: 16px;
     border: 0px;
-    background-color: #0571f7;
+    background-color: #5867dd;
     color: #ffffff;
     cursor: pointer;
     outline: none;
@@ -176,8 +176,4 @@ p
 .message-quit:active
 {
 	background-color: #484949;
-}
-.message-quit
-{
-    background-color: #5867dd;
 }

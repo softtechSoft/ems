@@ -48,10 +48,8 @@ public class PasswdController
 	public String updatePasswd(@Param("data") String data,HttpSession session) throws JsonMappingException, JsonProcessingException
 	{
 		Employee employee = employeeService.queryEmployee((String)session.getAttribute("userMailAdress"));
-		
 		ObjectMapper jsonMapper = new ObjectMapper();
 		Map<String,String> dataMap = jsonMapper.readValue(data, Map.class);
-		
 		if(!employee.getPassword().equals(dataMap.get("oldPsw")))
 		{
 			return "001";
@@ -66,6 +64,7 @@ public class PasswdController
 			{
 				return "001";
 			}
+			session.removeAttribute("userUpdatePsw");
 			return "111";
 		}
 	}

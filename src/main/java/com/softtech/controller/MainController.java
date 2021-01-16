@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.softtech.entity.Employee;
 import com.softtech.entity.Ofcfunction;
+import com.softtech.service.EmployeeService;
 import com.softtech.service.MainService;
 
 /**

@@ -27,7 +27,6 @@ public class LoginController
 	@Autowired
 	private EmployeeService employeeService;
 	
-	
 /**
  * 機能：ログイン画面初期化と遷移
  *
@@ -61,10 +60,9 @@ public class LoginController
 	@ResponseBody		
 	public String enter(@RequestParam("data") String data,HttpSession session) throws JsonMappingException, JsonProcessingException 
 	{ 
-		Employee employee = new Employee();
 		ObjectMapper jsonMapper = new ObjectMapper();
 		Map<String,String> map = jsonMapper.readValue(data, Map.class);
-		employee = employeeService.queryEmployee(map.get("user"));
+		Employee employee = employeeService.queryEmployee(map.get("user"));
 		if(employee!=null)
 		{
 			if(map.get("password").equals(employee.getPassword()))
@@ -72,6 +70,11 @@ public class LoginController
 				session.setAttribute("userMailAdress", employee.getMailAdress());
 				session.setAttribute("userEmoplyeeID", employee.getEmployeeID());
 				session.setAttribute("userAuthority", employee.getAuthority());
+				session.setAttribute("userEmployeeName", employee.getEmployeeName());
+				if(employee.getUpdateDate()==null)
+				{
+					session.setAttribute("userUpdatePsw", "false");
+				}
 				return "111";
 			}
 			else

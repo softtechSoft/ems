@@ -1,4 +1,3 @@
-var timeClean;
 window.addEventListener('DOMContentLoaded',
 function()
 {
