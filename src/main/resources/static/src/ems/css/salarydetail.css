@@ -93,9 +93,31 @@ a:active
     margin: auto;
     margin-top:36px;
 }
+.salryinfo-table tbody
+{
+	display:block;
+	height:554px;
+	overflow-y:scroll;
+}
+.salryinfo-table tbody::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+}
+.salryinfo-table tbody::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.0);
+    background: rgba(0,0,0,0.1);
+}
+.salryinfo-table tbody::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.0);
+    border-radius: 0;
+    background: rgba(0,0,0,0.0);
+}
 .salryinfo-table tr td
 {
     width: 200px;
+    line-height:21px;
+    font-size:16px;
 }
 .salryinfo-table tr:nth-child(odd)
 {

@@ -32,7 +32,6 @@ function inserttable(data)
     var table = document.getElementById("salaryinfo-table");
     table.innerHTML="";
     var insertTr;
-    console.log(data["column"]);
     for(var num=0;num<data["column"].length;num++)
     {
         insertTr = table.insertRow(num);
