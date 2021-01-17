@@ -1,10 +1,6 @@
 package com.ems;
 
-import java.util.Date;
-
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
 @ContextConfiguration
