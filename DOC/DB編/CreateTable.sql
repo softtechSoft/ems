@@ -185,7 +185,7 @@ updateDate  varchar(8) comment'更新日',
 primary key(employeeID,month),
 foreign key(employeeID) references employee(employeeID) on delete restrict on update cascade)comment'給料情報';
 insert into salaryInfo values
-("E001","202101","20210215",200000,1000,0,10000,0,0,"無理由",5000,5000,5000,5000,5000,5000,10000,10000,10000,10000,1000000,"0", date_format(now(), '%Y%m%d'), null);
+("E001","202001","20200215",200000,1000,0,10000,0,0,"無理由",5000,5000,5000,5000,5000,5000,10000,10000,10000,10000,1000000,"0", date_format(now(), '%Y%m%d'), null);
 
 drop table if exists transport;
 create table transport(

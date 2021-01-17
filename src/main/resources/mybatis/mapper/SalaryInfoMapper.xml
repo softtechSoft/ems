@@ -21,6 +21,9 @@
 		${slry}
 	</insert>
 	<select id="querySalaryInfoComment" resultType="SalaryInfoComment">
-		select COLUMN_NAME columnName, COLUMN_COMMENT comment from INFORMATION_SCHEMA.COLUMNS Where table_name = 'employee' AND table_schema = 'ems' AND COLUMN_NAME like "employeeName" union all select COLUMN_NAME columnName, COLUMN_COMMENT comment from INFORMATION_SCHEMA.COLUMNS Where table_name = 'salaryInfo' AND table_schema = 'ems' AND COLUMN_NAME not like 'deleteFlg' AND COLUMN_NAME not like 'insertDate' AND COLUMN_NAME not like 'updateDate';
+		select COLUMN_NAME columnName, COLUMN_COMMENT comment from INFORMATION_SCHEMA.COLUMNS
+		<where>
+		(table_name='employee' AND table_schema='ems' AND COLUMN_NAME="employeeName")or(table_name='salaryInfo' AND table_schema='ems' AND COLUMN_NAME!='deleteFlg' AND COLUMN_NAME!='insertDate' AND COLUMN_NAME!='updateDate')
+		</where>
 	</select>
 </mapper>
