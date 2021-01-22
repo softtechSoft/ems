@@ -54,37 +54,37 @@ public class SalaryInfo
 		return base;
 	}
 	public void setBase(String base) {
-		this.base = String.format("%,d", Integer.parseInt(base));
+		this.base = String.format("%,d円", Integer.parseInt(base));
 	}
 	public String getOverTimePlus() {
 		return overTimePlus;
 	}
 	public void setOverTimePlus(String overTimePlus) {
-		this.overTimePlus = String.format("%,d", Integer.parseInt(overTimePlus));
+		this.overTimePlus = String.format("%,d円", Integer.parseInt(overTimePlus));
 	}
 	public String getShortageReduce() {
 		return shortageReduce;
 	}
 	public void setShortageReduce(String shortageReduce) {
-		this.shortageReduce = String.format("%,d", Integer.parseInt(shortageReduce));
+		this.shortageReduce = String.format("%,d円", Integer.parseInt(shortageReduce));
 	}
 	public String getTransportExpense() {
 		return transportExpense;
 	}
 	public void setTransportExpense(String transportExpense) {
-		this.transportExpense = String.format("%,d", Integer.parseInt(transportExpense));
+		this.transportExpense = String.format("%,d円", Integer.parseInt(transportExpense));
 	}
 	public String getAllowancePlus() {
 		return allowancePlus;
 	}
 	public void setAllowancePlus(String allowancePlus) {
-		this.allowancePlus = String.format("%,d", Integer.parseInt(allowancePlus));
+		this.allowancePlus = String.format("%,d円", Integer.parseInt(allowancePlus));
 	}
 	public String getAllowanceReduce() {
 		return allowanceReduce;
 	}
 	public void setAllowanceReduce(String allowanceReduce) {
-		this.allowanceReduce = String.format("%,d", Integer.parseInt(allowanceReduce));
+		this.allowanceReduce = String.format("%,d円", Integer.parseInt(allowanceReduce));
 	}
 	public String getAllowanceReason() {
 		return allowanceReason;
@@ -96,66 +96,66 @@ public class SalaryInfo
 		return welfareSelf;
 	}
 	public void setWelfareSelf(String welfareSelf) {
-		this.welfareSelf = String.format("%,d", Integer.parseInt(welfareSelf));
+		this.welfareSelf = String.format("%,d円", Integer.parseInt(welfareSelf));
 	}
 	public String getWelfareComp() {
 		return welfareComp;
 	}
 	public void setWelfareComp(String welfareComp) {
-		this.welfareComp = String.format("%,d", Integer.parseInt(welfareComp));
+		this.welfareComp = String.format("%,d円", Integer.parseInt(welfareComp));
 	}
 	public String getWelfareBaby() {
 		return welfareBaby;
 	}
 	public void setWelfareBaby(String welfareBaby) {
-		this.welfareBaby = String.format("%,d", Integer.parseInt(welfareBaby));
+		this.welfareBaby = String.format("%,d円", Integer.parseInt(welfareBaby));
 	}
 	public String getEplyInsSelf() {
 		return eplyInsSelf;
 	}
 	public void setEplyInsSelf(String eplyInsSelf) {
-		this.eplyInsSelf = String.format("%,d", Integer.parseInt(eplyInsSelf));
+		this.eplyInsSelf = String.format("%,d円", Integer.parseInt(eplyInsSelf));
 	}
 	public String getEplyInsComp() {
 		return eplyInsComp;
 	}
 	public void setEplyInsComp(String eplyInsComp) {
-		this.eplyInsComp = String.format("%,d", Integer.parseInt(eplyInsComp));
+		this.eplyInsComp = String.format("%,d円", Integer.parseInt(eplyInsComp));
 	}
 	public String getEplyInsWithdraw() {
 		return eplyInsWithdraw;
 	}
 	public void setEplyInsWithdraw(String eplyInsWithdraw) {
-		this.eplyInsWithdraw = String.format("%,d", Integer.parseInt(eplyInsWithdraw));
+		this.eplyInsWithdraw = String.format("%,d円", Integer.parseInt(eplyInsWithdraw));
 	}
 	public String getWithholdingTax() {
 		return withholdingTax;
 	}
 	public void setWithholdingTax(String withholdingTax) {
-		this.withholdingTax = String.format("%,d", Integer.parseInt(withholdingTax));
+		this.withholdingTax = String.format("%,d円", Integer.parseInt(withholdingTax));
 	}
 	public String getMunicipalTax() {
 		return municipalTax;
 	}
 	public void setMunicipalTax(String municipalTax) {
-		this.municipalTax = String.format("%,d", Integer.parseInt(municipalTax));
+		this.municipalTax = String.format("%,d円", Integer.parseInt(municipalTax));
 	}
 	public String getRental() {
 		return rental;
 	}
 	public void setRental(String rental) {
-		this.rental = String.format("%,d", Integer.parseInt(rental));
+		this.rental = String.format("%,d円", Integer.parseInt(rental));
 	}
 	public String getRentalMgmtFee() {
 		return rentalMgmtFee;
 	}
 	public void setRentalMgmtFee(String rentalMgmtFee) {
-		this.rentalMgmtFee = String.format("%,d", Integer.parseInt(rentalMgmtFee));
+		this.rentalMgmtFee = String.format("%,d円", Integer.parseInt(rentalMgmtFee));
 	}
 	public String getSum() {
 		return sum;
 	}
 	public void setSum(String sum) {
-		this.sum = String.format("%,d", Integer.parseInt(sum));
+		this.sum = String.format("%,d円", Integer.parseInt(sum));
 	}
 }

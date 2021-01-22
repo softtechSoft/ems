@@ -54,3 +54,4 @@ function querytData()
     ajaxSend("get","/request-salarydetail",inserttable,"yearMonth",yearMonth);
 }
 
+

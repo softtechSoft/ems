@@ -99,19 +99,16 @@ workMonth varchar(6) not null comment'稼働月',
 workStartDay varchar(8)	not null comment'稼働開始日',	
 workEndDay varchar(8) not null comment'稼働最終日',
 workTime int(3) not null comment'稼働時間',
-workSheet varchar(50) comment'稼働表パス',
-transport int(7) comment'交通費',
-businessTrip int(7) comment'出張旅費',
-BusinessTripName varchar(10) comment'出張旅費ファイル',
+workInfoFile varchar(50) comment'稼働表パス',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日',
 primary key(workInfoID,contractID,workMonth),
 foreign key(contractID) references contract(contractID) on delete restrict on update cascade)comment'勤怠情報';
 drop table if exists claim;
 Insert into workInfo values
-('W001','CT001','202101','20210101','20210131',180,'D:\\Sheet\\',10000,2500,'D:\\TName\\', date_format(now(), '%Y%m%d'), null),
-('W002','CT002','202101','20210101','20210131',180,'D:\\Sheet\\',10000,2500,'D:\\TName\\', date_format(now(), '%Y%m%d'), null),
-('W003','CT003','202101','20210101','20210131',180,'D:\\Sheet\\',10000,2500,'D:\\TName\\', date_format(now(), '%Y%m%d'), null);
+('W001','CT001','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null),
+('W002','CT002','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null),
+('W003','CT003','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null);
 
 create table claim(
 claimID varchar(10) not null primary key comment'請求ID',
@@ -197,20 +194,20 @@ transportFacility varchar(20) not null comment'交通機関(代表)',
 transportExpense int(6) not null comment'定期券金額(1ヶ月)',
 midStation1 varchar(20) comment'中間駅1',
 transportFacility1 varchar(20) comment'交通機関1',
-transportExpense1 int(6) comment'定期券金額1(1ヶ月)',
 midStation2 varchar(20) comment'中間駅2',
 transportFacility2 varchar(20) comment'交通機関2',
-transportExpense2 int(6) comment'定期券金額2(1ヶ月)',
 midStation3 varchar(20) comment'中間駅3',
 transportFacility3 varchar(20) comment'交通機関3',
-transportExpense3 int(6) comment'定期券金額3(1ヶ月)',
+transport int(7) comment'交通費',
+businessTrip int(7) comment'出張旅費',
+BusinessTripName varchar(10) comment'出張旅費ファイル',
 status varchar(1) not null comment'使用ステータス',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日',
 primary key(employeeID,startDate)
 ) comment'交通情報';
 insert into transport values
-("E001","20210101","西川口駅","銀座駅","京浜東北線",3000,"赤羽駅","埼京線",3000,"新宿駅","埼京線",2000,"新宿駅","丸の内線",2000,"0",date_format(now(), '%Y%m%d'), null);
+("E001","20210101","西川口駅","銀座駅","京浜東北線",3000,"赤羽駅","埼京線","新宿駅","埼京線","新宿駅","丸の内線",10000,2500,'D:\\TName\\',"0",date_format(now(), '%Y%m%d'), null);
 
 
 

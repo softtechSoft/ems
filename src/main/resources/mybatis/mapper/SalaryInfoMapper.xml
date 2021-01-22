@@ -21,9 +21,9 @@
 		${slry}
 	</insert>
 	<select id="querySalaryInfoComment" resultType="SalaryInfoComment">
-		select COLUMN_NAME columnName, COLUMN_COMMENT comment from INFORMATION_SCHEMA.COLUMNS
+		select COLUMN_NAME columnName, COLUMN_COMMENT comment , case when COLUMN_COMMENT ="社員氏名" then 1 when COLUMN_COMMENT="社員ID" then 2 when COLUMN_COMMENT="対象月" then 3 when COLUMN_COMMENT="支払日" then 4 when COLUMN_COMMENT="基本給" then 5 when COLUMN_COMMENT="残業加算" then 6 when COLUMN_COMMENT="稼働不足減" then 7 when COLUMN_COMMENT="交通費" then 8 when COLUMN_COMMENT="手当加算" then 9 when COLUMN_COMMENT="手当減算" then 10 when COLUMN_COMMENT="手当理由" then 11 when COLUMN_COMMENT="厚生控除個人" then 12 when COLUMN_COMMENT="厚生控除会社" then 13 when COLUMN_COMMENT="厚生控除子育(会社)" then 14 when COLUMN_COMMENT="雇用保険会社負担" then 15 when COLUMN_COMMENT="雇用保険個人負担" then 16 when COLUMN_COMMENT="雇用保拠出金（会社)" then 17 when COLUMN_COMMENT="社宅家賃控除" then 18 when COLUMN_COMMENT="社宅管理費控除" then 19 when COLUMN_COMMENT="源泉控除" then 20 when COLUMN_COMMENT="住民税控除" then 21 when COLUMN_COMMENT="総額" then 22 end inOrder from INFORMATION_SCHEMA.COLUMNS 
 		<where>
-		(table_name='employee' AND table_schema='ems' AND COLUMN_NAME="employeeName")or(table_name='salaryInfo' AND table_schema='ems' AND COLUMN_NAME!='deleteFlg' AND COLUMN_NAME!='insertDate' AND COLUMN_NAME!='updateDate')
+		(table_name='employee' AND table_schema='ems' AND COLUMN_NAME="employeeName")or(table_name='salaryInfo' AND table_schema='ems' AND COLUMN_NAME!='deleteFlg' AND COLUMN_NAME!='insertDate' AND COLUMN_NAME!='updateDate') order by inOrder
 		</where>
 	</select>
 </mapper>
