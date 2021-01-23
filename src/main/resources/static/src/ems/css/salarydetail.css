@@ -91,12 +91,12 @@ a:active
     width: 100%;
     max-width: 400px;
     margin: auto;
-    margin-top:36px;
+    margin-top:26px;
 }
 .salryinfo-table tbody
 {
 	display:block;
-	height:554px;
+	height:578px;
 	overflow-y:scroll;
 }
 .salryinfo-table tbody::-webkit-scrollbar {

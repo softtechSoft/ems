@@ -36,6 +36,7 @@ function inserttable(data)
     {
         insertTr = table.insertRow(num);
         insertTr.innerHTML = "<td>" + data["column"][num]["comment"] + "</td><td>"+ data["data"][data["column"][num]["columnName"]]+"</td>";
+
     }
 }
 function querytData()

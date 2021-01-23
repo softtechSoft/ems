@@ -61,11 +61,11 @@ function onStyle(actor)
 		if(node.tagName=="LI")
 		{
 			node.style.backgroundColor="transparent";
-			node.style.color="#707783";
+			node.style.color="#ffffff";
 		}
 	}
 	actor.style.backgroundColor="#272a34";
-	actor.style.color="#ffffff";
+	actor.style.color="#757474";
 }
 
 function menu()

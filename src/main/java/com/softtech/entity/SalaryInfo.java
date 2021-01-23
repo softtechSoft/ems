@@ -5,6 +5,7 @@ public class SalaryInfo
 {
 	private String employeeName="0";
 	private String employeeID="0";
+	private String address="0";
 	private String month="0";
 	private String paymentDate="0";
 	private String base="0";
@@ -42,13 +43,13 @@ public class SalaryInfo
 		return month;
 	}
 	public void setMonth(String month) {
-		this.month = String.format("%s年%s月",month.substring(0,4),month.substring(4,6));
+		this.month = String.format("%s/%s",month.substring(0,4),month.substring(4,6));
 	}
 	public String getPaymentDate() {
 		return paymentDate;
 	}
 	public void setPaymentDate(String paymentDate) {
-		this.paymentDate = String.format("%s年%s月%s日",paymentDate.substring(0,4),paymentDate.substring(4,6),paymentDate.substring(6,8));
+		this.paymentDate = String.format("%s/%s/%s",paymentDate.substring(0,4),paymentDate.substring(4,6),paymentDate.substring(6,8));
 	}
 	public String getBase() {
 		return base;
@@ -157,5 +158,11 @@ public class SalaryInfo
 	}
 	public void setSum(String sum) {
 		this.sum = String.format("%,d円", Integer.parseInt(sum));
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }
