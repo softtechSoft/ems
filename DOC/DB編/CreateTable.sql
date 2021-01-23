@@ -5,6 +5,7 @@ employeeName varchar(12) not null comment'社員氏名',
 password varchar(6) not null comment'パスワード',
 status varchar(1) not null comment'ステータス',
 sex varchar(1) comment'性別',
+epType varchar(1) not null comment'タイプ',
 birthday varchar(8) comment'生年月日',
 age varchar(2) comment'年齢',
 joinedDate varchar(8) comment'入社年月日',
@@ -17,9 +18,9 @@ mailAdress varchar(20) not null comment'メール',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日')comment'社員情報';
 Insert into employee values
-('E001' ,'王明' ,'123456' ,'0' ,'0' ,'19860101' ,'34','20190101','2','2310859','横浜市中区','07012344321','0', 'ming@gmail.com',date_format(now(),'%Y%m%d') ,null),
-('E002' ,'王光' ,'123456' ,'0' ,'0' ,'19860102' ,'34','20190101','2','2310859','横浜市中区','07012344322','0', 'guang@gmail.com',date_format(now(),'%Y%m%d') ,null),
-('E003' ,'王明光' ,'123456' ,'0' ,'0' ,'19860103' ,'34','20190101','2','2310859','横浜市中区','07012344323','0','wang@gmail.com',date_format(now(),'%Y%m%d') ,null);
+('E001' ,'王明' ,'123456' ,'0' ,'0','0','19860101' ,'34','20190101','2','2310859','横浜市中区','07012344321','0', 'ming@gmail.com',date_format(now(),'%Y%m%d') ,null),
+('E002' ,'王光' ,'123456' ,'0' ,'0' ,'0','19860102' ,'34','20190101','2','2310859','横浜市中区','07012344322','0', 'guang@gmail.com',date_format(now(),'%Y%m%d') ,null),
+('E003' ,'王明光' ,'123456' ,'0' ,'0' ,'0','19860103' ,'34','20190101','2','2310859','横浜市中区','07012344323','0','wang@gmail.com',date_format(now(),'%Y%m%d') ,null);
 
 drop table if exists ofcfunction;
 create table ofcfunction(
@@ -83,9 +84,9 @@ paymentTerm varchar(2) comment'支払サイト',
 postNeed varchar(1) comment'原本郵送フラグ',
 invoice varchar(50) comment'請求書名称',
 insertDate varchar(8) comment'作成日',
-updateDate varchar(8) comment'更新日',
-foreign key(employeeID) references employee(employeeID) on delete restrict on update cascade,
-foreign key(companyID) references company(companyID) on delete restrict on update cascade)comment'契約情報';
+updateDate varchar(8) comment'更新日'
+)comment'契約情報';
+
 Insert into contract values
 ('CT001','火遁忍術開発支援','E001','C001',600000,'0',150,1000,200,1000,'20210101','20210131','10','0',' 火遁忍術開発支援', date_format(now(), '%Y%m%d'), null),
 ('CT002','水遁忍術開発支援','E002','C002',600000,'0',150,1000,200,1000,'20210101','20210131','10','0',' 水遁忍術開発支援', date_format(now(), '%Y%m%d'), null),
@@ -96,20 +97,21 @@ create table workInfo(
 workInfoID varchar(10) not null  comment'稼働情報ID',
 contractID varchar(10) not null  comment'契約ID',
 workMonth varchar(6) not null comment'稼働月',
-workStartDay varchar(8)	not null comment'稼働開始日',	
+workStartDay varchar(8)	not null comment'稼働開始日',
 workEndDay varchar(8) not null comment'稼働最終日',
 workTime int(3) not null comment'稼働時間',
 workInfoFile varchar(50) comment'稼働表パス',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日',
-primary key(workInfoID,contractID,workMonth),
-foreign key(contractID) references contract(contractID) on delete restrict on update cascade)comment'勤怠情報';
-drop table if exists claim;
+primary key(workInfoID,contractID,workMonth)
+)comment'勤怠情報';
 Insert into workInfo values
 ('W001','CT001','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null),
 ('W002','CT002','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null),
 ('W003','CT003','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null);
 
+
+drop table if exists claim;
 create table claim(
 claimID varchar(10) not null primary key comment'請求ID',
 contractID varchar(10) not null comment'契約ID',
@@ -127,31 +129,8 @@ sum int(8) comment'合計',
 specialClaim int(8) comment'特別請求',
 claimStatus varchar(1) not null comment'請求ステータス',
 insertDate varchar(8) comment'作成日',
-updateDate varchar(8) comment'更新日',
-foreign key(contractID) references contract(contractID) on delete restrict on update cascade)comment'請求情報';
-
-Insert into claim
-Select concat("CM",substring(勤怠情報.workInfoID,2)),
-契約情報.contractID,
-勤怠情報.workMonth,
-勤怠情報.worktime,
-@exceTime:=if(勤怠情報.workTime>契約情報.upperTime,勤怠情報.workTime-契約情報.upperTime,0),
-@addpayOff:=upperPrice*@exceTime,
-@deficiTime:=if(勤怠情報.workTime<契約情報.lowerTime,契約情報.lowerTime-勤怠情報.workTime,0),
-@minusPayOff:=lowerPrice*@deficiTime,
-勤怠情報.transport,
-勤怠情報.businessTrip,
-10,
-@consumpTax:=if(@addpayOff>0,契約情報.price+@addpayOff,契約情報.price-@minusPayOff)*10/100,
-@consumpTax/10*110+勤怠情報.transport+勤怠情報.businessTrip,
-0,
-"2",
-date_format(now(),'%Y%m%d'),
-null
-from
-contract 契約情報,workInfo 勤怠情報
-where 契約情報.contractID=勤怠情報.contractID
-and 勤怠情報.workMonth = "202101";
+updateDate varchar(8) comment'更新日'
+)comment'請求情報';
 
 drop table if exists salaryInfo;
 create table salaryInfo(
@@ -171,18 +150,20 @@ welfareBaby int(6) comment'厚生控除子育(会社)',
 eplyInsSelf int(6) comment'雇用保険個人負担',
 eplyInsComp int(6) comment'雇用保険会社負担',
 eplyInsWithdraw int(6) comment'雇用保拠出金（会社)',
+wkAcccpsIns int(6) comment'労災保険（会社負担のみ）',
 withholdingTax int(6) comment'源泉控除',
 municipalTax int(6) comment'住民税控除',
 rental int(6) comment'社宅家賃控除',
-rentalMgmtFee int(6) comment'社宅管理費控除',
+rentalMgmtFee int(6) comment'社宅共益費控除',
 sum int(9) not null comment'総額',
+remark varchar(200) comment'備考',
 deleteFlg  varchar(1) comment'削除フラグ',
 insertDate  varchar(8) comment'作成日',
 updateDate  varchar(8) comment'更新日',
-primary key(employeeID,month),
-foreign key(employeeID) references employee(employeeID) on delete restrict on update cascade)comment'給料情報';
+primary key(employeeID,month)
+)comment'給料情報';
 insert into salaryInfo values
-("E001","202001","20200215",200000,1000,0,10000,0,0,"無理由",5000,5000,5000,5000,5000,5000,10000,10000,10000,10000,1000000,"0", date_format(now(), '%Y%m%d'), null);
+("E001","202001","20200215",200000,1000,0,10000,0,0,"無理由",5000,5000,5000,5000,5000,5000,10000,10000,10000,0,10000,1000000,"備考","0", date_format(now(), '%Y%m%d'), null);
 
 drop table if exists transport;
 create table transport(
