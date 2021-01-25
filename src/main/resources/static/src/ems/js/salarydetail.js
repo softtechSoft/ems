@@ -32,11 +32,19 @@ function inserttable(data)
     var table = document.getElementById("salaryinfo-table");
     table.innerHTML="";
     var insertTr;
-    for(var num=0;num<data["column"].length;num++)
+    for(var num=0,rows=0;num<data["column"].length;rows++,num++)
     {
-        insertTr = table.insertRow(num);
+    	if(rows==5||rows==19||rows==21)
+    	{
+    	   insertTr = table.insertRow(rows++);
+    	   
+    	}
+        insertTr = table.insertRow(rows);
+        if(rows==20)
+        {
+        	insertTr.style.fontWeight="700";
+        }
         insertTr.innerHTML = "<td>" + data["column"][num]["comment"] + "</td><td>"+ data["data"][data["column"][num]["columnName"]]+"</td>";
-
     }
 }
 function querytData()

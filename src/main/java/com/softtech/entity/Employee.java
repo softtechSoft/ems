@@ -20,6 +20,7 @@ public class Employee
 	private String phoneNumber;
 	private String authority;
 	private String mailAdress;
+	private String remark;
 	private String insertDate;
 	private String updateDate;
 	
@@ -152,5 +153,11 @@ public class Employee
 				+ joinedDate + ", joinedTime=" + joinedTime + ", postCode=" + postCode + ", address=" + address
 				+ ", phoneNumber=" + phoneNumber + ", authority=" + authority + ", mailAdress=" + mailAdress
 				+ ", insertDate=" + insertDate + ", updateDate=" + updateDate + "]";
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 }

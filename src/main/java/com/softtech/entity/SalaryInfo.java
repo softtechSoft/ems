@@ -16,16 +16,13 @@ public class SalaryInfo
 	private String allowanceReduce="0";
 	private String allowanceReason="0";
 	private String welfareSelf="0";
-	private String welfareComp="0";
-	private String welfareBaby="0";
 	private String eplyInsSelf="0";
-	private String eplyInsComp="0";
-	private String eplyInsWithdraw="0";
 	private String withholdingTax="0";
 	private String municipalTax="0";
 	private String rental="0";
 	private String rentalMgmtFee="0";
 	private String sum="0";
+	private String remark=" ";
 
 	public String getEmployeeName() {
 		return employeeName;
@@ -99,35 +96,11 @@ public class SalaryInfo
 	public void setWelfareSelf(String welfareSelf) {
 		this.welfareSelf = String.format("%,d円", Integer.parseInt(welfareSelf));
 	}
-	public String getWelfareComp() {
-		return welfareComp;
-	}
-	public void setWelfareComp(String welfareComp) {
-		this.welfareComp = String.format("%,d円", Integer.parseInt(welfareComp));
-	}
-	public String getWelfareBaby() {
-		return welfareBaby;
-	}
-	public void setWelfareBaby(String welfareBaby) {
-		this.welfareBaby = String.format("%,d円", Integer.parseInt(welfareBaby));
-	}
 	public String getEplyInsSelf() {
 		return eplyInsSelf;
 	}
 	public void setEplyInsSelf(String eplyInsSelf) {
 		this.eplyInsSelf = String.format("%,d円", Integer.parseInt(eplyInsSelf));
-	}
-	public String getEplyInsComp() {
-		return eplyInsComp;
-	}
-	public void setEplyInsComp(String eplyInsComp) {
-		this.eplyInsComp = String.format("%,d円", Integer.parseInt(eplyInsComp));
-	}
-	public String getEplyInsWithdraw() {
-		return eplyInsWithdraw;
-	}
-	public void setEplyInsWithdraw(String eplyInsWithdraw) {
-		this.eplyInsWithdraw = String.format("%,d円", Integer.parseInt(eplyInsWithdraw));
 	}
 	public String getWithholdingTax() {
 		return withholdingTax;
@@ -164,5 +137,11 @@ public class SalaryInfo
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 }
