@@ -138,6 +138,8 @@ employeeID varchar(6) not null  comment'社員ID',
 month  varchar(6) not null  comment'対象月',
 paymentDate  varchar(8) not null comment'支払日',
 base int(8) not null comment'基本給',
+overTime int(8) comment'残業時間',
+shortage int(8) comment'不足時間',
 overTimePlus int(8) comment'残業加算',
 shortageReduce int(8) comment'稼働不足減',
 transportExpense int(6) comment'交通費',
@@ -156,14 +158,15 @@ municipalTax int(6) comment'住民税控除',
 rental int(6) comment'社宅家賃控除',
 rentalMgmtFee int(6) comment'社宅共益費控除',
 sum int(9) not null comment'総額',
+totalFee int(9) not null comment'総費用',
 remark varchar(200) comment'備考',
 deleteFlg  varchar(1) comment'削除フラグ',
 insertDate  varchar(8) comment'作成日',
 updateDate  varchar(8) comment'更新日',
 primary key(employeeID,month)
 )comment'給料情報';
-insert into salaryInfo values
-("E001","202001","20200215",200000,1000,0,10000,0,0,"無理由",5000,5000,5000,5000,5000,5000,10000,10000,10000,0,10000,1000000,"備考","0", date_format(now(), '%Y%m%d'), null);
+Insert into salaryInfo (employeeID,month,paymentDate,base,overTime,shortage,overTimePlus,shortageReduce,transportExpense,allowancePlus,allowanceReduce,allowanceReason,welfareSelf,welfareComp,welfareBaby,eplyInsSelf,eplyInsComp,eplyInsWithdraw,wkAcccpsIns,withholdingTax,municipalTax,rental,rentalMgmtFee,sum,totalFee,remark,deleteFlg,insertDate,updateDate)
+values ('E001','202001','20200215',60000,0,0,0,0,0,0,0,'',0,0,0,0,0,0,0,0,0,0,0,60000,60000,'','0','20210122','20210122');
 
 drop table if exists transport;
 create table transport(
