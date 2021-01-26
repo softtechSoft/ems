@@ -11,10 +11,10 @@ age varchar(2) comment'年齢',
 joinedDate varchar(8) comment'入社年月日',
 joinedTime varchar(2) comment'社齢',
 postCode varchar(7) comment'郵便番号',
-address varchar(50) comment'住所',
+address varchar(200) comment'住所',
 phoneNumber varchar(15) comment'電話番号',
 authority varchar(1) comment'権限',
-mailAdress varchar(20) not null comment'メール',
+mailAdress varchar(40) not null comment'メール',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日')comment'社員情報';
 Insert into employee values
