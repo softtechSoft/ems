@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softtech.mapper.TransportMapper">
+	<select id="queryAllTransport" parameterType="string" resultType="Transport">
+		select * from ems.transport
+	</select>
+
+	<insert id="uploadTransport" parameterType="map">
+		insert into transport(employeeID,startDate,startStation,endStation,transportFacility,transportExpense,midStation1,transportFacility1,midStation2,midStation3,businessTrip,status,insertDate) values (#{employeeID},#{startDate},#{startStation},#{endStation},#{transportFacility},#{transportExpense},#{midStation1},#{transportFacility1},#{midStation2},#{midStation3},#{businessTrip},'0',date_format(now(),'%Y%m%d'))
+	</insert>
+</mapper>

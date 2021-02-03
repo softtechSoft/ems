@@ -2,10 +2,8 @@ package com.softtech.service;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.softtech.entity.SalaryInfo;
 import com.softtech.entity.SalaryInfoComment;
 import com.softtech.mapper.SalaryInfoMapper;

@@ -1,6 +1,5 @@
 package com.softtech.controller;
 
-import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softtech.entity.Employee;
-import com.softtech.entity.Ofcfunction;
 import com.softtech.service.EmployeeService;
 
 /**
