@@ -37,7 +37,7 @@ function()
         {
             login.style.left="65%";
             h1.innerHTML="ソフトテク株式会社";
-            h2.innerHTML="Softtech&nbsp;co.&nbsp;,Ltd";
+            h2.innerHTML="It-Softtech&nbsp;co.&nbsp;,Ltd";
             title.style.marginLeft="33px";
             title.style.backgroundPosition="left center";
         }
@@ -47,7 +47,7 @@ function()
         }
         else
         {	
-            footer.innerHTML='Copyright &copy;2015-2020 IT Soft-Tech All Rights Reserved.';
+            footer.innerHTML='Copyright &copy;2015-2020 It-Softtech All Rights Reserved.';
         }
     },false);
 },false);
