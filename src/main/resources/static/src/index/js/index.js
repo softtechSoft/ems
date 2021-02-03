@@ -36,7 +36,7 @@ function()
         else
         {
             login.style.left="65%";
-            h1.innerHTML="ソフトトップ株式会社";
+            h1.innerHTML="ソフトテク株式会社";
             h2.innerHTML="Softtech&nbsp;co.&nbsp;,Ltd";
             title.style.marginLeft="33px";
             title.style.backgroundPosition="left center";
