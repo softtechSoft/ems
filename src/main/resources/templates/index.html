@@ -17,13 +17,13 @@
     <script type="text/javascript" charset="UTF-8" th:src="@{/src/index/js/index.js}"></script>
 </head>
 <body>
-    <div class="title">
+	<div class="title">
         <h1>ソフトテク株式会社</h1>
         <h2>It-Softtech&nbsp;co.&nbsp;,Ltd</h2>
     </div>
     <div class="login">
         <h3>社内管理システム</h3>
-        <input id="user" class="user" type="text" autocomplete="off" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="メールアドレス" title="メールアドレスを入力してください">
+        <input id="user" class="user" type="text" maxlength="40"  autocomplete="off" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="メールアドレス" title="メールアドレスを入力してください">
         <p id="userMessage"></p>
         <input id="password" class="password" type="password" maxlength="6" onblur="regularVerify(this)" onfocus="messageStyleRestore(this)" placeholder="パスワード" title="パスワードを入力してください">    
         <p id="passwordMessage"></p>

@@ -33,7 +33,7 @@ public class LoginController
  * @exception なし
  * @author ○○@ソフトテク
  */
-	@RequestMapping("/")
+	@RequestMapping({"/","/ems"})
 	public String login(HttpSession session)
 	{
 		if(session.getAttribute("userMailAdress")!=null) 

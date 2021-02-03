@@ -53,7 +53,7 @@ function()
 },false);
 function regularVerify(actor)
 {   
-    var userName={id:"userMessage",pattern:/[A-Za-z0-9_]{1,15}@[A-Za-z0-9]{1,10}.com/,message:"メールをお入力ください"};
+    var userName={id:"userMessage",pattern:/[A-Za-z0-9_]{1,15}@it-softtech.com/,message:"メールをお入力ください"};
     var password={id:"passwordMessage",pattern:/^[^ ]+$/,message:"パスワードをお入力ください"};
     var userStatus = true;
     actor.style.borderColor='#0aada8';
@@ -98,7 +98,7 @@ function login()
         if(regularVerify(psw))
         {
             var data={user:use.value,password:psw.value};
-            ajaxSend("POST","http://localhost:8080/enter",inspectionResult,"data",JSON.stringify(data));
+            ajaxSend("POST","/enter",inspectionResult,"data",JSON.stringify(data));
         }
     }
     function inspectionResult(actor)

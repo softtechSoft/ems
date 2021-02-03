@@ -18,6 +18,6 @@ public class EmsMvcConfig implements WebMvcConfigurer
       
 	@Override
 	 public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new EmsInterceptor()).addPathPatterns("/**").excludePathPatterns("/index","/main","/index.html","/","/src/**","/enter");
+        registry.addInterceptor(new EmsInterceptor()).addPathPatterns("/**").excludePathPatterns("/index","/ems","/main","/index.html","/","/src/**","/enter");
     }
 }
