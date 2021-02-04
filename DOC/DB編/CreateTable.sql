@@ -191,7 +191,7 @@ BusinessTripName varchar(10) comment'出張旅費ファイル',
 status varchar(1) not null comment'使用ステータス',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日',
-primary key(employeeID,startDate)
+primary key(employeeID,workMonth)
 ) comment'交通情報';
 insert into transport values
 ("E001","202101","20210101","西川口駅","銀座駅","京浜東北線",3000,"赤羽駅","埼京線","新宿駅","埼京線","新宿駅","丸の内線",10000,2500,'D:\\TName\\',"0",date_format(now(), '%Y%m%d'), null);
