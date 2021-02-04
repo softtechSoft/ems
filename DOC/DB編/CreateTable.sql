@@ -18,9 +18,9 @@ mailAdress varchar(40) not null comment'メール',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日')comment'社員情報';
 Insert into employee values
-('E001' ,'王明' ,'123456' ,'0' ,'0','0','19860101' ,'34','20190101','2','2310859','横浜市中区','07012344321','0', 'ming@gmail.com',date_format(now(),'%Y%m%d') ,null),
-('E002' ,'王光' ,'123456' ,'0' ,'0' ,'0','19860102' ,'34','20190101','2','2310859','横浜市中区','07012344322','0', 'guang@gmail.com',date_format(now(),'%Y%m%d') ,null),
-('E003' ,'王明光' ,'123456' ,'0' ,'0' ,'0','19860103' ,'34','20190101','2','2310859','横浜市中区','07012344323','0','wang@gmail.com',date_format(now(),'%Y%m%d') ,null);
+('E001' ,'王明' ,'123456' ,'0' ,'0','0','19860101' ,'34','20190101','2','2310859','横浜市中区','07012344321','0', 'ming@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
+('E002' ,'王光' ,'123456' ,'0' ,'0' ,'0','19860102' ,'34','20190101','2','2310859','横浜市中区','07012344322','0', 'guang@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
+('E003' ,'王明光' ,'123456' ,'0' ,'0' ,'0','19860103' ,'34','20190101','2','2310859','横浜市中区','07012344323','1','wang@it-softtech.com',date_format(now(),'%Y%m%d') ,null);
 
 drop table if exists ofcfunction;
 create table ofcfunction(
