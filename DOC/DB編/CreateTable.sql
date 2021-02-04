@@ -43,8 +43,8 @@ Insert into ofcfunction values
 ('S5','claim',"&#xe681;&emsp;請求情報管理",'1','/claim','4' ,'1',date_format(now(),'%Y%m%d') ,null),
 ('S6','transport',"&#xe612;&emsp;交通情報管理",'1','/transport','6' ,'1',date_format(now(),'%Y%m%d') ,null),
 ('S7','salaryInfo',"&#xe60c;&emsp;給料情報管理",'1','/salaryInfo','7' ,'1',date_format(now(),'%Y%m%d') ,null),
-('A7','workdetail',"&#xe672;&emsp;勤怠情報",'0','/workdetail','1' ,'0',date_format(now(),'%Y%m%d') ,null),
-('A8','salarydetail',"&#xe60c;&emsp;給料明細",'0','/salarydetail','0' ,'0',date_format(now(),'%Y%m%d') ,null),
+('A7','workdetail',"&#xe672;&emsp;勤怠情報",'2','/workdetail','1' ,'0',date_format(now(),'%Y%m%d') ,null),
+('A8','salarydetail',"&#xe60c;&emsp;給料明細",'2','/salarydetail','0' ,'0',date_format(now(),'%Y%m%d') ,null),
 ('A9','password',"&#xe696;&emsp;パスワード変更",'2','/passwd','99' ,'0',date_format(now(),'%Y%m%d') ,null);
 
 
