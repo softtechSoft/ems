@@ -15,6 +15,9 @@
     <div id="boder" class="boder">
 		<form th:action="@{/transport-workinfo}" class="wapper" method="POST" enctype="multipart/form-data">	
 			<label>社員名</label><span class="name" th:text="${session.userEmployeeName}">USER</span>
+			<div>
+				<label>稼働月</label><input name="workMonth" class="workinfo-month" type="text" maxlength="6"  oninvalid="setCustomValidity('稼働月を入力ください')" title="稼働月" required/>
+			</div>
 			<div class="workinfo">
 				<label>稼働開始日</label><input name="workStartDay" id="StartMonth" class="workinfo-startDate" type="date" required/>
 			</div>
