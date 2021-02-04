@@ -173,6 +173,7 @@ values ('E001','202001','20200215',60000,0,0,0,0,0,0,0,'',0,0,0,0,0,0,0,0,0,0,0,
 drop table if exists transport;
 create table transport(
 employeeID varchar(6) not null comment'社員ID',
+workMonth varchar(6) not null comment'対象月',
 startDate varchar(8) not null comment'開始日',
 startStation varchar(20) not null comment'起点駅',
 endStation varchar(20) not null comment'終点駅',
@@ -193,7 +194,7 @@ updateDate varchar(8) comment'更新日',
 primary key(employeeID,startDate)
 ) comment'交通情報';
 insert into transport values
-("E001","20210101","西川口駅","銀座駅","京浜東北線",3000,"赤羽駅","埼京線","新宿駅","埼京線","新宿駅","丸の内線",10000,2500,'D:\\TName\\',"0",date_format(now(), '%Y%m%d'), null);
+("E001","202101","20210101","西川口駅","銀座駅","京浜東北線",3000,"赤羽駅","埼京線","新宿駅","埼京線","新宿駅","丸の内線",10000,2500,'D:\\TName\\',"0",date_format(now(), '%Y%m%d'), null);
 
 
 
