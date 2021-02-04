@@ -20,7 +20,7 @@ h3
 .boder
 {
     width: 96%;
-    height: 630px;
+    height: 650px;
     margin-left: 2%;
     background-color: #ffffff;
     border: #d8d7d7 solid 1px;
@@ -32,7 +32,7 @@ h3
     width: 100%;
     min-width: 310px;
     max-width: 400px;
-    height: 610px;
+    height: 635px;
     margin: auto;
     margin-top: 10px;
     background-color: bisque;
@@ -49,9 +49,16 @@ h3
     margin-left: 10px;
     outline-color: rgb(199, 195, 255);
 }
+.workinfo-month
+{
+    margin-left: 52px;
+    max-width: 131px;
+    padding: 3px;
+    border: #0aada8 1px solid;
+    outline-color: rgb(199, 195, 255);
+}
 .workinfo
 {
-    margin-top: 10px;
     outline-color: rgb(199, 195, 255);
 }
 .workinfo-startDate,.workinfo-endDate
@@ -59,6 +66,7 @@ h3
     margin-left: 20px;
     border: #0aada8 1px solid;
     outline-color: rgb(199, 195, 255);
+    margin-top: 0px;
 }
 .workinfo-time
 {

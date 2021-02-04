@@ -5,6 +5,7 @@
 
 <mapper namespace="com.softtech.mapper.WorkInfoMapper">		
 	<insert id="uploadWorkInfo" parameterType="map">
-	insert into workInfo SELECT conCat('W',subStr(contractID,3)) as workInfoID,contractID,subStr(#{workStartDay},1,6) as workMonth,#{workStartDay} as workStartDay ,#{workEndDay} as workEndDay,#{workTime} as workTime,null ,date_format(now(),'%Y%m%d'),null FROM contract WHERE employeeID=#{employeeID} AND #{workStartDay} between contractBeginDate and contractEndDate
+	insert into workInfo SELECT conCat('W',subStr(contractID,3)) 
+	as workInfoID,contractID,#{workMonth} as workMonth,#{workStartDay} as workStartDay ,#{workEndDay} as workEndDay,#{workTime} as workTime,null ,date_format(now(),'%Y%m%d'),null FROM contract WHERE employeeID=#{employeeID} AND #{workStartDay} between contractBeginDate and contractEndDate
 	</insert>
 </mapper>
