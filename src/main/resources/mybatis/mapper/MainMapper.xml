@@ -6,6 +6,13 @@
 
 <mapper namespace="com.softtech.mapper.MainMapper">
 	<select id="queryOfcfunction" parameterType="string" resultType="Ofcfunction">
-		select * from ems.ofcfunction where (authority=#{authority} or authority='2') and deleteFlg='0' order by displayNo
+		select *
+		from
+			ems.ofcfunction
+		where deleteFlg='0'
+		<if test = "authority != 1">
+		 and authority=#{authority}
+		</if>
+		 order by displayNo
 	</select>
 </mapper>
