@@ -11,6 +11,8 @@
 	<groupId>com.ems</groupId>
 	<artifactId>ems</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<!-- WARファイルを作成するため -->
+	<packaging>war</packaging>
 	<name>ems</name>
 	<description>Softtech Co .Ltd </description>
 
@@ -47,9 +49,17 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Tomcatを内蔵しない -->
+		 <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
 	</dependencies>
 
 	<build>
+	<!-- 0.0.1-SNAPSHOTをなし -->
+	<finalName>ems</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

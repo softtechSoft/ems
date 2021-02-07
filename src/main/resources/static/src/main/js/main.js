@@ -12,7 +12,7 @@ function()
 		document.getElementById("menu").style.display="inline";
 		document.getElementById("menuBlur").style.display="inline";
 	}
-    window.addEventListener('resize', 
+    window.addEventListener('resize',
     	function()
     	{
     		if(window.innerWidth<1230)
@@ -39,7 +39,7 @@ function()
 				document.getElementById("menuBlur").style.display="none";
 				menuBlur();
     		}
-    	},false); 
+    	},false);
 },false);
 
 function onload(actor)
@@ -52,7 +52,17 @@ function onload(actor)
 
 function navigation(actor)
 {
-	document.getElementById("iframe").src=actor;
+
+	//document.getElementById("iframe").src=actor;
+
+	// リリース用www.it-softtech.com/ems/
+	//var uriPre = "http://www.it-softtech.com/ems/";
+	// リリース確認用www.it-softtech.com/office/
+	//var uriPre = "http://dev.it-softtech.com/ems/";
+	// 開発用www.it-softtech.com
+	var uriPre = "http://dev.it-softtech.com/";
+
+	document.getElementById("iframe").src=uriPre+actor;
 }
 function onStyle(actor)
 {
