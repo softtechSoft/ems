@@ -56,7 +56,7 @@ function navigation(actor)
 	//document.getElementById("iframe").src=actor;
 
 	// リリース用www.it-softtech.com/ems/
-	//var uriPre = "http://www.it-softtech.com/ems/";
+	//var uriPre = "http://it-softtech.com/ems/";
 	// リリース確認用www.it-softtech.com/office/
 	//var uriPre = "http://dev.it-softtech.com/ems/";
 	// 開発用www.it-softtech.com
