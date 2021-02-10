@@ -22,7 +22,7 @@ import com.softtech.service.WorkInfoService;
 
 
 @Controller
-public class TransportController 
+public class TransportController<WorkInfoComment> 
 {
 	@Autowired
 	private TransportService transportService;
@@ -33,6 +33,7 @@ public class TransportController
 	@RequestMapping("/transport-workinfo")
 	public String insertTransport(HttpServletRequest request,HttpSession session,@RequestParam("file") MultipartFile file,Model model) throws JsonMappingException, JsonProcessingException
 	{
+		 model.getAttribute("allCheckBox");
 		 model.addAttribute("state", "007");  
 		if (!file.isEmpty())
 		{
@@ -52,15 +53,23 @@ public class TransportController
 		}
 		Map<String,String> mapper = new HashMap();
 		mapper.put("employeeID",(String) session.getAttribute("userEmoplyeeID"));
-		Map<String,String[]> map=request.getParameterMap();
-		for(Map.Entry<String, String[]> entry : map.entrySet())
-		{
-			if(entry.getKey().equals("workStartDay")||entry.getKey().equals("workEndDay"))
+
+		String name = request.getParameter("allCheckBox");
+		if(!"on".equals(name )) {
+				
+				mapper = transportService.queryTransport(mapper);
+				
+		}else{
+			Map<String,String[]> map = request.getParameterMap();
+			for(Map.Entry<String, String[]> entry : map.entrySet())
 			{
-				mapper.put(entry.getKey(),entry.getValue()[0].replace("-",""));
-				continue;
+				if(entry.getKey().equals("workStartDay")||entry.getKey().equals("workEndDay"))
+				{
+					mapper.put(entry.getKey(),entry.getValue()[0].replace("-",""));
+					continue;
+				}
+				mapper.put(entry.getKey(), entry.getValue()[0]);
 			}
-			mapper.put(entry.getKey(), entry.getValue()[0]);
 		}
 		try
 		{
@@ -84,11 +93,28 @@ public class TransportController
 		{
 			model.addAttribute("upTransportInfo", "001");  
 		}
-//		List<Transport> list = transportService.queryAllTransport();
-//		String result = jsonMapper.writeValueAsString(list);
 		return "/ems/transpirt";
 	}	
+	@RequestMapping("/insert")
+	public String insert(HttpServletRequest request,HttpSession session,Model model) throws JsonMappingException, JsonProcessingException
+	{
+		String employeeID = (String) session.getAttribute("userEmoplyeeID");
+		String queryWorkinfo = workinfoService.queryWorkinfo(employeeID);
+		String year = queryWorkinfo.substring(0,4);
+		String month = queryWorkinfo.substring(4,6);
+		if("12". equals(month))
+		{
+			month="01";
+			year +="1";		
+		}else
+		{
+			month=month+"1";
+		}
+			String yearMonth = year+month;
 	
+		return "/ems/transpirt";
+	}	
+
 	@RequestMapping("/workdetail")
 	public String Workdetail()
 	{

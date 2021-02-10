@@ -8,4 +8,8 @@
 	insert into workInfo SELECT conCat('W',subStr(contractID,3)) 
 	as workInfoID,contractID,#{workMonth} as workMonth,#{workStartDay} as workStartDay ,#{workEndDay} as workEndDay,#{workTime} as workTime,null ,date_format(now(),'%Y%m%d'),null FROM contract WHERE employeeID=#{employeeID} AND #{workStartDay} between contractBeginDate and contractEndDate
 	</insert>
+	
+	<select id="selectWorkInfo" parameterType="map">
+		select max(w.workMonth) as workMonth from ems.workinfo w inner join ems.contract c winfo.ctractID = c.ctractID where c.employeeID = #{employeeID} group by c.employeeID
+	</select>
 </mapper>

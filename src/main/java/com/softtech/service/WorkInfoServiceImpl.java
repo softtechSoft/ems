@@ -29,4 +29,10 @@ public class WorkInfoServiceImpl implements WorkInfoService
 		this.workinfoMapper = workinfoMapper;
 	}
 
+	@Override
+	public String queryWorkinfo(String employeeID) {
+
+		return workinfoMapper.queryWorkinfo(employeeID);
+	}
+
 }

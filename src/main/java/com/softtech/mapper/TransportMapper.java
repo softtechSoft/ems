@@ -10,4 +10,6 @@ public interface TransportMapper
 {
 	List<Transport> queryAllTransport();
 	int uploadTransport(Map<String,String>map);
+	Map<String, String> queryTransport(Map<String,String>map);
+	
 }
