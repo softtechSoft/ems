@@ -42,7 +42,8 @@ public class WorkInfo
 		return workMonth;
 	}
 	public void setWorkMonth(String workMonth) {
-		this.workMonth =  String.format("%s/%s",workMonth.substring(0,4),workMonth.substring(4,6));
+		this.workMonth =workMonth;
+				//String.format("%s/%s",workMonth.substring(0,4),workMonth.substring(4,6));
 	}
 }
 
