@@ -1,13 +1,13 @@
 package com.softtech.entity;
 
-public class WorkInfo 
+public class WorkInfo
 {
-	private String employeeName;
-	private String workStartDay;
-	private String workEndDay;
-	private String workTime;
-	private String workMonth;
-		
+	private String employeeName="0";
+	private String workStartDay="";
+	private String workEndDay="";
+	private String workTime="";
+	private String workMonth="0";
+
 	public String getEmployeeName() {
 		return employeeName;
 	}
@@ -42,6 +42,7 @@ public class WorkInfo
 		return workMonth;
 	}
 	public void setWorkMonth(String workMonth) {
-		this.workMonth = workMonth;
+		this.workMonth =  String.format("%s/%s",workMonth.substring(0,4),workMonth.substring(4,6));
 	}
 }
+
