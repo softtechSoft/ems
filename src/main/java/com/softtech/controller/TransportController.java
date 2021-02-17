@@ -98,6 +98,9 @@ public class TransportController<WorkInfoComment>
 		Map<String,String> sportMapper = new HashMap();
 		sportMapper.put("employeeID",(String) session.getAttribute("userEmoplyeeID"));
 		Transport transport = transportService.queryTransport(sportMapper);
+		if(transport == null) {
+			transport = new Transport();
+		}
 		model.addAttribute("transport", transport);
 		return "/ems/transpirt";
 	}

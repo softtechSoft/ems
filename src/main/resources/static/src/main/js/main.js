@@ -61,7 +61,7 @@ function navigation(actor)
 	//var uriPre = "http://dev.it-softtech.com/ems/";
 	// 開発用www.it-softtech.com
 	var uriPre = "http://dev.it-softtech.com/";
-
+alert("uri=" + uriPre+actor);
 	document.getElementById("iframe").src=uriPre+actor;
 }
 function onStyle(actor)
