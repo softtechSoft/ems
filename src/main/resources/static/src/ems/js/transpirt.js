@@ -1,3 +1,14 @@
+window.addEventListener('DOMContentLoaded',
+function()
+{
+	  var date=new Date();
+	  var month=date.getMonth();
+	  if(month<10)month='0'+(month+2);
+	  document.getElementById('workMonth').value=date.getFullYear()+'/'+month;
+
+
+}
+,false);
 function setAll()
 {
 	var checkbox = document.getElementById("allCheckBox");
@@ -20,7 +31,7 @@ function setAll()
 }
 function onload(actor)
 {
-	if(actor!=null)        
+	if(actor!=null)
 	{
 		document.getElementById("messagebox").style.display="block";
 	}
@@ -36,7 +47,7 @@ function chekMonth()
 	if(!endmonth)
 	{
 		return true;
-	}	
+	}
 	var month1 = new Date(begintmonth).getMonth();
 	var month2 = new Date(endmonth).getMonth();
 	if(begintmonth=="")
@@ -51,7 +62,7 @@ function chekMonth()
 	{
 		return false;
 	}
-}	
-	
-	
-	
+}
+
+
+
