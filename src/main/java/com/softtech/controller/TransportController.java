@@ -35,8 +35,6 @@ public class TransportController<WorkInfoComment>
 
 	@RequestMapping("/transport-workinfo")
 	public String insertTransport(HttpServletRequest request,HttpSession session,@RequestParam("file") MultipartFile file,Model model) throws JsonMappingException, JsonProcessingException{
-		//　TODO1　使わない場合、削除してください。
-		model.addAttribute("state", "007");
 
 		// セッションからログインIDを取得する。
 		Map<String,String> mapper = new HashMap();
@@ -55,26 +53,26 @@ public class TransportController<WorkInfoComment>
 				mapper.put(entry.getKey(),entry.getValue()[0].replace("/",""));
 				continue;
 			}
+			//定期券開始日を変換。YYYY/MM形をYYYYMM形に変換。
+			if(entry.getKey().equals("startDate")) {
+				mapper.put(entry.getKey(),entry.getValue()[0].replace("/",""));
+				continue;
+			}
 			mapper.put(entry.getKey(), entry.getValue()[0]);
 		}
 
 		//勤怠追加処理
 		Transport transport=new Transport();
 		try {
-			transport = transportAllService.doTransport(file, mapper);
+			transport = transportAllService.doTransport(file, mapper, model);
 		} catch (Exception e) {
 			e.printStackTrace();
-			// TODO:下記使う場所を確認する。使わない場合、削除。
-			model.addAttribute("upTransportInfo", "001");
 		}
-
-		// TODO:下記使う場所を確認する。使わない場合、削除。
-		model.addAttribute("upTransportInfo", "111");
-		// 画面へ戻るデータを設定する。
 		model.addAttribute("transport", transport);
 
 		return "/ems/transpirt";
-	}
+		}
+
 
 	/**
 	 * 機能：勤怠管理画面初期データ設定

@@ -9,7 +9,7 @@
 	</select>
 
 	<insert id="uploadTransport" parameterType="map">
-		insert into transport(employeeID,workMonth,startDate,startStation,endStation,transportFacility,transportExpense,midStation1,transportFacility1,midStation2,midStation3,businessTrip,status,insertDate) values (#{employeeID},#{workMonth},#{startDate},#{startStation},#{endStation},#{transportFacility},#{transportExpense},#{midStation1},#{transportFacility1},#{midStation2},#{midStation3},#{businessTrip},'0',date_format(now(),'%Y%m%d'))
+		insert into transport(employeeID,workMonth,startDate,startStation,endStation,transportFacility,transportExpense,midStation1,transportFacility1,midStation2,midStation3,transport,businessTrip,status,insertDate) values (#{employeeID},#{workMonth},#{startDate},#{startStation},#{endStation},#{transportFacility},#{transportExpense},#{midStation1},#{transportFacility1},#{midStation2},#{midStation3},#{transport},#{businessTrip},'0',date_format(now(),'%Y%m%d'))
 	</insert>
 
 	<select id="queryTransport" parameterType="map" resultType="Transport">

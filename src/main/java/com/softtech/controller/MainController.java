@@ -1,13 +1,16 @@
 package com.softtech.controller;
 
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.softtech.entity.Ofcfunction;
 import com.softtech.service.MainService;
@@ -19,12 +22,12 @@ import com.softtech.service.MainService;
  * 作成日：2021/1/13
  */
 @Controller
-public class MainController 
+public class MainController
 {
 	@Autowired
 	@Qualifier("mainServiceImpl")
 	MainService mainService;
-	
+
 	/**
 	 * 機能：画面初期化と遷移
 	 *
@@ -36,19 +39,19 @@ public class MainController
 	@RequestMapping("/main")
 	public String emsMain(Model model,HttpSession session) throws JsonProcessingException
 	{
-		if(session.getAttribute("userMailAdress")!=null) 
+		if(session.getAttribute("userMailAdress")!=null)
 		{
 			List<Ofcfunction> list= mainService.queryOfcfunction((String)session.getAttribute("userAuthority"));
 			model.addAttribute("list", list);
 			return "/main/main";
 		}
-		else 
+		else
 		{
 			return "redirect:/index";
 		}
 	}
-	
-	
+
+
 	/**
 	 * 機能：画面遷移
 	 *
@@ -62,14 +65,14 @@ public class MainController
 	{
 		return "/main/welcome";
 	}
-	
+
 	/**
 	 * 機能：画面遷移
 	 *
 	 * @param session
 	 * @return /welcome
 	 * @exception なし
-	 * @author ソフトテク教育グループ 
+	 * @author ソフトテク教育グループ
 	 */
 	@RequestMapping("/exit")
 	@ResponseBody
