@@ -20,7 +20,7 @@ h3
 .boder
 {
     width: 96%;
-    height: 650px;
+    height: 630px;
     margin-left: 2%;
     background-color: #ffffff;
     border: #d8d7d7 solid 1px;
@@ -32,7 +32,7 @@ h3
     width: 100%;
     min-width: 310px;
     max-width: 400px;
-    height: 635px;
+
     margin: auto;
     margin-top: 10px;
     background-color: bisque;
@@ -92,6 +92,7 @@ h3
 .start
 {
 	margin-left: 10px;
+	margin-top: 5px;
     padding: 3px;
     border: #0aada8 1px solid;
     outline-color: rgb(199, 195, 255);
@@ -157,7 +158,7 @@ h3
     height: 27px;
     background-color: #f8a407;
     margin-left: 65%;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     border: 0;
     outline: none;
 }
@@ -227,7 +228,7 @@ h3
 {
     width: 120px;
     height: 34px;
-    margin: auto;   
+    margin: auto;
 }
 .message-quit
 {
