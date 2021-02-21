@@ -63,8 +63,10 @@
 				<div th:if="${(uploadFile == '001')}">ファイルアプロード失敗しました</div>
 				<div th:if="${(uploadFile == '111')}">ファイルアプロード成功しました</div>
 				<div th:if="${(uploadInfo == '001')}">対象稼働月は既に入力です</div>
+				<div th:if="${(uploadInfo == '002')}">アプロードが失敗しました</div>
 				<div th:if="${(uploadInfo == '111')}">アプロードが成功しました</div>
 				<div th:if="${(upTransportInfo == '001')}">対象稼働月は既に入力です</div>
+				<div th:if="${(upTransportInfo == '111')}">アプロードが失敗しました</div>
 				<div th:if="${(upTransportInfo == '111')}">アプロードが成功しました</div>
 			</div>
 			<div class="message-button"><button class="message-quit" onclick="messagetExit()">確認</button></div>

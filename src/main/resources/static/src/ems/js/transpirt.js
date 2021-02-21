@@ -6,7 +6,7 @@ function()
 	  var day=date.getDay();
 	  if(month<10)month='0'+(month+2);
 	  document.getElementById('workMonth').value=date.getFullYear()+'/'+month;
-	  document.getElementById("startDate").value=date.getFullYear()+'/'+month+'/0'+day;
+	  document.getElementById("startDate").value=date.getFullYear()+'/'+month+'/0'+Day;
 }
 ,false);
 function setAll()

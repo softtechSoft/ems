@@ -90,9 +90,11 @@ public class TransportAllService
 			// 勤怠テーブルに新規追加
 			try{
 				int upWork = workinfoService.uploadWorkInfo(mapper);
-				if(upWork>=0){
+				if(upWork > 0){
 					model.addAttribute("uploadInfo", "111");
-				}
+				}else if(upWork != 0){
+					model.addAttribute("uploadInfo", "002");
+					}
 				}catch(Exception e){
 					model.addAttribute("uploadInfo", "001");
 			}
@@ -103,8 +105,10 @@ public class TransportAllService
 			// 交通費テーブルに新規追加
 			try{
 				int uptransport = transportService.uploadTransport(mapper);
-				if(uptransport>=0){
+				if(uptransport > 0){
 					model.addAttribute("upTransportInfo", "111");
+				}else if(uptransport != 0){
+					model.addAttribute("uptransport", "002");
 					}
 				}catch(Exception e){
 					model.addAttribute("upTransportInfo", "001");
