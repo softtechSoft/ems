@@ -1,0 +1,57 @@
+
+            社内管理システム命名規則
+
+１）Javaクラス
+　　①命名：
+	　　クラス名、関数、引数名は基本Pascal形式にする
+	　　できるだけ、英語を利用する。複雑な場合、日本語ロマ字で組み合わせする
+	　　例：
+	　　　給料一覧機能のJavaクラスには、
+	　　　　クラス名：SalaryDetail。はじめ文字は大文字。
+	　　　　変数名：社員名称→employeeName　始め桁は小文字。
+　　②コメント：
+      1)JAVAファイル：
+　　　　(1)クラス説明
+　　　　　例：
+　　　　　　　/**
+　　　　　     * 概要：社員給料明細を取得するコントロール
+　　　　　     *
+　　　　　     * 作成者：張＠ソフトテク
+　　　　　     * 作成日：2019/8/7
+　　　　　     */
+　　　　(2)関数説明
+　　　　　例：  
+　　　　　　　/**
+　　　　　     * 機能：社員IDを持っち、DBを検索する。
+　　　　　     *
+　　　　　     * @param emplyeeID 社員ID
+　　　　　     * @return salaryModle 社員給料モデル
+　　　　　     * @exception DB接続例外
+　　　　　     * @author 張＠ソフトテク
+　　　　　     */
+　　　　(3)ソース
+　　　　　基本、第三者からコメントだけを見ると、分かるように記入する。
+
+
+　　　２）JSPファイル
+　　　　画面とコントロールクラスと間の通信クラスを記入する。
+　　　　例：
+　　　　　　<!--　SalaryCotrol.javaと通信モデル：SalaryBean-->
+　　　　　　<form:form id="fbean" name="fbean" modelAttribute="softtech.office.bean.SalaryinfoBean" method="get">
+
+　　　３）マッパファイル
+　　　　SQLの説明を記入する。
+　　　　例：
+　　　　　<!--　社員給料明細を取得する。　-->
+　　　　　<select id="findById" parameterType="String" resultType="softtech.office.bean.SalaryinfoBean">
+        　　　SELECT * FROM employee where id = #{id}
+    　　　</select>
+
+　　　４）HTML/JS
+　　　　　重要な所に分かるようにする。
+　　　　　例：
+　　　　　　<!--　社員ID　-->
+　　　　　　<input type="text" name="employeeId" />
+
+　
+　　　
