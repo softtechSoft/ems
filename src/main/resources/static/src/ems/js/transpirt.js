@@ -2,11 +2,12 @@ window.addEventListener('DOMContentLoaded',
 function()
 {
 	  var date=new Date();
+	  var year=date.getFullYear();
 	  var month=date.getMonth();
-	  var day=date.getDay();
+	  var day = date.getDate();
 	  if(month<10)month='0'+(month+2);
-	  document.getElementById('workMonth').value=date.getFullYear()+'/'+month;
-	  document.getElementById("startDate").value=date.getFullYear()+'/'+month+'/0'+Day;
+	  document.getElementById('workMonth').value=year+'/'+month;
+	  document.getElementById('startDate').value=year+'/'+month+'/'+day;
 }
 ,false);
 function setAll()
