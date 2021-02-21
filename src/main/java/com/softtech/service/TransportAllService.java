@@ -108,7 +108,7 @@ public class TransportAllService
 				if(uptransport > 0){
 					model.addAttribute("upTransportInfo", "111");
 				}else if(uptransport != 0){
-					model.addAttribute("uptransport", "002");
+					model.addAttribute("upTransportInfo", "002");
 					}
 				}catch(Exception e){
 					model.addAttribute("upTransportInfo", "001");
