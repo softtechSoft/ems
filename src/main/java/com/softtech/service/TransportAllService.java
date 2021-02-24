@@ -49,40 +49,39 @@ public class TransportAllService {
 		// ファイルアップロード
 		FileUtil fileUtil = new FileUtil();
 		if (!fileUtil.uploadFile(file)) {
-			throw new Exception("ファイルアップロード失敗。");
+			model.addAttribute("uploadInfo", "001");
 		}
 
 		// 勤怠テーブルに新規追加
 		try {
 			int upWork = workinfoService.insertWorkInfo(mapper);
-			if (upWork != 1 || upWork > 0) {
-				//アプロードが成功しました
+			if (upWork == 1) {
+				//登録が成功しました
 				model.addAttribute("uploadInfo", "111");
+			}else {
+				//登録は失敗
+				model.addAttribute("uploadInfo", "002");
 			}
 		} catch (Exception e) {
 			//対象稼働月は既に入力です
 			model.addAttribute("uploadInfo", "001");
 		}
 
-		// ①画面上のチェックボックスの値により処理
-		// 定期券変更がある場合、画面データを交通費テーブルへ新規追加。
-		// 定期券変更がない場合、前月分の定期券情報を交通費テーブルへ新規追加。
-		// 交通費テーブルに新規追加
-		String box = mapper.get("teiki");
+		// 交通費テーブル登録
 		try {
-//		if ("1".equals(box)) {
-//			int uptransport = transportService.insertTransport(mapper);
-//			}else if(!"on".equals(box)){
 			int uptransport = transportService.insertTransport(mapper);
-			if((uptransport != 1 || uptransport > 0)) {
-				//アプロードが成功しました
+			if(uptransport == 1 ) {
+				//登録が成功しました
 				model.addAttribute("upTransportInfo", "111");
-				}
-//			}
-		}	catch (Exception e) {
+			}else {
+				//登録は失敗
+				model.addAttribute("uploadInfo", "002");
+			}
+
+		} catch (Exception e) {
 			//対象稼働月は既に入力です
 			model.addAttribute("upTransportInfo", "001");
-			}
+		}
 
 		// 交通情報を取得し戻る
 		Map<String, String> transportMapper = new HashMap();
@@ -91,6 +90,7 @@ public class TransportAllService {
 		if (transport == null) {
 			transport = new Transport();
 		}
+
 		return transport;
 	}
 }

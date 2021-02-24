@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.softtech.entity.Transport;
 import com.softtech.service.TransportAllService;
 import com.softtech.service.TransportService;
-import com.softtech.service.WorkInfoService;
 
 /**
  * 機能：勤怠管理コントロール
@@ -29,8 +28,6 @@ import com.softtech.service.WorkInfoService;
 public class TransportController<WorkInfoComment> {
 	@Autowired
 	private TransportService transportService;
-	@Autowired
-	private WorkInfoService workinfoService;
 
 	@Autowired
 	private TransportAllService transportAllService;
@@ -39,17 +36,25 @@ public class TransportController<WorkInfoComment> {
 	public String insertTransport(HttpServletRequest request, HttpSession session,@RequestParam("file") MultipartFile file, Model model) throws Exception {
 
 		// セッションからログインIDを取得する。
-		Map<String, String> mapper = new HashMap();
+		Map<String, String> mapper = new HashMap<String, String>();
 		mapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
 
 		boolean flg = false;
 		String workStartDay = "";
+
 		//パラメータ取得
 		Map<String, String[]> map = request.getParameterMap();
 		for (Map.Entry<String, String[]> entry : map.entrySet()) {
 
-			//開始日、終了日を変換。YYYY-MM-DD形をYYYYMMDD形に変換
-			if (entry.getKey().equals("workStartDay") || entry.getKey().equals("workEndDay")) {
+			//稼働開始日。YYYY-MM-DD形をYYYYMMDD形に変換
+			if (entry.getKey().equals("workStartDay") ) {
+				workStartDay = entry.getValue()[0].replace("-", "");
+				mapper.put(entry.getKey(), workStartDay);
+				continue;
+			}
+
+			//終了日を変換。YYYY-MM-DD形をYYYYMMDD形に変換
+			if ( entry.getKey().equals("workEndDay")) {
 				mapper.put(entry.getKey(), entry.getValue()[0].replace("-", ""));
 				continue;
 			}
@@ -65,13 +70,17 @@ public class TransportController<WorkInfoComment> {
 				String en = entry.getValue()[0];
 				if( en != null && en.equals("1")) {
 					flg = true;
-				continue;
-			}
+					continue;
+				}
 			}
 			mapper.put(entry.getKey(), entry.getValue()[0]);
-	}
+		} // for
 
-
+		// 定期券チェックボックスがチェックされた場合
+		if(flg) {
+			// 定期券開始日を稼働開始日に設定する。
+			mapper.put("startDate", workStartDay);
+		}
 
 		//勤怠追加処理
 		Transport transport = new Transport();
@@ -92,13 +101,15 @@ public class TransportController<WorkInfoComment> {
 	@RequestMapping("/workdetail")
 	public String Workdetail(HttpServletRequest request, HttpSession session, Model model) {
 
-		Map<String, String> sportMapper = new HashMap();
+		Map<String, String> sportMapper = new HashMap<String, String>();
 		//　交通情報取得
 		sportMapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
 		Transport transport = transportService.queryTransport(sportMapper);
 		if (transport == null) {
 			transport = new Transport();
 		}
+		// 交通費を０に設定。
+		transport.setBusinessTrip("0");
 		//　画面へ戻す
 		model.addAttribute("transport", transport);
 		return "/ems/transpirt";
