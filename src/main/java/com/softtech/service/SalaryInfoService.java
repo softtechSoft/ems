@@ -6,11 +6,14 @@ import java.util.Map;
 import com.softtech.entity.SalaryInfo;
 import com.softtech.entity.SalaryInfoComment;
 
-public interface SalaryInfoService
-{
+public interface SalaryInfoService {
 	List<SalaryInfo> queryAllSalaryInfo();
-	int updateSalaryInfo(Map<String,String> map);
+
+	int updateSalaryInfo(Map<String, String> map);
+
 	SalaryInfo uploadSalaryInfo(String slry);
+
 	List<SalaryInfoComment> querySalaryInfoComment();
-	SalaryInfo querySalaryInfo(Map<String,String> map);
+
+	SalaryInfo querySalaryInfo(Map<String, String> map);
 }

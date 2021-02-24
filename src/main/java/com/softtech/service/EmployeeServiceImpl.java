@@ -10,26 +10,24 @@ import com.softtech.entity.Employee;
 import com.softtech.mapper.EmployeeMapper;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService
-{
+public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private EmployeeMapper employeeMapper;
-	
+
 	@Override
-	public Employee queryEmployee(String email) 
-	{
+	public Employee queryEmployee(String email) {
 		return employeeMapper.queryEmployee(email);
 	}
-	
+
 	@Override
-	public int updatePassword(Map<String, String> map) 
-	{
+	public int updatePassword(Map<String, String> map) {
 		return employeeMapper.updatePassword(map);
 	}
-	
+
 	public EmployeeMapper getEmployeeMapper() {
 		return employeeMapper;
 	}
+
 	public void setEmployeeMapper(EmployeeMapper employeeMapper) {
 		this.employeeMapper = employeeMapper;
 	}
@@ -40,13 +38,13 @@ public class EmployeeServiceImpl implements EmployeeService
 	}
 
 	@Override
-	public int updateEmployee(Map<String,String> map) {
-		
+	public int updateEmployee(Map<String, String> map) {
+
 		return employeeMapper.updateEmployee(map);
 	}
 
 	@Override
-	public int updateStatus(Map<String,String>map) {
+	public int updateStatus(Map<String, String> map) {
 		return employeeMapper.updateStatus(map);
 	}
 }

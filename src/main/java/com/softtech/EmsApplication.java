@@ -11,9 +11,10 @@ public class EmsApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(EmsApplication.class, args);
 	}
+
 	@Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		System.out.println("******** RUN configure ********");
 		return application.sources(EmsApplication.class);
-    }
+	}
 }

@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUtil {
 
 	//アップロードフォルダー
-	final String uploadPath="D:/worksheet/";
+	final String uploadPath = "D:/worksheet/";
 
 	/**
 	 * 機能：ファイルをアップロード
@@ -31,20 +31,30 @@ public class FileUtil {
 	 */
 	public boolean uploadFile(MultipartFile file) {
 
-		if (!file.isEmpty()){
-	        try {
-	                BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File(uploadPath+file.getOriginalFilename())));
-	                out.write(file.getBytes());
-	                out.flush();
-	                out.close();
-	            } catch (FileNotFoundException e) {
-	                e.printStackTrace();
-	                return false;
-	            } catch (IOException e) {
-	                e.printStackTrace();
-	                return false;
-	            }
+		// ファイルアップロード
+		if (!file.isEmpty()) {
+			try {
+				BufferedOutputStream out = new BufferedOutputStream(
+						new FileOutputStream(new File(uploadPath + file.getOriginalFilename())));
+				out.write(file.getBytes());
+				out.flush();
+				out.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				return false;
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			}
 		}
 		return true;
 	}
 }
+
+//BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File("D:/"+file.getOriginalFilename())));
+//ファイルアプロード失敗しました
+//model.addAttribute("uploadFile", "001");
+//ファイルアプロード失敗しました
+//model.addAttribute("uploadFile", "001");
+//ファイルアプロード成功しました
+//model.addAttribute("uploadFile", "111");

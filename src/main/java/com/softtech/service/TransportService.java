@@ -5,10 +5,10 @@ import java.util.Map;
 
 import com.softtech.entity.Transport;
 
-
-public interface TransportService
-{
+public interface TransportService {
 	List<Transport> queryAllTransport();
-	int uploadTransport(Map<String,String>map);
-	Transport queryTransport(Map<String,String>map);
+
+	int insertTransport(Map<String, String> map);
+
+	Transport queryTransport(Map<String, String> map);
 }

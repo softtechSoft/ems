@@ -9,8 +9,7 @@ import com.softtech.entity.Ofcfunction;
 import com.softtech.mapper.MainMapper;
 
 @Service("mainServiceImpl")
-public class MainServiceImpl implements MainService
-{
+public class MainServiceImpl implements MainService {
 	@Autowired
 	private MainMapper mainMpper;
 

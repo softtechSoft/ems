@@ -10,9 +10,14 @@ function()
 	  document.getElementById('startDate').value=year+'/'+month+'/'+day;
 }
 ,false);
+function startDateChange()
+{
+	var str=document.getElementById('workMonth').value;
+	document.getElementById('startDate').value=str;
+}
 function setAll()
 {
-	var checkbox = document.getElementById("allCheckBox");
+	var checkbox = document.getElementById("teiki");
 	if(checkbox.checked==true)
 	{
 		var docs=document.getElementsByTagName('input');

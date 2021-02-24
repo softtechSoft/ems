@@ -22,8 +22,7 @@ import com.softtech.service.MainService;
  * 作成日：2021/1/13
  */
 @Controller
-public class MainController
-{
+public class MainController {
 	@Autowired
 	@Qualifier("mainServiceImpl")
 	MainService mainService;
@@ -37,20 +36,15 @@ public class MainController
 	 * @author ○○@ソフトテク
 	 */
 	@RequestMapping("/main")
-	public String emsMain(Model model,HttpSession session) throws JsonProcessingException
-	{
-		if(session.getAttribute("userMailAdress")!=null)
-		{
-			List<Ofcfunction> list= mainService.queryOfcfunction((String)session.getAttribute("userAuthority"));
+	public String emsMain(Model model, HttpSession session) throws JsonProcessingException {
+		if (session.getAttribute("userMailAdress") != null) {
+			List<Ofcfunction> list = mainService.queryOfcfunction((String) session.getAttribute("userAuthority"));
 			model.addAttribute("list", list);
 			return "/main/main";
-		}
-		else
-		{
+		} else {
 			return "redirect:/index";
 		}
 	}
-
 
 	/**
 	 * 機能：画面遷移
@@ -61,8 +55,7 @@ public class MainController
 	 * @author ○○@ソフトテク
 	 */
 	@RequestMapping("/welcome")
-	public String welcome()
-	{
+	public String welcome() {
 		return "/main/welcome";
 	}
 
@@ -76,8 +69,7 @@ public class MainController
 	 */
 	@RequestMapping("/exit")
 	@ResponseBody
-	public void exit(HttpSession session)
-	{
+	public void exit(HttpSession session) {
 		session.invalidate();
 	}
 }

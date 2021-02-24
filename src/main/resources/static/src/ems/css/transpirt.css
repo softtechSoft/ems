@@ -20,7 +20,7 @@ h3
 .boder
 {
     width: 96%;
-    height: 630px;
+    height: 650px;
     margin-left: 2%;
     background-color: #ffffff;
     border: #d8d7d7 solid 1px;
@@ -32,7 +32,7 @@ h3
     width: 100%;
     min-width: 310px;
     max-width: 400px;
-
+    height: 635px;
     margin: auto;
     margin-top: 10px;
     background-color: bisque;
@@ -158,7 +158,7 @@ h3
     height: 27px;
     background-color: #f8a407;
     margin-left: 65%;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border: 0;
     outline: none;
 }

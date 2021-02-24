@@ -9,13 +9,10 @@ import org.springframework.stereotype.Service;
 import com.softtech.entity.Transport;
 import com.softtech.mapper.TransportMapper;
 
-
 @Service
-public class TransportServiceImpl implements TransportService
-{
+public class TransportServiceImpl implements TransportService {
 	@Autowired
 	private TransportMapper transportMapper;
-
 
 	public TransportMapper getTransportMapper() {
 		return transportMapper;
@@ -31,8 +28,6 @@ public class TransportServiceImpl implements TransportService
 		return transportMapper.queryAllTransport();
 	}
 
-
-
 	@Override
 	public Transport queryTransport(Map<String, String> map) {
 
@@ -40,10 +35,9 @@ public class TransportServiceImpl implements TransportService
 	}
 
 	@Override
-	public int uploadTransport(Map<String, String> map) {
+	public int insertTransport(Map<String, String> map) {
 
-		return transportMapper.uploadTransport(map);
+		return transportMapper.insertTransport(map);
 	}
-
 
 }

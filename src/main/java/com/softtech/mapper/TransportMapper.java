@@ -8,10 +8,11 @@ import org.apache.ibatis.annotations.Mapper;
 import com.softtech.entity.Transport;
 
 @Mapper
-public interface TransportMapper
-{
+public interface TransportMapper {
 	List<Transport> queryAllTransport();
-	int uploadTransport(Map<String,String>map);
-	Transport queryTransport(Map<String,String>map);
+
+	int insertTransport(Map<String, String> map);
+
+	Transport queryTransport(Map<String, String> map);
 
 }

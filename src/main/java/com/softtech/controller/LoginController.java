@@ -1,12 +1,15 @@
 package com.softtech.controller;
 
 import java.util.Map;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,68 +23,56 @@ import com.softtech.service.EmployeeService;
  * 作成日：2021/1/13
  */
 @Controller
-public class LoginController 
-{
+public class LoginController {
 	@Autowired
 	private EmployeeService employeeService;
-	
-/**
- * 機能：ログイン画面初期化と遷移
- *
- * @param session
- * @return /indexと/main
- * @exception なし
- * @author ○○@ソフトテク
- */
-	@RequestMapping({"/","/ems"})
-	public String login(HttpSession session)
-	{
-		if(session.getAttribute("userMailAdress")!=null) 
-		{
+
+	/**
+	 * 機能：ログイン画面初期化と遷移
+	 *
+	 * @param session
+	 * @return /indexと/main
+	 * @exception なし
+	 * @author ○○@ソフトテク
+	 */
+	@RequestMapping({ "/", "/ems" })
+	public String login(HttpSession session) {
+		if (session.getAttribute("userMailAdress") != null) {
 			return "redirect:/main";
-		}
-		else 
-		{
+		} else {
 			return "/index";
 		}
 	}
 
-/**
- * 機能：ログイン判断
- *
- * @param dataとsession
- * @return "111"と"002"と"001"
- * @exception JsonMappingException
- * @author ○○@ソフトテク 
- */
+	/**
+	 * 機能：ログイン判断
+	 *
+	 * @param dataとsession
+	 * @return "111"と"002"と"001"
+	 * @exception JsonMappingException
+	 * @author ○○@ソフトテク 
+	 */
 	@RequestMapping("/enter")
-	@ResponseBody		
-	public String enter(@RequestParam("data") String data,HttpSession session) throws JsonMappingException, JsonProcessingException 
-	{ 
+	@ResponseBody
+	public String enter(@RequestParam("data") String data, HttpSession session)
+			throws JsonMappingException, JsonProcessingException {
 		ObjectMapper jsonMapper = new ObjectMapper();
-		Map<String,String> map = jsonMapper.readValue(data, Map.class);
+		Map<String, String> map = jsonMapper.readValue(data, Map.class);
 		Employee employee = employeeService.queryEmployee(map.get("user"));
-		if(employee!=null)
-		{
-			if(map.get("password").equals(employee.getPassword()))
-			{
+		if (employee != null) {
+			if (map.get("password").equals(employee.getPassword())) {
 				session.setAttribute("userMailAdress", employee.getMailAdress());
 				session.setAttribute("userEmoplyeeID", employee.getEmployeeID());
 				session.setAttribute("userAuthority", employee.getAuthority());
 				session.setAttribute("userEmployeeName", employee.getEmployeeName());
-				if(employee.getUpdateDate()==null)
-				{
+				if (employee.getUpdateDate() == null) {
 					session.setAttribute("userUpdatePsw", "false");
 				}
 				return "111";
-			}
-			else
-			{	
+			} else {
 				return "002";
 			}
-		}
-		else
-		{
+		} else {
 			return "001";
 		}
 	}

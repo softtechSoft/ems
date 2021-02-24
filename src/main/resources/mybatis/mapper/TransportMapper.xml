@@ -8,11 +8,64 @@
 		select * from ems.transport
 	</select>
 
-	<insert id="uploadTransport" parameterType="map">
-		insert into transport(employeeID,workMonth,startDate,startStation,endStation,transportFacility,transportExpense,midStation1,transportFacility1,midStation2,midStation3,transport,businessTrip,status,insertDate) values (#{employeeID},#{workMonth},#{startDate},#{startStation},#{endStation},#{transportFacility},#{transportExpense},#{midStation1},#{transportFacility1},#{midStation2},#{midStation3},#{transport},#{businessTrip},'0',date_format(now(),'%Y%m%d'))
+	<insert id="insertTransport" parameterType="map">
+		insert
+		into transport(
+			employeeID,
+			workMonth,
+			startDate,
+			startStation,
+			endStation,
+			transportFacility,
+			transportExpense,
+			midStation1,
+			transportFacility1,
+			midStation2,
+			midStation3,
+			transport,
+			businessTrip,
+			status,
+			insertDate
+		)
+		values (
+			#{employeeID},
+			#{workMonth},
+			#{startDate},
+			#{startStation},
+			#{endStation},
+			#{transportFacility},
+			#{transportExpense},
+			#{midStation1},
+			#{transportFacility1},
+			#{midStation2},
+			#{midStation3},
+			#{transport},
+			#{businessTrip},
+			'0',
+			date_format(now(),'%Y%m%d')
+		)
 	</insert>
 
 	<select id="queryTransport" parameterType="map" resultType="Transport">
-    	select t.workMonth,t.startDate,t.startStation,t.endStation,t.transportFacility,t.transportExpense,t.midStation1,t.transportFacility1,t.midStation2,t.midStation3,t.transport,t.businessTrip from ems.transport t where t.employeeID = #{employeeID} order by t.workMonth desc limit 1
+    	select
+    		t.workMonth,
+    		t.startDate,
+    		t.startStation,
+    		t.endStation,
+    		t.transportFacility,
+    		t.transportExpense,
+    		t.midStation1,
+    		t.transportFacility1,
+    		t.midStation2,
+    		t.midStation3,
+    		t.transport,
+    		t.businessTrip
+    	from
+    		ems.transport t
+    		where t.employeeID = #{employeeID}
+    	order by
+    		t.workMonth desc
+    	limit
+    		1
 	</select>
 </mapper>
