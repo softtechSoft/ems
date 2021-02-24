@@ -1,57 +1,56 @@
+  ç¤¾å†…ç®¡ç†ã‚·ã‚¹ãƒ†ãƒ å‘½åè¦å‰‡
 
-            ŽÐ“àŠÇ—ƒVƒXƒeƒ€–½–¼‹K‘¥
-
-‚PjJavaƒNƒ‰ƒX
-@@‡@–½–¼F
-	@@ƒNƒ‰ƒX–¼AŠÖ”Aˆø”–¼‚ÍŠî–{PascalŒ`Ž®‚É‚·‚é
-	@@‚Å‚«‚é‚¾‚¯A‰pŒê‚ð—˜—p‚·‚éB•¡ŽG‚Èê‡A“ú–{Œêƒƒ}Žš‚Å‘g‚Ý‡‚í‚¹‚·‚é
-	@@—áF
-	@@@‹‹—¿ˆê——‹@”\‚ÌJavaƒNƒ‰ƒX‚É‚ÍA
-	@@@@ƒNƒ‰ƒX–¼FSalaryDetailB‚Í‚¶‚ß•¶Žš‚Í‘å•¶ŽšB
-	@@@@•Ï”–¼FŽÐˆõ–¼Ì¨employeeName@Žn‚ßŒ…‚Í¬•¶ŽšB
-@@‡AƒRƒƒ“ƒgF
-      1)JAVAƒtƒ@ƒCƒ‹F
-@@@@(1)ƒNƒ‰ƒXà–¾
-@@@@@—áF
-@@@@@@@/**
-@@@@@     * ŠT—vFŽÐˆõ‹‹—¿–¾×‚ðŽæ“¾‚·‚éƒRƒ“ƒgƒ[ƒ‹
-@@@@@     *
-@@@@@     * ì¬ŽÒF’£—ƒ\ƒtƒgƒeƒN
-@@@@@     * ì¬“úF2019/8/7
-@@@@@     */
-@@@@(2)ŠÖ”à–¾
-@@@@@—áF  
-@@@@@@@/**
-@@@@@     * ‹@”\FŽÐˆõID‚ðŽ‚Á‚¿ADB‚ðŒŸõ‚·‚éB
-@@@@@     *
-@@@@@     * @param emplyeeID ŽÐˆõID
-@@@@@     * @return salaryModle ŽÐˆõ‹‹—¿ƒ‚ƒfƒ‹
-@@@@@     * @exception DBÚ‘±—áŠO
-@@@@@     * @author ’£—ƒ\ƒtƒgƒeƒN
-@@@@@     */
-@@@@(3)ƒ\[ƒX
-@@@@@Šî–{A‘æŽOŽÒ‚©‚çƒRƒƒ“ƒg‚¾‚¯‚ðŒ©‚é‚ÆA•ª‚©‚é‚æ‚¤‚É‹L“ü‚·‚éB
+ï¼‘ï¼‰Javaã‚¯ãƒ©ã‚¹
+ã€€ã€€â‘ å‘½åï¼š
+	ã€€ã€€ã‚¯ãƒ©ã‚¹åã€é–¢æ•°ã€å¼•æ•°åã¯åŸºæœ¬Pascalå½¢å¼ã«ã™ã‚‹
+	ã€€ã€€ã§ãã‚‹ã ã‘ã€è‹±èªžã‚’åˆ©ç”¨ã™ã‚‹ã€‚è¤‡é›‘ãªå ´åˆã€æ—¥æœ¬èªžãƒ­ãƒžå­—ã§çµ„ã¿åˆã‚ã›ã™ã‚‹
+	ã€€ã€€ä¾‹ï¼š
+	ã€€ã€€ã€€çµ¦æ–™ä¸€è¦§æ©Ÿèƒ½ã®Javaã‚¯ãƒ©ã‚¹ã«ã¯ã€
+	ã€€ã€€ã€€ã€€ã‚¯ãƒ©ã‚¹åï¼šSalaryDetailã€‚ã¯ã˜ã‚æ–‡å­—ã¯å¤§æ–‡å­—ã€‚
+	ã€€ã€€ã€€ã€€å¤‰æ•°åï¼šç¤¾å“¡åç§°â†’employeeNameã€€å§‹ã‚æ¡ã¯å°æ–‡å­—ã€‚
+ã€€ã€€â‘¡ã‚³ãƒ¡ãƒ³ãƒˆï¼š
+      1)JAVAãƒ•ã‚¡ã‚¤ãƒ«ï¼š
+ã€€ã€€ã€€ã€€(1)ã‚¯ãƒ©ã‚¹èª¬æ˜Ž
+ã€€ã€€ã€€ã€€ã€€ä¾‹ï¼š
+ã€€ã€€ã€€ã€€ã€€ã€€ã€€/**
+ã€€ã€€ã€€ã€€ã€€     * æ¦‚è¦ï¼šç¤¾å“¡çµ¦æ–™æ˜Žç´°ã‚’å–å¾—ã™ã‚‹ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«
+ã€€ã€€ã€€ã€€ã€€     *
+ã€€ã€€ã€€ã€€ã€€     * ä½œæˆè€…ï¼šå¼µï¼ ã‚½ãƒ•ãƒˆãƒ†ã‚¯
+ã€€ã€€ã€€ã€€ã€€     * ä½œæˆæ—¥ï¼š2019/8/7
+ã€€ã€€ã€€ã€€ã€€     */
+ã€€ã€€ã€€ã€€(2)é–¢æ•°èª¬æ˜Ž
+ã€€ã€€ã€€ã€€ã€€ä¾‹ï¼š  
+ã€€ã€€ã€€ã€€ã€€ã€€ã€€/**
+ã€€ã€€ã€€ã€€ã€€     * æ©Ÿèƒ½ï¼šç¤¾å“¡IDã‚’æŒã£ã¡ã€DBã‚’æ¤œç´¢ã™ã‚‹ã€‚
+ã€€ã€€ã€€ã€€ã€€     *
+ã€€ã€€ã€€ã€€ã€€     * @param emplyeeID ç¤¾å“¡ID
+ã€€ã€€ã€€ã€€ã€€     * @return salaryModle ç¤¾å“¡çµ¦æ–™ãƒ¢ãƒ‡ãƒ«
+ã€€ã€€ã€€ã€€ã€€     * @exception DBæŽ¥ç¶šä¾‹å¤–
+ã€€ã€€ã€€ã€€ã€€     * @author å¼µï¼ ã‚½ãƒ•ãƒˆãƒ†ã‚¯
+ã€€ã€€ã€€ã€€ã€€     */
+ã€€ã€€ã€€ã€€(3)ã‚½ãƒ¼ã‚¹
+ã€€ã€€ã€€ã€€ã€€åŸºæœ¬ã€ç¬¬ä¸‰è€…ã‹ã‚‰ã‚³ãƒ¡ãƒ³ãƒˆã ã‘ã‚’è¦‹ã‚‹ã¨ã€åˆ†ã‹ã‚‹ã‚ˆã†ã«è¨˜å…¥ã™ã‚‹ã€‚
 
 
-@@@‚QjJSPƒtƒ@ƒCƒ‹
-@@@@‰æ–Ê‚ÆƒRƒ“ƒgƒ[ƒ‹ƒNƒ‰ƒX‚ÆŠÔ‚Ì’ÊMƒNƒ‰ƒX‚ð‹L“ü‚·‚éB
-@@@@—áF
-@@@@@@<!--@SalaryCotrol.java‚Æ’ÊMƒ‚ƒfƒ‹FSalaryBean-->
-@@@@@@<form:form id="fbean" name="fbean" modelAttribute="softtech.office.bean.SalaryinfoBean" method="get">
+ã€€ã€€ã€€ï¼’ï¼‰JSPãƒ•ã‚¡ã‚¤ãƒ«
+ã€€ã€€ã€€ã€€ç”»é¢ã¨ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ«ã‚¯ãƒ©ã‚¹ã¨é–“ã®é€šä¿¡ã‚¯ãƒ©ã‚¹ã‚’è¨˜å…¥ã™ã‚‹ã€‚
+ã€€ã€€ã€€ã€€ä¾‹ï¼š
+ã€€ã€€ã€€ã€€ã€€ã€€<!--ã€€SalaryCotrol.javaã¨é€šä¿¡ãƒ¢ãƒ‡ãƒ«ï¼šSalaryBean-->
+ã€€ã€€ã€€ã€€ã€€ã€€<form:form id="fbean" name="fbean" modelAttribute="softtech.office.bean.SalaryinfoBean" method="get">
 
-@@@‚Rjƒ}ƒbƒpƒtƒ@ƒCƒ‹
-@@@@SQL‚Ìà–¾‚ð‹L“ü‚·‚éB
-@@@@—áF
-@@@@@<!--@ŽÐˆõ‹‹—¿–¾×‚ðŽæ“¾‚·‚éB@-->
-@@@@@<select id="findById" parameterType="String" resultType="softtech.office.bean.SalaryinfoBean">
-        @@@SELECT * FROM employee where id = #{id}
-    @@@</select>
+ã€€ã€€ã€€ï¼“ï¼‰ãƒžãƒƒãƒ‘ãƒ•ã‚¡ã‚¤ãƒ«
+ã€€ã€€ã€€ã€€SQLã®èª¬æ˜Žã‚’è¨˜å…¥ã™ã‚‹ã€‚
+ã€€ã€€ã€€ã€€ä¾‹ï¼š
+ã€€ã€€ã€€ã€€ã€€<!--ã€€ç¤¾å“¡çµ¦æ–™æ˜Žç´°ã‚’å–å¾—ã™ã‚‹ã€‚ã€€-->
+ã€€ã€€ã€€ã€€ã€€<select id="findById" parameterType="String" resultType="softtech.office.bean.SalaryinfoBean">
+        ã€€ã€€ã€€SELECT * FROM employee where id = #{id}
+    ã€€ã€€ã€€</select>
 
-@@@‚SjHTML/JS
-@@@@@d—v‚ÈŠ‚É•ª‚©‚é‚æ‚¤‚É‚·‚éB
-@@@@@—áF
-@@@@@@<!--@ŽÐˆõID@-->
-@@@@@@<input type="text" name="employeeId" />
+ã€€ã€€ã€€ï¼”ï¼‰HTML/JS
+ã€€ã€€ã€€ã€€ã€€é‡è¦ãªæ‰€ã«åˆ†ã‹ã‚‹ã‚ˆã†ã«ã™ã‚‹ã€‚
+ã€€ã€€ã€€ã€€ã€€ä¾‹ï¼š
+ã€€ã€€ã€€ã€€ã€€ã€€<!--ã€€ç¤¾å“¡IDã€€-->
+ã€€ã€€ã€€ã€€ã€€ã€€<input type="text" name="employeeId" />
 
-@
-@@@
+ã€€
+ã€€ã€€ã€€
