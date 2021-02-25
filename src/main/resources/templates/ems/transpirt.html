@@ -61,14 +61,14 @@
 		<div class="messagecanvas">
 			<div class="message-header"><span class="message-exit" onclick="messagetExit()">×</span></div>
 			<div class="message">
-				<div th:if="${(uploadFile == '001')}">ファイルアプロードが失敗しました</div>
-				<div th:if="${(uploadFile == '111')}">ファイルアプロードが成功しました</div>
-				<div th:if="${(uploadInfo == '001')}">対象稼働月は既に入力です</div>
-				<div th:if="${(uploadInfo == '002')}">登録が失敗しました</div>
-				<div th:if="${(uploadInfo == '111')}">登録が成功しました</div>
-				<div th:if="${(upTransportInfo == '001')}">対象稼働月は既に入力です</div>
-				<div th:if="${(upTransportInfo == '002')}">登録が失敗しました</div>
-				<div th:if="${(upTransportInfo == '111')}">登録が成功しました</div>
+				<div th:if="${(uploadFile == '001')}">ファイルアプロードは失敗しました。</div>
+				<div th:if="${(uploadFile == '111')}">ファイルアプロードは成功しました。</div>
+				<div th:if="${(uploadInfo == '001')}">稼働月の勤怠は既に提出済み。</div>
+				<div th:if="${(uploadInfo == '002')}">登録は失敗しました。</div>
+				<div th:if="${(uploadInfo == '111')}">登録は成功しました。</div>
+				<div th:if="${(upTransportInfo == '001')}">稼働月の勤怠は既に提出済み。</div>
+				<div th:if="${(upTransportInfo == '002')}">登録は失敗しました</div>
+				<div th:if="${(upTransportInfo == '111')}">登録は成功しました</div>
 			</div>
 			<div class="message-button"><button class="message-quit" onclick="messagetExit()">確認</button></div>
 		</div>
