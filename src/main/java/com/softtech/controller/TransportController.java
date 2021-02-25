@@ -108,7 +108,7 @@ public class TransportController<WorkInfoComment> {
 		//勤怠追加処理
 		Transport transport = new Transport();
 
-		transport = transportAllService.doTransport(request, session, file, mapper, model);
+		transport = transportAllService.doTransport(file, mapper, model);
 		model.addAttribute("transport", transport);
 		return "/ems/transpirt";
 	}
