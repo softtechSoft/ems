@@ -17,39 +17,39 @@
 		<form th:action="@{/transport-workinfo}" class="wapper" method="POST" enctype="multipart/form-data">
 				<label>社員名</label><span class="name" th:text="${session.userEmployeeName}">USER</span>
 			<div>
-				<label>稼働月</label><input id="workMonth" class="workinfo-month" name="workMonth" type="text" maxlength="6" onchange="startDateChange()" oninvalid="setCustomValidity('稼働月を入力ください')" title="稼働月" required/>
+				<label>稼働月</label><input id="workMonth" class="workinfo-month" name="workMonth" type="text" maxlength="6" oninvalid="setCustomValidity('稼働月を入力ください')" title="稼働月" required />
 			</div>
 			<div class="workinfo">
-				<label>稼働開始日</label><input id="StartMonth" class="workinfo-startDate" name="workStartDay" type="date" required/>
+				<label>稼働開始日</label><input id="workStartDay" class="workinfo-startDate" name="workStartDay" onchange="startDateChange()" value="" type="date" required />
 			</div>
-				<label>稼働最終日</label><input id="endMonth" class="workinfo-endDate" name="workEndDay" type="date" required/>
+				<label>稼働最終日</label><input id="endMonth" class="workinfo-endDate" name="workEndDay" type="date" required />
 			<div>
-				<label>稼働時間</label><input class="workinfo-time" name="workTime" type="text" maxlength="3" pattern="[0-9]{0,3}" oninvalid="setCustomValidity('稼働時間を入力ください')" title="稼働時間" required/>
+				<label>稼働時間</label><input class="workinfo-time" name="workTime" type="text" maxlength="3" pattern="[0-9]{0,3}" oninvalid="setCustomValidity('稼働時間を入力ください')" title="稼働時間" required />
 			</div>
 			<div class="file">
 				<input id="file" type="file" name="file"/>
 			</div>
 				<label>定期券変更あり</label><input id="teiki" class="ticket" name="teiki" Value='1' type="checkbox" onclick="setAll()"/>
 			<div>
-				<label>定期券開始日</label><input id="startDate" class="start" name="startDate" type="text" title="stationinfo" th:value="${transport.startDate}" disabled="disabled" required/>
+				<label>定期券開始日</label><input id="startDate" class="start" name="startDate" value="" type="text" title="stationinfo" th:value="${transport.startDate}" disabled="disabled" required />
 			</div>
 			<div class="station">
-				<label>起点駅</label><input class="station-start" name="startStation" type="text" title="stationinfo" th:value="${transport.startStation}" disabled="disabled" required/>
+				<label>起点駅</label><input id="startStation" class="station-start" name="startStation" type="text" title="stationinfo" th:value="${transport.startStation}" disabled="disabled" required />
 			</div>
-				<label>終点駅</label><input class="station-end" name="endStation" type="text" title="stationinfo" th:value="${transport.endStation}" disabled="disabled" required/>
+				<label>終点駅</label><input id="endStation" class="station-end" name="endStation" type="text" title="stationinfo" th:value="${transport.endStation}" disabled="disabled" required />
 			<div>
-				<label>交通機関</label><input class="station-traffic" name="transportFacility" type="text" th:value="${transport.transportFacility}" title="stationinfo" disabled="disabled" required/>
+				<label>交通機関</label><input id="transportFacility" class="station-traffic" name="transportFacility" type="text" th:value="${transport.transportFacility}" title="stationinfo" disabled="disabled" required />
 			</div>
-				<label>中間駅1</label><input class="station-a" name="midStation1" type="text" th:value="${transport.midStation1}" title="stationinfo" disabled="disabled" >
+				<label>中間駅1</label><input id="midStation1" class="station-a" name="midStation1" type="text" th:value="${transport.midStation1}" title="stationinfo" disabled="disabled" >
 			<div>
-				<label>交通機関1</label><input class="station-traffic-a" name="transportFacility1" type="text" th:value="${transport.transportFacility1}" title="stationinfo" disabled="disabled" >
+				<label>交通機関1</label><input id="transportFacility1" class="station-traffic-a" name="transportFacility1" type="text" th:value="${transport.transportFacility1}" title="stationinfo" disabled="disabled" >
 			</div>
 			<div>
-				<label>中間駅2</label><input class="station-a" name="midStation2" type="text" th:value="${transport.midStation2}" title="stationinfo" disabled="disabled" >
+				<label>中間駅2</label><input id="midStation2" class="station-a" name="midStation2" type="text" th:value="${transport.midStation2}" title="stationinfo" disabled="disabled" >
 			</div>
-				<label>中間駅3</label><input class="station-a" name="midStation3"type="text" th:value="${transport.midStation3}" title="stationinfo" disabled="disabled" >
+				<label>中間駅3</label><input id="midStation3" class="station-a" name="midStation3" type="text" th:value="${transport.midStation3}" title="stationinfo" disabled="disabled" >
 			<div>
-				<label>定期券金額(1ヶ月)</label><input class="amount" name="transportExpense" type="text" pattern="[0-9]{0,7}" oninvalid="setCustomValidity('金額を入力ください')" th:value="${transport.transportExpense}" title="stationinfo" disabled="disabled" required/>
+				<label>定期券金額(1ヶ月)</label><input id="transportExpense" class="amount" name="transportExpense" type="text" pattern="[0-9]{0,7}" oninvalid="setCustomValidity('金額を入力ください')" th:value="${transport.transportExpense}" title="stationinfo" disabled="disabled" required/>
 			</div>
 			<div>
 				<label>出張交通費</label><input id="businessTrip" class="transportation" name="businessTrip" type="text" pattern="[0-9]{0,7}" oninvalid="setCustomValidity('金額を入力ください')" th:value="${transport.businessTrip}" autocomplete="off" title="stationinfo" disabled="disabled" >
@@ -64,9 +64,11 @@
 				<div th:if="${(uploadFile == '001')}">ファイルアプロードが失敗しました</div>
 				<div th:if="${(uploadFile == '111')}">ファイルアプロードが成功しました</div>
 				<div th:if="${(uploadInfo == '001')}">対象稼働月は既に入力です</div>
-				<div th:if="${(uploadInfo == '111')}">アプロードが成功しました</div>
-				<div th:if="${(upTransportInfo == '001')}">アプロードが失敗しました</div>
-				<div th:if="${(upTransportInfo == '111')}">アプロードが成功しました</div>
+				<div th:if="${(uploadInfo == '002')}">登録が失敗しました</div>
+				<div th:if="${(uploadInfo == '111')}">登録成功しました</div>
+				<div th:if="${(upTransportInfo == '001')}">対象稼働月は既に入力です</div>
+				<div th:if="${(upTransportInfo == '002')}">登録が失敗しました</div>
+				<div th:if="${(upTransportInfo == '111')}">登録が成功しました</div>
 			</div>
 			<div class="message-button"><button class="message-quit" onclick="messagetExit()">確認</button></div>
 		</div>

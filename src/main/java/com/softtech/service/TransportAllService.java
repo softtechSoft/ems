@@ -59,7 +59,7 @@ public class TransportAllService {
 				//登録が成功しました
 				model.addAttribute("uploadInfo", "111");
 			}else {
-				//登録は失敗
+				//登録は失敗しました
 				model.addAttribute("uploadInfo", "002");
 			}
 		} catch (Exception e) {
@@ -74,10 +74,9 @@ public class TransportAllService {
 				//登録が成功しました
 				model.addAttribute("upTransportInfo", "111");
 			}else {
-				//登録は失敗
+				//登録は失敗しました
 				model.addAttribute("uploadInfo", "002");
 			}
-
 		} catch (Exception e) {
 			//対象稼働月は既に入力です
 			model.addAttribute("upTransportInfo", "001");

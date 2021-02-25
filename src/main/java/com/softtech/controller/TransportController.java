@@ -32,6 +32,7 @@ public class TransportController<WorkInfoComment> {
 	@Autowired
 	private TransportAllService transportAllService;
 
+
 	@RequestMapping("/transport-workinfo")
 	public String insertTransport(HttpServletRequest request, HttpSession session,@RequestParam("file") MultipartFile file, Model model) throws Exception {
 
@@ -76,10 +77,32 @@ public class TransportController<WorkInfoComment> {
 			mapper.put(entry.getKey(), entry.getValue()[0]);
 		} // for
 
-		// 定期券チェックボックスがチェックされた場合
-		if(flg) {
-			// 定期券開始日を稼働開始日に設定する。
+		// 定期券チェックボックスがチェックされない場合、テーブルから交通費を取得
+		if(!flg) {
+			Map<String, String> sportMapper = new HashMap<String, String>();
+			//　交通情報取得
+			sportMapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
+			Transport transport = transportService.queryTransport(sportMapper);
+			// 定期券開始日
 			mapper.put("startDate", workStartDay);
+			//起点駅
+			mapper.put("startStation", transport.getStartStation());
+			//終点駅
+			mapper.put("endStation", transport.getEndStation());
+			//交通機関
+			mapper.put("transportFacility", transport.getTransportFacility());
+			//中間駅1
+			mapper.put("midStation1", transport.getMidStation1());
+			//交通機関1
+			mapper.put("transportFacility1", transport.getTransportFacility1());
+			//中間駅2
+			mapper.put("midStation2", transport.getMidStation2());
+			//中間駅3
+			mapper.put("midStation3", transport.getMidStation3());
+			//定期券金額(1ヶ月)
+			mapper.put("transportExpense", transport.getTransportExpense());
+			//出張交通費
+			mapper.put("businessTrip", "0");
 		}
 
 		//勤怠追加処理

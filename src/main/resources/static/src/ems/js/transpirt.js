@@ -12,8 +12,8 @@ function()
 ,false);
 function startDateChange()
 {
-	var str=document.getElementById('workMonth').value;
-	document.getElementById('startDate').value=str;
+	var str = document.getElementById('workStartDay').value;
+	document.getElementById('startDate').value = str;
 }
 function setAll()
 {
