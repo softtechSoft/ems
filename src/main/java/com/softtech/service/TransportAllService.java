@@ -43,12 +43,14 @@ public class TransportAllService {
 
 		Transport transport = new Transport();
 
-		//メッセージ一覧
-		model.addAttribute("state", "007");
+		//stateは非NULL状態、メッセージを表示する。
+		model.addAttribute("state", "1");
 
 		// ファイルアップロード
 		FileUtil fileUtil = new FileUtil();
 		if (!fileUtil.uploadFile(file)) {
+			//ファイルのアップロードに失敗の場合、画面に下記メッセージを表示する。
+			//アップロードは失敗しました
 			model.addAttribute("uploadInfo", "001");
 		}
 
@@ -56,13 +58,16 @@ public class TransportAllService {
 		try {
 			int upWork = workinfoService.insertWorkInfo(mapper);
 			if (upWork == 1) {
+				//追加成功の場合、画面に下記メッセージを表示する。
 				//登録が成功しました
 				model.addAttribute("uploadInfo", "111");
 			}else {
+				//登録は失敗の場合、画面に下記メッセージを表示する。
 				//登録は失敗しました
 				model.addAttribute("uploadInfo", "002");
 			}
 		} catch (Exception e) {
+			//追加失敗の場合、画面に下記メッセージを表示する。
 			//対象稼働月は既に入力です
 			model.addAttribute("uploadInfo", "001");
 		}
@@ -71,25 +76,27 @@ public class TransportAllService {
 		try {
 			int uptransport = transportService.insertTransport(mapper);
 			if(uptransport == 1 ) {
+				//追加成功の場合、画面に下記メッセージを表示する。
 				//登録が成功しました
 				model.addAttribute("upTransportInfo", "111");
 			}else {
+				//登録は失敗の場合、画面に下記メッセージを表示する。
 				//登録は失敗しました
 				model.addAttribute("uploadInfo", "002");
 			}
 		} catch (Exception e) {
-			//対象稼働月は既に入力です
+			//追加失敗の場合、画面に下記メッセージを表示する。
+			//対象稼働月は既に入力です。
 			model.addAttribute("upTransportInfo", "001");
 		}
 
 		// 交通情報を取得し戻る
-		Map<String, String> transportMapper = new HashMap();
+		Map<String, String> transportMapper = new HashMap<String, String>();
 		transportMapper.put("employeeID", mapper.get("employeeID"));
 		transport = transportService.queryTransport(transportMapper);
 		if (transport == null) {
 			transport = new Transport();
 		}
-
 		return transport;
 	}
 }
