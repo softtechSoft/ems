@@ -1,13 +1,19 @@
 window.addEventListener('DOMContentLoaded',
 function()
 {
+	  // 現在日付を作成
 	  var date=new Date();
 	  var year=date.getFullYear();
 	  var month=date.getMonth();
-	  var day = date.getDate();
-	  if(month<10)month='0'+(month+2);
+
+	  //10月未満の場合、頭に’0’を追加する。（例：1→01)
+	  if(month<10)month='0'+(month+1);
+
+	  // 稼働月設定
 	  document.getElementById('workMonth').value=year+'/'+month;
-	  document.getElementById('startDate').value=year+'/'+month+'/'+day;
+
+      // 交通非開始日設定
+	  document.getElementById('startDate').value=year+'/'+month+'/01';
 }
 ,false);
 function startDateChange()

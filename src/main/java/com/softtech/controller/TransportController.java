@@ -60,9 +60,18 @@ public class TransportController<WorkInfoComment> {
 				continue;
 			}
 
-			//稼働月と定期券開始日を変換。YYYY/MM形をYYYYMM形に変換。
-			if(entry.getKey().equals("workMonth")||entry.getKey().equals("startDate")){
+			//稼働月を変換。YYYY/MM形をYYYYMM形に変換。
+			if(entry.getKey().equals("workMonth")){
 				mapper.put(entry.getKey(), entry.getValue()[0].replace("/", ""));
+				continue;
+			}
+
+			//定期券開始日を変換。YYYYMM形に変換。
+			if(entry.getKey().equals("startDate")){
+				String startDate = entry.getValue()[0];
+				startDate = startDate.replace("/", "");
+				startDate = startDate.replace("-", "");
+				mapper.put(entry.getKey(), startDate);
 				continue;
 			}
 

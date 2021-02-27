@@ -85,14 +85,15 @@ contractEndDate varchar(8) comment'契約終了日',
 paymentTerm varchar(2) comment'支払サイト',
 postNeed varchar(1) comment'原本郵送フラグ',
 invoice varchar(50) comment'請求書名称',
+status varchar(1) not null comment'進行ステータス',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日'
 )comment'契約情報';
 
 Insert into contract values
-('CT001','火遁忍術開発支援','E001','C001',600000,'0',150,1000,200,1000,'20210101','20210131','10','0',' 火遁忍術開発支援', date_format(now(), '%Y%m%d'), null),
-('CT002','水遁忍術開発支援','E002','C002',600000,'0',150,1000,200,1000,'20210101','20210131','10','0',' 水遁忍術開発支援', date_format(now(), '%Y%m%d'), null),
-('CT003','水遁忍術開発支援','E003','C003',600000,'0',150,1000,200,1000,'20210101','20210131','10','0',' 土遁忍術開発支援', date_format(now(), '%Y%m%d'), null);
+('CT001','火遁忍術開発支援','E001','C001',600000,'0',150,1000,200,1000,'20210101','20210131','10','0',' 火遁忍術開発支援', '1',date_format(now(), '%Y%m%d'), date_format(now(), '%Y%m%d')),
+('CT002','水遁忍術開発支援','E002','C002',600000,'0',150,1000,200,1000,'20210101','20210131','10','0',' 水遁忍術開発支援', '1',date_format(now(), '%Y%m%d'), date_format(now(), '%Y%m%d')),
+('CT003','水遁忍術開発支援','E003','C003',600000,'0',150,1000,200,1000,'20210101','20210131','10','0',' 土遁忍術開発支援', '1',date_format(now(), '%Y%m%d'), date_format(now(), '%Y%m%d'));
 
 drop table if exists workInfo;
 create table workInfo(
