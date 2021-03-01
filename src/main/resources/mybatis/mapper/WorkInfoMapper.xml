@@ -21,8 +21,8 @@
     	contract
     WHERE
     	employeeID=#{employeeID}
-   	 AND #{workStartDay} >= contractBeginDate
-   	 AND status = '1'
+ 		AND #{workStartDay} >= contractBeginDate
+ 		and status = '1'
 	</insert>
 
 	<select id="queryWorkInfo" parameterType="map" resultType="WorkInfo">

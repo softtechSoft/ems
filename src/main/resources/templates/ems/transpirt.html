@@ -17,14 +17,14 @@
 		<form th:action="@{/transport-workinfo}" class="wapper" method="POST" enctype="multipart/form-data">
 				<label>社員名</label><span class="name" th:text="${session.userEmployeeName}">USER</span>
 			<div>
-				<label>稼働月</label><input id="workMonth" class="workinfo-month" name="workMonth" type="text" maxlength="7" oninvalid="setCustomValidity('稼働月を入力ください')" title="稼働月" required />
+				<label>稼働月</label><input id="workMonth" class="workinfo-month" name="workMonth" type="text" maxlength="7" title="稼働月" required />
 			</div>
 			<div class="workinfo">
 				<label>稼働開始日</label><input id="workStartDay" class="workinfo-startDate" name="workStartDay" onchange="startDateChange()" value="" type="date" required />
 			</div>
 				<label>稼働最終日</label><input id="endMonth" class="workinfo-endDate" name="workEndDay" type="date" required />
 			<div>
-				<label>稼働時間</label><input class="workinfo-time" name="workTime" type="text" maxlength="3" pattern="[0-9]{0,3}" oninvalid="setCustomValidity('稼働時間を入力ください')" title="稼働時間" required />
+				<label>稼働時間</label><input class="workinfo-time" name="workTime" type="text" maxlength="3" pattern="[0-9]{0,3}" placeholder="例:150" title="稼働時間" required />
 			</div>
 			<div class="file">
 				<input id="file" type="file" name="file"/>
@@ -49,10 +49,10 @@
 			</div>
 				<label>中間駅3</label><input id="midStation3" class="station-a" name="midStation3" type="text" th:value="${transport.midStation3}" title="stationinfo" disabled="disabled" >
 			<div>
-				<label>定期券金額(1ヶ月)</label><input id="transportExpense" class="amount" name="transportExpense" type="text" pattern="[0-9]{0,7}" oninvalid="setCustomValidity('金額を入力ください')" th:value="${transport.transportExpense}" title="stationinfo" disabled="disabled" required/>
+				<label>定期券金額(1ヶ月)</label><input id="transportExpense" class="amount" name="transportExpense" type="text" pattern="[0-9]{0,7}" th:value="${transport.transportExpense}" placeholder="例:5000" title="stationinfo" disabled="disabled" required/>
 			</div>
 			<div>
-				<label>出張交通費</label><input id="businessTrip" class="transportation" name="businessTrip" type="text" pattern="[0-9]{0,7}" oninvalid="setCustomValidity('金額を入力ください')" th:value="${transport.businessTrip}" autocomplete="off" title="stationinfo" disabled="disabled" >
+				<label>出張交通費</label><input id="businessTrip" class="transportation" name="businessTrip" type="text" pattern="[0-9]{0,7}" th:value="${transport.businessTrip}" placeholder="例:500" autocomplete="off" title="stationinfo" disabled="disabled" >
 			</div>
 			<input class="enter" type="submit" value="提出">
 		</form>
