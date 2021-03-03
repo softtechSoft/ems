@@ -45,8 +45,7 @@ public class SalaryInfoController {
 	 */
 	@RequestMapping("/request-salarydetail")
 	@ResponseBody
-	public String salaryinfo(@RequestParam("yearMonth") String yearMonth, HttpSession session)
-			throws JsonProcessingException {
+	public String salaryinfo(@RequestParam("yearMonth") String yearMonth, HttpSession session) throws JsonProcessingException {
 		ObjectMapper jsonMapper = new ObjectMapper();
 		Map<String, String> sqlParam = new HashMap<>();
 		sqlParam.put("yearMonth", yearMonth);
