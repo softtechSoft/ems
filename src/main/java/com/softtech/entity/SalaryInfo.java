@@ -21,6 +21,14 @@ public class SalaryInfo {
 	private String rentalMgmtFee = "0";
 	private String sum = "0";
 	private String remark = " ";
+	private String totalFee = "0";
+	private String wkAcccpsIns = "0";
+	private String eplyInsWithdraw = "0";
+	private String eplyInsComp = "0";
+	private String welfareBaby = "0";
+	private String welfareComp = "0";
+	private String overTime = "0";
+	private String shortage = "0";
 
 	public String getEmployeeName() {
 		return employeeName;
@@ -181,5 +189,69 @@ public class SalaryInfo {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public String getTotalFee() {
+		return totalFee;
+	}
+
+	public void setTotalFee(String totalFee) {
+		this.totalFee = totalFee;
+	}
+
+	public String getWkAcccpsIns() {
+		return wkAcccpsIns;
+	}
+
+	public void setWkAcccpsIns(String wkAcccpsIns) {
+		this.wkAcccpsIns = wkAcccpsIns;
+	}
+
+	public String getEplyInsWithdraw() {
+		return eplyInsWithdraw;
+	}
+
+	public void setEplyInsWithdraw(String eplyInsWithdraw) {
+		this.eplyInsWithdraw = eplyInsWithdraw;
+	}
+
+	public String getEplyInsComp() {
+		return eplyInsComp;
+	}
+
+	public void setEplyInsComp(String eplyInsComp) {
+		this.eplyInsComp = eplyInsComp;
+	}
+
+	public String getWelfareBaby() {
+		return welfareBaby;
+	}
+
+	public void setWelfareBaby(String welfareBaby) {
+		this.welfareBaby = welfareBaby;
+	}
+
+	public String getWelfareComp() {
+		return welfareComp;
+	}
+
+	public void setWelfareComp(String welfareComp) {
+		this.welfareComp = welfareComp;
+	}
+
+	public String getOverTime() {
+		return overTime;
+	}
+
+	public void setOverTime(String overTime) {
+		this.overTime = overTime;
+	}
+
+	public String getShortage() {
+		return shortage;
+	}
+
+	public void setShortage(String shortage) {
+		this.shortage = shortage;
 	}
 }

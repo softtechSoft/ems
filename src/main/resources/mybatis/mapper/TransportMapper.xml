@@ -64,7 +64,7 @@
     		ems.transport t
     		where t.employeeID = #{employeeID}
     	order by
-    		t.workMonth desc
+    		t.workMonth DESC
     	limit
     		1
 	</select>

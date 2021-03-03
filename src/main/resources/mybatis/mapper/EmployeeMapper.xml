@@ -2,8 +2,8 @@
         <!DOCTYPE mapper
                 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-<!--namespace=Dao/Mapper-->      
+
+<!--namespace=Dao/Mapper-->
 <mapper namespace="com.softtech.mapper.EmployeeMapper">
 	<select id="queryEmployee" parameterType="string" resultType="Employee">
 		select * from ems.employee where status = '0'
@@ -11,21 +11,43 @@
 		and mailAdress = #{email}
 		</if>
 	</select>
-	
+
 	<update id="updatePassword" parameterType="map">
-		update ems.employee set password = #{password},updateDate = date_format(now(),'%Y%m%d') where mailAdress=#{email}
+		update ems.employee
+		set
+    		password = # { password }
+   		 , updateDate = date_format(now(), '%Y%m%d')
+		where
+   			mailAdress = # { email }
+
 	</update>
 
   	<update id="updateEmployee" parameterType="map">
-		update ems.employee set employeeName = #{employeeName},password = #{password},
-		status = #{status}, sex = #{sex},birthday = #{birthday},age = #{age},joinedDate = #{joinedDate},
-		joinedTime = #{joinedTime},postCode = #{postCode},address = #{address},phoneNumber = #{phoneNumber},
-		authority = #{authority},mailAdress = #{mailAdress} where employeeID =#{employeeID}
+		update ems.employee
+		set
+		    employeeName = # { employeeName }
+		    , password = # { password }
+		    , status = # { status }
+		    , sex = # { sex }
+		    , birthday = # { birthday }
+		    , age = # { age }
+		    , joinedDate = # { joinedDate }
+		    , joinedTime = # { joinedTime }
+		    , postCode = # { postCode }
+		    , address = # { address }
+		    , phoneNumber = # { phoneNumber }
+		    , authority = # { authority }
+		    , mailAdress = # { mailAdress }
+		where
+		    employeeID = # { employeeID }
+
 	</update>
-		
+
 	<update id="updateStatus" parameterType="map">
-		update ems.employee set status = '9' where employeeID =#{employeeID}
+		update ems.employee
+		set
+    		status = '9'
+		where
+			employeeID = # { employeeID }
 	</update>
-
-
 </mapper>

@@ -5,24 +5,24 @@
 
 <mapper namespace="com.softtech.mapper.WorkInfoMapper">
 	<insert id="insertWorkInfo" parameterType="map">
-	insert
-	into workInfo
-	SELECT
-		conCat('W',subStr(contractID,3))as workInfoID,
-		contractID,
-		#{workMonth}as workMonth,
-    	#{workStartDay}as workStartDay ,
-   	 	#{workEndDay}as workEndDay,
-    	#{workTime}as workTime,
-   		null ,
-    	date_format(now(),'%Y%m%d'),
-    	null
-    FROM
-    	contract
-    WHERE
-    	employeeID=#{employeeID}
- 		AND #{workStartDay} >= contractBeginDate
- 		and status = '1'
+		insert
+		into workInfo
+		SELECT
+			conCat('W',subStr(contractID,3))as workInfoID,
+			contractID,
+			#{workMonth}as workMonth,
+	    	#{workStartDay}as workStartDay ,
+	   	 	#{workEndDay}as workEndDay,
+	    	#{workTime}as workTime,
+	   		null ,
+	    	date_format(now(),'%Y%m%d'),
+	    	null
+	    FROM
+	    	contract
+	    WHERE
+	    	employeeID=#{employeeID}
+	 		AND #{workStartDay} >= contractBeginDate
+	 		and status = '1'
 	</insert>
 
 	<select id="queryWorkInfo" parameterType="map" resultType="WorkInfo">
