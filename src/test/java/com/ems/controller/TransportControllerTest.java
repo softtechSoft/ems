@@ -21,7 +21,14 @@ import com.softtech.controller.TransportController;
 import com.softtech.entity.Transport;
 import com.softtech.service.TransportAllService;
 import com.softtech.service.TransportServiceImpl;
-
+/**
+ * 参考資料：
+ * 　https://qiita.com/a-pompom/items/3f834119c756e5286730
+ * 　https://spring.pleiades.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-testing
+ * 　
+ * @author softtech
+ *
+ */
 @ContextConfiguration(classes = EmsApplication.class)
 @RunWith(SpringRunner.class)
 @WebMvcTest(TransportController.class)
