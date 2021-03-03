@@ -43,7 +43,8 @@ public class PasswdController {
 	 */
 	@RequestMapping("/update-passwd")
 	@ResponseBody
-	public String updatePasswd(@Param("data") String data, HttpSession session)	throws JsonMappingException, JsonProcessingException {
+	public String updatePasswd(@Param("data") String data, HttpSession session)
+			throws JsonMappingException, JsonProcessingException {
 		Employee employee = employeeService.queryEmployee((String) session.getAttribute("userMailAdress"));
 		ObjectMapper jsonMapper = new ObjectMapper();
 		Map<String, String> dataMap = jsonMapper.readValue(data, Map.class);
@@ -62,3 +63,4 @@ public class PasswdController {
 		}
 	}
 }
+

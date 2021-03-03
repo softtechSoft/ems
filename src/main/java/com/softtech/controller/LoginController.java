@@ -54,7 +54,8 @@ public class LoginController {
 	 */
 	@RequestMapping("/enter")
 	@ResponseBody
-	public String enter(@RequestParam("data") String data, HttpSession session)	throws JsonMappingException, JsonProcessingException {
+	public String enter(@RequestParam("data") String data, HttpSession session)
+			throws JsonMappingException, JsonProcessingException {
 		ObjectMapper jsonMapper = new ObjectMapper();
 		Map<String, String> map = jsonMapper.readValue(data, Map.class);
 		Employee employee = employeeService.queryEmployee(map.get("user"));
