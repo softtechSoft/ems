@@ -28,7 +28,7 @@ public class TransportAllService {
 	/**
 	 * 機能：①勤怠テーブル、交通費テーブルに新規追加する。
 	 * 　　　②画面情報を戻す
-	 *
+	 *      ※アドバイス：①Page資源をサービス層に持ってこない。JUNITには難しい。例org.springframework.ui.Model
 	 * @param file アップロードファイル
 	 * @param mapper 新規追加内容
 	 * @return 交通情報
@@ -88,6 +88,28 @@ public class TransportAllService {
 		}
 
 		// 交通情報を取得し戻る
+//		Map<String, String> transportMapper = new HashMap<String, String>();
+//		transportMapper.put("employeeID", mapper.get("employeeID"));
+//		transport = transportService.queryTransport(transportMapper);
+//		if (transport == null) {
+//			transport = new Transport();
+//		}
+		transport = getTransportInf(mapper);
+		return transport;
+	}
+	/**
+	 * 機能：交通費情報を取得する
+	 *
+	 * @param mapper 必要なパラメータ
+	 * @return 交通情報
+	 * @exception DB操作例外
+	 *
+	 * @author 楊@ソフトテク
+	 */
+	public Transport getTransportInf(Map<String, String> mapper) {
+		Transport transport = new Transport();
+
+		// 交通情報を取得し戻る
 		Map<String, String> transportMapper = new HashMap<String, String>();
 		transportMapper.put("employeeID", mapper.get("employeeID"));
 		transport = transportService.queryTransport(transportMapper);
@@ -95,5 +117,6 @@ public class TransportAllService {
 			transport = new Transport();
 		}
 		return transport;
+
 	}
 }
