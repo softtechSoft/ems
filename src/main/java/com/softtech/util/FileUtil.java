@@ -29,13 +29,17 @@ public class FileUtil {
 	 * @exception なし
 	 * @author 楊@ソフトテク
 	 */
-	public boolean uploadFile(MultipartFile file) {
+	public boolean uploadFile(MultipartFile file,String targetPath) {
+
+		if(targetPath == null) {
+			return true;
+		}
 
 		// ファイルアップロード
 		if (!file.isEmpty()) {
 			try {
 				BufferedOutputStream out = new BufferedOutputStream(
-						new FileOutputStream(new File(uploadPath + file.getOriginalFilename())));
+						new FileOutputStream(new File(targetPath + File.separator + file.getOriginalFilename())));
 				out.write(file.getBytes());
 				out.flush();
 				out.close();
@@ -49,12 +53,46 @@ public class FileUtil {
 		}
 		return true;
 	}
-}
 
-//BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File("D:/"+file.getOriginalFilename())));
-//ファイルアプロード失敗しました
-//model.addAttribute("uploadFile", "001");
-//ファイルアプロード失敗しました
-//model.addAttribute("uploadFile", "001");
-//ファイルアプロード成功しました
-//model.addAttribute("uploadFile", "111");
+	/**
+	 * 機能：アップロードパスを作成。
+	 *
+	 * @param File　対象ファイル
+	 * @return TRUE:成功、FALSE失敗
+	 * @exception なし
+	 * @author @ソフトテク
+	 */
+	public String mkUploadPath(String... path) {
+		String loadPath="";
+		for (int i = 0; i < path.length; i++){
+			if(i>0) {
+				loadPath += File.separator;
+			}
+
+			loadPath += path[i];
+			mkPath(loadPath);
+		}
+		return loadPath;
+	}
+	/**
+	 * 機能：パス作成。
+	 *
+	 * @param Path　対象パス
+	 * @return TRUE:成功、FALSE失敗
+	 * @exception なし
+	 * @author @ソフトテク
+	 */
+	private boolean mkPath(String path) {
+		if (path == null ) return true;
+
+		File folder = new File(path);
+		if(folder.exists()) {
+			return true;
+		} else {
+			// フォルダー作成。
+			folder.mkdir();
+		}
+		return true;
+	}
+
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softtech.mapper.ContractMapper">
+
+	<select id="getContract" parameterType="string" resultType="Contract">
+		select
+			ct.*,e.employeeName,cm.companyName
+		from
+			ems.employee e,
+			ems.contract ct,
+			ems.company cm
+		where ct.status = '1'
+		and ct.employeeID = e.employeeID
+		and ct.companyID = cm.companyID
+		and ct.employeeID = #{employeeID}
+	</select>
+</mapper>

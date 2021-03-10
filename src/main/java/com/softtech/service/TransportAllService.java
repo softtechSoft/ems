@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.softtech.entity.Contract;
 import com.softtech.entity.Transport;
 import com.softtech.util.FileUtil;
 
@@ -24,6 +25,11 @@ public class TransportAllService {
 	private TransportService transportService;
 	@Autowired
 	private WorkInfoService workinfoService;
+	@Autowired
+	private ContractService contractService;
+
+	//画面に入力したデータ
+	Map<String, String> gamenParam = new HashMap<String, String>();
 
 	/**
 	 * 機能：①勤怠テーブル、交通費テーブルに新規追加する。
@@ -38,14 +44,16 @@ public class TransportAllService {
 	 */
 	public Transport doTransport(MultipartFile file,Map<String, String> mapper, Model model) throws Exception {
 
+		//画面に入力したデータ
+		gamenParam.putAll(mapper);
+
 		Transport transport = new Transport();
 
 		//stateは非NULL状態、メッセージを表示する。
 		model.addAttribute("state", "1");
 
 		// ファイルアップロード
-		FileUtil fileUtil = new FileUtil();
-		if (!fileUtil.uploadFile(file)) {
+		if (!uploadTimeReport(file)) {
 			//ファイルのアップロードに失敗の場合、画面に下記メッセージを表示する。
 			//アップロードは失敗しました
 			model.addAttribute("uploadInfo", "001");
@@ -88,12 +96,6 @@ public class TransportAllService {
 		}
 
 		// 交通情報を取得し戻る
-//		Map<String, String> transportMapper = new HashMap<String, String>();
-//		transportMapper.put("employeeID", mapper.get("employeeID"));
-//		transport = transportService.queryTransport(transportMapper);
-//		if (transport == null) {
-//			transport = new Transport();
-//		}
 		transport = getTransportInf(mapper);
 		return transport;
 	}
@@ -118,5 +120,36 @@ public class TransportAllService {
 		}
 		return transport;
 
+	}
+
+	/**
+	 * 機能：タイムレポートをアップロードする。
+	 *
+	 * @param mapper 必要なパラメータ
+	 * @return 交通情報
+	 * @exception DB操作例外
+	 *
+	 * @author ソフトテク@ソフトテク
+	 */
+	private boolean uploadTimeReport(MultipartFile mltFile) {
+
+		//　契約テーブルからアップロードパスを取得する。
+		String emplyID = gamenParam.get("employeeID");
+		Contract contract = contractService.getContract(emplyID);
+
+		if(contract==null) {
+			return false;
+		}
+
+		FileUtil fileUtil = new FileUtil();
+        //アップロードパスを作成
+		String uploadPath = fileUtil.mkUploadPath(contract.getTimeReportPath(),contract.getCompanyName(),contract.getEmployeeName(),gamenParam.get("workMonth"));
+
+		// ファイルアップロード
+		if (!fileUtil.uploadFile(mltFile,uploadPath)) {
+			return false;
+		}
+
+		return true;
 	}
 }
