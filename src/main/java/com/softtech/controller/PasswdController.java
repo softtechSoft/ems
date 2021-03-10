@@ -45,12 +45,24 @@ public class PasswdController {
 	@ResponseBody
 	public String updatePasswd(@Param("data") String data, HttpSession session)
 			throws JsonMappingException, JsonProcessingException {
-		Employee employee = employeeService.queryEmployee((String) session.getAttribute("userMailAdress"));
+		//Employee employee = employeeService.queryEmployee((String) session.getAttribute("userMailAdress"));
 		ObjectMapper jsonMapper = new ObjectMapper();
 		Map<String, String> dataMap = jsonMapper.readValue(data, Map.class);
-		if (!employee.getPassword().equals(dataMap.get("oldPsw"))) {
+
+		// テーブルに存在するかを確認する
+		Employee employeep = new Employee();
+		// 画面IDを設定する。
+		employeep.setMailAdress((String) session.getAttribute("userMailAdress"));
+		// 画面パスワードを設定する
+		employeep.setPassword(dataMap.get("oldPsw"));
+		Employee employee = employeeService.login(employeep);
+
+		//if (!employee.getPassword().equals(dataMap.get("oldPsw"))) {
+		if (employee == null ) {
+			// 存在していないので、パスワードの変更ができない。
 			return "001";
 		} else {
+			// パスワード変更
 			Map<String, String> map = new HashMap<>();
 			map.put("email", employee.getMailAdress());
 			map.put("password", dataMap.get("firstPsw"));

@@ -9,6 +9,8 @@ public interface EmployeeService {
 	List<Employee> queryEmployee();
 
 	Employee queryEmployee(String email);
+	//　ログイン
+	Employee login(Employee em);
 
 	int updatePassword(Map<String, String> map);
 

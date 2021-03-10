@@ -58,9 +58,18 @@ public class LoginController {
 			throws JsonMappingException, JsonProcessingException {
 		ObjectMapper jsonMapper = new ObjectMapper();
 		Map<String, String> map = jsonMapper.readValue(data, Map.class);
-		Employee employee = employeeService.queryEmployee(map.get("user"));
+
+		// ログインSQLのパラメータ作成
+		Employee employeep = new Employee();
+		// 画面IDを設定する。
+		employeep.setMailAdress(map.get("user"));
+		// 画面パスワードを設定する
+		employeep.setPassword(map.get("password"));
+
+		//Employee employee = employeeService.queryEmployee(map.get("user"));
+		Employee employee = employeeService.login(employeep);
 		if (employee != null) {
-			if (map.get("password").equals(employee.getPassword())) {
+			//if (map.get("password").equals(employee.getPassword())) {
 				session.setAttribute("userMailAdress", employee.getMailAdress());
 				session.setAttribute("userEmoplyeeID", employee.getEmployeeID());
 				session.setAttribute("userAuthority", employee.getAuthority());
@@ -69,9 +78,9 @@ public class LoginController {
 					session.setAttribute("userUpdatePsw", "false");
 				}
 				return "111";
-			} else {
-				return "002";
-			}
+//			} else {
+//				return "002";
+//			}
 		} else {
 			return "001";
 		}

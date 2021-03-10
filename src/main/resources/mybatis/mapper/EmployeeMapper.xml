@@ -11,9 +11,17 @@
 		and mailAdress = #{email}
 		</if>
 	</select>
+    <!-- ログイン -->
+    <select id="login" parameterType="Employee" resultType="Employee">
+		select * from ems.employee
+		where status = '0'
+		and mailAdress = #{mailAdress}
+		and password = md5(#{password})
+
+	</select>
 
 	<update id="updatePassword" parameterType="map">
-		update ems.employee set password = #{password},updateDate = date_format(now(),'%Y%m%d') where mailAdress=#{email}
+		update ems.employee set password = md5(#{password}),updateDate = date_format(now(),'%Y%m%d') where mailAdress=#{email}
 	</update>
 
   	<update id="updateEmployee" parameterType="map">

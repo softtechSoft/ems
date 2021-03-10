@@ -18,6 +18,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Employee queryEmployee(String email) {
 		return employeeMapper.queryEmployee(email);
 	}
+	//ログイン
+	@Override
+	public Employee login(Employee em) {
+		return employeeMapper.login(em);
+	}
 
 	@Override
 	public int updatePassword(Map<String, String> map) {

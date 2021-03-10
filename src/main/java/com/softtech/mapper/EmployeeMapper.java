@@ -14,6 +14,9 @@ public interface EmployeeMapper {
 
 	Employee queryEmployee(@Param("email") String email);
 
+	// ログイン
+	Employee login(Employee em);
+
 	int updatePassword(Map<String, String> map);
 
 	int updateEmployee(Map<String, String> map);
