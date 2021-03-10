@@ -1,0 +1,14 @@
+alter table employee modify password varchar(50);
+update employee  set  password = md5(password) where employeeID='e00001';
+update employee  set  password = md5(password) where employeeID='e00002';
+update employee  set  password = md5(password) where employeeID='e00003';
+update employee  set  password = md5(password) where employeeID='e00004';
+update employee  set  password = md5(password) where employeeID='e00005';
+update employee  set  password = md5(password) where employeeID='e00006';
+update employee  set  password = md5(password) where employeeID='e00007';
+update employee  set  password = md5(password) where employeeID='e00008';
+update employee  set  password = md5(password) where employeeID='b00001';
+update employee  set  password = md5(password) where employeeID='k00001';
+update employee  set  password = md5(password) where employeeID='k00002';
+update employee  set  password = md5(password) where employeeID='p00001';
+
