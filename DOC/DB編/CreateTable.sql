@@ -2,7 +2,7 @@ drop table if exists employee;
 create table employee(
 employeeID varchar(6) not null primary key comment'社員ID',
 employeeName varchar(12) not null comment'社員氏名',
-password varchar(6) not null comment'パスワード',
+password varchar(50) not null comment'パスワード',
 status varchar(1) not null comment'ステータス',
 sex varchar(1) comment'性別',
 epType varchar(1) not null comment'タイプ',
@@ -18,9 +18,9 @@ mailAdress varchar(40) not null comment'メール',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日')comment'社員情報';
 Insert into employee values
-('E001' ,'王明' ,'123456' ,'0' ,'0','0','19860101' ,'34','20190101','2','2310859','横浜市中区','07012344321','0', 'ming@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
-('E002' ,'王光' ,'123456' ,'0' ,'0' ,'0','19860102' ,'34','20190101','2','2310859','横浜市中区','07012344322','0', 'guang@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
-('E003' ,'王明光' ,'123456' ,'0' ,'0' ,'0','19860103' ,'34','20190101','2','2310859','横浜市中区','07012344323','1','wang@it-softtech.com',date_format(now(),'%Y%m%d') ,null);
+('E001' ,'王明' ,md5('123456') ,'0' ,'0','0','19860101' ,'34','20190101','2','2310859','横浜市中区','07012344321','0', 'ming@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
+('E002' ,'王光' ,md5('123456') ,'0' ,'0' ,'0','19860102' ,'34','20190101','2','2310859','横浜市中区','07012344322','0', 'guang@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
+('E003' ,'王明光' ,md5('123456') ,'0' ,'0' ,'0','19860103' ,'34','20190101','2','2310859','横浜市中区','07012344323','1','wang@it-softtech.com',date_format(now(),'%Y%m%d') ,null);
 
 drop table if exists ofcfunction;
 create table ofcfunction(
