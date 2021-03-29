@@ -94,22 +94,41 @@ public class TransportController<WorkInfoComment> {
 			Transport transport = transportService.queryTransport(sportMapper);
 			// 定期券開始日
 			mapper.put("startDate", workStartDay);
-			//起点駅
-			mapper.put("startStation", transport.getStartStation());
-			//終点駅
-			mapper.put("endStation", transport.getEndStation());
-			//交通機関
-			mapper.put("transportFacility", transport.getTransportFacility());
-			//中間駅1
-			mapper.put("midStation1", transport.getMidStation1());
-			//交通機関1
-			mapper.put("transportFacility1", transport.getTransportFacility1());
-			//中間駅2
-			mapper.put("midStation2", transport.getMidStation2());
-			//中間駅3
-			mapper.put("midStation3", transport.getMidStation3());
-			//定期券金額(1ヶ月)
-			mapper.put("transportExpense", transport.getTransportExpense());
+			if(transport != null ) {
+				//起点駅
+				mapper.put("startStation", transport.getStartStation());
+				//終点駅
+				mapper.put("endStation", transport.getEndStation());
+				//交通機関
+				mapper.put("transportFacility", transport.getTransportFacility());
+				//中間駅1
+				mapper.put("midStation1", transport.getMidStation1());
+				//交通機関1
+				mapper.put("transportFacility1", transport.getTransportFacility1());
+				//中間駅2
+				mapper.put("midStation2", transport.getMidStation2());
+				//中間駅3
+				mapper.put("midStation3", transport.getMidStation3());
+				//定期券金額(1ヶ月)
+				mapper.put("transportExpense", transport.getTransportExpense());
+			} else {
+				//起点駅
+				mapper.put("startStation", "無し");
+				//終点駅
+				mapper.put("endStation", "無し");
+				//交通機関
+				mapper.put("transportFacility", "無し");
+				//中間駅1
+				mapper.put("midStation1", "無し");
+				//交通機関1
+				mapper.put("transportFacility1", "無し");
+				//中間駅2
+				mapper.put("midStation2", "無し");
+				//中間駅3
+				mapper.put("midStation3", "無し");
+				//定期券金額(1ヶ月)
+				mapper.put("transportExpense", "0");
+			}
 			//出張交通費
 			mapper.put("businessTrip", "0");
 		}
