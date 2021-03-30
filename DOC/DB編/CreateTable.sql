@@ -113,7 +113,7 @@ Insert into workInfo values
 ('W001','CT001','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null),
 ('W002','CT002','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null),
 ('W003','CT003','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null);
-
+alter table workInfo modify workTime float not null default 0 comment'稼働時間';
 
 drop table if exists claim;
 create table claim(
