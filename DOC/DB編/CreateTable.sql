@@ -172,6 +172,11 @@ primary key(employeeID,month)
 Insert into salaryInfo (employeeID,month,paymentDate,base,overTime,shortage,overTimePlus,shortageReduce,transportExpense,allowancePlus,allowanceReduce,allowanceReason,welfareSelf,welfareComp,welfareBaby,eplyInsSelf,eplyInsComp,eplyInsWithdraw,wkAcccpsIns,withholdingTax,municipalTax,rental,rentalMgmtFee,sum,totalFee,remark,deleteFlg,insertDate,updateDate)
 values ('E001','202001','20200215',60000,0,0,0,0,0,0,0,'',0,0,0,0,0,0,0,0,0,0,0,60000,60000,'','0','20210122','20210122');
 
+alter table ems.salaryinfo CHANGE welfareSelf welfarePensionSelf int DEFAULT 0 COMMENT '厚生年金控除個人';
+alter table ems.salaryinfo add column welfarePensionComp int DEFAULT 0 COMMENT '厚生年金控除会社' after welfarePensionSelf;
+alter table ems.salaryinfo CHANGE welfareComp welfareHealthComp int DEFAULT 0 COMMENT '厚生健康控除会社';
+alter table ems.salaryinfo add column welfareHealthSelf int DEFAULT 0 COMMENT '厚生健康控除個人' after welfarePensionSelf;
+
 drop table if exists transport;
 create table transport(
 employeeID varchar(6) not null comment'社員ID',

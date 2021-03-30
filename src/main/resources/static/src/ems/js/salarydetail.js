@@ -1,10 +1,10 @@
 window.addEventListener('DOMContentLoaded',
 function()
-{     
+{
 	  var date=new Date();
 	  var year=date.getFullYear();
 	  var month=date.getMonth();
-	  var yearObj=document.getElementById('years'); 
+	  var yearObj=document.getElementById('years');
 	  var monthObj=document.getElementById('months');
 	  if(month == 0)
 	  {
@@ -12,8 +12,8 @@ function()
 		  {
 		     yearObj.options.add(new Option(year));
 		     year--;
-		  } 
-		  monthObj.options[11].selected=true;	
+		  }
+		  monthObj.options[11].selected=true;
 	  }
 	  else
 	  {
@@ -21,30 +21,38 @@ function()
 		  {
 		     yearObj.options.add(new Option(year));
 		     year--;
-		  } 
+		  }
 		  monthObj.options[month-1].selected=true;
 	  }
 }
 ,false);
-function inserttable(data)
-{	
-	data=JSON.parse(data);
+function inserttable(a)
+{
+	a=JSON.parse(a);
     var table = document.getElementById("salaryinfo-table");
     table.innerHTML="";
     var insertTr;
-    for(var num=0,rows=0;num<data["column"].length;rows++,num++)
+    for(var num=0,rows=0;num<a["column"].length;rows++,num++)
     {
-    	if(rows==5||rows==19||rows==21)
+    	if(rows==5)
     	{
     	   insertTr = table.insertRow(rows++);
-    	   
+
+    	}
+    	if(rows==20)
+    	{
+    	   insertTr = table.insertRow(rows++);
+    	   insertTr = table.insertRow(rows++);
+
+
     	}
         insertTr = table.insertRow(rows);
-        if(rows==20)
+
+        if(rows==22)
         {
         	insertTr.style.fontWeight="700";
         }
-        insertTr.innerHTML = "<td>" + data["column"][num]["comment"] + "</td><td>"+ data["data"][data["column"][num]["columnName"]]+"</td>";
+        insertTr.innerHTML = "<td>" + a["column"][num]["comment"] + "</td><td>"+ a["data"][a["column"][num]["columnName"]]+"</td>";
     }
 }
 function querytData()
@@ -60,6 +68,7 @@ function querytData()
     {
         yearMonth=year.value+""+month.value;
     }
+
     ajaxSend("get","/request-salarydetail",inserttable,"yearMonth",yearMonth);
 }
 

@@ -13,7 +13,8 @@ public class SalaryInfo {
 	private String allowancePlus = "0";
 	private String allowanceReduce = "0";
 	private String allowanceReason = "0";
-	private String welfareSelf = "0";
+	private String welfarePensionSelf = "0";
+	private String welfareHealthSelf = "0";
 	private String eplyInsSelf = "0";
 	private String withholdingTax = "0";
 	private String municipalTax = "0";
@@ -26,7 +27,8 @@ public class SalaryInfo {
 	private String eplyInsWithdraw = "0";
 	private String eplyInsComp = "0";
 	private String welfareBaby = "0";
-	private String welfareComp = "0";
+	private String welfarePensionComp = "0";
+	private String welfareHealthComp = "0";
 	private String overTime = "0";
 	private String shortage = "0";
 
@@ -118,13 +120,23 @@ public class SalaryInfo {
 	public void setAllowanceReason(String allowanceReason) {
 		this.allowanceReason = allowanceReason;
 	}
-
-	public String getWelfareSelf() {
-		return welfareSelf;
+	public String getWelfarePensionSelf() {
+		return  welfarePensionSelf;
 	}
 
-	public void setWelfareSelf(String welfareSelf) {
-		this.welfareSelf = String.format("%,d円", Integer.parseInt(welfareSelf));
+
+	public void setWelfarePensionSelf(String welfarePensionSelf) {
+		this.welfarePensionSelf = String.format("%,d円", Integer.parseInt(welfarePensionSelf));
+	}
+
+	public String getWelfareHealthSelf() {
+		return welfareHealthSelf;
+	}
+
+	public void setWelfareHealthSelf(String welfareHealthSelf) {
+		this.welfareHealthSelf = String.format("%,d円", Integer.parseInt(welfareHealthSelf));
+
+
 	}
 
 	public String getEplyInsSelf() {
@@ -231,14 +243,20 @@ public class SalaryInfo {
 		this.welfareBaby = welfareBaby;
 	}
 
-	public String getWelfareComp() {
-		return welfareComp;
+	public String getWelfarePensionComp() {
+		return welfarePensionComp;
 	}
 
-	public void setWelfareComp(String welfareComp) {
-		this.welfareComp = welfareComp;
+	public void setWelfarePensionComp(String welfarePensionComp) {
+		this.welfarePensionComp = welfarePensionComp;
+	}
+	public String getWelfareHealthComp() {
+		return welfareHealthComp;
 	}
 
+	public void setWelfareHealthComp(String welfareHealthComp) {
+		this.welfareHealthComp = welfareHealthComp;
+	}
 	public String getOverTime() {
 		return overTime;
 	}
