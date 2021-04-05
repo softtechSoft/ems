@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/src/ems/css/workdetaillist.css}">
+    <script type="text/javascript" th:src="@{/src/ems/js/workdetaillist.js}"></script>
+</head>
+<body>
+
+<h3>勤怠リスト</h3>
+
+<form action="#" th:action="@{/getWorkDetail}" th:object="${timereport}" method="post">
+
+
+    	<a class="button-search" href="javascript:workData()">前月</a>
+    	<span id="preMonth"></span>
+		<a class="button-search" href="javascript:workData1()">翌月</a>
+
+    <table border="1">
+    <tr>
+        <th>ID</th>
+        <th>氏名</th>
+        <th>対象月</th>
+        <th>勤怠時間（H)</th>
+        <th>定期券変更</th>
+        <th>定期券額（円）</th>
+        <th>H他の交通費(円）</th>
+        <th>プロジェクト名</th>
+    </tr>
+	<tr th:each="workline : ${timereport}">
+    	<td th:text="${workline.id}">111</td>
+    	<td th:text="${workline.name}">Yumi Wakatsuki</td>
+    	<td th:text="${workline.moon}">202103</td>
+    	<td th:text="${workline.time}">180</td>
+    	<td th:text="${workline.a}">定期券変更</td>
+    	<td th:text="${workline.money}">定期券額（円)</td>
+    	<td th:text="${workline.b}">他の交通費(円）</td>
+    	<td th:text="${workline.c}">プロジェクト名</td>
+	</tr>
+</table>
+
+</form>
+
+</body>
+</html>
