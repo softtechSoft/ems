@@ -17,6 +17,8 @@ public class WorkDetail {
 	private long b;
 	//プロジェクト名
 	private String c;
+	//month
+	private String month;
 
 	/**
 	 * @return id
@@ -113,6 +115,18 @@ public class WorkDetail {
 	 */
 	public void setC(String c) {
 		this.c = c;
+	}
+	/**
+	 * @return month
+	 */
+	public String getMonth() {
+		return month;
+	}
+	/**
+	 * @param month セットする month
+	 */
+	public void setMonth(String month) {
+		this.month = month;
 	}
 
 

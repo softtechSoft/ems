@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.softtech.actionForm.WorkDetail;
@@ -46,8 +48,6 @@ public class WorkDetailListController {
 		workDetail3.setMoney(8910);
 		workDetail3.setB(54321);
 		workDetail3.setC("SBT開発支援");
-
-
 		List<WorkDetail> workDetailList = new ArrayList<WorkDetail>();
 		workDetailList.add(workDetail1);
 		workDetailList.add(workDetail2);
@@ -57,5 +57,13 @@ public class WorkDetailListController {
 
 		return "/ems/workdetaillist";
 	}
+	 @PostMapping("/WorkDetail")
+	  public String WorkDetailSubmit( WorkDetail workDetail, BindingResult bindingResult,Model model) {
+		  String a =  workDetail.getMonth();
+		   a =   a + "月です。";
+		  workDetail.setMonth(a);
+		  model.addAttribute("WorkDetail", workDetail);
+		  return "workdetaillist";
+	  }
 
 }
