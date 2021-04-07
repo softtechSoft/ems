@@ -3,6 +3,8 @@ package com.softtech.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.softtech.actionForm.WorkDetail;
+import com.softtech.actionForm.WorkSelectJyoken;
 
 @Controller
 public class WorkDetailListController {
@@ -55,15 +58,24 @@ public class WorkDetailListController {
 
 		model.addAttribute("timereport", workDetailList);
 
+		//検索条件初期化
+		WorkSelectJyoken workSelectJyoken= new WorkSelectJyoken();
+		workSelectJyoken.setMonth("2021/03");
+		model.addAttribute("selectjyolken", workSelectJyoken);
+
 		return "/ems/workdetaillist";
 	}
 	 @PostMapping("/WorkDetail")
-	  public String WorkDetailSubmit( WorkDetail workDetail, BindingResult bindingResult,Model model) {
-		  String a =  workDetail.getMonth();
+	  public String WorkDetailSubmit(@Valid WorkSelectJyoken selectjyolken,  BindingResult bindingResult,Model model) {
+		 if (bindingResult.hasErrors()) {
+				return "selectjyolken";
+		  }
+		 String a =  selectjyolken.getMonth();
 		   a =   a + "月です。";
-		  workDetail.setMonth(a);
-		  model.addAttribute("WorkDetail", workDetail);
-		  return "workdetaillist";
+		   selectjyolken.setMonth(a);
+		  model.addAttribute("selectjyolken", selectjyolken);
+		  model.addAttribute("timereport",new ArrayList<WorkDetail>());
+		  return "/ems/workdetaillist";
 	  }
 
 }
