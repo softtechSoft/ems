@@ -12,7 +12,7 @@
  <form action="#" th:action="@{/WorkDetail}" th:object="${selectjyolken}" method="post">
 
 	 <span>対象年月: <input type="text" th:field="*{month}" /></span>
-	 <p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" />
+	<!--<p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" />-->
      <span><input type="submit" value="検索" /></span>
 
  </form>

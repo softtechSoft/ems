@@ -3,8 +3,6 @@ package com.softtech.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -66,13 +64,12 @@ public class WorkDetailListController {
 		return "/ems/workdetaillist";
 	}
 	 @PostMapping("/WorkDetail")
-	  public String WorkDetailSubmit(@Valid WorkSelectJyoken selectjyolken,  BindingResult bindingResult,Model model) {
-		 if (bindingResult.hasErrors()) {
-				return "selectjyolken";
-		  }
+	  public String WorkDetailSubmit(WorkSelectJyoken selectjyolken,  BindingResult bindingResult,Model model) {
+
 		 String a =  selectjyolken.getMonth();
 		   a =   a + "月です。";
 		   selectjyolken.setMonth(a);
+		   
 		  model.addAttribute("selectjyolken", selectjyolken);
 		  model.addAttribute("timereport",new ArrayList<WorkDetail>());
 		  return "/ems/workdetaillist";
