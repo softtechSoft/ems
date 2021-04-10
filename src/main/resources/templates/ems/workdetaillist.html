@@ -29,14 +29,20 @@
         <th>プロジェクト名</th>
       </tr>
 	  <tr th:each="workline : ${timereport}">
+	  <!--
     	<td th:text="${workline.id}">111</td>
+
     	<td th:text="${workline.name}">Yumi Wakatsuki</td>
-    	<td th:text="${workline.moon}">202103</td>
-    	<td th:text="${workline.time}">180</td>
+    	 -->
+    	<td th:text="${workline.workMonth}">202103</td>
+    	<td th:text="${workline.workTime}">180</td>
+    	<!--
     	<td th:text="${workline.a}">定期券変更</td>
+
     	<td th:text="${workline.money}">定期券額（円)</td>
     	<td th:text="${workline.b}">他の交通費(円）</td>
     	<td th:text="${workline.c}">プロジェクト名</td>
+	  -->
 	  </tr>
 	</table>
 

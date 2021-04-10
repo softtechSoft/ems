@@ -8,7 +8,7 @@ public class WorkDetail {
 	// 対象年月
 	private String workMonth;
 	// 稼働時間
-	private int workTime;
+	private float workTime;
 	//定期券変更
 	//private String a;
 	//定期券額（円)
@@ -68,13 +68,13 @@ public class WorkDetail {
 	/**
 	 * @return workTime
 	 */
-	public int getWorkTime() {
+	public float getWorkTime() {
 		return workTime;
 	}
 	/**
 	 * @param workTime セットする workTime
 	 */
-	public void setWorkTime(int workTime) {
+	public void setWorkTime(float workTime) {
 		this.workTime = workTime;
 	}
 	/**

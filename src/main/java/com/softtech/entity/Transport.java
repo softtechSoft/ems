@@ -14,6 +14,11 @@ public class Transport {
 	private String transportExpense = "";
 	private String businessTrip = "0";
 
+	// 社員ID
+	private String employeeID;
+	// 交通費
+	private int transport;
+
 	public String getStartStation() {
 		return startStation;
 	}
@@ -101,5 +106,33 @@ public class Transport {
 	public void setStartDate(String startDate) {
 		this.startDate = String.format("%s/%s/%s", startDate.substring(0, 4), startDate.substring(4, 6),
 				startDate.substring(6, 8));
+	}
+
+	/**
+	 * @return transport
+	 */
+	public int getTransport() {
+		return transport;
+	}
+
+	/**
+	 * @param transport セットする transport
+	 */
+	public void setTransport(int transport) {
+		this.transport = transport;
+	}
+
+	/**
+	 * @return employeeID
+	 */
+	public String getEmployeeID() {
+		return employeeID;
+	}
+
+	/**
+	 * @param employeeID セットする employeeID
+	 */
+	public void setEmployeeID(String employeeID) {
+		this.employeeID = employeeID;
 	}
 }

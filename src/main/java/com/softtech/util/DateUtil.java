@@ -13,15 +13,33 @@ import java.util.Date;
 
 public class DateUtil {
 
+	/**
+	 * 機能：現在月を生成する
+	 *
+	 * @return 現在月
+	 * @exception なし
+	 * @author 馬@ソフトテク
+	 */
 	public static String getNowMonth() {
 		// YYYY/MM→yyyymmに変換
 		// 現在月生成
 		String b;
 		Date dNow = new Date( );
-		SimpleDateFormat a = new SimpleDateFormat (" yyyyMM");
+		SimpleDateFormat a = new SimpleDateFormat ("yyyyMM");
 		 b = a.format(dNow);
 		return b;
 	}
-
+	/**
+	 * 機能：YYYY/MMからYYYMMに変更
+	 *
+	 * @param 年月
+	 * @return 変更後年月
+	 * @exception なし
+	 * @author 馬@ソフトテク
+	 */
+	public static String chgMonthToYM(String month) {
+		// YYYY/MM→yyyymmに変換
+		return month.replace("/", "");
+	}
 
 }

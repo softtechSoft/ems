@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.softtech.actionForm.WorkDetail;
+import com.softtech.entity.Transport;
+import com.softtech.entity.WorkInfo;
 
 @Mapper
 public interface WorkDetailListMapper {
 
-	List<WorkDetail> getWorkInfoDetail(String month);
-	List<WorkDetail> geTransportDetail(String month);
+	List<WorkInfo> getWorkInfoDetail(String month);
+	List<Transport> geTransportDetail(String month);
 }

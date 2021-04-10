@@ -1,6 +1,14 @@
 package com.softtech.entity;
 
+/**
+ * 概要：稼働情報クラス
+ *
+ * 作成者：馬@ソフトテク
+ * 作成日：2021/4/10
+ */
 public class WorkInfo {
+	// 社員ID
+	private String employeeID;
 	private String employeeName = "0";
 	private String workStartDay = "";
 	private String workEndDay = "";
@@ -52,5 +60,19 @@ public class WorkInfo {
 	public void setWorkMonth(String workMonth) {
 		this.workMonth = workMonth;
 		//String.format("%s/%s",workMonth.substring(0,4),workMonth.substring(4,6));
+	}
+
+	/**
+	 * @return employeeID
+	 */
+	public String getEmployeeID() {
+		return employeeID;
+	}
+
+	/**
+	 * @param employeeID セットする employeeID
+	 */
+	public void setEmployeeID(String employeeID) {
+		this.employeeID = employeeID;
 	}
 }
