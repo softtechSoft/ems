@@ -2,117 +2,94 @@ package com.softtech.actionForm;
 
 public class WorkDetail {
 	// 社員id
-	private long id;
+	private  String workInfoID;
 	// 社員氏名
-	private String name;
+	private String contractID;
 	// 対象年月
-	private String moon;
+	private String workMonth;
 	// 稼働時間
-	private String time;
+	private int workTime;
 	//定期券変更
-	private String a;
+	//private String a;
 	//定期券額（円)
-	private long money;
+	private int transportExpense;
 	//他の交通費(円
-	private long b;
+	private int transport;
 	//プロジェクト名
-	private String c;
+	//private String c;
+	/**
+	 * @return workInfoID
+	 */
+	public String getWorkInfoID() {
+		return workInfoID;
+	}
+	/**
+	 * @param workInfoID セットする workInfoID
+	 */
+	public void setWorkInfoID(String workInfoID) {
+		this.workInfoID = workInfoID;
+	}
+	/**
+	 * @return transportExpense
+	 */
+	public int getTransportExpense() {
+		return transportExpense;
+	}
+	/**
+	 * @param transportExpense セットする transportExpense
+	 */
+	public void setTransportExpense(int transportExpense) {
+		this.transportExpense = transportExpense;
+	}
+	/**
+	 * @return contractID
+	 */
+	public String getContractID() {
+		return contractID;
+	}
+	/**
+	 * @param contractID セットする contractID
+	 */
+	public void setContractID(String contractID) {
+		this.contractID = contractID;
+	}
+	/**
+	 * @return workMonth
+	 */
+	public String getWorkMonth() {
+		return workMonth;
+	}
+	/**
+	 * @param workMonth セットする workMonth
+	 */
+	public void setWorkMonth(String workMonth) {
+		this.workMonth = workMonth;
+	}
+	/**
+	 * @return workTime
+	 */
+	public int getWorkTime() {
+		return workTime;
+	}
+	/**
+	 * @param workTime セットする workTime
+	 */
+	public void setWorkTime(int workTime) {
+		this.workTime = workTime;
+	}
+	/**
+	 * @return transport
+	 */
+	public int getTransport() {
+		return transport;
+	}
+	/**
+	 * @param transport セットする transport
+	 */
+	public void setTransport(int transport) {
+		this.transport = transport;
+	}
 
-	/**
-	 * @return id
-	 */
-	public long getId() {
-		return id;
-	}
-	/**
-	 * @param id セットする id
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
-	/**
-	 * @return name
-	 */
-	public String getName() {
-		return name;
-	}
-	/**
-	 * @param name セットする name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-	/**
-	 * @return moon
-	 */
-	public String getMoon() {
-		return moon;
-	}
-	/**
-	 * @param moon セットする moon
-	 */
-	public void setMoon(String moon) {
-		this.moon = moon;
-	}
-	/**
-	 * @return time
-	 */
-	public String getTime() {
-		return time;
-	}
-	/**
-	 * @param time セットする time
-	 */
-	public void setTime(String time) {
-		this.time = time;
-	}
-	/**
-	 * @return a
-	 */
-	public String getA() {
-		return a;
-	}
-	/**
-	 * @param a セットする a
-	 */
-	public void setA(String a) {
-		this.a = a;
-	}
-	/**
-	 * @return money
-	 */
-	public long getMoney() {
-		return money;
-	}
-	/**
-	 * @param money セットする money
-	 */
-	public void setMoney(long money) {
-		this.money = money;
-	}
-	/**
-	 * @return b
-	 */
-	public long getB() {
-		return b;
-	}
-	/**
-	 * @param b セットする b
-	 */
-	public void setB(long b) {
-		this.b = b;
-	}
-	/**
-	 * @return c
-	 */
-	public String getC() {
-		return c;
-	}
-	/**
-	 * @param c セットする c
-	 */
-	public void setC(String c) {
-		this.c = c;
-	}
+
 
 }

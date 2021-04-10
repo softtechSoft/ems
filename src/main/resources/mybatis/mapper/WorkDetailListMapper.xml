@@ -5,13 +5,19 @@
 
 <mapper namespace="com.softtech.mapper.WorkDetailListMapper">
 
+	<select id="getWorkInfoDetail" parameterType="string" resultType="WorkDetail">
+		select workInfoID,
+		       contractID,
+		       workMonth,
+		       workTime
+		from workinfo
+		where workMonth=#{month}
 
-
-
-
-
-
-
-
-
+	</select>
+	<select id="geTransportDetail" parameterType="string" resultType="WorkDetail">
+		select transportExpense,
+		       transport
+		from transport
+		where workMonth=#{month}
+	</select>
 </mapper>

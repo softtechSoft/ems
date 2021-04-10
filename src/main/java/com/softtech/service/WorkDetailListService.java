@@ -1,11 +1,11 @@
 package com.softtech.service;
 
-import java.util.Map;
+import java.util.List;
 
 import com.softtech.actionForm.WorkDetail;
 
 public interface WorkDetailListService {
-	
-	WorkDetail queryWorkDetail(Map<String, String> map);
+
+	List<WorkDetail> queryWorkDetail(String month);
 
 }
