@@ -12,9 +12,8 @@
  <form action="#" th:action="@{/WorkDetail}" th:object="${selectjyolken}" method="post">
 
 	 <span>対象年月: <input type="text" th:field="*{month}" /></span>
-	<!--<p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" />-->
      <span><input type="submit" value="検索" /></span>
-
+     <p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" />
  </form>
 	<!-- 勤怠リスト -->
     <table border="1">
@@ -28,22 +27,24 @@
         <th>H他の交通費(円）</th>
         <th>プロジェクト名</th>
       </tr>
+
 	  <tr th:each="workline : ${timereport}">
-	  <!--
+<!--
     	<td th:text="${workline.id}">111</td>
 
     	<td th:text="${workline.name}">Yumi Wakatsuki</td>
-    	 -->
+-->
     	<td th:text="${workline.workMonth}">202103</td>
     	<td th:text="${workline.workTime}">180</td>
-    	<!--
+<!--
     	<td th:text="${workline.a}">定期券変更</td>
 
     	<td th:text="${workline.money}">定期券額（円)</td>
     	<td th:text="${workline.b}">他の交通費(円）</td>
     	<td th:text="${workline.c}">プロジェクト名</td>
-	  -->
+-->
 	  </tr>
+
 	</table>
 
 

@@ -1,9 +1,11 @@
 package com.softtech.actionForm;
 
+import javax.validation.constraints.Size;
+
 public class WorkSelectJyoken {
 
 	//month
-	//@NotNull(message="月を入力してください。")
+	@Size(min=2, max=30,message="デフォルトメッセージ２と３０の間のデータを入力してください。ここでカスタマイズできます。まとめてMessageファイルもできます。")
     private String month;
 
 	/**
