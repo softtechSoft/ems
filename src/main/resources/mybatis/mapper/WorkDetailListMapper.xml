@@ -4,16 +4,29 @@
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.softtech.mapper.WorkDetailListMapper">
-
+	<!--社員勤怠情報を取得する。-->
 	<select id="getWorkInfoDetail" parameterType="string" resultType="com.softtech.entity.WorkInfo">
 		select ct.employeeID,
-		       workTime
+		         wk.workInfoID,
+		         wk.contractID,
+		         wk.workMonth,
+		         wk.workTime
 		from workinfo wk,contract ct
 		where wk.contractID=ct.contractID
 		AND wk.workMonth=#{month}
 	</select>
+	<!--社員交通情報を取得する。-->
 	<select id="geTransportDetail" parameterType="string" resultType="com.softtech.entity.Transport">
 		select employeeID,
+        transportExpense,
+		       transport
+		from transport
+		where workMonth=#{month}
+	</select>
+	<!--勤怠情報を取得する。-->
+	<select id="geTransport" parameterType="string" resultType="com.softtech.entity.Transport">
+		select employeeID,
+        transportExpense,
 		       transport
 		from transport
 		where workMonth=#{month}

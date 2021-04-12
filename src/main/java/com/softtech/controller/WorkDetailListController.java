@@ -1,6 +1,5 @@
 package com.softtech.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,7 +16,12 @@ import com.softtech.actionForm.WorkDetail;
 import com.softtech.actionForm.WorkSelectJyoken;
 import com.softtech.service.WorkDetailListService;
 import com.softtech.util.DateUtil;
-
+/**
+ * 概要：勤怠リスト機能
+ *
+ * 作成者：馬@ソフトテク
+ * 作成日：2021/4/10
+ */
 @Controller
 public class WorkDetailListController {
 
@@ -41,23 +45,25 @@ public class WorkDetailListController {
 
 		return "/ems/workdetaillist";
 	}
+	/**
+	 * 機能：入力した年月に基づいて勤怠リストを表示する。
+	 * @return  workdetaillist
+	 * @author 馬@ソフトテク
+	 */
 	@PostMapping("/WorkDetail")
 	public String WorkDetailSubmit(@Valid @ModelAttribute("selectjyolken") WorkSelectJyoken selectjyolken,BindingResult bindingResult,Model model) {
-
+         // NotNullの入力した年月をチェック。
 		 if (bindingResult.hasErrors()) {
 			 //FieldError errMsg = bindingResult.getFieldError("month");
 
 			 //model.addAttribute("selectjyolken", selectjyolken);
 			return "/ems/workdetaillist";
 		 }
-
-		 String a =  selectjyolken.getMonth();
-		   a =   a + "月です。";
-		   selectjyolken.setMonth(a);
-
-		  model.addAttribute("selectjyolken", selectjyolken);
-		  model.addAttribute("timereport",new ArrayList<WorkDetail>());
-		  return "/ems/workdetaillist";
+		 // 入力した年月を持っち、DBから勤怠情報を取得
+	     List<WorkDetail> workDetailList1 = workDetailListService.queryWorkDetail(selectjyolken.getMonth());
+		 model.addAttribute("selectjyolken", selectjyolken);
+		 model.addAttribute("timereport", workDetailList1);
+		 return "/ems/workdetaillist";
 	 }
 
 }

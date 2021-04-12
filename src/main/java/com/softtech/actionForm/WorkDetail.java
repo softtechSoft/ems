@@ -1,4 +1,10 @@
 package com.softtech.actionForm;
+/**
+ * 概要：勤怠情報クラス
+ *
+ * 作成者：馬@ソフトテク
+ * 作成日：2021/4/10
+ */
 
 public class WorkDetail {
 	// 社員id

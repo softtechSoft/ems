@@ -1,4 +1,10 @@
 package com.softtech.entity;
+/**
+ * 概要：交通情報クラス
+ *
+ * 作成者：馬@ソフトテク
+ * 作成日：2021/4/10
+ */
 
 public class Transport {
 
@@ -11,13 +17,15 @@ public class Transport {
 	private String transportFacility1 = "";
 	private String midStation2 = "";
 	private String midStation3 = "";
-	private String transportExpense = "";
+	private String transportExpense = "0";
 	private String businessTrip = "0";
 
 	// 社員ID
 	private String employeeID;
 	// 交通費
 	private int transport;
+	//定期券額（円)
+	//private int transportExpense;
 
 	public String getStartStation() {
 		return startStation;
@@ -135,4 +143,6 @@ public class Transport {
 	public void setEmployeeID(String employeeID) {
 		this.employeeID = employeeID;
 	}
+
+
 }

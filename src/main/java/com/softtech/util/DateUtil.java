@@ -5,10 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * 概要：ファイル処理機能
+ * 概要：対象月処理機能
  *
- * 作成者：@ソフトテク
- * 作成日：
+ * 作成者：馬@ソフトテク
+ * 作成日：2021/4/10
  */
 
 public class DateUtil {

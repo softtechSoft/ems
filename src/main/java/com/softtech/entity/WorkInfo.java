@@ -9,6 +9,10 @@ package com.softtech.entity;
 public class WorkInfo {
 	// 社員ID
 	private String employeeID;
+	// 社員氏名
+	private String contractID;
+	// 社員workInfoid
+	private String workInfoID;
 	private String employeeName = "0";
 	private String workStartDay = "";
 	private String workEndDay = "";
@@ -74,5 +78,33 @@ public class WorkInfo {
 	 */
 	public void setEmployeeID(String employeeID) {
 		this.employeeID = employeeID;
+	}
+
+	/**
+	 * @return contractID
+	 */
+	public String getContractID() {
+		return contractID;
+	}
+
+	/**
+	 * @param contractID セットする contractID
+	 */
+	public void setContractID(String contractID) {
+		this.contractID = contractID;
+	}
+
+	/**
+	 * @return workInfoID
+	 */
+	public String getWorkInfoID() {
+		return workInfoID;
+	}
+
+	/**
+	 * @param workInfoID セットする workInfoID
+	 */
+	public void setWorkInfoID(String workInfoID) {
+		this.workInfoID = workInfoID;
 	}
 }
