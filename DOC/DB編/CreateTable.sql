@@ -185,13 +185,15 @@ startDate varchar(8) not null comment'開始日',
 startStation varchar(20) not null comment'起点駅',
 endStation varchar(20) not null comment'終点駅',
 transportFacility varchar(20) not null comment'交通機関(代表)',
-transportExpense int(6) not null comment'定期券金額(1ヶ月)',
+transportExpense1 float(6) not null comment'定期券金額(1ヶ月)',
 midStation1 varchar(20) comment'中間駅1',
 transportFacility1 varchar(20) comment'交通機関1',
 midStation2 varchar(20) comment'中間駅2',
 transportFacility2 varchar(20) comment'交通機関2',
 midStation3 varchar(20) comment'中間駅3',
 transportFacility3 varchar(20) comment'交通機関3',
+transportExpense2 float(6) comment'定期券金額(2ヶ月)',
+transportExpense3 float(6) comment'定期券金額(3ヶ月)',
 transport int(7) comment'交通費',
 businessTrip int(7) comment'出張旅費',
 BusinessTripName varchar(10) comment'出張旅費ファイル',
@@ -201,7 +203,7 @@ updateDate varchar(8) comment'更新日',
 primary key(employeeID,workMonth)
 ) comment'交通情報';
 insert into transport values
-("E001","202101","20210101","西川口駅","銀座駅","京浜東北線",3000,"赤羽駅","埼京線","新宿駅","埼京線","新宿駅","丸の内線",10000,2500,'D:\\TName\\',"0",date_format(now(), '%Y%m%d'), null);
+("E001","202104","20210101","西川口駅","銀座駅","京浜東北線",3000,"赤羽駅","埼京線","新宿駅","埼京線","新宿駅","丸の内線",0,0,10000,2500,'D:\\TName\\',"0",date_format(now(), '%Y%m%d'), null);
 
 
 

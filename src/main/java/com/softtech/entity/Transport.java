@@ -17,15 +17,20 @@ public class Transport {
 	private String transportFacility1 = "";
 	private String midStation2 = "";
 	private String midStation3 = "";
+	//定期券額（円)
 	private String transportExpense = "0";
 	private String businessTrip = "0";
 
 	// 社員ID
 	private String employeeID;
+	//社員氏名
+	private String employeeName;
 	// 交通費
 	private int transport;
-	//定期券額（円)
-	//private int transportExpense;
+	// 1ヶ月分定期券
+	private float transportExpense1;
+	// 稼働時間
+	private float workTime;
 
 	public String getStartStation() {
 		return startStation;
@@ -142,6 +147,48 @@ public class Transport {
 	 */
 	public void setEmployeeID(String employeeID) {
 		this.employeeID = employeeID;
+	}
+
+	/**
+	 * @return employeeName
+	 */
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	/**
+	 * @param employeeName セットする employeeName
+	 */
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+
+	/**
+	 * @return transportExpense1
+	 */
+	public float getTransportExpense1() {
+		return transportExpense1;
+	}
+
+	/**
+	 * @param transportExpense1 セットする transportExpense1
+	 */
+	public void setTransportExpense1(float transportExpense1) {
+		this.transportExpense1 = transportExpense1;
+	}
+
+	/**
+	 * @return workTime
+	 */
+	public float getWorkTime() {
+		return workTime;
+	}
+
+	/**
+	 * @param workTime セットする workTime
+	 */
+	public void setWorkTime(float workTime) {
+		this.workTime = workTime;
 	}
 
 

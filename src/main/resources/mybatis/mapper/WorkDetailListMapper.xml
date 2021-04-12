@@ -23,12 +23,20 @@
 		from transport
 		where workMonth=#{month}
 	</select>
-	<!--勤怠情報を取得する。-->
-	<select id="geTransport" parameterType="string" resultType="com.softtech.entity.Transport">
-		select employeeID,
-        transportExpense,
-		       transport
-		from transport
-		where workMonth=#{month}
+	<!--勤怠情報を取得する。inner join-->
+	<select id="getWorkTransport" parameterType="string" resultType="com.softtech.entity.Transport">
+		select ee.employeeID,
+		       ee.employeeName,
+		       wk.workMonth,
+		       wk.workTime,
+               tt.transportExpense1,
+		       tt.transport
+		from workinfo wk,contract ct,transport tt,employee ee
+		where wk.contractID=ct.contractID
+		AND   ct.employeeID=tt.employeeID
+		AND   tt.employeeID=ee.employeeID
+		AND   wk.workMonth=#{month}
+
+
 	</select>
 </mapper>

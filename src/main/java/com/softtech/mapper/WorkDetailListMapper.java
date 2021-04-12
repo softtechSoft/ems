@@ -12,4 +12,5 @@ public interface WorkDetailListMapper {
 
 	List<WorkInfo> getWorkInfoDetail(String month);
 	List<Transport> geTransportDetail(String month);
+	List<Transport> getWorkTransport(String month);
 }

@@ -8,56 +8,40 @@ package com.softtech.actionForm;
 
 public class WorkDetail {
 	// 社員id
-	private  String workInfoID;
+	private  String employeeID;
 	// 社員氏名
-	private String contractID;
+	private String employeeName;
 	// 対象年月
 	private String workMonth;
 	// 稼働時間
 	private float workTime;
 	//定期券変更
-	//private String a;
-	//定期券額（円)
-	private int transportExpense;
+	private float transportExpense;
 	//他の交通費(円
-	private int transport;
-	//プロジェクト名
-	//private String c;
+	private float transport;
 	/**
-	 * @return workInfoID
+	 * @return employeeID
 	 */
-	public String getWorkInfoID() {
-		return workInfoID;
+	public String getEmployeeID() {
+		return employeeID;
 	}
 	/**
-	 * @param workInfoID セットする workInfoID
+	 * @param employeeID セットする employeeID
 	 */
-	public void setWorkInfoID(String workInfoID) {
-		this.workInfoID = workInfoID;
+	public void setEmployeeID(String employeeID) {
+		this.employeeID = employeeID;
 	}
 	/**
-	 * @return transportExpense
+	 * @return employeeName
 	 */
-	public int getTransportExpense() {
-		return transportExpense;
+	public String getEmployeeName() {
+		return employeeName;
 	}
 	/**
-	 * @param transportExpense セットする transportExpense
+	 * @param employeeName セットする employeeName
 	 */
-	public void setTransportExpense(int transportExpense) {
-		this.transportExpense = transportExpense;
-	}
-	/**
-	 * @return contractID
-	 */
-	public String getContractID() {
-		return contractID;
-	}
-	/**
-	 * @param contractID セットする contractID
-	 */
-	public void setContractID(String contractID) {
-		this.contractID = contractID;
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
 	}
 	/**
 	 * @return workMonth
@@ -84,15 +68,27 @@ public class WorkDetail {
 		this.workTime = workTime;
 	}
 	/**
+	 * @return transportExpense
+	 */
+	public float getTransportExpense() {
+		return transportExpense;
+	}
+	/**
+	 * @param transportExpense セットする transportExpense
+	 */
+	public void setTransportExpense(float transportExpense) {
+		this.transportExpense = transportExpense;
+	}
+	/**
 	 * @return transport
 	 */
-	public int getTransport() {
+	public float getTransport() {
 		return transport;
 	}
 	/**
 	 * @param transport セットする transport
 	 */
-	public void setTransport(int transport) {
+	public void setTransport(float transport) {
 		this.transport = transport;
 	}
 
