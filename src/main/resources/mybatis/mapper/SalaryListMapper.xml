@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.softtech.mapper.salarylistMapper">
+
+<select id="getsalaryinfolist" parameterType="string" resultType="com.softtech.entity.SalaryInfo">
+<!--給料情報を取得する。-->
+		select s.employeeID,
+		       s.month,
+		       e.employeeName,
+		       s.paymentDate,
+		       s.base,
+		       s.sum,
+		       s.remark
+		from salaryInfo s
+		left join ems.employee e on s.employeeID = e.employeeID
+		where s.month=#{month}
+	</select>
+</mapper>
