@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.softtech.actionForm.WorkDetail;
 import com.softtech.actionForm.WorkSelectJyoken;
 import com.softtech.service.WorkDetailListService;
 import com.softtech.util.DateUtil;
+import com.softtech.util.HSSFWorkbook;
 /**
  * 概要：勤怠リスト機能
  *
@@ -27,6 +29,8 @@ public class WorkDetailListController {
 
 	@Autowired
 	WorkDetailListService workDetailListService;
+	@Autowired
+	HSSFWorkbook hSSFWorkbook;
 
 	@RequestMapping("/workdetaillist")
 	public String toWorkDetailList(Model model) {
@@ -54,9 +58,6 @@ public class WorkDetailListController {
 	public String WorkDetailSubmit(@Valid @ModelAttribute("selectjyolken") WorkSelectJyoken selectjyolken,BindingResult bindingResult,Model model) {
          // NotNullの入力した年月をチェック。
 		 if (bindingResult.hasErrors()) {
-			 //FieldError errMsg = bindingResult.getFieldError("month");
-
-			 //model.addAttribute("selectjyolken", selectjyolken);
 			return "/ems/workdetaillist";
 		 }
 		 // 入力した年月を持っち、DBから勤怠情報を取得
@@ -65,5 +66,19 @@ public class WorkDetailListController {
 		 model.addAttribute("timereport", workDetailList1);
 		 return "/ems/workdetaillist";
 	 }
+	/**
+	 * 機能：勤怠リストをダウンロードする。
+	 * @return  workdetaillist
+	 * @author 馬@ソフトテク
+	 */
+	@GetMapping("/Download")
+	public String WorkDetailDownloadSubmit(  WorkSelectJyoken selectjyolken,Model model) {
+		// 入力した年月を持っち、DBから勤怠情報を取得
+	     List<WorkDetail> workDetailList2= workDetailListService.queryWorkDetail(selectjyolken.getMonth());
+	     HSSFWorkbook wb =  hSSFWorkbook.downloadExcel(workDetailList2);
+        //excel出力??????
 
+
+		return "/ems/workdetaillist";
+	 }
 }

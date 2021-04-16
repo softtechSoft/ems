@@ -9,14 +9,18 @@
 
 <h3>勤怠リスト</h3>
  <!-- 対象年月 -->
- <form action="#" th:action="@{/WorkDetail}" th:object="${selectjyolken}" method="post">
+ <form action="WorkDetail" th:action="@{/WorkDetail}" th:object="${selectjyolken}" method="post">
 
 	 <span>対象年月: <input type="text" th:field="*{month}" /></span>
      <span><input type="submit" value="検索" /></span>
      <p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" />
  </form>
+ <!-- Download -->
+  <form action="Download" th:action="@{/Download}" th:object="${selectjyolken}" method="get">
+     <span><input type="submit" value="ダウンロード" /></span>
+ </form>
 	<!-- 勤怠リスト -->
-    <table border="1">
+    <table >
       <tr>
         <th>社員ID</th>
         <th>社員氏名</th>

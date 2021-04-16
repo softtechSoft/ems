@@ -17,7 +17,7 @@ public class WorkDetail {
 	private float workTime;
 	//定期券変更
 	private float transportExpense;
-	//他の交通費(円
+	//他の交通費(円)
 	private float transport;
 	/**
 	 * @return employeeID
