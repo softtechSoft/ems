@@ -6,8 +6,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.softtech.actionForm.WorkDetail;
 
 /**
  * 概要：ファイル処理機能
@@ -94,5 +101,44 @@ public class FileUtil {
 		}
 		return true;
 	}
+	/**
+	 * 機能：勤怠リストダウンロード
+	 *
+	 * @param response レスポンス
+	 * @param workDetailList 対象データ
+	 * @return TRUE:成功、FALSE失敗
+	 *
+	 * @exception なし
+	 * @author @ソフトテク
+	 */
+	public boolean workSheetDownload(HttpServletResponse  response,List<WorkDetail> workDetailList){
+		//エンコーディング設定
+		response.setContentType(MimeTypeUtils.APPLICATION_OCTET_STREAM_VALUE + ";charset=Shift-JIS");
+		//ダウンロードファイル名設定
+		response.setHeader("Content-Disposition", "attachment; filename=\"worksheet.csv\"");
 
+		try {
+			PrintWriter pw = response.getWriter();
+            for(WorkDetail wl:workDetailList) {
+            	String employeeID = wl.getEmployeeID();
+                String employeeName = wl.getEmployeeName();
+                String workMonth = wl.getWorkMonth();
+                float workTime = wl.getWorkTime();
+                float transportExpense = wl.getTransportExpense();
+                float transport = wl.getTransport();
+
+
+                String outputString = employeeID + "," + employeeName + "," + workMonth + "," + workTime + "," + transportExpense + "," + transport
+                         + "\r\n";
+
+                pw.print(outputString);
+            }
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+	 }
 }
