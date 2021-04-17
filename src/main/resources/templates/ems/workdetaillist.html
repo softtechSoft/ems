@@ -4,21 +4,36 @@
     <title>Getting Started: Handling Form Submission</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" th:href="@{/src/ems/css/workdetaillist.css}">
+    <script>
+         //対象年月検索とダウンロードを分かれる。
+    	function selectData(){
+    		var downldflg=document.getElementById("downloadFlg");
+    		downldflg.value=false;
+    		document.workSheet.submit();
+    	}
+		function downLodData(){
+			var downldflg=document.getElementById("downloadFlg");
+			downldflg.value=true;
+			document.workSheet.submit();
+    	}
+    </script>
 </head>
 <body>
 
 <h3>勤怠リスト</h3>
  <!-- 対象年月 -->
- <form action="WorkDetail" th:action="@{/WorkDetail}" th:object="${selectjyolken}" method="post">
 
+ <form name="workSheet" th:action="@{/WorkDetail}" th:object="${selectjyolken}"   method="post">
 	 <span>対象年月: <input type="text" th:field="*{month}" /></span>
-     <span><input type="submit" value="検索" /></span>
+
+    <span><input type="button" onclick="selectData()" value="検索" /></span>
+
      <p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" />
+
+      <span><input type="hidden" id="downloadFlg" th:field="*{downloadFlg}" /></span>
+     <span><input type="button" onclick="downLodData()" value="ダウンロード" /></span>
  </form>
- <!-- Download -->
-  <form action="Download" th:action="@{/Download}" th:object="${selectjyolken}" method="get">
-     <span><input type="submit" value="ダウンロード" /></span>
- </form>
+
 	<!-- 勤怠リスト -->
     <table >
       <tr>
@@ -26,28 +41,17 @@
         <th>社員氏名</th>
         <th>対象月</th>
         <th>勤怠時間（H)</th>
-        <!--<th>定期券変更</th> -->
         <th>定期券額（円）</th>
         <th>その他交通費（定期券以外）(円）</th>
-       <!-- <th>プロジェクト名</th>-->
       </tr>
 
 	  <tr th:each="workline : ${timereport}">
-
-    	<td th:text="${workline.employeeID}">111</td>
-
+    	<td th:text="${workline.employeeID}">E001</td>
     	<td th:text="${workline.employeeName}">Yumi Wakatsuki</td>
-
     	<td th:text="${workline.workMonth}">202103</td>
     	<td th:text="${workline.workTime}">180</td>
-<!--
-    	<td th:text="${workline.a}">定期券変更</td>
--->
     	<td th:text="${workline.transportExpense}">定期券額（円)</td>
     	<td th:text="${workline.transport}">他の交通費(円）</td>
-<!--
-    	<td th:text="${workline.c}">プロジェクト名</td>
--->
 	  </tr>
 
 	</table>
