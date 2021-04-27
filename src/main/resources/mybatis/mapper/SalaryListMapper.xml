@@ -7,15 +7,12 @@
 
 <select id="getsalaryinfolist" parameterType="string" resultType="com.softtech.entity.SalaryInfo">
 <!--給料情報を取得する。-->
-		select s.employeeID,
-		       s.month,
-		       e.employeeName,
-		       s.paymentDate,
-		       s.base,
-		       s.sum,
-		       s.remark
+		 select s.*,
+		       e.employeeName
+
 		from salaryInfo s
 		left join ems.employee e on s.employeeID = e.employeeID
 		where s.month=#{month}
+
 	</select>
 </mapper>

@@ -4,41 +4,114 @@
     <title>ソフトテク株式会社-社内管理システム</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" th:href="@{/src/ems/css/salarylist.css}">
+	<script>
+	//対象年月検索とダウンロードを分かれる。
+		function search(){
+			var downloadFlg =document.getElementById('downloadFlg');
+			downloadFlg.value=false;
+			document.worksheet1.submit();
+		}
+		function downLoadData(){
+			var downloadFlg =document.getElementById('downloadFlg');
+			downloadFlg.value=true;
+			document.worksheet1.submit();
+		}
+	</script>
 </head>
 <body>
 	<header>
 		<h3>給料リスト</h3>
     </header>
- <form action="#" th:action="@{/salarylist}" th:object="${selectjyoken}" method="post">
+ <form name="worksheet1" th:action="@{/salarylist}" th:object="${selectjyoken}" method="post">
 
      <span>対象年月: <input type="text" th:field="*{month}" /></span>
-     <span><input type="submit" value="検索" /></span>
+     <span><input type="button" onclick="search()" value="検索" /></span>
      <p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" />
 
-   <table border="1"class="salrylist-table">
+     <span><input type="hidden" id="downloadFlg" th:field="*{downloadFlg}" /></span>
+     <span><input type="button" onclick="downLoadData()" value="ダウンロード" /></span>
+ </form>
+
+ <table border="1"class="salrylist-table">
      <tr>
         <th width="100">社員ID</th>
-        <th width="150">社員氏名</th>
+        <th width="200">社員氏名</th>
         <th width="200">対象年月</th>
         <th width="200">支払日</th>
-        <th width="200">基本給(単位:円)</th>
+        <th width="400">基本給(単位:円)</th>
+        <th width="200">残業時間</th>
+        <th width="200">不足時間</th>
+        <th width="500">残業加算(単位:円)</th>
+        <th width="500">稼働不足減(単位:円)</th>
+        <th width="200">交通費(単位:円)</th>
+        <th width="500">手当加算(単位:円)</th>
+        <th width="500">手当減算(単位:円)</th>
+        <th width="300">手当理由</th>
+        <th width="700">厚生年金控除個人(単位:円)</th>
+        <th width="700">厚生健康控除個人(単位:円)</th>
+        <th width="700">厚生年金控除会社(単位:円)</th>
+        <th width="700">厚生健康控除会社(単位:円)</th>
+        <th width="700">厚生控除子育(会社)(単位:円)</th>
+        <th width="700">雇用保険個人負担(単位:円)</th>
+        <th width="700">雇用保険会社負担(単位:円)</th>
+        <th width="700">雇用保拠出金（会社)(単位:円)</th>
+        <th width="700">労災保険（会社負担のみ）(単位:円)</th>
+        <th width="500">源泉控除(単位:円)</th>
+        <th width="500">住民税控除(単位:円)</th>
+        <th width="500">社宅家賃控除(単位:円)</th>
+        <th width="700">社宅共益費控除(単位:円)</th>
+        <th width="500">総費用(単位:円)</th>
         <th width="200">総額(単位:円)</th>
         <th width="500">備考</th>
+        <th width="200">削除フラグ</th>
+        <th width="200">作成日</th>
+        <th width="200">更新日</th>
+
+
+
      </tr>
 
-     <tr th:each="workline : ${salarydate}">
+    <tr th:each="workline : ${salarydate}">
 
        <td  th:text="${workline.employeeID}" >employeeID</td>
        <td  th:text="${workline.employeeName}">workinfoID</td>
        <td  th:text="${workline.month}">month</td>
        <td  th:text="${workline.paymentDate}">paymentDate</td>
        <td  th:text="${workline.base}">base</td>
+       <td  th:text="${workline.overTime}">overTime</td>
+       <td  th:text="${workline.shortage}">shortage</td>
+       <td  th:text="${workline.overTimePlus}">overTimePlus</td>
+       <td  th:text="${workline.shortageReduce}">shortageReduce</td>
+       <td  th:text="${workline.transportExpense}">transportExpense</td>
+       <td  th:text="${workline.allowancePlus}">allowancePlus</td>
+       <td  th:text="${workline.allowanceReduce}">allowanceReduce</td>
+       <td  th:text="${workline.allowanceReason}">allowanceReason</td>
+       <td  th:text="${workline.welfarePensionSelf}">welfarePensionSelf</td>
+       <td  th:text="${workline.welfareHealthSelf}">welfareHealthSelf</td>
+       <td  th:text="${workline.welfarePensionComp}">welfarePensionComp</td>
+       <td  th:text="${workline.welfareHealthComp}">welfareHealthComp</td>
+       <td  th:text="${workline.welfareBaby}">welfareBaby</td>
+       <td  th:text="${workline.eplyInsSelf}">eplyInsSelf</td>
+       <td  th:text="${workline.eplyInsComp}">eplyInsComp</td>
+       <td  th:text="${workline.eplyInsWithdraw}">eplyInsWithdraw</td>
+       <td  th:text="${workline.wkAcccpsIns}">wkAcccpsIns</td>
+       <td  th:text="${workline.withholdingTax}">withholdingTax</td>
+       <td  th:text="${workline.municipalTax}">municipalTax</td>
+       <td  th:text="${workline.rental}">rental</td>
+       <td  th:text="${workline.rentalMgmtFee}">rentalMgmtFee</td>
        <td  th:text="${workline.sum}">sum</td>
+       <td  th:text="${workline.totalFee}">totalFee</td>
        <td  th:text="${workline.remark}">remark</td>
+       <td  th:text="${workline.deleteFlg}">deleteFlg</td>
+       <td  th:text="${workline.insertDate}">insertDate</td>
+       <td  th:text="${workline.updateDate}">updateDate</td>
+
+
+
        </tr>
   </table>
 
-  </form>
+
   </body>
 
   </html>
