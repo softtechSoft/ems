@@ -19,7 +19,7 @@ import com.softtech.entity.SalaryInfo;
 
 /**
  * 概要：ファイル処理機能
- *0102
+ *010203
  * 作成者：楊@ソフトテク
  * 作成日：2021/2/17
  */
