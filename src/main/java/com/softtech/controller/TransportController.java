@@ -110,7 +110,7 @@ public class TransportController<WorkInfoComment> {
 				//中間駅3
 				mapper.put("midStation3", transport.getMidStation3());
 				//定期券金額(1ヶ月)
-				mapper.put("transportExpense", transport.getTransportExpense());
+				mapper.put("transportExpense1", transport.getTransportExpense());
 			} else {
 				//起点駅
 				mapper.put("startStation", "無し");
