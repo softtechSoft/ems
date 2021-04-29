@@ -29,7 +29,6 @@ public class FileUtil {
 	//アップロードフォルダー
 	final String uploadPath = "D:/worksheet/";
 
-	// GIT test
 	/**
 	 * 機能：ファイルをアップロード
 	 *
@@ -171,6 +170,8 @@ public class FileUtil {
                 String month = wl.getMonth();
                 String paymentDate = wl.getPaymentDate();
                 String base = wl.getBase();
+                String base1 = base.replace(",", "");
+                System.out.println(base1);
                 String overTime = wl.getOverTime();
                 String shortage = wl.getShortage();
                 String overTimePlus = wl.getOverTimePlus();
@@ -201,7 +202,7 @@ public class FileUtil {
 
 
 
-                String outputString = employeeID + "," + employeeName + "," + month + "," + paymentDate + "," + base + "."+ overTime+ "," +shortage+ "," +overTimePlus+ "," +shortageReduce+ "," +transportExpense+ "," +allowancePlus+ "," +allowanceReduce+ "," +allowanceReason+ "," +welfarePensionSelf+ "," +welfareHealthSelf+ "," +welfarePensionComp+ "," +welfareHealthComp+ "," +welfareBaby+ "," +eplyInsSelf+ "," +eplyInsComp+ "," +eplyInsWithdraw+ "," +wkAcccpsIns+ "," +withholdingTax+ "," +municipalTax+ "," +rental+ "," +rentalMgmtFee+ "," +sum+ "," +totalFee+ "," +remark+ ","  + sum +"," +remark
+                String outputString = employeeID + "," + employeeName + "," + month + "," + paymentDate + "," + base1 + "."+ overTime+ "," +shortage+ "," +overTimePlus+ "," +shortageReduce+ "," +transportExpense+ "," +allowancePlus+ "," +allowanceReduce+ "," +allowanceReason+ "," +welfarePensionSelf+ "," +welfareHealthSelf+ "," +welfarePensionComp+ "," +welfareHealthComp+ "," +welfareBaby+ "," +eplyInsSelf+ "," +eplyInsComp+ "," +eplyInsWithdraw+ "," +wkAcccpsIns+ "," +withholdingTax+ "," +municipalTax+ "," +rental+ "," +rentalMgmtFee+ "," +sum+ "," +totalFee+ "," +remark+ ","  + sum +"," +remark
                 		+ "," +deleteFlg+ "," +insertDate+ "," +  updateDate      + "\r\n";
 
                 pw.print(outputString);
