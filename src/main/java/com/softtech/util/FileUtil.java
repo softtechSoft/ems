@@ -25,12 +25,12 @@ import com.softtech.entity.SalaryInfo;
  */
 
 public class FileUtil {
-	//アップロードフォルダー000
+	//アップロードフォルダー000111
 	//アップロードフォルダー
 	final String uploadPath = "D:/worksheet/";
 	/**
 	 * 機能：ファイルをアップロード
-	 *
+	 *あああ
 	 * @param File　対象ファイル
 	 * @return TRUE:成功、FALSE失敗
 	 * @exception なし
