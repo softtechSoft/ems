@@ -68,7 +68,7 @@ public class Transport {
 		return midStation2;
 	}
 
-	public void setMidStation2(String midStation2) {
+	public void setMidStation2(String midStation2) { 
 		this.midStation2 = midStation2;
 	}
 

@@ -38,7 +38,7 @@ public class TransportAllServiceTest {
 
 
     @Test
-    public void test1() throws Exception {
+    public void test1() throws Exception { 
 
 
     	Map<String, String> mapper = new HashMap<String, String>();
@@ -50,11 +50,31 @@ public class TransportAllServiceTest {
     	Mockito.when(mockTransportService.queryTransport(mapper)).thenReturn(transport);
 
     	// テストする。
-    	transport = mockTransportAllService.getTransportInf(mapper);
+    	Transport tt = mockTransportAllService.getTransportInf(mapper);
 
     	// 結果確認
-    	String rtn = transport.getStartDate();
+    	String rtn = tt.getStartDate();
     	assertEquals(rtn,"2021/03/04");
     }
+    @Test
+    public void test2() throws Exception {
 
+
+    	Map<String, String> mapper = new HashMap<String, String>();
+    	mapper.put("employeeID", "testID");
+
+    	// テスト対象関数内に存在する他のクラス関数などをもくする。
+    	Transport transport = new Transport();
+    	transport.setStartDate("20210304");
+    	//Mockito.when(mockTransportService.queryTransport(mapper)).thenReturn(transport);
+    	Mockito.when(mockTransportService.queryTransport(mapper)).thenReturn(null);
+    	// テストする。
+    	Transport tt = mockTransportAllService.getTransportInf(mapper);
+
+    	// 結果確認
+    	
+    	String rtn = tt.getStartDate();
+
+    	assertEquals(rtn,"");
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -110,7 +111,7 @@ public class TransportController<WorkInfoComment> {
 				//中間駅3
 				mapper.put("midStation3", transport.getMidStation3());
 				//定期券金額(1ヶ月)
-				mapper.put("transportExpense", transport.getTransportExpense());
+				mapper.put("transportExpense1", transport.getTransportExpense());
 			} else {
 				//起点駅
 				mapper.put("startStation", "無し");
@@ -127,7 +128,7 @@ public class TransportController<WorkInfoComment> {
 				//中間駅3
 				mapper.put("midStation3", "無し");
 				//定期券金額(1ヶ月)
-				mapper.put("transportExpense", "0");
+				mapper.put("transportExpense1", "0");
 			}
 			//出張交通費
 			mapper.put("businessTrip", "0");
@@ -149,7 +150,7 @@ public class TransportController<WorkInfoComment> {
 	 *
 	 * @author 楊@ソフトテク
 	 */
-	@RequestMapping("/workdetail")
+	@RequestMapping(path="/workdetail", method= RequestMethod.GET)
 	public String Workdetail(HttpServletRequest request, HttpSession session, Model model) {
 
 		Map<String, String> sportMapper = new HashMap<String, String>();

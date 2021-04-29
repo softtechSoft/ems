@@ -119,7 +119,9 @@ public class FileUtil {
 
 		try {
 			PrintWriter pw = response.getWriter();
-            for(WorkDetail wl:workDetailList) {
+			String outputString1 ="社員id,"+"社員氏名," + "対象年月," + "勤怠時間(H)," + "定期券額(円)," +"その他交通費(円）," + "\r\n";
+			pw.print(outputString1);
+			for(WorkDetail wl:workDetailList) {
             	String employeeID = wl.getEmployeeID();
                 String employeeName = wl.getEmployeeName();
                 String workMonth = wl.getWorkMonth();
@@ -130,7 +132,6 @@ public class FileUtil {
 
                 String outputString = employeeID + "," + employeeName + "," + workMonth + "," + workTime + "," + transportExpense + "," + transport
                          + "\r\n";
-
                 pw.print(outputString);
             }
             pw.close();

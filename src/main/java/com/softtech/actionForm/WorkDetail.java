@@ -15,7 +15,7 @@ public class WorkDetail {
 	private String workMonth;
 	// 稼働時間
 	private float workTime;
-	//定期券変更
+	//定期券
 	private float transportExpense;
 	//他の交通費(円)
 	private float transport;

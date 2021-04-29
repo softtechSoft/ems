@@ -10,7 +10,7 @@ import com.softtech.entity.Transport;
 import com.softtech.mapper.TransportMapper;
 
 @Service
-public class TransportServiceImpl implements TransportService {
+public class TransportServiceImpl implements TransportService { 
 	@Autowired
 	private TransportMapper transportMapper;
 
