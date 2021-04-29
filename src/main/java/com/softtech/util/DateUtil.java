@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * 概要：対象月処理機能
- *010203
+ *
  * 作成者：馬@ソフトテク
  * 作成日：2021/4/10
  */
@@ -16,7 +16,7 @@ public class DateUtil {
 
 	/**
 	 * 機能：現在月を生成する
-	 *１１
+	 *
 	 * @return 現在月
 	 * @exception なし
 	 * @author 馬@ソフトテク
