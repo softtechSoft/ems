@@ -19,7 +19,7 @@ import com.softtech.entity.SalaryInfo;
 
 /**
  * 概要：ファイル処理機能
- *01
+ *0102
  * 作成者：楊@ソフトテク
  * 作成日：2021/2/17
  */
@@ -30,7 +30,7 @@ public class FileUtil {
 	final String uploadPath = "D:/worksheet/";
 	/**
 	 * 機能：ファイルをアップロード
-	 *あああ
+	 *あああ１１
 	 * @param File　対象ファイル
 	 * @return TRUE:成功、FALSE失敗
 	 * @exception なし
