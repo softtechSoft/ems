@@ -29,6 +29,7 @@ public class FileUtil {
 	//アップロードフォルダー
 	final String uploadPath = "D:/worksheet/";
 
+	// GIT test
 	/**
 	 * 機能：ファイルをアップロード
 	 *
