@@ -31,6 +31,10 @@ public class SalaryInfo {
 	private String welfareHealthComp = "0";
 	private String overTime = "0";
 	private String shortage = "0";
+	private String deleteFlg = "0";
+	private String insertDate = "0";
+	private String updateDate = "0";
+
 
 	public String getEmployeeName() {
 		return employeeName;
@@ -70,7 +74,7 @@ public class SalaryInfo {
 	}
 
 	public void setBase(String base) {
-		this.base = String.format("%,d円", Integer.parseInt(base));
+		this.base = String.format("%,d", Integer.parseInt(base));
 	}
 
 	public String getOverTimePlus() {
@@ -78,7 +82,7 @@ public class SalaryInfo {
 	}
 
 	public void setOverTimePlus(String overTimePlus) {
-		this.overTimePlus = String.format("%,d円", Integer.parseInt(overTimePlus));
+		this.overTimePlus = String.format("%,d", Integer.parseInt(overTimePlus));
 	}
 
 	public String getShortageReduce() {
@@ -86,7 +90,7 @@ public class SalaryInfo {
 	}
 
 	public void setShortageReduce(String shortageReduce) {
-		this.shortageReduce = String.format("%,d円", Integer.parseInt(shortageReduce));
+		this.shortageReduce = String.format("%,d", Integer.parseInt(shortageReduce));
 	}
 
 	public String getTransportExpense() {
@@ -94,7 +98,7 @@ public class SalaryInfo {
 	}
 
 	public void setTransportExpense(String transportExpense) {
-		this.transportExpense = String.format("%,d円", Integer.parseInt(transportExpense));
+		this.transportExpense = String.format("%,d", Integer.parseInt(transportExpense));
 	}
 
 	public String getAllowancePlus() {
@@ -102,7 +106,7 @@ public class SalaryInfo {
 	}
 
 	public void setAllowancePlus(String allowancePlus) {
-		this.allowancePlus = String.format("%,d円", Integer.parseInt(allowancePlus));
+		this.allowancePlus = String.format("%,d", Integer.parseInt(allowancePlus));
 	}
 
 	public String getAllowanceReduce() {
@@ -110,7 +114,7 @@ public class SalaryInfo {
 	}
 
 	public void setAllowanceReduce(String allowanceReduce) {
-		this.allowanceReduce = String.format("%,d円", Integer.parseInt(allowanceReduce));
+		this.allowanceReduce = String.format("%,d", Integer.parseInt(allowanceReduce));
 	}
 
 	public String getAllowanceReason() {
@@ -126,7 +130,7 @@ public class SalaryInfo {
 
 
 	public void setWelfarePensionSelf(String welfarePensionSelf) {
-		this.welfarePensionSelf = String.format("%,d円", Integer.parseInt(welfarePensionSelf));
+		this.welfarePensionSelf = String.format("%,d", Integer.parseInt(welfarePensionSelf));
 	}
 
 	public String getWelfareHealthSelf() {
@@ -134,7 +138,7 @@ public class SalaryInfo {
 	}
 
 	public void setWelfareHealthSelf(String welfareHealthSelf) {
-		this.welfareHealthSelf = String.format("%,d円", Integer.parseInt(welfareHealthSelf));
+		this.welfareHealthSelf = String.format("%,d", Integer.parseInt(welfareHealthSelf));
 
 
 	}
@@ -144,7 +148,7 @@ public class SalaryInfo {
 	}
 
 	public void setEplyInsSelf(String eplyInsSelf) {
-		this.eplyInsSelf = String.format("%,d円", Integer.parseInt(eplyInsSelf));
+		this.eplyInsSelf = String.format("%,d", Integer.parseInt(eplyInsSelf));
 	}
 
 	public String getWithholdingTax() {
@@ -152,7 +156,7 @@ public class SalaryInfo {
 	}
 
 	public void setWithholdingTax(String withholdingTax) {
-		this.withholdingTax = String.format("%,d円", Integer.parseInt(withholdingTax));
+		this.withholdingTax = String.format("%,d", Integer.parseInt(withholdingTax));
 	}
 
 	public String getMunicipalTax() {
@@ -160,7 +164,7 @@ public class SalaryInfo {
 	}
 
 	public void setMunicipalTax(String municipalTax) {
-		this.municipalTax = String.format("%,d円", Integer.parseInt(municipalTax));
+		this.municipalTax = String.format("%,d", Integer.parseInt(municipalTax));
 	}
 
 	public String getRental() {
@@ -168,7 +172,7 @@ public class SalaryInfo {
 	}
 
 	public void setRental(String rental) {
-		this.rental = String.format("%,d円", Integer.parseInt(rental));
+		this.rental = String.format("%,d", Integer.parseInt(rental));
 	}
 
 	public String getRentalMgmtFee() {
@@ -176,7 +180,7 @@ public class SalaryInfo {
 	}
 
 	public void setRentalMgmtFee(String rentalMgmtFee) {
-		this.rentalMgmtFee = String.format("%,d円", Integer.parseInt(rentalMgmtFee));
+		this.rentalMgmtFee = String.format("%,d", Integer.parseInt(rentalMgmtFee));
 	}
 
 	public String getSum() {
@@ -184,7 +188,7 @@ public class SalaryInfo {
 	}
 
 	public void setSum(String sum) {
-		this.sum = String.format("%,d円", Integer.parseInt(sum));
+		this.sum = String.format("%,d", Integer.parseInt(sum));
 	}
 
 	public String getAddress() {
@@ -208,7 +212,7 @@ public class SalaryInfo {
 	}
 
 	public void setTotalFee(String totalFee) {
-		this.totalFee = totalFee;
+		this.totalFee = String.format("%,d", Integer.parseInt(totalFee));
 	}
 
 	public String getWkAcccpsIns() {
@@ -216,7 +220,7 @@ public class SalaryInfo {
 	}
 
 	public void setWkAcccpsIns(String wkAcccpsIns) {
-		this.wkAcccpsIns = wkAcccpsIns;
+		this.wkAcccpsIns = String.format("%,d", Integer.parseInt(wkAcccpsIns));
 	}
 
 	public String getEplyInsWithdraw() {
@@ -224,7 +228,7 @@ public class SalaryInfo {
 	}
 
 	public void setEplyInsWithdraw(String eplyInsWithdraw) {
-		this.eplyInsWithdraw = eplyInsWithdraw;
+		this.eplyInsWithdraw = String.format("%,d", Integer.parseInt(eplyInsWithdraw));
 	}
 
 	public String getEplyInsComp() {
@@ -232,7 +236,7 @@ public class SalaryInfo {
 	}
 
 	public void setEplyInsComp(String eplyInsComp) {
-		this.eplyInsComp = eplyInsComp;
+		this.eplyInsComp = String.format("%,d", Integer.parseInt(eplyInsComp));
 	}
 
 	public String getWelfareBaby() {
@@ -240,7 +244,7 @@ public class SalaryInfo {
 	}
 
 	public void setWelfareBaby(String welfareBaby) {
-		this.welfareBaby = welfareBaby;
+		this.welfareBaby = String.format("%,d", Integer.parseInt(welfareBaby));
 	}
 
 	public String getWelfarePensionComp() {
@@ -248,14 +252,14 @@ public class SalaryInfo {
 	}
 
 	public void setWelfarePensionComp(String welfarePensionComp) {
-		this.welfarePensionComp = welfarePensionComp;
+		this.welfarePensionComp = String.format("%,d", Integer.parseInt(welfarePensionComp));
 	}
 	public String getWelfareHealthComp() {
 		return welfareHealthComp;
 	}
 
 	public void setWelfareHealthComp(String welfareHealthComp) {
-		this.welfareHealthComp = welfareHealthComp;
+		this.welfareHealthComp = String.format("%,d", Integer.parseInt(welfareHealthComp));
 	}
 	public String getOverTime() {
 		return overTime;
@@ -271,5 +275,49 @@ public class SalaryInfo {
 
 	public void setShortage(String shortage) {
 		this.shortage = shortage;
+	}
+
+	/**
+	 * @return deleteFlg
+	 */
+	public String getDeleteFlg() {
+		return deleteFlg;
+	}
+
+	/**
+	 * @param deleteFlg セットする deleteFlg
+	 */
+	public void setDeleteFlg(String deleteFlg) {
+		this.deleteFlg = deleteFlg;
+	}
+
+	/**
+	 * @return insertDate
+	 */
+	public String getInsertDate() {
+		return insertDate;
+	}
+
+	/**
+	 * @param insertDate セットする insertDate
+	 */
+	public void setInsertDate(String insertDate) {
+		this.insertDate = String.format("%s/%s/%s", insertDate.substring(0, 4), insertDate.substring(4, 6),
+				insertDate.substring(6, 8));
+	}
+
+	/**
+	 * @return updateDate
+	 */
+	public String getUpdateDate() {
+		return updateDate;
+	}
+
+	/**
+	 * @param updateDate セットする updateDate
+	 */
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = String.format("%s/%s/%s", updateDate.substring(0, 4), updateDate.substring(4, 6),
+				updateDate.substring(6, 8));
 	}
 }
