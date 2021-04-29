@@ -1,6 +1,7 @@
 
 package com.softtech.util;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -42,4 +43,16 @@ public class DateUtil {
 		return month.replace("/", "");
 	}
 
+	/**
+	 * 機能：float→Stringに変換
+	 *
+	 * @param 年月
+	 * @return 変更後年月
+	 * @exception なし
+	 * @author 馬@ソフトテク
+	 */
+	public static String formatTosepara(float getTransportExpense1) {
+		DecimalFormat df = new DecimalFormat("#,###.00");
+		return df.format(getTransportExpense1);
+		}
 }

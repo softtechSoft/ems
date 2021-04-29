@@ -16,9 +16,9 @@ public class WorkDetail {
 	// 稼働時間
 	private float workTime;
 	//定期券
-	private float transportExpense;
+	private String transportExpense;
 	//他の交通費(円)
-	private float transport;
+	private String transport;
 	/**
 	 * @return employeeID
 	 */
@@ -67,30 +67,34 @@ public class WorkDetail {
 	public void setWorkTime(float workTime) {
 		this.workTime = workTime;
 	}
+
+
 	/**
 	 * @return transportExpense
 	 */
-	public float getTransportExpense() {
+	public String getTransportExpense() {
 		return transportExpense;
 	}
 	/**
 	 * @param transportExpense セットする transportExpense
 	 */
-	public void setTransportExpense(float transportExpense) {
+	public void setTransportExpense(String transportExpense) {
 		this.transportExpense = transportExpense;
 	}
 	/**
 	 * @return transport
 	 */
-	public float getTransport() {
+	public String getTransport() {
 		return transport;
 	}
 	/**
 	 * @param transport セットする transport
 	 */
-	public void setTransport(float transport) {
+	public void setTransport(String transport) {
 		this.transport = transport;
 	}
+
+
 
 
 

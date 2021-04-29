@@ -90,9 +90,9 @@ public class WorkDetailListServiceImpl implements WorkDetailListService{
 			//勤怠時間（H)
 			workDetail.setWorkTime(tt.getWorkTime());
 			//定期券額（円）
-			workDetail.setTransportExpense(tt.getTransportExpense1());
+			workDetail.setTransportExpense(DateUtil.formatTosepara(tt.getTransportExpense1()));
 			//交通費（定期券以外）(円）
-			workDetail.setTransport(tt.getTransport());
+			workDetail.setTransport(DateUtil.formatTosepara(tt.getTransport()));
 
 			rtn.add(workDetail);
 		}
