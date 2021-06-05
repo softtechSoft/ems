@@ -16,6 +16,16 @@
     <link rel="stylesheet" type="text/css" media="screen" th:href="@{/src/main/css/main.css}"/>
     <script type="text/javascript" charset="UTF-8" th:src="@{/src/public/public.js}"></script>
     <script type="text/javascript" charset="UTF-8" th:src="@{/src/main/js/main.js}"></script>
+    <script>
+    	function toManager(){
+    		var windowObjectReference;
+    		var windowFeatures = "menubar=yes,location=yes,resizable=yes,scrollbars=yes,status=yes";
+
+    		var employeeID = document.getElementById('employeeID').value;
+    		//alert(employeeID);
+    		windowObjectReference = window.open("http://dev.it-softtech.com/emsm/functionInit?employeeID="+employeeID, "CNN_WindowName", windowFeatures);
+    	}
+    </script>
 </head>
 <body th:onload="onload([[${session.userUpdatePsw}]])">
 	<header id="header">
@@ -24,6 +34,10 @@
 		<ul>
 			<li th:each="ofcfunction:${list}" th:id="${ofcfunction.functionName}" th:onclick="navigation([[${ofcfunction.functionLink}]]);onStyle(this)"><span class='iconfont icon' th:utext="${ofcfunction.functionText}">TEXT</span></li>
 		</ul>
+		<th:block th:if="${manager == '1'}">
+		  <input type="hidden" id="employeeID"  th:value="${session.userEmoplyeeID}"/>
+		  <input type="button" name="manager" onclick="toManager()" value="管理者"/>
+		</th:block>
 	</header>
 	<div id="shade" class="shade" onclick="menuBlur()"></div>
 	<div id="right-block" class="right-block">

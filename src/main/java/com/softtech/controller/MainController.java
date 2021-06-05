@@ -40,6 +40,7 @@ public class MainController {
 		if (session.getAttribute("userMailAdress") != null) {
 			List<Ofcfunction> list = mainService.queryOfcfunction((String) session.getAttribute("userAuthority"));
 			model.addAttribute("list", list);
+			model.addAttribute("manager", (String) session.getAttribute("userAuthority"));
 			return "/main/main";
 		} else {
 			return "redirect:/index";
