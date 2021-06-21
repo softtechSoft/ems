@@ -96,8 +96,8 @@ Insert into contract values
 ('CT002','水遁忍術開発支援','E002','C002',600000,'0',150,1000,200,1000,'20210101','20210131','10','0','D:/tmp/work',' 水遁忍術開発支援', '1',date_format(now(), '%Y%m%d'), date_format(now(), '%Y%m%d')),
 ('CT003','水遁忍術開発支援','E003','C003',600000,'0',150,1000,200,1000,'20210101','20210131','10','0','D:/tmp/work',' 土遁忍術開発支援', '1',date_format(now(), '%Y%m%d'), date_format(now(), '%Y%m%d'));
 
-drop table if exists workInfo;
-create table workInfo(
+drop table if exists workinfo;
+create table workinfo(
 workInfoID varchar(10) not null  comment'稼働情報ID',
 contractID varchar(10) not null  comment'契約ID',
 workMonth varchar(6) not null comment'稼働月',
@@ -109,11 +109,11 @@ insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日',
 primary key(workInfoID,contractID,workMonth)
 )comment'勤怠情報';
-Insert into workInfo values
+Insert into workinfo values
 ('W001','CT001','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null),
 ('W002','CT002','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null),
 ('W003','CT003','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null);
-alter table workInfo modify workTime float not null default 0 comment'稼働時間';
+alter table workinfo modify workTime float not null default 0 comment'稼働時間';
 
 drop table if exists claim;
 create table claim(
@@ -136,8 +136,8 @@ insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日'
 )comment'請求情報';
 
-drop table if exists salaryInfo;
-create table salaryInfo(
+drop table if exists salaryinfo;
+create table salaryinfo(
 employeeID varchar(6) not null  comment'社員ID',
 month  varchar(6) not null  comment'対象月',
 paymentDate  varchar(8) not null comment'支払日',
@@ -169,13 +169,13 @@ insertDate  varchar(8) comment'作成日',
 updateDate  varchar(8) comment'更新日',
 primary key(employeeID,month)
 )comment'給料情報';
-Insert into salaryInfo (employeeID,month,paymentDate,base,overTime,shortage,overTimePlus,shortageReduce,transportExpense,allowancePlus,allowanceReduce,allowanceReason,welfareSelf,welfareComp,welfareBaby,eplyInsSelf,eplyInsComp,eplyInsWithdraw,wkAcccpsIns,withholdingTax,municipalTax,rental,rentalMgmtFee,sum,totalFee,remark,deleteFlg,insertDate,updateDate)
+Insert into salaryinfo (employeeID,month,paymentDate,base,overTime,shortage,overTimePlus,shortageReduce,transportExpense,allowancePlus,allowanceReduce,allowanceReason,welfareSelf,welfareComp,welfareBaby,eplyInsSelf,eplyInsComp,eplyInsWithdraw,wkAcccpsIns,withholdingTax,municipalTax,rental,rentalMgmtFee,sum,totalFee,remark,deleteFlg,insertDate,updateDate)
 values ('E001','202001','20200215',60000,0,0,0,0,0,0,0,'',0,0,0,0,0,0,0,0,0,0,0,60000,60000,'','0','20210122','20210122');
 
-alter table ems.salaryInfo CHANGE welfareSelf welfarePensionSelf int DEFAULT 0 COMMENT '厚生年金控除個人';
-alter table ems.salaryInfo add column welfarePensionComp int DEFAULT 0 COMMENT '厚生年金控除会社' after welfarePensionSelf;
-alter table ems.salaryInfo CHANGE welfareComp welfareHealthComp int DEFAULT 0 COMMENT '厚生健康控除会社';
-alter table ems.salaryInfo add column welfareHealthSelf int DEFAULT 0 COMMENT '厚生健康控除個人' after welfarePensionSelf;
+alter table ems.salaryinfo CHANGE welfareSelf welfarePensionSelf int DEFAULT 0 COMMENT '厚生年金控除個人';
+alter table ems.salaryinfo add column welfarePensionComp int DEFAULT 0 COMMENT '厚生年金控除会社' after welfarePensionSelf;
+alter table ems.salaryinfo CHANGE welfareComp welfareHealthComp int DEFAULT 0 COMMENT '厚生健康控除会社';
+alter table ems.salaryinfo add column welfareHealthSelf int DEFAULT 0 COMMENT '厚生健康控除個人' after welfarePensionSelf;
 
 drop table if exists transport;
 create table transport(

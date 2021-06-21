@@ -10,7 +10,7 @@
 		 select s.*,
 		       e.employeeName
 
-		from salaryInfo s
+		from salaryinfo s
 		left join ems.employee e on s.employeeID = e.employeeID
 		where s.month=#{month}
 

@@ -6,7 +6,7 @@
 <mapper namespace="com.softtech.mapper.WorkInfoMapper">
 	<insert id="insertWorkInfo" parameterType="map">
 	insert
-	into workInfo
+	into workinfo
 	SELECT
 		conCat('W',subStr(contractID,3))as workInfoID,
 		contractID,
