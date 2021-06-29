@@ -205,6 +205,28 @@ primary key(employeeID,workMonth)
 insert into transport values
 ("E001","202104","20210101","西川口駅","銀座駅","京浜東北線",3000,"赤羽駅","埼京線","新宿駅","埼京線","新宿駅","丸の内線",0,0,10000,2500,'D:\\TName\\',"0",date_format(now(), '%Y%m%d'), null);
 
-
+drop table if exists welfareinfo;
+create table welfareinfo(
+employeeID varchar(6) not null primary key comment'社員ID',
+startDate varchar(8) not null comment'控除開始日',
+welfarePensionSelf int(6) comment'厚生年金控除個人',
+welfarePensionComp int(6) comment'厚生年金控除会社',
+welfareHealthComp int(6) comment'厚生健康控除会社',
+welfareHealthSelf int(6) comment'厚生健康控除個人',
+welfareBaby int(6) comment'厚生控除子育(会社)',
+eplyInsSelf int(6) comment'雇用保険個人負担',
+eplyInsComp int(6) comment'雇用保険会社負担',
+eplyInsWithdraw int(6) comment'雇用保拠出金（会社)',
+wkAcccpsIns int(6) comment'労災保険（会社負担のみ）',
+withholdingTax int(6) comment'源泉控除',
+municipalTax int(6) comment'住民税控除',
+rental int(6) comment'社宅家賃控除',
+rentalMgmtFee int(6) comment'社宅管理費控除',
+status varchar(1) not null comment'控除ステータス',
+insertDate varchar(8) comment'作成日',
+insertEmployee varchar(6) comment'作成者',
+updateDate varchar(8) comment'更新日',
+updateEmployee varchar(6) comment'更新者'
+)comment'福祉情報';
 
 
