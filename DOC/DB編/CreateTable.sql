@@ -207,7 +207,7 @@ insert into transport values
 
 drop table if exists welfareinfo;
 create table welfareinfo(
-employeeID varchar(6) not null primary key comment'社員ID',
+employeeID varchar(6) not null comment'社員ID',
 startDate varchar(8) not null comment'控除開始日',
 base int(8) not null comment'基本給',
 welfarePensionSelf int(6) comment'厚生年金控除個人',
@@ -227,7 +227,8 @@ status varchar(1) not null comment'控除ステータス',
 insertDate varchar(8) comment'作成日',
 insertEmployee varchar(6) comment'作成者',
 updateDate varchar(8) comment'更新日',
-updateEmployee varchar(6) comment'更新者'
+updateEmployee varchar(6) comment'更新者',
+primary key(employeeID,startDate)
 )comment'福祉情報';
 
 
