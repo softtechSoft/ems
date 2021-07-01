@@ -209,6 +209,7 @@ drop table if exists welfareinfo;
 create table welfareinfo(
 employeeID varchar(6) not null primary key comment'社員ID',
 startDate varchar(8) not null comment'控除開始日',
+base int(8) not null comment'基本給',
 welfarePensionSelf int(6) comment'厚生年金控除個人',
 welfarePensionComp int(6) comment'厚生年金控除会社',
 welfareHealthComp int(6) comment'厚生健康控除会社',
