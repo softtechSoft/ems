@@ -1,0 +1,109 @@
+DELIMITER //
+/* 福祉情報新規作成 */
+CREATE PROCEDURE updatewelfare (
+								in employeeID1 VarChar(6) /* 社員ID*/
+								,in startDate1 VarChar(8) /* 控除開始日*/
+								,in base Int /*基本給 */
+								,in welfarePensionSelf1 Int /*厚生年金控除個人 */
+								,in welfarePensionComp1 Int /*厚生年金控除会社 */
+								,in welfareHealthComp1 Int /*厚生健康控除会社 */
+								,in welfareHealthSelf1 Int /*厚生健康控除個人 */
+								,in welfareBaby1 Int /*厚生控除子育(会社) */
+								,in eplyInsSelf1 Int /*雇用保険個人負担 */
+								,in eplyInsComp1 Int /* 雇用保険会社負担*/
+								,in eplyInsWithdraw1 Int /*雇用保拠出金（会社) */
+								,in wkAcccpsIns1 Int /*労災保険（会社負担のみ） */
+								,in withholdingTax1 Int /* 源泉控除*/
+								,in municipalTax1 Int /*住民税控除 */
+								,in rental1 Int /* 社宅家賃控除*/
+								,in rentalMgmtFee1 Int /*社宅管理費控除 */
+								,in status1 VarChar(1) /* 控除ステータス*/
+								,in insertDate1 VarChar(8) /*作成日 */
+								,in insertEmployee1 VarChar(6) /*作成者 */
+								,in updateDate1 VarChar(8) /*更新日 */
+								,in updateEmployee1 VarChar(6)  /*更新者 */
+				
+								
+								)
+BEGIN
+	/*引数定義*/
+	DECLARE cnt Int DEFAULT 0;
+    select count(*) into cnt 
+    from welfareinfo
+    where welfareinfo.employeeID=employeeID1
+	and   welfareinfo.startDate=startDate1;
+    
+/*検索結果は１件の場合、更新の場合*/
+IF (cnt=1) then
+	update welfareinfo set
+		base=base,
+		welfarePensionSelf=welfarePensionSelf1,
+		welfarePensionComp=welfarePensionComp1,
+		welfareHealthComp=welfareHealthComp1,
+		welfareHealthSelf=welfareHealthSelf1,
+		welfareBaby=welfareBaby1,
+		eplyInsSelf=eplyInsSelf1,
+		eplyInsComp=eplyInsComp1,
+		eplyInsWithdraw=eplyInsWithdraw1,
+		wkAcccpsIns=wkAcccpsIns1,
+		withholdingTax=withholdingTax1,
+		municipalTax=municipalTax1,
+		rental=rental1,
+		rentalMgmtFee=rentalMgmtFee1,
+		status=status1,
+		insertDate=insertDate1,
+		insertEmployee=insertEmployee1,
+		updateDate=updateDate1,
+		updateEmployee=updateEmployee1
+	where welfareinfo.employeeID=employeeID1
+	and   welfareinfo.startDate=startDate1;
+/*検索結果は0件の場合、新規追加*/
+ELSEIF (cnt=0) then
+	insert into welfareinfo(
+			employeeID
+			,startDate
+			,base
+			,welfarePensionSelf
+			,welfarePensionComp
+			,welfareHealthComp
+			,welfareHealthSelf
+			,welfareBaby
+			,eplyInsSelf
+			,eplyInsComp
+			,wkAcccpsIns
+			,eplyInsWithdraw
+			,withholdingTax
+			,municipalTax
+			,rental
+			,rentalMgmtFee
+			,status
+			,insertDate
+			,insertEmployee
+			,updateDate
+			,updateEmployee
+	) 
+	VALUES(employeeID1
+		,startDate1
+		,base
+		,welfarePensionSelf1
+		,welfarePensionComp1
+		,welfareHealthComp1
+		,welfareHealthSelf1
+		,welfareBaby1
+		,eplyInsSelf1
+		,eplyInsComp1
+		,eplyInsWithdraw1
+		,wkAcccpsIns1
+		,withholdingTax1
+		,municipalTax1
+		,rental1
+		,rentalMgmtFee1
+		,status1
+		,insertDate1
+		,insertEmployee1
+		,updateDate1
+		,updateEmployee1);
+END IF;
+END//
+
+DELIMITER ;
