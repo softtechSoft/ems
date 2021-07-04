@@ -1,39 +1,39 @@
 DELIMITER //
-/* •Ÿƒî•ñV‹Kì¬ */
+/* ç¦ç¥‰æƒ…å ±æ–°è¦ä½œæˆ */
 CREATE PROCEDURE updatewelfare (
-								in employeeID1 VarChar(6) /* ĞˆõID*/
-								,in startDate1 VarChar(8) /* TœŠJn“ú*/
-								,in base Int /*Šî–{‹‹ */
-								,in welfarePensionSelf1 Int /*Œú¶”N‹àTœŒÂl */
-								,in welfarePensionComp1 Int /*Œú¶”N‹àTœ‰ïĞ */
-								,in welfareHealthComp1 Int /*Œú¶Œ’NTœ‰ïĞ */
-								,in welfareHealthSelf1 Int /*Œú¶Œ’NTœŒÂl */
-								,in welfareBaby1 Int /*Œú¶Tœqˆç(‰ïĞ) */
-								,in eplyInsSelf1 Int /*ŒÙ—p•ÛŒ¯ŒÂl•‰’S */
-								,in eplyInsComp1 Int /* ŒÙ—p•ÛŒ¯‰ïĞ•‰’S*/
-								,in eplyInsWithdraw1 Int /*ŒÙ—p•Û‹’o‹ài‰ïĞ) */
-								,in wkAcccpsIns1 Int /*˜JĞ•ÛŒ¯i‰ïĞ•‰’S‚Ì‚İj */
-								,in withholdingTax1 Int /* Œ¹òTœ*/
-								,in municipalTax1 Int /*Z–¯ÅTœ */
-								,in rental1 Int /* Ğ‘î‰Æ’ÀTœ*/
-								,in rentalMgmtFee1 Int /*Ğ‘îŠÇ—”ïTœ */
-								,in status1 VarChar(1) /* TœƒXƒe[ƒ^ƒX*/
-								,in insertDate1 VarChar(8) /*ì¬“ú */
-								,in insertEmployee1 VarChar(6) /*ì¬Ò */
-								,in updateDate1 VarChar(8) /*XV“ú */
-								,in updateEmployee1 VarChar(6)  /*XVÒ */
-				
-								
+								in employeeID1 VarChar(6) /* ç¤¾å“¡ID*/
+								,in startDate1 VarChar(8) /* æ§é™¤é–‹å§‹æ—¥*/
+								,in base Int /*åŸºæœ¬çµ¦ */
+								,in welfarePensionSelf1 Int /*åšç”Ÿå¹´é‡‘æ§é™¤å€‹äºº */
+								,in welfarePensionComp1 Int /*åšç”Ÿå¹´é‡‘æ§é™¤ä¼šç¤¾ */
+								,in welfareHealthComp1 Int /*åšç”Ÿå¥åº·æ§é™¤ä¼šç¤¾ */
+								,in welfareHealthSelf1 Int /*åšç”Ÿå¥åº·æ§é™¤å€‹äºº */
+								,in welfareBaby1 Int /*åšç”Ÿæ§é™¤å­è‚²(ä¼šç¤¾) */
+								,in eplyInsSelf1 Int /*é›‡ç”¨ä¿é™ºå€‹äººè² æ‹… */
+								,in eplyInsComp1 Int /* é›‡ç”¨ä¿é™ºä¼šç¤¾è² æ‹…*/
+								,in eplyInsWithdraw1 Int /*é›‡ç”¨ä¿æ‹ å‡ºé‡‘ï¼ˆä¼šç¤¾) */
+								,in wkAcccpsIns1 Int /*åŠ´ç½ä¿é™ºï¼ˆä¼šç¤¾è² æ‹…ã®ã¿ï¼‰ */
+								,in withholdingTax1 Int /* æºæ³‰æ§é™¤*/
+								,in municipalTax1 Int /*ä½æ°‘ç¨æ§é™¤ */
+								,in rental1 Int /* ç¤¾å®…å®¶è³ƒæ§é™¤*/
+								,in rentalMgmtFee1 Int /*ç¤¾å®…ç®¡ç†è²»æ§é™¤ */
+								,in status1 VarChar(1) /* æ§é™¤ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹*/
+								,in insertDate1 VarChar(8) /*ä½œæˆæ—¥ */
+								,in insertEmployee1 VarChar(6) /*ä½œæˆè€… */
+								,in updateDate1 VarChar(8) /*æ›´æ–°æ—¥ */
+								,in updateEmployee1 VarChar(6)  /*æ›´æ–°è€… */
+
+
 								)
 BEGIN
-	/*ˆø”’è‹`*/
+	/*å¼•æ•°å®šç¾©*/
 	DECLARE cnt Int DEFAULT 0;
-    select count(*) into cnt 
+    select count(*) into cnt
     from welfareinfo
     where welfareinfo.employeeID=employeeID1
 	and   welfareinfo.startDate=startDate1;
-    
-/*ŒŸõŒ‹‰Ê‚Í‚PŒ‚Ìê‡AXV‚Ìê‡*/
+
+/*æ¤œç´¢çµæœã¯ï¼‘ä»¶ã®å ´åˆã€æ›´æ–°*/
 IF (cnt=1) then
 	update welfareinfo set
 		base=base,
@@ -57,7 +57,7 @@ IF (cnt=1) then
 		updateEmployee=updateEmployee1
 	where welfareinfo.employeeID=employeeID1
 	and   welfareinfo.startDate=startDate1;
-/*ŒŸõŒ‹‰Ê‚Í0Œ‚Ìê‡AV‹K’Ç‰Á*/
+/*æ¤œç´¢çµæœã¯0ä»¶ã®å ´åˆã€æ–°è¦è¿½åŠ */
 ELSEIF (cnt=0) then
 	insert into welfareinfo(
 			employeeID
@@ -81,7 +81,7 @@ ELSEIF (cnt=0) then
 			,insertEmployee
 			,updateDate
 			,updateEmployee
-	) 
+	)
 	VALUES(employeeID1
 		,startDate1
 		,base
