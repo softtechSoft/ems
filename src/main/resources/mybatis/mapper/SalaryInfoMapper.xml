@@ -33,7 +33,7 @@
  end
  inOrder from INFORMATION_SCHEMA.COLUMNS
         <where>
-		(table_name='employee' AND table_schema='ems' AND (COLUMN_NAME="employeeName" or COLUMN_NAME="address"))or(table_name='salaryInfo' AND table_schema='ems' AND (COLUMN_NAME="employeeID" or COLUMN_NAME="month" or COLUMN_NAME="paymentDate" or COLUMN_NAME="base" or COLUMN_NAME="overTimePlus" or COLUMN_NAME="shortageReduce" or COLUMN_NAME="transportExpense" or COLUMN_NAME="allowancePlus" or COLUMN_NAME="allowanceReduce" or COLUMN_NAME="allowanceReason" or COLUMN_NAME="welfarePensionSelf" or COLUMN_NAME="welfareHealthSelf" or COLUMN_NAME="eplyInsSelf" or COLUMN_NAME="rental" or COLUMN_NAME="rentalMgmtFee" or COLUMN_NAME="withholdingTax" or COLUMN_NAME="municipalTax" or COLUMN_NAME="sum"
+		(table_name='employee' AND table_schema='ems' AND (COLUMN_NAME="employeeName" or COLUMN_NAME="address"))or(table_name='salaryinfo' AND table_schema='ems' AND (COLUMN_NAME="employeeID" or COLUMN_NAME="month" or COLUMN_NAME="paymentDate" or COLUMN_NAME="base" or COLUMN_NAME="overTimePlus" or COLUMN_NAME="shortageReduce" or COLUMN_NAME="transportExpense" or COLUMN_NAME="allowancePlus" or COLUMN_NAME="allowanceReduce" or COLUMN_NAME="allowanceReason" or COLUMN_NAME="welfarePensionSelf" or COLUMN_NAME="welfareHealthSelf" or COLUMN_NAME="eplyInsSelf" or COLUMN_NAME="rental" or COLUMN_NAME="rentalMgmtFee" or COLUMN_NAME="withholdingTax" or COLUMN_NAME="municipalTax" or COLUMN_NAME="sum"
 		or COLUMN_NAME="remark" or COLUMN_NAME="rentalMgmtFee")AND COLUMN_NAME!='deleteFlg' AND COLUMN_NAME!='insertDate' AND COLUMN_NAME!='updateDate') order by inOrder
 		</where>
 	</select>
