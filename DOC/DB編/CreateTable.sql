@@ -35,20 +35,21 @@ insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日'
 ) comment'機能情報';
 
+
 Insert into ofcfunction values
-('S1','employee',"&#xe666;&emsp;社員情報管理",'1','/employee','0' ,'0',date_format(now(),'%Y%m%d') ,null),
-('S2','company',"&#xe65c;&emsp;取引先情報管理",'1','/company','1' ,'0',date_format(now(),'%Y%m%d') ,null),
-('S3','contract',"&#xe65d;&emsp;契約情報管理",'1','/contract','2' ,'1',date_format(now(),'%Y%m%d') ,null),
-('S4','workInfo',"&#xe672;&emsp;勤怠情報管理",'1','/workInfo','3' ,'1',date_format(now(),'%Y%m%d') ,null),
-('S5','claim',"&#xe681;&emsp;請求情報管理",'1','/claim','4' ,'1',date_format(now(),'%Y%m%d') ,null),
-('S6','transport',"&#xe612;&emsp;交通情報管理",'1','/transport','6' ,'1',date_format(now(),'%Y%m%d') ,null),
-('S7','salaryInfo',"&#xe60c;&emsp;給料情報管理",'1','/salaryInfo','7' ,'1',date_format(now(),'%Y%m%d') ,null),
-('A7','workdetail',"&#xe672;&emsp;勤怠情報",'0','/workdetail','1' ,'0',date_format(now(),'%Y%m%d') ,null),
-('A8','salarydetail',"&#xe60c;&emsp;給料明細",'0','/salarydetail','0' ,'0',date_format(now(),'%Y%m%d') ,null),
-('A9','password',"&#xe696;&emsp;パスワード変更",'0','/passwd','99' ,'0',date_format(now(),'%Y%m%d') ,null)，
-('A1','salarylist',"&#xe60c;&emsp;給料リスト",'1','/emsm/salarylist','4' ,'0',date_format(now(),'%Y%m%d') ,null)，
-('A4','welfareList',"&#xe681;&emsp;福祉控除リスト",'1','/emsm/welfarelist','0' ,'0',date_format(now(),'%Y%m%d') ,null)，
-('A6','workdetailli',"&#xe60c;&emsp;勤怠リスト",'1','/emsm/workdetaillist','3' ,'0',date_format(now(),'%Y%m%d') ,null);
+('S1','employee','&#xe666;&emsp;社員情報管理','1','/employee','0' ,'0',date_format(now(),'%Y%m%d') ,null),
+('S2','company','&#xe65c;&emsp;取引先情報管理','1','/company','1' ,'0',date_format(now(),'%Y%m%d') ,null),
+('S3','contract','&#xe65d;&emsp;契約情報管理','1','/contract','2' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S4','workInfo','&#xe672;&emsp;勤怠情報管理','1','/workInfo','3' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S5','claim','&#xe681;&emsp;請求情報管理','1','/claim','4' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S6','transport','&#xe612;&emsp;交通情報管理','1','/transport','6' ,'1',date_format(now(),'%Y%m%d') ,null),
+('S7','salaryInfo','&#xe60c;&emsp;給料情報管理','1','/salaryInfo','7' ,'1',date_format(now(),'%Y%m%d') ,null),
+('A7','workdetail','&#xe672;&emsp;勤怠情報','0','/workdetail','1' ,'0',date_format(now(),'%Y%m%d') ,null),
+('A8','salarydetail','&#xe60c;&emsp;給料明細','0','/salarydetail','0' ,'0',date_format(now(),'%Y%m%d') ,null),
+('A9','password','&#xe696;&emsp;パスワード変更','0','/passwd','99' ,'0',date_format(now(),'%Y%m%d') ,null),
+('A1','salarylist','&#xe60c;&emsp;給料リスト','1','/emsm/salarylist','4' ,'0',date_format(now(),'%Y%m%d') ,null),
+('A4','welfareList','&#xe681;&emsp;福祉控除リスト','1','/emsm/welfarelist','0' ,'0',date_format(now(),'%Y%m%d') ,null),
+('A6','workdetailli','&#xe60c;&emsp;勤怠リスト','1','/emsm/workdetaillist','3' ,'0',date_format(now(),'%Y%m%d') ,null);
 
 
 drop table if exists company;
