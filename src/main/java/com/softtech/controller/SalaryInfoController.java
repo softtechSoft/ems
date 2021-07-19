@@ -8,6 +8,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,7 +48,7 @@ public class SalaryInfoController {
 	 */
 	@RequestMapping("/request-salarydetail")
 	@ResponseBody
-	public String salaryinfo(@RequestParam("yearMonth") String yearMonth, HttpSession session) throws JsonProcessingException {
+	public String salaryinfo(@RequestParam("yearMonth") String yearMonth,Model model,@ModelAttribute("salarydate") SalaryInfo salaryInfo, HttpSession session) throws JsonProcessingException {
 		ObjectMapper jsonMapper = new ObjectMapper();
 		Map<String, String> sqlParam = new HashMap<>();
 		sqlParam.put("yearMonth", yearMonth);
@@ -58,7 +61,23 @@ public class SalaryInfoController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("column", column);
 		map.put("data", salary);
-		String result = jsonMapper.writeValueAsString(map);
-		return result;
+	//	String result = jsonMapper.writeValueAsString(map);
+
+
+		salaryInfo.setEmployeeID("E001");
+		salaryInfo.setEmployeeName("liu Qi");
+		model.addAttribute("salarydate", salaryInfo);
+
+		//return result;
+		return "salarydetail";
+	}
+	@PostMapping("/abc")
+	public String abc(@ModelAttribute("salarydate") SalaryInfo salaryInfo,Model model){
+
+		salaryInfo.setEmployeeID("E001");
+		salaryInfo.setEmployeeName("liu Qi");
+		model.addAttribute("salarydate", salaryInfo);
+
+		return "salarydetail";
 	}
 }
