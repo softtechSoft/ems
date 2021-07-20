@@ -8,11 +8,31 @@
 	<link rel="stylesheet" th:href="@{/src/ems/css/salarydetail.css}">
 	<script type="text/javascript" th:src="@{/src/public/public.js}"></script>
 	<script type="text/javascript" th:src="@{/src/ems/js/salarydetail.js}"></script>
+
+	<script>
+	//検索ボタン
+	function search(){
+		//alert('1');
+		var years =document.getElementById('years').value;
+		//alert(years);
+		var months =document.getElementById('months').value;
+		//alert(months);
+		document.getElementById('month').value=years + months;
+		//document.getElementById('month').value=months;
+		//alert(document.getElementById('month').value);
+		document.salaryDetail.submit();
+	}
+
+	</script>
+
 </head>
 <body>
 	<header>
 		<h3>給料明細</h3>
     </header>
+
+ <form name="salaryDetail" th:action="@{/request-salarydetail}" th:object="${salarydata}" method="post">
+
     <div class="control">
 		<div class="options">
 			<select id="years" class="years" onchange="checkMonth()">
@@ -33,132 +53,131 @@
 				<option>12</option>
 			</select>
 			<span>月</span>
+			<!--
 			<a class="button-search" href="javascript:querytData()">検索</a>
+			 -->
+			 <span><input type="hidden" id="month" th:field="*{month}" /></span>
+			<span>
+			 	<input type="button" onclick="search()" value="検索" />
+			 </span>
 		</div>
 	</div>
 
-
-
-   <form name="Sheet" th:action="@{abc}" th:object="${salarydate}"   method="post">
     <table border="1" cellspacing="0" cellpadding="0"  width:100%; >
-
-
-
-
         <tr style="background-color:#bfe1ff">
 			<td rowspan="9">  給与部分 </td>
         	<td>基本給</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="*{employeeID}" ></td>
 
 
          <tr style="background-color:#dcfeeb">
        		<td>職務手当</td>
-       		<td  th:text="#{salarydate.employeeName}"></td>
+       		<td  th:text="*{employeeName}"></td>
         </tr>
 
  		<tr style="background-color:#bfe1ff">
         	<td>資格手当</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
         </tr>
 
  		<tr style="background-color:#dcfeeb">
         	<td>残業手当・欠勤控除</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
         </tr>
 
         <tr style="background-color:#bfe1ff">
         	<td>出張手当</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#dcfeeb">
         	<td>冠婚葬祭手当</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#bfe1ff">
         	<td>特別手当</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#dcfeeb">
         	<td>前期調整金額</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#bfe1ff">
         	<td>特別控除</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#dcfeeb">
          <td  style="background-color:#bfe1ff"> 非課税交通費部分  </td>
         	<td>交通費</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#bfe1ff">
          <td rowspan="6"> 控除部分  </td>
         	<td>雇用保険</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#dcfeeb">
         	<td>健康保険（一般）</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#bfe1ff">
         	<td>健康保険（介護）</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#dcfeeb">
         	<td>厚生年金</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#bfe1ff">
         	<td>所得税</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#dcfeeb">
         	<td>住民税</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#bfe1ff">
          	<td > 非課税部分  </td>
         	<td>年末調整額など</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#dcfeeb">
          <td rowspan="3"  style="background-color:#bfe1ff"> 合計部分  </td>
         	<td>支給総額</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#bfe1ff">
         	<td>課税対象額</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#dcfeeb">
         	<td>控除総額</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
          <tr style="background-color:#bfe1ff">
          <td> 実際支給部分  </td>
         	<td>差引支給額</td>
-       		<td  th:text="#{salarydate.employeeID}" ></td>
+       		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
 
-
-
   </table>
+
  </form>
+
 </body>
 </html>

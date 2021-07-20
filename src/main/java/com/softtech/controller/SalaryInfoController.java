@@ -1,9 +1,9 @@
 package com.softtech.controller;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.softtech.actionForm.SalaryInfoBean;
 import com.softtech.entity.SalaryInfo;
-import com.softtech.entity.SalaryInfoComment;
 import com.softtech.service.SalaryInfoServiceImpl;
 
 /**
@@ -34,7 +30,13 @@ public class SalaryInfoController {
 	SalaryInfoServiceImpl salaryInfoService;
 
 	@RequestMapping("/salarydetail")
-	public String salarydetails() {
+	public String salarydetails(Model model) {
+
+		SalaryInfoBean salaryInfoBean = new SalaryInfoBean();
+		//salaryInfoBean.setEmployeeID("E001");
+		//salaryInfoBean.setEmployeeName("liu Qi");
+
+		model.addAttribute("salarydata", salaryInfoBean);
 		return "/ems/salarydetail";
 	}
 
@@ -46,30 +48,43 @@ public class SalaryInfoController {
 	 * @exception JsonMappingException
 	 * @author ○○@ソフトテク
 	 */
-	@RequestMapping("/request-salarydetail")
-	@ResponseBody
-	public String salaryinfo(@RequestParam("yearMonth") String yearMonth,Model model,@ModelAttribute("salarydate") SalaryInfo salaryInfo, HttpSession session) throws JsonProcessingException {
-		ObjectMapper jsonMapper = new ObjectMapper();
+//	@RequestMapping("/request-salarydetail")
+//	public String salaryinfo(@RequestParam("yearMonth") String yearMonth,
+//			@ModelAttribute("salarydata") SalaryInfo salaryInfo,
+//			Model model,
+//			HttpSession session) throws JsonProcessingException {
+
+	@PostMapping("/request-salarydetail")
+	public String salarylistSubmit(HttpServletResponse response,
+			@ModelAttribute("salarydata") SalaryInfoBean salaryInfo,
+			Model model,
+			HttpSession session) {
+
+		//ObjectMapper jsonMapper = new ObjectMapper();
 		Map<String, String> sqlParam = new HashMap<>();
-		sqlParam.put("yearMonth", yearMonth);
+		sqlParam.put("yearMonth", salaryInfo.getMonth());
 		sqlParam.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
 		SalaryInfo salary = salaryInfoService.querySalaryInfo(sqlParam);
 		if (salary == null) {
 			salary = new SalaryInfo();
 		}
-		List<SalaryInfoComment> column = salaryInfoService.querySalaryInfoComment();
-		Map<String, Object> map = new HashMap<>();
-		map.put("column", column);
-		map.put("data", salary);
-	//	String result = jsonMapper.writeValueAsString(map);
+
+		//TODO　DB　entityから画面Beanへ変換
 
 
-		salaryInfo.setEmployeeID("E001");
-		salaryInfo.setEmployeeName("liu Qi");
-		model.addAttribute("salarydate", salaryInfo);
+//		List<SalaryInfoComment> column = salaryInfoService.querySalaryInfoComment();
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("column", column);
+//		map.put("data", salary);
+//		String result = jsonMapper.writeValueAsString(map);
+
+		SalaryInfoBean salaryInfoBean = new SalaryInfoBean();
+		salaryInfoBean.setEmployeeID("aaa");
+		salaryInfoBean.setEmployeeName("テスト");
+		model.addAttribute("salarydata", salaryInfoBean);
 
 		//return result;
-		return "salarydetail";
+		return "/ems/salarydetail";
 	}
 	@PostMapping("/abc")
 	public String abc(@ModelAttribute("salarydate") SalaryInfo salaryInfo,Model model){
