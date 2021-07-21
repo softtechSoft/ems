@@ -64,16 +64,31 @@
 	</div>
 
     <table border="1" cellspacing="0" cellpadding="0"  width:100%; >
+
         <tr style="background-color:#bfe1ff">
+        	<!-- 基本給 ～手当理由 -->
 			<td rowspan="9">  給与部分 </td>
         	<td>基本給</td>
-       		<td  th:text="*{employeeID}" ></td>
+       		<td  th:text="*{base}" ></td>
+		</tr>
 
-
-         <tr style="background-color:#dcfeeb">
-       		<td>職務手当</td>
-       		<td  th:text="*{employeeName}"></td>
+        <tr style="background-color:#dcfeeb">
+       		<td>残業時間</td>
+       		<td  th:text="*{overTime}"></td>
         </tr>
+        <tr style="background-color:#dcfeeb">
+       		<td>不足時間</td>
+       		<td  th:text="*{shortage}"></td>
+        </tr>
+        <tr style="background-color:#dcfeeb">
+       		<td>残業加算</td>
+       		<td  th:text="*{overTimePlus}"></td>
+        </tr>
+
+
+
+
+
 
  		<tr style="background-color:#bfe1ff">
         	<td>資格手当</td>
@@ -117,6 +132,11 @@
          </tr>
 
          <tr style="background-color:#bfe1ff">
+
+         <!-- 厚生年金控除個人(:厚生年金),厚生健康控除個人(:厚生健康)
+         雇用保険個人負担(:雇用保険(労災)),源泉控除(：所得税(源泉)),住民税控除(：住民税)
+         社宅家賃控除(：社宅家賃)、社宅共益費控除(:社宅共益費)
+         -->
          <td rowspan="6"> 控除部分  </td>
         	<td>雇用保険</td>
        		<td  th:text="${salarydata.employeeID}" ></td>
@@ -154,7 +174,10 @@
          </tr>
 
          <tr style="background-color:#dcfeeb">
+
          <td rowspan="3"  style="background-color:#bfe1ff"> 合計部分  </td>
+         <!-- 総額、支払日、備考
+         -->
         	<td>支給総額</td>
        		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
@@ -168,7 +191,8 @@
         	<td>控除総額</td>
        		<td  th:text="${salarydata.employeeID}" ></td>
          </tr>
-
+ <!-- いらない
+         -->
          <tr style="background-color:#bfe1ff">
          <td> 実際支給部分  </td>
         	<td>差引支給額</td>
