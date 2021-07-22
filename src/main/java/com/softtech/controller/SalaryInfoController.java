@@ -48,11 +48,10 @@ public class SalaryInfoController {
 	 */
 	@PostMapping("/request-salarydetail")
 	public String salarylistSubmit(HttpServletResponse response,
-			@ModelAttribute("salarydata") SalaryInfoBean salaryInfo,
-			Model model,
-			HttpSession session) {
-
-		//ObjectMapper jsonMapper = new ObjectMapper();
+									@ModelAttribute("salarydata") SalaryInfoBean salaryInfo,
+									Model model,
+									HttpSession session)
+	{
 		Map<String, String> sqlParam = new HashMap<>();
 
 		sqlParam.put("yearMonth", salaryInfo.getMonth());

@@ -12,14 +12,19 @@
 	<script>
 	//検索ボタン
 	function search(){
-		//alert('1');
+		// 年度取得
 		var years =document.getElementById('years').value;
-		//alert(years);
+		// 月取得
 		var months =document.getElementById('months').value;
-		//alert(months);
+
+		// 月を2桁まで、補足する。例：1→01
+		if (months.length == 1)
+		{
+			months = '0'+ months;
+		}
+
 		document.getElementById('month').value=years + months;
-		//document.getElementById('month').value=months;
-		//alert(document.getElementById('month').value);
+
 		document.salaryDetail.submit();
 	}
 
