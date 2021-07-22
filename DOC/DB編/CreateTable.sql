@@ -50,7 +50,7 @@ Insert into ofcfunction values
 ('A1','salarylist','&#xe60c;&emsp;給料リスト','1','/emsm/salarylist','4' ,'0',date_format(now(),'%Y%m%d') ,null),
 ('A4','welfareList','&#xe681;&emsp;福祉控除リスト','1','/emsm/welfarelist','0' ,'0',date_format(now(),'%Y%m%d') ,null),
 ('A6','workdetailli','&#xe60c;&emsp;勤怠リスト','1','/emsm/workdetaillist','3' ,'0',date_format(now(),'%Y%m%d') ,null);
-
+alter table ofcfunction add column sysType varchar(1);
 
 drop table if exists company;
 create table company(
