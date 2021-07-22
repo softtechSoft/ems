@@ -67,7 +67,7 @@ public class SalaryInfoBean {
 	// 総費用
 	private String totalFee ;
 	// 備考
-	private String remark = " ";
+	private String remark ;
 	// 削除フラグ
 	private String deleteFlg ;
 	// 作成日
