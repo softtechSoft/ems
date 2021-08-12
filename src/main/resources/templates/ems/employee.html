@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+</head>
+<body>
+ <form name="employeeInfo" th:action="@{/employeeInfo}" th:object="${employeeInfo}"   method="post">
+
+	 <table style=width:100% text-align: center;>
+
+        <tr >
+        	<!-- 社員情報 -->
+
+        	<td>社員ID</td>
+       		<td  th:text="*{employeeID}" ></td>
+		</tr>
+
+        <tr >
+       		<td>氏名</td>
+       		<td  th:text="*{employeeName}"></td>
+        </tr>
+
+		<tr >
+       		<td>住所</td>
+       		<td  th:text="*{address}"></td>
+        </tr>
+
+      <tr border="0">
+        <td></td>
+        <td>
+        <input type="button" onclick="selectData()" value="登録" />
+        </td>
+        </tr>
+
+	   </table>
+
+ </form>
+
+</body>
+</html>
