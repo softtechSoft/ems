@@ -235,4 +235,24 @@ updateEmployee varchar(6) comment'更新者',
 primary key(employeeID,startDate)
 )comment'福祉情報';
 
-
+drop table if exists expenses;
+create table expenses(
+expensesID varchar(10) not null comment'経費ID',
+accrualDate varchar(8) not null comment'発生日',
+cost int(6) not null not null comment'金額',
+tantouID varchar(6) not null comment'担当者ID',
+tantouName varchar(6) comment'担当者',
+confirmStaus varchar(1) not null comment'承認ステータス',
+confirmDate varchar(8) comment'承認日',
+confirmerID varchar(6) comment'承認者ID',
+confirmerName varchar(6) comment'承認者',
+stmtlStaus varchar(1) not null comment'精算ステータス',
+stmtlDate varchar(8) comment'精算日',
+paymentType varchar(1) not null comment'出金タイプ',
+remark varchar(30) comment'備考',
+insertID varchar(6) comment'作成者ID',
+insertDate varchar(8) comment'作成日',
+updateID varchar(6) comment'更新者ID',
+updateDate varchar(8) comment'更新日',
+primary key(expensesID)
+)comment'一般経費';
