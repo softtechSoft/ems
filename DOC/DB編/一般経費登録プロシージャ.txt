@@ -1,0 +1,56 @@
+
+DELIMITER //
+
+drop PROCEDURE updateexpenses;
+
+CREATE PROCEDURE updateexpenses(
+								 in accrualDateP VarChar(8)
+								,in costP Int
+								,in tantouNameP VarChar(6)
+								,in confirmStausP VarChar(1)  
+								,in confirmDateP VarChar(8) 
+								,in confirmerP VarChar(6) 
+								,in stmtlStausP VarChar(1) 
+								,in stmtlDateP VarChar(8) 
+								,in paymentTypeP VarChar(1) 
+								)
+
+BEGIN
+ 	
+	DECLARE employeeIDTanto VarChar(6);
+	DECLARE expID Int default 0;
+	
+	select employeeID into employeeIDTanto
+	from employee
+	where employeeName = tantouNameP;
+	
+	select count(expensesID)+1 into expID
+	from expenses;
+	
+	insert into expenses (expensesID
+						,accrualDate
+						,cost
+						,tantouID
+						,tantouName
+						,confirmStaus
+						,confirmDate
+						,confirmerName
+						,stmtlStaus
+						,stmtlDate
+						,paymentType
+						)
+	values(				expID
+						,accrualDateP
+						,costP
+						,employeeIDTanto
+						,tantouNameP
+						,confirmStausP
+						,confirmDateP
+						,confirmerP
+						,stmtlStausP
+						,stmtlDateP
+						,paymentTypeP
+	);	
+END//
+
+DELIMITER ;

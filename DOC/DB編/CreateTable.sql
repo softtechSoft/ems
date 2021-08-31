@@ -151,11 +151,12 @@ shortage int(8) comment'不足時間',
 overTimePlus int(8) comment'残業加算',
 shortageReduce int(8) comment'稼働不足減',
 transportExpense int(6) comment'交通費',
+specialAddition int(6) comment'特別加算',
 allowancePlus int(6) comment'手当加算',
 allowanceReduce int(6) comment'手当減算',
 allowanceReason  varchar(50) comment'手当理由',
-welfareSelf int(6) comment'厚生控除個人',
-welfareComp int(6) comment'厚生控除会社',
+welfarePensionSelf int(6) comment'厚生控除個人',
+welfarePensionComp int(6) comment'厚生控除会社',
 welfareBaby int(6) comment'厚生控除子育(会社)',
 eplyInsSelf int(6) comment'雇用保険個人負担',
 eplyInsComp int(6) comment'雇用保険会社負担',
@@ -165,6 +166,7 @@ withholdingTax int(6) comment'源泉控除',
 municipalTax int(6) comment'住民税控除',
 rental int(6) comment'社宅家賃控除',
 rentalMgmtFee int(6) comment'社宅共益費控除',
+specialReduce int(6) comment'特別控除',
 sum int(9) not null comment'総額',
 totalFee int(9) not null comment'総費用',
 remark varchar(200) comment'備考',
@@ -173,8 +175,8 @@ insertDate  varchar(8) comment'作成日',
 updateDate  varchar(8) comment'更新日',
 primary key(employeeID,month)
 )comment'給料情報';
-Insert into salaryinfo (employeeID,month,paymentDate,base,overTime,shortage,overTimePlus,shortageReduce,transportExpense,allowancePlus,allowanceReduce,allowanceReason,welfareSelf,welfareComp,welfareBaby,eplyInsSelf,eplyInsComp,eplyInsWithdraw,wkAcccpsIns,withholdingTax,municipalTax,rental,rentalMgmtFee,sum,totalFee,remark,deleteFlg,insertDate,updateDate)
-values ('E001','202001','20200215',60000,0,0,0,0,0,0,0,'',0,0,0,0,0,0,0,0,0,0,0,60000,60000,'','0','20210122','20210122');
+Insert into salaryinfo (employeeID,month,paymentDate,base,overTime,shortage,overTimePlus,shortageReduce,transportExpense,specialAddition,allowancePlus,allowanceReduce,allowanceReason,welfarePensionSelf,welfarePensionComp,welfareBaby,eplyInsSelf,eplyInsComp,eplyInsWithdraw,wkAcccpsIns,withholdingTax,municipalTax,rental,rentalMgmtFee,specialReduce,sum,totalFee,remark,deleteFlg,insertDate,updateDate)
+values ('E001','202001','20200215',60000,0,0,0,0,0,0,0,0,'',0,0,0,0,0,0,0,0,0,0,0,0,60000,60000,'','0','20210122','20210122');
 
 alter table ems.salaryinfo CHANGE welfareSelf welfarePensionSelf int DEFAULT 0 COMMENT '厚生年金控除個人';
 alter table ems.salaryinfo add column welfarePensionComp int DEFAULT 0 COMMENT '厚生年金控除会社' after welfarePensionSelf;
@@ -224,7 +226,18 @@ eplyInsComp int(6) comment'雇用保険会社負担',
 eplyInsWithdraw int(6) comment'雇用保拠出金（会社)',
 wkAcccpsIns int(6) comment'労災保険（会社負担のみ）',
 withholdingTax int(6) comment'源泉控除',
-municipalTax int(6) comment'住民税控除',
+municipalTax1 int(6) comment'住民税控除一月',
+municipalTax2 int(6) comment'住民税控除二月',
+municipalTax3 int(6) comment'住民税控除三月',
+municipalTax4 int(6) comment'住民税控除四月',
+municipalTax5 int(6) comment'住民税控除五月',
+municipalTax6 int(6) comment'住民税控除六月',
+municipalTax7 int(6) comment'住民税控除七月',
+municipalTax8 int(6) comment'住民税控除八月',
+municipalTax9 int(6) comment'住民税控除九月',
+municipalTax10 int(6) comment'住民税控除十月',
+municipalTax11 int(6) comment'住民税控除十一月',
+municipalTax12 int(6) comment'住民税控除十二月',
 rental int(6) comment'社宅家賃控除',
 rentalMgmtFee int(6) comment'社宅管理費控除',
 status varchar(1) not null comment'控除ステータス',
@@ -235,4 +248,24 @@ updateEmployee varchar(6) comment'更新者',
 primary key(employeeID,startDate)
 )comment'福祉情報';
 
-
+drop table if exists expenses;
+create table expenses(
+expensesID varchar(10) not null comment'経費ID',
+accrualDate varchar(8) not null comment'発生日',
+cost int(6) not null not null comment'金額',
+tantouID varchar(6) not null comment'担当者ID',
+tantouName varchar(6) comment'担当者',
+confirmStaus varchar(1) not null comment'承認ステータス',
+confirmDate varchar(8) comment'承認日',
+confirmerID varchar(6) comment'承認者ID',
+confirmerName varchar(6) comment'承認者',
+stmtlStaus varchar(1) not null comment'精算ステータス',
+stmtlDate varchar(8) comment'精算日',
+paymentType varchar(1) not null comment'出金タイプ',
+remark varchar(30) comment'備考',
+insertID varchar(6) comment'作成者ID',
+insertDate varchar(8) comment'作成日',
+updateID varchar(6) comment'更新者ID',
+updateDate varchar(8) comment'更新日',
+primary key(expensesID)
+)comment'一般経費';
