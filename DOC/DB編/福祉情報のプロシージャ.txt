@@ -33,6 +33,69 @@ BEGIN
     where welfareinfo.employeeID=employeeID1
 	and   welfareinfo.startDate=startDate1;
 
+DECLARE municipalTax1 Int DEFAULT 0;
+DECLARE municipalTax2 Int DEFAULT 0;
+DECLARE municipalTax3 Int DEFAULT 0;
+DECLARE municipalTax4 Int DEFAULT 0;
+DECLARE municipalTax5 Int DEFAULT 0;
+DECLARE municipalTax6 Int DEFAULT 0;
+DECLARE municipalTax7 Int DEFAULT 0;
+DECLARE municipalTax8 Int DEFAULT 0;
+DECLARE municipalTax9 Int DEFAULT 0;
+DECLARE municipalTax10 Int DEFAULT 0;
+DECLARE municipalTax11 Int DEFAULT 0;
+DECLARE municipalTax12 Int DEFAULT 0;
+
+if from_unixtime(startDate1,'%m') = '01'
+municipalTax1 = municipalTax1
+
+
+if from_unixtime(startDate1,'%m') = '02'
+municipalTax1 = municipalTax2
+
+
+if from_unixtime(startDate1,'%m') = '03'
+municipalTax1 = municipalTax3
+
+
+if from_unixtime(startDate1,'%m') = '04'
+municipalTax1 = municipalTax4
+
+
+if from_unixtime(startDate1,'%m') = '05'
+municipalTax1 = municipalTax5
+
+
+if from_unixtime(startDate1,'%m') = '06'
+municipalTax1 = municipalTax6
+
+
+if from_unixtime(startDate1,'%m') = '07'
+municipalTax1 = municipalTax7
+
+
+if from_unixtime(startDate1,'%m') = '08'
+municipalTax1 = municipalTax8
+
+
+if from_unixtime(startDate1,'%m') = '09'
+municipalTax1 = municipalTax9
+
+
+if from_unixtime(startDate1,'%m') = '10'
+municipalTax1 = municipalTax10
+
+
+if from_unixtime(startDate1,'%m') = '11'
+municipalTax1 = municipalTax11
+
+
+if from_unixtime(startDate1,'%m') = '12'
+municipalTax1 = municipalTax12
+
+end
+
+
 /*検索結果は１件の場合、更新*/
 IF (cnt=1) then
 	update welfareinfo set
@@ -47,7 +110,20 @@ IF (cnt=1) then
 		eplyInsWithdraw=eplyInsWithdraw1,
 		wkAcccpsIns=wkAcccpsIns1,
 		withholdingTax=withholdingTax1,
-		municipalTax=municipalTax1,
+
+		municipalTax1=municipalTax1,
+		municipalTax2=municipalTax2,
+		municipalTax3=municipalTax3,
+		municipalTax4=municipalTax4,
+		municipalTax5=municipalTax5,
+		municipalTax6=municipalTax6,
+		municipalTax7=municipalTax7,
+		municipalTax8=municipalTax8,
+		municipalTax9=municipalTax9,
+		municipalTax10=municipalTax10,
+		municipalTax11=municipalTax11,
+		municipalTax12=municipalTax12,
+
 		rental=rental1,
 		rentalMgmtFee=rentalMgmtFee1,
 		status=status1,
@@ -73,7 +149,19 @@ ELSEIF (cnt=0) then
 			,wkAcccpsIns
 			,eplyInsWithdraw
 			,withholdingTax
-			,municipalTax
+			,municipalTax1
+			,municipalTax2
+			,municipalTax3
+			,municipalTax4
+			,municipalTax5
+			,municipalTax6
+			,municipalTax7
+			,municipalTax8
+			,municipalTax9
+			,municipalTax10
+			,municipalTax11
+			,municipalTax12
+
 			,rental
 			,rentalMgmtFee
 			,status
@@ -96,6 +184,18 @@ ELSEIF (cnt=0) then
 		,wkAcccpsIns1
 		,withholdingTax1
 		,municipalTax1
+		,municipalTax2
+		,municipalTax3
+		,municipalTax4
+		,municipalTax5
+		,municipalTax6
+		,municipalTax7
+		,municipalTax8
+		,municipalTax9
+		,municipalTax10
+		,municipalTax11
+		,municipalTax12
+
 		,rental1
 		,rentalMgmtFee1
 		,status1

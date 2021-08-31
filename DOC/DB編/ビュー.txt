@@ -1,6 +1,23 @@
 
 //单表
-CREATE VIEW welfare AS SELECT *  FROM welfareinfo;
+CREATE VIEW welfare AS SELECT * ,
+	case from_unixtime(startDate,'%m')
+		when '01' then municipalTax1
+		when '02' then municipalTax2
+		when '03' then municipalTax3
+		when '04' then municipalTax4
+		when '05' then municipalTax5
+		when '06' then municipalTax6
+		when '07' then municipalTax7
+		when '08' then municipalTax8
+		when '09' then municipalTax9
+		when '10' then municipalTax10
+		when '11' then municipalTax11
+		when '12' then municipalTax12
+		ELSE 0
+	END municipalTax
+    FROM welfareinfo;
+
 
 // 2表结合
 drop view welfare;
