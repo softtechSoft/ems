@@ -98,7 +98,7 @@ function login()
         if(regularVerify(psw))
         {
             var data={user:use.value,password:psw.value};
-            ajaxSend("POST","/enter",inspectionResult,"data",JSON.stringify(data));
+            ajaxSend("POST","enter",inspectionResult,"data",JSON.stringify(data));
         }
     }
     function inspectionResult(actor)
