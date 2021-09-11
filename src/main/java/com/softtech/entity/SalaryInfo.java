@@ -13,6 +13,7 @@ public class SalaryInfo {
 	private String allowancePlus = "0";
 	private String allowanceReduce = "0";
 	private String allowanceReason = "0";
+	private String specialAddition = "0";
 	private String welfarePensionSelf = "0";
 	private String welfareHealthSelf = "0";
 	private String eplyInsSelf = "0";
@@ -29,6 +30,7 @@ public class SalaryInfo {
 	private String welfareBaby = "0";
 	private String welfarePensionComp = "0";
 	private String welfareHealthComp = "0";
+	private String specialReduce = "0";
 	private String overTime = "0";
 	private String shortage = "0";
 	private String deleteFlg = "0";
@@ -319,5 +321,33 @@ public class SalaryInfo {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = String.format("%s/%s/%s", updateDate.substring(0, 4), updateDate.substring(4, 6),
 				updateDate.substring(6, 8));
+	}
+
+	/**
+	 * @return specialAddition
+	 */
+	public String getSpecialAddition() {
+		return specialAddition;
+	}
+
+	/**
+	 * @param specialAddition セットする specialAddition
+	 */
+	public void setSpecialAddition(String specialAddition) {
+		this.specialAddition = specialAddition;
+	}
+
+	/**
+	 * @return specialReduce
+	 */
+	public String getSpecialReduce() {
+		return specialReduce;
+	}
+
+	/**
+	 * @param specialReduce セットする specialReduce
+	 */
+	public void setSpecialReduce(String specialReduce) {
+		this.specialReduce = specialReduce;
 	}
 }

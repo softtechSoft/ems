@@ -44,6 +44,10 @@ public class SalaryInfoServiceImpl implements SalaryInfoService {
 	}
 	public SalaryInfoBean tranferData(SalaryInfo salaryInfo) {
 		SalaryInfoBean salaryInfoBean = new SalaryInfoBean();
+		//名前
+		salaryInfoBean.setEmployeeName(salaryInfo.getEmployeeName());
+		//住所
+		salaryInfoBean.setAddress(salaryInfo.getAddress());
 		//支払日
 		salaryInfoBean.setPaymentDate(salaryInfo.getPaymentDate());
 		//基本給
@@ -64,6 +68,8 @@ public class SalaryInfoServiceImpl implements SalaryInfoService {
 		salaryInfoBean.setAllowanceReduce(salaryInfo.getAllowanceReduce());
 		//手当理由
 		salaryInfoBean.setAllowanceReason(salaryInfo.getAllowanceReason());
+		//特別加算
+		salaryInfoBean.setSpecialAddition(salaryInfo.getSpecialAddition() );
 		//厚生年金控除個人
 		salaryInfoBean.setWelfarePensionSelf(salaryInfo.getWelfarePensionSelf());
 		//厚生年金控除会社
@@ -90,6 +96,8 @@ public class SalaryInfoServiceImpl implements SalaryInfoService {
 		salaryInfoBean.setRental(salaryInfo.getRental());
 		//社宅共益費控除
 		salaryInfoBean.setRentalMgmtFee(salaryInfo.getRentalMgmtFee());
+		//特別控除
+		salaryInfoBean.setSpecialReduce(salaryInfo.getSpecialReduce());
 		//総額
 		salaryInfoBean.setSum(salaryInfo.getSum());
 		//総費用
@@ -102,7 +110,6 @@ public class SalaryInfoServiceImpl implements SalaryInfoService {
 		salaryInfoBean.setInsertDate(salaryInfo.getInsertDate());
 		//更新日
 		salaryInfoBean.setUpdateDate(salaryInfo.getUpdateDate());
-
 
 		return salaryInfoBean;
 	}

@@ -10,7 +10,13 @@
 	</select>
 
 	<select id="querySalaryInfo" parameterType="map" resultType="SalaryInfo">
-		select e.employeeName,e.address,s.* from salaryinfo s inner join employee e on s.employeeID = e.employeeID where s.employeeID=#{employeeID} and month=#{yearMonth}
+		select e.employeeName,
+				e.address,
+				s.*
+				from salaryinfo s
+				inner join employee e
+				on s.employeeID = e.employeeID
+				where s.employeeID=#{employeeID} and month=#{yearMonth}
 	</select>
 
 	<update id="updateSalaryInfo" parameterType="map">

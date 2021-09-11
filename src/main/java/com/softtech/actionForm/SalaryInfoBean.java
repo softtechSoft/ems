@@ -32,6 +32,8 @@ public class SalaryInfoBean {
 	private String transportExpense ;
 	// 手当加算
 	private String allowancePlus ;
+	// 特別加算
+	private String specialAddition ;
 	// 手当減算
 	private String allowanceReduce ;
 	// 手当理由
@@ -62,6 +64,8 @@ public class SalaryInfoBean {
 	private String rental ;
 	// 社宅共益費控除
 	private String rentalMgmtFee;
+	// 特別控除
+	private String specialReduce ;
 	// 総額
 	private String sum ;
 	// 総費用
@@ -469,6 +473,30 @@ public class SalaryInfoBean {
 	 */
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
+	}
+	/**
+	 * @return specialAddition
+	 */
+	public String getSpecialAddition() {
+		return specialAddition;
+	}
+	/**
+	 * @param specialAddition セットする specialAddition
+	 */
+	public void setSpecialAddition(String specialAddition) {
+		this.specialAddition = specialAddition;
+	}
+	/**
+	 * @return specialReduce
+	 */
+	public String getSpecialReduce() {
+		return specialReduce;
+	}
+	/**
+	 * @param specialReduce セットする specialReduce
+	 */
+	public void setSpecialReduce(String specialReduce) {
+		this.specialReduce = specialReduce;
 	}
 
 
