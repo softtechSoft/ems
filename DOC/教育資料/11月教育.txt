@@ -27,5 +27,18 @@
 　　DB構築　失敗
 
 
-11/3　　李
+11/3　　郭
+状況：
+　　MySQL　OK
+　　EMSM　実行　OK
+　　ソフトテク教育.xlsx　thymeleaf、SQL-MySQL、HTMLJS　勉強中。
+質問は下記記入
+　①
+　②
 
+11/4　　李
+ 予定：
+ 　　①QA対応
+ 　　②ems　Checkou　、実行
+ 　　
+ 　　
