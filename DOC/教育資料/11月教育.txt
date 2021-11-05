@@ -1,44 +1,45 @@
-11/1�@�@�s
-�T�|�[�g�̐�
+11/1　　郭
+サポート体制
 
-�׋����@
-�@�ڕW�ݒ�A�Z�p�͈͂����āA����׋�
+勉強方法
+　目標設定、技術範囲をして、自ら勉強
 
-�Z�p�͈�
-�@�@HTML/CSS/JS
-�@�@Java(�j
-�@�@JSP
-�@�@SQL�iMySQL�j
-�@�@�t���[�����[�N�FSPringBoot�i�W���Łj�A�iJSP�j
-�H���͈�
-�@�@�ڍא݌v���猋���e�X�g�܂�
-�@�@
-�@�@
-�v���W�F�N�g�Fems�Aemsm
+技術範囲
+　　HTML/CSS/JS
+　　Java(）
+　　JSP
+　　SQL（MySQL）
+　　フレームワーク：SPringBoot（標準版）、（JSP）
+工程範囲
+　　詳細設計から結合テストまで
+　　
+　　
+プロジェクト：ems、emsm
 
-11/2�@�@��
-��ƁF
-�@�J�����\�z
-�@�@Eclipse�@����
-�@�@EMSM�@�\�[�X�̃C���|�[�g����
-�@�@github�̃A�J�E���g�쐬�@����
+11/2　　黄
+作業：
+　開発環境構築
+　　Eclipse　完了
+　　EMSM　ソースのインポート完了
+　　githubのアカウント作成　完了
 
-�@���_�F
-�@�@DB�\�z�@���s
+　問題点：
+　　DB構築　失敗
 
 
-11/3�@�@�s
-�󋵁F
-�@�@MySQL�@OK
-�@�@EMSM�@���s�@OK
-�@�@�\�t�g�e�N����.xlsx�@thymeleaf�ASQL-MySQL�AHTMLJS�@�׋����B
-����͉��L�L��
-�@�@
-�@�A
+11/3　　郭
+状況：
+　　MySQL　OK
+　　EMSM　実行　OK
+　　ソフトテク教育.xlsx　thymeleaf、SQL-MySQL、HTMLJS　勉強中。
+質問は下記記入
+　①
+　②
 
-11/4�@�@��
- �\��F
- �@�@�@QA�Ή�
- �@�@�Aems�@Checkou�@�A���s
- �@�@
- �@�@
+11/4　　李
+ 予定：
+ 　　①QA対応
+ 　　②ems　Checkou　、実行
+ 　　
+ 　　
+11/5　　郭
