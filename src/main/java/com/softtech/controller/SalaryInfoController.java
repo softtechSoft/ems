@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.softtech.actionForm.SalaryInfoBean;
 import com.softtech.entity.SalaryInfo;
 import com.softtech.service.SalaryInfoServiceImpl;
+import com.softtech.util.DateUtil;
 
 /**
  * 概要：給料明細機能
@@ -63,7 +64,8 @@ public class SalaryInfoController {
 
 		//画面表示するため設定する
 		SalaryInfoBean salaryInfoBean = salaryInfoService.tranferData(salary);
-
+		//対象年月を画面へ戻す。
+		salaryInfoBean.setMonth(DateUtil.chgYMToDate(salaryInfo.getMonth()));
 	    model.addAttribute("salarydata", salaryInfoBean);
 
 		return "/ems/salarydetail";
