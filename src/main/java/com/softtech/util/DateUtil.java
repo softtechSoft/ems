@@ -42,7 +42,21 @@ public class DateUtil {
 		// YYYY/MM→yyyymmに変換
 		return month.replace("/", "");
 	}
-
+	/**
+	 * 機能：YYYY/MMからYYYMMに変更
+	 *
+	 * @param 年月
+	 * @return 変更後年月
+	 * @exception なし
+	 * @author 馬@ソフトテク
+	 */
+	public static String chgYMToDate(String month) {
+		// yyyymm→YYYY/MMに変換
+		if (month.length() < 4 ) return month;
+		String monthDate="";
+		monthDate = month.substring(0, 4) + "/" + month.substring(4);
+		return monthDate;
+	}
 	/**
 	 * 機能：float→Stringに変換
 	 *
