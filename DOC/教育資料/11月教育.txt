@@ -109,3 +109,17 @@ test111
 　　　　　必要な知識
 			Junit
 　　６）結合テスト　　　　　　　　　　未
+　　
+　　
+12/3 李
+　　１）Service経由、Mybatisも利用している。（要強化？）
+　　２）QA
+　　　①画面
+　　　　パスワード、メールアドレス項目を削除
+　　　②Java
+　　　　String（yyyyMMdd）　→　Date変更　Fomat設定。yyyy/MM/dd　→　yyyyMMdd
+　　　　★変更元のStringにより設定。
+　　　　　Date→Stringの変更も理解するのは必要
+　　３）「変更」ボタン機能を着手。
+　　　
+
