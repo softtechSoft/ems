@@ -122,4 +122,8 @@ test111
 　　　　　Date→Stringの変更も理解するのは必要
 　　３）「変更」ボタン機能を着手。
 　　　
+12/7 郭
+　　　SpringBootのValidationチェックを研修中。
+
+
 
