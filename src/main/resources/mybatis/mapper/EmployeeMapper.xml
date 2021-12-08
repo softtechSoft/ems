@@ -5,6 +5,10 @@
 
 <!--namespace=Dao/Mapper-->
 <mapper namespace="com.softtech.mapper.EmployeeMapper">
+	<select id="queryEmployeeAll" parameterType="string" resultType="Employee">
+		select * from ems.employee where
+		employeeID = #{employeeID}
+	</select>
 	<select id="queryEmployee" parameterType="string" resultType="Employee">
 		select * from ems.employee where status = '0'
 		<if test = "email!=null">

@@ -1,0 +1,28 @@
+th {
+   text-align: left;20px; /* 文章を左寄せする(※) */
+   font-weight: bold;
+	text-indent: 1em;
+
+
+}
+.wapper
+{
+    width: 100%;
+    min-width: 310px;
+    max-width: 400px;
+    height:520px;
+    margin: auto;
+    margin-top: 10px;
+    background-color: bisque;
+    font-size: 16px;
+}
+.enter
+{
+    width: 100px;
+    height: 27px;
+    background-color: #f8a407;
+    margin-left: 65%;
+    margin-bottom: 10px;
+    border: 0;
+    outline: none;
+}

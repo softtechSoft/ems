@@ -14,6 +14,8 @@ public interface EmployeeMapper {
 
 	Employee queryEmployee(@Param("email") String email);
 
+	Employee queryEmployeeAll(@Param("employeeID") String employeeID);
+
 	// ログイン
 	Employee login(Employee em);
 

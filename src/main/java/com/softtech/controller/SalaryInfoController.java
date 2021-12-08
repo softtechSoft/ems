@@ -56,6 +56,7 @@ public class SalaryInfoController {
 		Map<String, String> sqlParam = new HashMap<>();
 
 		sqlParam.put("yearMonth", salaryInfo.getMonth());
+		sqlParam.put("employeeName", salaryInfo.getMonth());
 		sqlParam.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
 		SalaryInfo salary = salaryInfoService.querySalaryInfo(sqlParam);
 		if (salary == null) {

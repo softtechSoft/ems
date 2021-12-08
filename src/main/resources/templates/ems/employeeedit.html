@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" th:href="@{/src/public/public.css}">
+<link rel="stylesheet" th:href="@{/src/ems/css/employeeedit.css}">
+<link rel="stylesheet" th:href="@{/src/main/main.css}">
+<script type="text/javascript" charset="UTF-8" th:src="@{/src/ems/js/transpirt.js}"></script>
+
+</head>
+<body th:onload="onload([[${state}]])">
+	<header>
+		<h3>社員情報変更</h3>
+
+	</header>
+
+	<div id="boder" class="boder">
+		<form class="wapper" method="POST" th:action="@{/btn-employeeEdit}" th:object="${employeeEditBean}" enctype="multipart/form-data">
+
+			<ul style="text-align:center; color:red;">
+				<li th:each="error : ${#fields.detailedErrors()}"><span th:text="${error.message}">Error message</span></li>
+			</ul>
+
+			<!-- <div style="text-align:center; color:red;" th:if="${employeeNameErr != ''}"><span th:text="${employeeNameErr}"></span></div>
+			<div style="text-align:center; color:red;" th:if="${joinedDateStringErr != ''}"><span th:text="${joinedDateStringErr}"></span></div> -->
+
+			<table>
+				<tr>
+					<th>社員ID</th>
+					<td>
+						<span class="name" th:text="${employeeEditBean.employeeID}"></span>
+						<input type="hidden" name="employeeID" th:value="${employeeEditBean.employeeID}">
+					</td>
+
+				</tr>
+
+				<tr>
+					<th class="subject">氏名</th>
+					<td>
+						<input type="text" id="employeeName" class="subject" name="employeeName" title="氏名" th:value="${employeeEditBean.employeeName}" />
+					</td>
+				</tr>
+
+				<tr>
+					<th>性別</th>
+					<td>
+						<input type="radio" name="sex" th:checked="${employeeEditBean.sex == '1'}" value="1" />
+						男
+						<input type="radio" name="sex" th:checked="${employeeEditBean.sex == '0'}" value="0" />
+						女
+					</td>
+				</tr>
+
+				<tr>
+					<th>社員タイプ</th>
+					<td>
+						<select name="example1">
+							<option value="サンプル1">選択</option>
+							<option value="サンプル2">正社員</option>
+							<option value="サンプル3">契約社員</option>
+							<option value="サンプル4">個人事業</option>
+							<option value="サンプル5">そのた</option>
+						</select>
+					</td>
+				</tr>
+
+
+				<tr>
+					<th>生年月日</th>
+					<td>
+						<input id="birthday" class="form-control" name="birthday" type="date" th:value="${employeeEditBean.birthday}" />
+					</td>
+				</tr>
+
+
+
+
+				<tr>
+					<th>個人番号</th>
+					<td>
+						<input id="employeeName" class="" name="" type="text" maxlength="7" title="" />
+					</td>
+				</tr>
+
+
+				<tr>
+					<th>年齢</th>
+					<td>
+						<input id="age" class="" name="age" type="text" maxlength="7" th:value="${employeeEditBean.age}" />
+					</td>
+				</tr>
+
+
+				<tr>
+					<th>入社年月日</th>
+					<td>
+						<input id="joinedDateString" class="" name="joinedDateString" type="date" th:value="${#dates.format(employeeEditBean.joinedDate,'yyyy-MM-dd')}" />
+					</td>
+				</tr>
+
+
+				<tr>
+					<th>所属部門</th>
+					<td>
+						<select name="example1">
+							<option value="サンプル1">選択</option>
+							<option value="サンプル2">部門1</option>
+							<option value="サンプル3">部門2</option>
+							<option value="サンプル4">部門3</option>
+							<option value="サンプル5">そのた</option>
+						</select>
+					</td>
+				</tr>
+
+
+				<tr>
+					<th>社齢</th>
+					<td>
+						<input id="employeeName" class="" name="joinedTime" type="text" maxlength="7" title="" th:value="${employeeEditBean.joinedTime}" />
+					</td>
+				</tr>
+
+
+				<tr>
+					<th>郵便番号</th>
+					<td>
+						<input id="employeeName" class="" name="postCode" type="text" maxlength="7" title="" th:value="${employeeEditBean.postCode}" />
+					</td>
+				</tr>
+
+
+				<tr>
+					<th>住所</th>
+					<td>
+						<input id="employeeName" class="" name="address" type="text" maxlength="7" title="" th:value="${employeeEditBean.address}" />
+					</td>
+				</tr>
+
+
+				<tr>
+					<th>電話番号</th>
+					<td>
+						<input id="employeeName" class="" name="phoneNumber" type="text" maxlength="7" title="" th:value="${employeeEditBean.phoneNumber}" />
+					</td>
+				</tr>
+
+
+				<tr>
+					<th>前回更新日</th>
+					<td>
+						<span class="name" th:text="${employeeEditBean.updateDate}"></span>
+					</td>
+
+				</tr>
+
+			</table>
+
+
+
+
+
+			<input class="enter" type="submit" value="更新">
+		</form>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
