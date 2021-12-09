@@ -134,4 +134,6 @@ test111
 　　　年齢と社齢はjavascriptで自動計算。
 　　　DB更新の処理実装。
 
-
+12/9黄
+　　　入社年月日に修正、yyyyMMdd→yyyy/MM/dd。
+　　　年齢と社齢はjavascriptで自動計算完了しました。
