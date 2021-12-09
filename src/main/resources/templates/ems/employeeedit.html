@@ -8,6 +8,7 @@
 <link rel="stylesheet" th:href="@{/src/ems/css/employeeedit.css}">
 <link rel="stylesheet" th:href="@{/src/main/main.css}">
 <script type="text/javascript" charset="UTF-8" th:src="@{/src/ems/js/transpirt.js}"></script>
+<script type="text/javascript" th:src="@{/src/ems/js/employeeedit.js}"></script>
 
 </head>
 <body th:onload="onload([[${state}]])">
@@ -19,7 +20,7 @@
 	<div id="boder" class="boder">
 		<form class="wapper" method="POST" th:action="@{/btn-employeeEdit}" th:object="${employeeEditBean}" enctype="multipart/form-data">
 
-			<ul style="text-align:center; color:red;">
+			<ul style="text-align: center; color: red;">
 				<li th:each="error : ${#fields.detailedErrors()}"><span th:text="${error.message}">Error message</span></li>
 			</ul>
 
@@ -88,7 +89,8 @@
 				<tr>
 					<th>年齢</th>
 					<td>
-						<input id="age" class="" name="age" type="text" maxlength="7" th:value="${employeeEditBean.age}" />
+						<span id="age"></span>
+						<input type="hidden" name="age">
 					</td>
 				</tr>
 
@@ -118,7 +120,8 @@
 				<tr>
 					<th>社齢</th>
 					<td>
-						<input id="employeeName" class="" name="joinedTime" type="text" maxlength="7" title="" th:value="${employeeEditBean.joinedTime}" />
+						<span id="joinedTime" class=""></span>
+						<input type="hidden" name="joinedTime">
 					</td>
 				</tr>
 

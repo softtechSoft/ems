@@ -30,14 +30,17 @@ public class EmployeeEditBean {
 	// 性別
 	private String sex;
 	//生年月日
+	@NotEmpty(message="生年月日を入力してください。")
 
 	private String birthday;
 	//年齢
     private String age;
+
     //入社年月日
     private Date joinedDate;
 
     //入社年月日
+    @NotEmpty(message="入社年月日を入力してください。")
     private String joinedDateString;
 
     //社齢

@@ -49,7 +49,7 @@ public class EmployeeEditController {
 
 		employeeEditBean.setBirthday(birthday);
 		employeeEditBean.setAge(employee.getAge());
-		/*employeeEditBean.setJoinedDate(employee.getJoinedDate());*/
+		/*employeeEditBean.setjoinedDateString(employee.getJoinedDate());*/
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
 		Date date = sdFormat.parse(employee.getJoinedDate());
@@ -88,6 +88,10 @@ public class EmployeeEditController {
 					Date date = sdFormat.parse(employeeEditBean.getJoinedDateString());
 					employeeEditBean.setJoinedDate(date);
 				}*/
+
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
+		Date date = sdFormat.parse(employeeEditBean.getJoinedDateString());
+		employeeEditBean.setJoinedDate(date);
 
 		model.addAttribute("employeeEditBean", employeeEditBean);
 
