@@ -2,7 +2,10 @@ package com.softtech.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.softtech.actionForm.EmployeeEditBean;
 import com.softtech.entity.Employee;
-import com.softtech.service.EmployeeEditServicelmpl;
+import com.softtech.service.EmployeeEditService;
 
 /**
  * 概要：社員情報変更機能
@@ -30,12 +33,12 @@ import com.softtech.service.EmployeeEditServicelmpl;
 public class EmployeeEditController {
 
 	@Autowired
-	EmployeeEditServicelmpl employeeEditServicelmpl;
+	EmployeeEditService employeeEditService;
 
 	@RequestMapping("/employeeedit")
 	public String employeeEdit(Model model, HttpSession session) throws ParseException {
 
-		Employee employee = employeeEditServicelmpl.queryEmployeeAll((String) session.getAttribute("userEmoplyeeID"));
+		Employee employee = employeeEditService.queryEmployeeAll((String) session.getAttribute("userEmoplyeeID"));
 
 		EmployeeEditBean employeeEditBean = new EmployeeEditBean();
 
@@ -46,14 +49,13 @@ public class EmployeeEditController {
 		String birthday = employee.getBirthday().substring(0, 4)
 				+ "-" + employee.getBirthday().substring(4, 6)
 				+ "-" + employee.getBirthday().substring(6);
-
 		employeeEditBean.setBirthday(birthday);
 		employeeEditBean.setAge(employee.getAge());
-		/*employeeEditBean.setjoinedDateString(employee.getJoinedDate());*/
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdFormat.parse(employee.getJoinedDate());
-		employeeEditBean.setJoinedDate(date);
+		employeeEditBean.setJoinedDateString(sdFormat2.format(date));
 
 		employeeEditBean.setJoinedTime(employee.getJoinedTime());
 		employeeEditBean.setPostCode(employee.getPostCode());
@@ -99,8 +101,40 @@ public class EmployeeEditController {
 			return "/ems/employeeedit";
 		}
 
+		// DB更新
+		Map<String, String> map = new HashMap<>();
+		map.put("employeeID", employeeEditBean.getEmployeeID());
+		map.put("employeeName", employeeEditBean.getEmployeeName());
+		map.put("sex", employeeEditBean.getSex());
+		map.put("epType", employeeEditBean.getEpType());
+
+		Date birthday_date = sdFormat.parse(employeeEditBean.getBirthday());
+		map.put("birthday", sdFormat.format(birthday_date));
+
+		map.put("age", employeeEditBean.getAge());
+
+		Date joinedDate_date = sdFormat.parse(employeeEditBean.getJoinedDateString());
+		map.put("joinedDate", sdFormat.format(joinedDate_date));
+
+		map.put("joinedTime", employeeEditBean.getJoinedTime());
+		map.put("postCode", employeeEditBean.getPostCode());
+		map.put("address", employeeEditBean.getAddress());
+		map.put("phoneNumber", employeeEditBean.getPhoneNumber());
 
 
+		Calendar cl = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String str = sdf.format(cl.getTime());
+		map.put("updateDate", str);
+
+
+		int num = employeeEditService.updateEmployeeAll(map);
+
+		if (num == 1) {
+			model.addAttribute("updateMsg", "社員情報を更新しました。");
+		} else {
+			model.addAttribute("updateMsg", "社員情報の更新に失敗しました。");
+		}
 
 		return "/ems/employeeedit";
 

@@ -1,5 +1,7 @@
 package com.softtech.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,11 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	@Override
 	public Employee queryEmployeeAll(String employeeID) {
 		return employeeMapper.queryEmployeeAll(employeeID);
+	}
+
+	@Override
+	public int updateEmployeeAll(Map<String, String> map) {
+		return employeeMapper.updateEmployeeAll(map);
 	}
 
 }

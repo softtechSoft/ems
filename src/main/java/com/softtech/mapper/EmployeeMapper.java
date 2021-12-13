@@ -23,5 +23,7 @@ public interface EmployeeMapper {
 
 	int updateEmployee(Map<String, String> map);
 
+	int updateEmployeeAll(Map<String, String> map);
+
 	int updateStatus(Map<String, String> map);
 }

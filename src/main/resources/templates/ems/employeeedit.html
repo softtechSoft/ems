@@ -24,6 +24,10 @@
 				<li th:each="error : ${#fields.detailedErrors()}"><span th:text="${error.message}">Error message</span></li>
 			</ul>
 
+			<div style="text-align: center; color: red;">
+				<span th:text="${updateMsg}"></span>
+			</div>
+
 			<!-- <div style="text-align:center; color:red;" th:if="${employeeNameErr != ''}"><span th:text="${employeeNameErr}"></span></div>
 			<div style="text-align:center; color:red;" th:if="${joinedDateStringErr != ''}"><span th:text="${joinedDateStringErr}"></span></div> -->
 
@@ -57,12 +61,12 @@
 				<tr>
 					<th>社員タイプ</th>
 					<td>
-						<select name="example1">
-							<option value="サンプル1">選択</option>
-							<option value="サンプル2">正社員</option>
-							<option value="サンプル3">契約社員</option>
-							<option value="サンプル4">個人事業</option>
-							<option value="サンプル5">そのた</option>
+						<select name="epType">
+							<option value="">選択</option>
+							<option value="0">正社員</option>
+							<option value="1">契約社員</option>
+							<option value="2">個人事業</option>
+							<option value="3">その他</option>
 						</select>
 					</td>
 				</tr>
@@ -81,7 +85,7 @@
 				<tr>
 					<th>個人番号</th>
 					<td>
-						<input id="employeeName" class="" name="" type="text" maxlength="7" title="" />
+						<input id="employeeName" class="" name="" type="text" title="" />
 					</td>
 				</tr>
 
@@ -98,7 +102,7 @@
 				<tr>
 					<th>入社年月日</th>
 					<td>
-						<input id="joinedDateString" class="" name="joinedDateString" type="date" th:value="${#dates.format(employeeEditBean.joinedDate,'yyyy-MM-dd')}" />
+						<input id="joinedDateString" class="" name="joinedDateString" type="date" th:value="${employeeEditBean.joinedDateString}" />
 					</td>
 				</tr>
 
@@ -129,7 +133,7 @@
 				<tr>
 					<th>郵便番号</th>
 					<td>
-						<input id="employeeName" class="" name="postCode" type="text" maxlength="7" title="" th:value="${employeeEditBean.postCode}" />
+						<input id="employeeName" class="" name="postCode" type="text" title="" th:value="${employeeEditBean.postCode}" />
 					</td>
 				</tr>
 
@@ -137,7 +141,7 @@
 				<tr>
 					<th>住所</th>
 					<td>
-						<input id="employeeName" class="" name="address" type="text" maxlength="7" title="" th:value="${employeeEditBean.address}" />
+						<input id="employeeName" class="" name="address" type="text" title="" th:value="${employeeEditBean.address}" />
 					</td>
 				</tr>
 
@@ -145,7 +149,7 @@
 				<tr>
 					<th>電話番号</th>
 					<td>
-						<input id="employeeName" class="" name="phoneNumber" type="text" maxlength="7" title="" th:value="${employeeEditBean.phoneNumber}" />
+						<input id="employeeName" class="" name="phoneNumber" type="text" title="" th:value="${employeeEditBean.phoneNumber}" />
 					</td>
 				</tr>
 

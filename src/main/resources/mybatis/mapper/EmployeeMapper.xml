@@ -35,6 +35,13 @@
 		authority = #{authority},mailAdress = #{mailAdress} where employeeID =#{employeeID}
 	</update>
 
+  	<update id="updateEmployeeAll" parameterType="map">
+		update ems.employee set employeeName = #{employeeName},
+		sex = #{sex},birthday = #{birthday},age = #{age},joinedDate = #{joinedDate},
+		joinedTime = #{joinedTime},postCode = #{postCode},address = #{address},phoneNumber = #{phoneNumber},
+		updateDate = #{updateDate} where employeeID =#{employeeID}
+	</update>
+
 	<update id="updateStatus" parameterType="map">
 		update ems.employee set status = '9' where employeeID =#{employeeID}
 	</update>
