@@ -137,3 +137,19 @@ test111
 12/9黄
 　　　入社年月日に修正、yyyyMMdd→yyyy/MM/dd。
 　　　年齢と社齢はjavascriptで自動計算完了しました。
+　　　
+12/13 ソースレビュー
+　　emploeeedit.html
+　　 ①ダミーの改行をなくす
+　　 ②更新完了メッセージの画面表示は、黒字にする。
+　　 
+　　EmployeeEditController.java
+　　　①コメント？
+　　　　参照：DOC/要件定義/命名およびコメント規則.txt
+　　　
+　　　②Line43からLine64のロジックは、Service層へ移す。
+　　　
+　　　③employeeEditSubmit関数にも、Service層へ移動すべきものをService層へ移動。
+　　　
+　　　④Line94～Line96のような共通処理は、Utilにて用意する。
+　　　
