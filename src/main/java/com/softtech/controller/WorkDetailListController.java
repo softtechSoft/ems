@@ -29,7 +29,7 @@ public class WorkDetailListController {
 
 	@Autowired
 	WorkDetailListService workDetailListService;
-	@RequestMapping("/workdetaillist")
+	@RequestMapping("/workinfolist")
 	public String toWorkDetailList(Model model) {
 
         //現在年月取得
