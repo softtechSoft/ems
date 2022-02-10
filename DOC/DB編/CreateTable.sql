@@ -258,7 +258,6 @@ create table expenses(
 expensesID varchar(10) not null comment'経費ID',
 accrualDate varchar(8) not null comment'発生日',
 cost int(6) not null not null comment'金額',
-tantouID varchar(6) not null comment'担当者ID',
 tantouName varchar(6) comment'担当者',
 confirmStaus varchar(1) not null comment'承認ステータス',
 confirmDate varchar(8) comment'承認日',
