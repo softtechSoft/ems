@@ -7,61 +7,48 @@
 
 </head>
 <body>
-	<header>
-		<h3 align="center">2022</h3>
-    </header>
+
  <form name="worksheet1" th:action="@{/salarylist}" th:object="${selectjyoken}" method="post">
 	<p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" />
-  	 <tr>
-  	 <table>
-	 <th> <button type="submit">前年度</button></th>
 
-
-	 <th align="900"> <button type="submit" class="btn btn-primary">次年度</button></th>
-	 </tr>
+  	 <table style="width:1500px">
+  	 	<tr>
+	 		<td> <button type="submit">前年度</button></td>
+	 		<td th:text="*{year}"> </td>
+			<td> <button type="submit" class="btn btn-primary">次年度</button></td>
+	 	</tr>
       </table>
-
-
-
-
-
-
-   </form>
-
-
 
 
 
  <table border="1"class="salrylist-table">
      <tr>
-
         <th width="200">年月</th>
         <th width="400">基本給</th>
         <th width="400">残業代</th>
-       <th width="400">交通費</th>
-       <th width="300">控除（社会）</th>
+        <th width="400">交通費</th>
+        <th width="300">控除（社会）</th>
         <th width="300">控除(源泉)</th>
         <th width="300">控除(住民税)</th>
         <th width="500">総額</th>
         <th width="300"></th>
         <th width="300"></th>
-
      </tr>
+<!-- 1行目 -->
      <tr>
-
       <td>2022/1</td>
       <td align="right">210000</td>
       <td  align="right">20000</td>
-       <td  align="right">10000</td>
-        <td  align="right">10000</td>
-         <td  align="right">7000</td>
-          <td  align="right">8000</td>
-           <td  align="right">225000</td>
-           <td></td>
-           <td align="right"> <button type="submit">明細</button></td>
+      <td  align="right">10000</td>
+      <td  align="right">10000</td>
+      <td  align="right">7000</td>
+      <td  align="right">8000</td>
+      <td  align="right">225000</td>
+      <td></td>
+      <td align="right"> <button type="submit">明細</button></td>
     </tr>
+<!-- ２行目 -->
    <tr>
-
    		<td>2022/2</td>
          <td align="right">210000</td>
           <td  align="right">0</td>
@@ -73,19 +60,19 @@
           <td></td>
           <td align="right"> <button type="button" class="btn btn-primary">明細</button></td>
           </tr>
-          <tr>
-
-         	  <td>2022/3<td>
-              <td></td>
-         	 <td></td>
-         	 <td></td>
-       		 <td></td>
-         	<td></td>
-         	 <td></td>
-         	 <td></td>
-         	 <td></td>
-         	 <td></td>
-         	 </tr>
+<!-- ３行目 -->
+    <tr>
+         <td>2022/3<td>
+         <td></td>
+         <td></td>
+         <td></td>
+       	 <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+     </tr>
         <tr>
          	  <td>2022/4<td>
               <td></td>
@@ -203,7 +190,7 @@
          	 </table>
 
 
-
+ </form>
 
 
   </body>

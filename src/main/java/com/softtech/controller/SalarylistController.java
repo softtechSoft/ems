@@ -1,7 +1,5 @@
 package com.softtech.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -14,10 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.softtech.actionForm.SalarySelectJyoken;
-import com.softtech.entity.SalaryInfo;
 import com.softtech.service.SalaryListService;
 import com.softtech.util.DateUtil;
-import com.softtech.util.FileUtil;
 /**
  * 概要：給料リスト機能
  *
@@ -39,13 +35,17 @@ public class SalarylistController {
 	public String Salarylist(Model model) {
 
 		//現在年月取得
-		String month = DateUtil.getNowMonth();
-		// DBから給料情報を取得
-		List<SalaryInfo> sl= salaryListService.querySalaryList(month);
-		model.addAttribute("salarydate",sl);
+//		String month = DateUtil.getNowMonth();
+//		// DBから給料情報を取得
+//		List<SalaryInfo> sl= salaryListService.querySalaryList(month);
+//		model.addAttribute("salarydate",sl);
+
+		//現在年取得
+		String year = DateUtil.getNowYear();
 		//検索条件初期化
 		SalarySelectJyoken salarySelectJyoken = new SalarySelectJyoken();
-		salarySelectJyoken.setMonth(month);
+		salarySelectJyoken.setYear(year);
+		//画面へデータを渡す
 		model.addAttribute("selectjyoken",salarySelectJyoken);
 
 		return "/ems/salarylist";
@@ -54,31 +54,31 @@ public class SalarylistController {
 	@PostMapping("/salarylist")
 	public String salarylistSubmit(HttpServletResponse response,@Valid @ModelAttribute("selectjyoken") SalarySelectJyoken selectjyoken,BindingResult bindingResult,Model model) {
 
-		// NotNullの入力した年月をチェック。
-		 if (bindingResult.hasErrors()) {
-			return "/ems/salarylist";
-		 }
-
-		// 入力した年月を持っち、DBから給料情報を取得
-	     List<SalaryInfo> sl2 = salaryListService.querySalaryList(selectjyoken.getMonth());
-
-		 // データダウンロード場合
-		 if(selectjyoken.getDownloadFlg()){
-			 FileUtil ft = new FileUtil();
-			 boolean rtn = ft.salaryDownload(response,sl2);
-			 if(!rtn) {
-				 // エラーメッセージを設定して、画面表示
-			 }else {
-				 //画面表示用データを設定する。
-				 model.addAttribute("selectjyoken", selectjyoken);
-			 }
-
-		 // 検索する場合
-		 } else {
-
-			 model.addAttribute("selectjyoken",selectjyoken);
-			 model.addAttribute("salarydate", sl2);
-		 }
+//		// NotNullの入力した年月をチェック。
+//		 if (bindingResult.hasErrors()) {
+//			return "/ems/salarylist";
+//		 }
+//
+//		// 入力した年月を持っち、DBから給料情報を取得
+//	     List<SalaryInfo> sl2 = salaryListService.querySalaryList(selectjyoken.getMonth());
+//
+//		 // データダウンロード場合
+//		 if(selectjyoken.getDownloadFlg()){
+//			 FileUtil ft = new FileUtil();
+//			 boolean rtn = ft.salaryDownload(response,sl2);
+//			 if(!rtn) {
+//				 // エラーメッセージを設定して、画面表示
+//			 }else {
+//				 //画面表示用データを設定する。
+//				 model.addAttribute("selectjyoken", selectjyoken);
+//			 }
+//
+//		 // 検索する場合
+//		 } else {
+//
+//			 model.addAttribute("selectjyoken",selectjyoken);
+//			 model.addAttribute("salarydate", sl2);
+//		 }
 		 return "/ems/salarylist";
 	}
 

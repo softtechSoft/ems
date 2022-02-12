@@ -15,6 +15,23 @@ import java.util.Date;
 public class DateUtil {
 
 	/**
+	 * 機能：現在年度を生成する
+	 *
+	 * @return 現在年度
+	 * @exception なし
+	 * @author @ソフトテク
+	 */
+	public static String getNowYear() {
+		// YYYY/MM→yyyymmに変換
+		// 現在月生成
+		String b;
+		Date dNow = new Date( );
+		SimpleDateFormat a = new SimpleDateFormat ("yyyy");
+		 b = a.format(dNow);
+		return b;
+	}
+
+	/**
 	 * 機能：現在月を生成する
 	 *
 	 * @return 現在月
