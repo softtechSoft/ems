@@ -13,6 +13,13 @@ public class WorkSelectJyoken {
 	//対象年月
 	@Size(min=2, max=30,message="月を入力してください。例：202104")
     private String month;
+
+	//対象開始年月
+	 private String fromMonth;
+
+	//対象終了年月
+	private String toMonth;
+
 	//ダウンロード
 	private boolean downloadFlg;
 
@@ -42,6 +49,34 @@ public class WorkSelectJyoken {
 	 */
 	public void setDownloadFlg(boolean downloadFlg) {
 		this.downloadFlg = downloadFlg;
+	}
+
+	/**
+	 * @return fromMonth
+	 */
+	public String getFromMonth() {
+		return fromMonth;
+	}
+
+	/**
+	 * @param fromMonth セットする fromMonth
+	 */
+	public void setFromMonth(String fromMonth) {
+		this.fromMonth = fromMonth;
+	}
+
+	/**
+	 * @return toMonth
+	 */
+	public String getToMonth() {
+		return toMonth;
+	}
+
+	/**
+	 * @param toMonth セットする toMonth
+	 */
+	public void setToMonth(String toMonth) {
+		this.toMonth = toMonth;
 	}
 
 }

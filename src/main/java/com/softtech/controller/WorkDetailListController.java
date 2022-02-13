@@ -1,5 +1,6 @@
 package com.softtech.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.softtech.actionForm.WorkDetail;
 import com.softtech.actionForm.WorkSelectJyoken;
 import com.softtech.service.WorkDetailListService;
-import com.softtech.util.DateUtil;
 import com.softtech.util.FileUtil;
 /**
  * 概要：勤怠リスト機能
@@ -32,17 +32,22 @@ public class WorkDetailListController {
 	@RequestMapping("/workinfolist")
 	public String toWorkDetailList(Model model) {
 
-        //現在年月取得
-		String month=DateUtil.getNowMonth();
-		// DBから勤怠情報を取得
-		List<WorkDetail> workDetailList = workDetailListService.queryWorkDetail(month);
-
-		model.addAttribute("timereport", workDetailList);
+//        //現在年月取得
+//		String month=DateUtil.getNowMonth();
+//		// DBから勤怠情報を取得
+//		List<WorkDetail> workDetailList = workDetailListService.queryWorkDetail(month);
+//
+//		model.addAttribute("timereport", workDetailList);
 
 		//検索条件初期化
 		WorkSelectJyoken workSelectJyoken= new WorkSelectJyoken();
-		workSelectJyoken.setMonth(month);
+		workSelectJyoken.setFromMonth("2022/01");
+		workSelectJyoken.setToMonth("2022/02");
+		workSelectJyoken.setDownloadFlg(false);
 		model.addAttribute("selectjyolken", workSelectJyoken);
+
+		List<WorkDetail> workDetailList1 = new ArrayList<WorkDetail>();
+		 model.addAttribute("timereport", workDetailList1);
 
 		return "/ems/workdetaillist";
 	}

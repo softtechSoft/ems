@@ -24,14 +24,25 @@
  <!-- 対象年月 -->
 
  <form name="workSheet" th:action="@{/WorkDetail}" th:object="${selectjyolken}"   method="post">
-	 <span>対象年月: <input type="text" th:field="*{month}" /></span>
-
-    <span><input type="button" onclick="selectData()" value="検索" /></span>
-
+	<!-- エラーメッセー -->
      <p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" />
+     <!-- 検索条件 -->
+	<table style="width:1500px">
+  	 	<tr>
+	 		<td> <span>開始年月: <input type="text" th:field="*{fromMonth}" /></span></td>
+	 		<td> ～ </td>
+			<td> <span>終了年月: <input type="text" th:field="*{toMonth}" /></span></td>
+			<td> <span><input type="button" onclick="selectData()" value="検索" /></span></td>
 
-      <span><input type="hidden" id="downloadFlg" th:field="*{downloadFlg}" /></span>
-     <span><input type="button" onclick="downLodData()" value="ダウンロード" /></span>
+			<td>
+
+			<span><input type="hidden" id="downloadFlg" th:field="*{downloadFlg}" /></span>
+
+     			<span><input type="button" onclick="downLodData()" value="CSVダウンロード" /></span>
+			</td>
+	 	</tr>
+    </table>
+
  </form>
 
 	<!-- 勤怠リスト -->
@@ -53,10 +64,7 @@
     	<td th:text="${workline.transportExpense}">定期券額（円)</td>
     	<td th:text="${workline.transport}">他の交通費(円）</td>
 	  </tr>
-
 	</table>
-
-
 
 </body>
 </html>
