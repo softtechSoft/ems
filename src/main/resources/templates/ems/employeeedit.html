@@ -14,22 +14,18 @@
 <body th:onload="onload([[${state}]])">
 	<header>
 		<h3>社員情報変更</h3>
-
 	</header>
-
 	<div id="boder" class="boder">
 		<form class="wapper" method="POST" th:action="@{/btn-employeeEdit}" th:object="${employeeEditBean}" enctype="multipart/form-data">
-
+			<!-- エラーメッセージ -->
 			<ul style="text-align: center; color: red;">
 				<li th:each="error : ${#fields.detailedErrors()}"><span th:text="${error.message}">Error message</span></li>
 			</ul>
-
 			<div style="text-align: center; color: red;">
 				<span th:text="${updateMsg}"></span>
 			</div>
 
-			<!-- <div style="text-align:center; color:red;" th:if="${employeeNameErr != ''}"><span th:text="${employeeNameErr}"></span></div>
-			<div style="text-align:center; color:red;" th:if="${joinedDateStringErr != ''}"><span th:text="${joinedDateStringErr}"></span></div> -->
+			<!-- 社員情報 -->
 
 			<table>
 				<tr>
@@ -38,18 +34,15 @@
 						<span class="name" th:text="${employeeEditBean.employeeID}"></span>
 						<input type="hidden" name="employeeID" th:value="${employeeEditBean.employeeID}">
 					</td>
-
 				</tr>
-
 				<tr>
-					<th class="subject">氏名</th>
+					<th class="subject">氏　名</th>
 					<td>
 						<input type="text" id="employeeName" class="subject" name="employeeName" title="氏名" th:value="${employeeEditBean.employeeName}" />
 					</td>
 				</tr>
-
 				<tr>
-					<th>性別</th>
+					<th>性　別</th>
 					<td>
 						<input type="radio" name="sex" th:checked="${employeeEditBean.sex == '1'}" value="1" />
 						男
@@ -57,7 +50,6 @@
 						女
 					</td>
 				</tr>
-
 				<tr>
 					<th>社員タイプ</th>
 					<td>
@@ -70,17 +62,12 @@
 						</select>
 					</td>
 				</tr>
-
-
 				<tr>
 					<th>生年月日</th>
 					<td>
 						<input id="birthday" class="form-control" name="birthday" type="date" th:value="${employeeEditBean.birthday}" />
 					</td>
 				</tr>
-
-
-
 
 				<tr>
 					<th>個人番号</th>
@@ -89,15 +76,13 @@
 					</td>
 				</tr>
 
-
 				<tr>
-					<th>年齢</th>
+					<th>年　齢</th>
 					<td>
 						<span id="age"></span>
 						<input type="hidden" name="age">
 					</td>
 				</tr>
-
 
 				<tr>
 					<th>入社年月日</th>
@@ -105,7 +90,6 @@
 						<input id="joinedDateString" class="" name="joinedDateString" type="date" th:value="${employeeEditBean.joinedDateString}" />
 					</td>
 				</tr>
-
 
 				<tr>
 					<th>所属部門</th>
@@ -120,15 +104,13 @@
 					</td>
 				</tr>
 
-
 				<tr>
-					<th>社齢</th>
+					<th>社　齢</th>
 					<td>
 						<span id="joinedTime" class=""></span>
 						<input type="hidden" name="joinedTime">
 					</td>
 				</tr>
-
 
 				<tr>
 					<th>郵便番号</th>
@@ -137,14 +119,12 @@
 					</td>
 				</tr>
 
-
 				<tr>
-					<th>住所</th>
+					<th>住　所</th>
 					<td>
 						<input id="employeeName" class="" name="address" type="text" title="" th:value="${employeeEditBean.address}" />
 					</td>
 				</tr>
-
 
 				<tr>
 					<th>電話番号</th>
@@ -152,7 +132,6 @@
 						<input id="employeeName" class="" name="phoneNumber" type="text" title="" th:value="${employeeEditBean.phoneNumber}" />
 					</td>
 				</tr>
-
 
 				<tr>
 					<th>前回更新日</th>
@@ -163,10 +142,6 @@
 				</tr>
 
 			</table>
-
-
-
-
 
 			<input class="enter" type="submit" value="更新">
 		</form>

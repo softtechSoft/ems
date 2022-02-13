@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.softtech.actionForm.EmployeeEditBean;
-import com.softtech.entity.Employee;
 import com.softtech.service.EmployeeEditService;
 
 /**
@@ -38,30 +37,35 @@ public class EmployeeEditController {
 	@RequestMapping("/employeeedit")
 	public String employeeEdit(Model model, HttpSession session) throws ParseException {
 
-		Employee employee = employeeEditService.queryEmployeeAll((String) session.getAttribute("userEmoplyeeID"));
+//		Employee employee = employeeEditService.queryEmployeeAll((String) session.getAttribute("userEmoplyeeID"));
+//
+//		EmployeeEditBean employeeEditBean = new EmployeeEditBean();
+//
+//		employeeEditBean.setEmployeeName(employee.getEmployeeName());
+//		employeeEditBean.setEmployeeID(employee.getEmployeeID());
+//		employeeEditBean.setSex(employee.getSex());
+//
+//		String birthday = employee.getBirthday().substring(0, 4)
+//				+ "-" + employee.getBirthday().substring(4, 6)
+//				+ "-" + employee.getBirthday().substring(6);
+//		employeeEditBean.setBirthday(birthday);
+//		employeeEditBean.setAge(employee.getAge());
+//
+//		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
+//		SimpleDateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+//		Date date = sdFormat.parse(employee.getJoinedDate());
+//		employeeEditBean.setJoinedDateString(sdFormat2.format(date));
+//
+//		employeeEditBean.setJoinedTime(employee.getJoinedTime());
+//		employeeEditBean.setPostCode(employee.getPostCode());
+//		employeeEditBean.setAddress(employee.getAddress());
+//		employeeEditBean.setPhoneNumber(employee.getPhoneNumber());
+//		employeeEditBean.setUpdateDate(employee.getUpdateDate());
 
 		EmployeeEditBean employeeEditBean = new EmployeeEditBean();
-
-		employeeEditBean.setEmployeeName(employee.getEmployeeName());
-		employeeEditBean.setEmployeeID(employee.getEmployeeID());
-		employeeEditBean.setSex(employee.getSex());
-
-		String birthday = employee.getBirthday().substring(0, 4)
-				+ "-" + employee.getBirthday().substring(4, 6)
-				+ "-" + employee.getBirthday().substring(6);
-		employeeEditBean.setBirthday(birthday);
-		employeeEditBean.setAge(employee.getAge());
-
-		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
-		SimpleDateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdFormat.parse(employee.getJoinedDate());
-		employeeEditBean.setJoinedDateString(sdFormat2.format(date));
-
-		employeeEditBean.setJoinedTime(employee.getJoinedTime());
-		employeeEditBean.setPostCode(employee.getPostCode());
-		employeeEditBean.setAddress(employee.getAddress());
-		employeeEditBean.setPhoneNumber(employee.getPhoneNumber());
-		employeeEditBean.setUpdateDate(employee.getUpdateDate());
+		employeeEditBean.setEmployeeID("1111");
+		employeeEditBean.setEmployeeName("名前");
+		employeeEditBean.setSex("1");
 
 		model.addAttribute("employeeEditBean", employeeEditBean);
 

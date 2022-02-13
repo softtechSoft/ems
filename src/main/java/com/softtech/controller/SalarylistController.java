@@ -1,5 +1,8 @@
 package com.softtech.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.softtech.actionForm.SalaryInfoBean;
 import com.softtech.actionForm.SalarySelectJyoken;
 import com.softtech.service.SalaryListService;
 import com.softtech.util.DateUtil;
@@ -29,24 +33,39 @@ public class SalarylistController {
 	/**
 	 * 機能：画面初期表示
 	 * @return  salarylist
-	 * @author 王@ソフトテク
+	 * @author @ソフトテク
 	 */
 	@RequestMapping("/salarylist")
 	public String Salarylist(Model model) {
-
-		//現在年月取得
-//		String month = DateUtil.getNowMonth();
-//		// DBから給料情報を取得
-//		List<SalaryInfo> sl= salaryListService.querySalaryList(month);
-//		model.addAttribute("salarydate",sl);
-
 		//現在年取得
 		String year = DateUtil.getNowYear();
 		//検索条件初期化
 		SalarySelectJyoken salarySelectJyoken = new SalarySelectJyoken();
 		salarySelectJyoken.setYear(year);
+
 		//画面へデータを渡す
 		model.addAttribute("selectjyoken",salarySelectJyoken);
+
+		 List<SalaryInfoBean> sList = new ArrayList<SalaryInfoBean>();
+		//給料データを作成
+		SalaryInfoBean sb1= new SalaryInfoBean();
+		sb1.setMonth("2022/1");
+		sb1.setBase("500000");
+		sb1.setOverTimePlus("10000");
+		sb1.setTransportExpense("20000");
+
+		sList.add(sb1);
+
+		SalaryInfoBean sb2= new SalaryInfoBean();
+		sb2.setMonth("2022/2");
+		sb2.setBase("500000");
+		sb2.setOverTimePlus("10000");
+		sb2.setTransportExpense("20000");
+
+		sList.add(sb2);
+
+		//画面へ給料リストデータを渡す
+		model.addAttribute("salaryList",sList);
 
 		return "/ems/salarylist";
 	}
