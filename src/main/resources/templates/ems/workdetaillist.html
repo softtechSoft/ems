@@ -3,6 +3,7 @@
 <head>
     <title>Getting Started: Handling Form Submission</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <scriptsrc="js/echarts.min.js"></script>
     <link rel="stylesheet" th:href="@{/src/ems/css/workdetaillist.css}">
     <script>
          //対象年月検索とダウンロードを分かれる。
@@ -20,29 +21,18 @@
 </head>
 <body>
 
-<h3>勤怠リスト</h3>
+<h3>勤怠管理</h3>
  <!-- 対象年月 -->
 
  <form name="workSheet" th:action="@{/WorkDetail}" th:object="${selectjyolken}"   method="post">
-	<!-- エラーメッセー -->
+	 <span>対象年月: <input type="text" th:field="*{month}" /></span>
+
+    <span><input type="button" onclick="selectData()" value="検索" /></span>
+
      <p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" />
-     <!-- 検索条件 -->
-	<table style="width:1500px">
-  	 	<tr>
-	 		<td> <span>開始年月: <input type="text" th:field="*{fromMonth}" /></span></td>
-	 		<td> ～ </td>
-			<td> <span>終了年月: <input type="text" th:field="*{toMonth}" /></span></td>
-			<td> <span><input type="button" onclick="selectData()" value="検索" /></span></td>
 
-			<td>
-
-			<span><input type="hidden" id="downloadFlg" th:field="*{downloadFlg}" /></span>
-
-     			<span><input type="button" onclick="downLodData()" value="CSVダウンロード" /></span>
-			</td>
-	 	</tr>
-    </table>
-
+      <span><input type="hidden" id="downloadFlg" th:field="*{downloadFlg}" /></span>
+     <span><input type="button" onclick="downLodData()" value="CSVダウンロード" /></span>
  </form>
 
 	<!-- 勤怠リスト -->
@@ -54,7 +44,7 @@
         <th>勤怠時間（H)</th>
         <th>定期券額（円）</th>
         <th>その他交通費（定期券以外）(円）</th>
-      </tr>
+
 
 	  <tr th:each="workline : ${timereport}">
     	<td th:text="${workline.employeeID}">E001</td>
@@ -64,7 +54,10 @@
     	<td th:text="${workline.transportExpense}">定期券額（円)</td>
     	<td th:text="${workline.transport}">他の交通費(円）</td>
 	  </tr>
+
 	</table>
+
+
 
 </body>
 </html>

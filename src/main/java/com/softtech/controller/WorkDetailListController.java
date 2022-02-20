@@ -2,6 +2,7 @@ package com.softtech.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -33,11 +34,11 @@ public class WorkDetailListController {
 	public String toWorkDetailList(Model model) {
 
 //        //現在年月取得
-//		String month=DateUtil.getNowMonth();
+		String month=DateUtil.getNowMonth();
 //		// DBから勤怠情報を取得
-//		List<WorkDetail> workDetailList = workDetailListService.queryWorkDetail(month);
+		List<WorkDetail> workDetailList = workDetailListService.queryWorkDetail(month);
 //
-//		model.addAttribute("timereport", workDetailList);
+		model.addAttribute("timereport", workDetailList);
 
 		//検索条件初期化
 		WorkSelectJyoken workSelectJyoken= new WorkSelectJyoken();
