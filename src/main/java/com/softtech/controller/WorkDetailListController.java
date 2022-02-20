@@ -2,7 +2,6 @@ package com.softtech.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -23,8 +22,8 @@ import com.softtech.util.FileUtil;
 /**
  * 概要：勤怠リスト機能
  *
- * 作成者：馬@ソフトテク
- * 作成日：2021/4/10
+ * 作成者：孫@ソフトテク
+ * 作成日：2022/2/20
  */
 @Controller
 public class WorkDetailListController {
@@ -34,11 +33,11 @@ public class WorkDetailListController {
 	@RequestMapping("/workinfolist")
 	public String toWorkDetailList(Model model) {
 
-//        //現在年月取得
+        //現在年月取得
 		String month=DateUtil.getNowMonth();
-//		// DBから勤怠情報を取得
+		// DBから勤怠情報を取得
 		List<WorkDetail> workDetailList = workDetailListService.queryWorkDetail(month);
-//
+
 		model.addAttribute("timereport", workDetailList);
 
 		//検索条件初期化
