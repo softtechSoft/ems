@@ -8,6 +8,7 @@ package com.softtech.actionForm;
 
 import javax.validation.constraints.Size;
 
+//検索条件
 public class WorkSelectJyoken {
 
 	//対象年月

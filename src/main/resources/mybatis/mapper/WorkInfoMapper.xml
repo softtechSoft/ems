@@ -21,19 +21,25 @@
     	contract
     WHERE
     	employeeID=#{employeeID}
- 		AND #{workStartDay} >= contractBeginDate
+ 		AND workStartDay >= #{contractBeginDate}
  		and status = '1'
 	</insert>
 
 	<select id="queryWorkInfo" parameterType="map" resultType="WorkInfo">
 		select
-			max(w.workMonth) as workMonth
+			w.workMonth as workMonth,
+			w.workInfoID as employeeID,
+			e.employeeName as employeeName,
+			w.workTime as workTime,
+			s.transportExpense as transportExpense,
+			t.transport as transport
+
 		from
 			ems.workinfo w
-			inner join ems.contract c winfo.ctractID = c.ctractID
+            left join ems.employee e on w.workInfoID = e.employeeID
+            left join ems.salaryinfo s on w.workInfoID = s.employeeID
+            left join ems.transport t on w.workInfoID = t.employeeID
 		where
-			c.employeeID = #{employeeID}
-		group by
-			c.employeeID
+			employeeID=#{employeeID}
 	</select>
 </mapper>

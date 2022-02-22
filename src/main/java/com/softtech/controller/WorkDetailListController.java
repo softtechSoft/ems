@@ -1,5 +1,6 @@
 package com.softtech.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import com.softtech.actionForm.WorkSelectJyoken;
 import com.softtech.service.WorkDetailListService;
 import com.softtech.util.DateUtil;
 import com.softtech.util.FileUtil;
+import java.util.Calendar;
 /**
  * 概要：勤怠リスト機能
  *
@@ -42,8 +44,8 @@ public class WorkDetailListController {
 
 		//検索条件初期化
 		WorkSelectJyoken workSelectJyoken= new WorkSelectJyoken();
-		workSelectJyoken.setFromMonth("2022/01");
-		workSelectJyoken.setToMonth("2022/02");
+		workSelectJyoken.setFromMonth("2021/10");
+		workSelectJyoken.setToMonth(month);
 		workSelectJyoken.setDownloadFlg(false);
 		model.addAttribute("selectjyolken", workSelectJyoken);
 
@@ -52,6 +54,9 @@ public class WorkDetailListController {
 
 		return "/ems/workdetaillist";
 	}
+
+
+
 	/**
 	 * 機能：入力した年月に基づいて勤怠リストを表示する。
 	 * @return  workdetaillist
@@ -88,3 +93,4 @@ public class WorkDetailListController {
 	}
 
 }
+

@@ -48,7 +48,7 @@ public class DateUtil {
 		return b;
 	}
 	/**
-	 * 機能：YYYY/MMからYYYMMに変更
+	 * 機能：YYYY/MMからYYYYMMに変更
 	 *
 	 * @param 年月
 	 * @return 変更後年月
