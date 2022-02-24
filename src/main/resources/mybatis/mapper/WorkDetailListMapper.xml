@@ -25,17 +25,23 @@
 	</select>
 	<!--勤怠情報を取得する。inner join-->
 	<select id="getWorkTransport" parameterType="string" resultType="com.softtech.entity.Transport">
-		select ee.employeeID,
-		       ee.employeeName,
-		       wk.workMonth,
-		       wk.workTime,
-               tt.transportExpense1,
-		       tt.transport
-		from workinfo wk,contract ct,transport tt,employee ee
-		where wk.contractID=ct.contractID
-		AND   ct.employeeID=tt.employeeID
-		AND   tt.employeeID=ee.employeeID
-		AND   wk.workMonth=#{month}
+		select
+			w.workMonth as workMonth,
+			w.workInfoID as employeeID,
+			e.employeeName as employeeName,
+			w.workTime as workTime,
+			s.transportExpense as transportExpense1,
+			t.transport as transport
+
+		from
+			ems.workinfo w
+            left join ems.employee e on w.workInfoID = e.employeeID
+            left join ems.salaryinfo s on w.workInfoID = s.employeeID
+            left join ems.transport t on w.workInfoID = t.employeeID
+		where
+			employeeID=#{employeeID}
+			AND w.workMonth >= #{fromMonth}
+			AND w.workMonth &lt;= #{toMonth}
 
 
 	</select>

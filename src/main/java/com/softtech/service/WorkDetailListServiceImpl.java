@@ -20,11 +20,11 @@ public class WorkDetailListServiceImpl implements WorkDetailListService{
 	@Autowired
 	WorkDetailListMapper workDetailListMapper;
 	@Override
-	public List<WorkDetail> queryWorkDetail(String month) {
+	public List<WorkDetail> queryWorkDetail(String employeeID,String fromMonth,String toMonth) {
 
         // YYYY/MM→yyyymmに変換
-		String monthP = DateUtil.chgMonthToYM(month);
-//		// 勤怠情報を取得する
+//		String monthP = DateUtil.chgMonthToYM(month);
+		// 勤怠情報を取得する
 //		List<WorkInfo> workInfoLst =  workDetailListMapper.getWorkInfoDetail(monthP);
 //		// 交通費情報を取得する
 //		List<Transport> transportLst = workDetailListMapper.geTransportDetail(monthP);
@@ -60,7 +60,7 @@ public class WorkDetailListServiceImpl implements WorkDetailListService{
 //			rtn.add(workDetail);
 //		}
 		// 勤怠リストを取得する
-		List<Transport> transportLst = workDetailListMapper.getWorkTransport(monthP);
+		List<Transport> transportLst = workDetailListMapper.getWorkTransport(employeeID,fromMonth,toMonth);
 
 		// 勤怠情報へ変更する。
 		List<WorkDetail> rtn  = transfter(transportLst);

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,24 +35,23 @@ public class WorkDetailListController {
 	@Autowired
 	WorkDetailListService workDetailListService;
 	@RequestMapping("/workinfolist")
-	public String toWorkDetailList(Model model) {
+	public String toWorkDetailList(Model model,HttpSession session) {
 
         //現在年月取得
 		String month=DateUtil.getNowMonth();
 
 
 		//半年前時間
-		GregorianCalendar gr=new GregorianCalendar();
-		   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		 gr.set(GregorianCalendar.YEAR,GregorianCalendar.MONTH-6,GregorianCalendar.DATE);
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, -6);
+//		GregorianCalendar gr=new GregorianCalendar();
+		   SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+//		 gr.set(GregorianCalendar.YEAR,GregorianCalendar.MONTH-6,GregorianCalendar.DATE);
 
 		    String di=null;
-		           di=sdf.format(gr.getTime());
+		           di=sdf.format(cal.getTime());
 
-		// DBから勤怠情報を取得
-		List<WorkDetail> workDetailList = workDetailListService.queryWorkDetail(month);
 
-		model.addAttribute("timereport", workDetailList);
 
 		//検索条件初期化
 		WorkSelectJyoken workSelectJyoken= new WorkSelectJyoken();
@@ -59,6 +59,13 @@ public class WorkDetailListController {
 		workSelectJyoken.setToMonth(month);
 		workSelectJyoken.setDownloadFlg(false);
 		model.addAttribute("selectjyolken", workSelectJyoken);
+
+		String employeeID = (String) session.getAttribute("userEmoplyeeID");
+
+		// DBから勤怠情報を取得
+		List<WorkDetail> workDetailList = workDetailListService.queryWorkDetail(employeeID,di,month);
+
+		model.addAttribute("timereport", workDetailList);
 
 		List<WorkDetail> workDetailList1 = new ArrayList<WorkDetail>();
 		 model.addAttribute("timereport", workDetailList1);
@@ -74,14 +81,15 @@ public class WorkDetailListController {
 	 * @author 馬@ソフトテク
 	 */
 	@PostMapping("/WorkDetail")
-	public String WorkDetailSubmit(HttpServletResponse response,@Valid @ModelAttribute("selectjyolken") WorkSelectJyoken selectjyolken, BindingResult bindingResult,Model model) {
+	public String WorkDetailSubmit(HttpServletResponse response,@Valid @ModelAttribute("selectjyolken") WorkSelectJyoken selectjyolken, BindingResult bindingResult,Model model,HttpSession session) {
 		// NotNullの入力した年月をチェック。
 		 if (bindingResult.hasErrors()) {
 			return "/ems/workdetaillist";
 		 }
 
 		// 入力した年月を持っち、DBから勤怠情報を取得
-	     List<WorkDetail> workDetailList1 = workDetailListService.queryWorkDetail(selectjyolken.getMonth());
+		 String employeeID = (String) session.getAttribute("userEmoplyeeID");
+	     List<WorkDetail> workDetailList1 = workDetailListService.queryWorkDetail(employeeID,selectjyolken.getFromMonth(),selectjyolken.getToMonth());
 
 		 // データダウンロード場合
 		 if(selectjyolken.getDownloadFlg()){

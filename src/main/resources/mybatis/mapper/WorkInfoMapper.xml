@@ -41,5 +41,7 @@
             left join ems.transport t on w.workInfoID = t.employeeID
 		where
 			employeeID=#{employeeID}
+
+
 	</select>
 </mapper>

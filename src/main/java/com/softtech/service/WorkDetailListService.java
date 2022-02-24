@@ -6,6 +6,6 @@ import com.softtech.actionForm.WorkDetail;
 
 public interface WorkDetailListService {
 
-	List<WorkDetail> queryWorkDetail(String month);
+	List<WorkDetail> queryWorkDetail(String employeeID,String fromMonth,String toMonth);
 
 }
