@@ -29,16 +29,16 @@
      <!-- 検索条件 -->
 	<table style="width:900px">
   	 	<tr>
-	 		<td style="background-color:#F0F8FF"> <span>開始年月: <input type="text" th:field="*{fromMonth}" /></span></td>
+	 		<td style="background-color:#F0F8FF"> <span>開始年月: <input type="text" size = "8" th:field="*{fromMonth}" /></span></td>
 	 		<td style="background-color:#F0F8FF"> ～</td>
-			<td style="background-color:#F0F8FF"> <span>終了年月: <input type="text" th:field="*{toMonth}" /></span></td>
-			<td style="background-color:#F0F8FF"> <span><input type="button" onclick="selectData()" value="検索" /></span></td>
+			<td style="background-color:#F0F8FF"> <span>終了年月: <input type="text" size = "8" th:field="*{toMonth}" /></span></td>
+			<td style="background-color:#F0F8FF"> <span><input type="button"  onclick="selectData()" value="検索" /></span></td>
 
 			<td style="background-color:#F0F8FF">
 
 			<span><input type="hidden" id="downloadFlg" th:field="*{downloadFlg}" /></span>
 
-     			<span><input type="button" onclick="downLodData()" value="CSVダウンロード" /></span>
+     			<span><input type="button"  onclick="downLodData()" value="CSVダウンロード" /></span>
 			</td>
 	 	</tr>
     </table>
