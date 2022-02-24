@@ -21,6 +21,7 @@ import com.softtech.service.WorkDetailListService;
 import com.softtech.util.DateUtil;
 import com.softtech.util.FileUtil;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 /**
  * 概要：勤怠リスト機能
  *
@@ -37,6 +38,16 @@ public class WorkDetailListController {
 
         //現在年月取得
 		String month=DateUtil.getNowMonth();
+
+
+		//半年前時間
+		GregorianCalendar gr=new GregorianCalendar();
+		   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		 gr.set(GregorianCalendar.YEAR,GregorianCalendar.MONTH-6,GregorianCalendar.DATE);
+
+		    String di=null;
+		           di=sdf.format(gr.getTime());
+
 		// DBから勤怠情報を取得
 		List<WorkDetail> workDetailList = workDetailListService.queryWorkDetail(month);
 
@@ -44,7 +55,7 @@ public class WorkDetailListController {
 
 		//検索条件初期化
 		WorkSelectJyoken workSelectJyoken= new WorkSelectJyoken();
-		workSelectJyoken.setFromMonth("2021/10");
+		workSelectJyoken.setFromMonth(di);
 		workSelectJyoken.setToMonth(month);
 		workSelectJyoken.setDownloadFlg(false);
 		model.addAttribute("selectjyolken", workSelectJyoken);
@@ -93,4 +104,6 @@ public class WorkDetailListController {
 	}
 
 }
+
+
 

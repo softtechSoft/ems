@@ -27,14 +27,14 @@
 	<!-- エラーメッセー -->
      <p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" />
      <!-- 検索条件 -->
-	<table style="width:1500px">
+	<table style="width:1400px">
   	 	<tr>
-	 		<td> <span>開始年月: <input type="text" th:field="*{fromMonth}" /></span></td>
-	 		<td> ～ </td>
-			<td> <span>終了年月: <input type="text" th:field="*{toMonth}" /></span></td>
-			<td> <span><input type="button" onclick="selectData()" value="検索" /></span></td>
+	 		<td style="background-color:#F0F8FF"> <span>開始年月: <input type="text" th:field="*{fromMonth}" /></span></td>
+	 		<td style="background-color:#F0F8FF"> ～</td>
+			<td style="background-color:#F0F8FF"> <span>終了年月: <input type="text" th:field="*{toMonth}" /></span></td>
+			<td style="background-color:#F0F8FF"> <span><input type="button" onclick="selectData()" value="検索" /></span></td>
 
-			<td>
+			<td style="background-color:#F0F8FF">
 
 			<span><input type="hidden" id="downloadFlg" th:field="*{downloadFlg}" /></span>
 
@@ -46,14 +46,14 @@
  </form>
 
 	<!-- 勤怠リスト -->
-    <table >
+    <table border="1"class="workdetaillist-table">
       <tr>
-        <th>社員ID</th>
-        <th>社員氏名</th>
-        <th>対象月</th>
-        <th>勤怠時間（H)</th>
-        <th>定期券額（円）</th>
-        <th>その他交通費（定期券以外）(円）</th>
+        <th style="background-color:#dcfeeb" width="200">社員ID</th>
+        <th style="background-color:#dcfeeb" width="200">社員氏名</th>
+        <th style="background-color:#dcfeeb" width="200">対象月</th>
+        <th style="background-color:#dcfeeb" width="250">勤怠時間（H)</th>
+        <th style="background-color:#dcfeeb" width="250">定期券額（円）</th>
+        <th style="background-color:#dcfeeb" width="400">その他交通費（定期券以外）(円）</th>
       </tr>
 
 	  <tr th:each="workline : ${timereport}">
