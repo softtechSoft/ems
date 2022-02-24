@@ -1,15 +1,16 @@
 package com.softtech.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,10 +34,10 @@ public class SalarylistController {
 	/**
 	 * 機能：画面初期表示
 	 * @return  salarylist
-	 * @author @ソフトテク
+	 * @author テー@ソフトテク
 	 */
 	@RequestMapping("/salarylist")
-	public String Salarylist(Model model) {
+	public String Salarylist(Model model,HttpSession session) {
 		//現在年取得
 		String year = DateUtil.getNowYear();
 		//検索条件初期化
@@ -46,29 +47,24 @@ public class SalarylistController {
 		//画面へデータを渡す
 		model.addAttribute("selectjyoken",salarySelectJyoken);
 
-		 List<SalaryInfoBean> sList = new ArrayList<SalaryInfoBean>();
-		//給料データを作成
-		SalaryInfoBean sb1= new SalaryInfoBean();
-		sb1.setMonth("2022/1");
-		sb1.setBase("500000");
-		sb1.setOverTimePlus("10000");
-		sb1.setTransportExpense("20000");
-
-		sList.add(sb1);
-
-		SalaryInfoBean sb2= new SalaryInfoBean();
-		sb2.setMonth("2022/2");
-		sb2.setBase("500000");
-		sb2.setOverTimePlus("10000");
-		sb2.setTransportExpense("20000");
-
-		sList.add(sb2);
+		//対象年度の給料リストを所得
+		String employeeID = (String) session.getAttribute("userEmoplyeeID");
+		List<SalaryInfoBean> sList = salaryListService.getSalaryList(year, employeeID);
 
 		//画面へ給料リストデータを渡す
 		model.addAttribute("salaryList",sList);
 
 		return "/ems/salarylist";
 	}
+
+	@GetMapping("/salarydetail")
+	public String salarydetails(Model model) {
+		SalaryInfoBean salaryInfoBean = new SalaryInfoBean();
+		model.addAttribute("salarydata", salaryInfoBean);
+		return "/ems/salarydetail";
+	}
+
+
 
 	@PostMapping("/salarylist")
 	public String salarylistSubmit(HttpServletResponse response,@Valid @ModelAttribute("selectjyoken") SalarySelectJyoken selectjyoken,BindingResult bindingResult,Model model) {
@@ -77,6 +73,8 @@ public class SalarylistController {
 //		 if (bindingResult.hasErrors()) {
 //			return "/ems/salarylist";
 //		 }
+		 return "/ems/salarylist";
+	}
 //
 //		// 入力した年月を持っち、DBから給料情報を取得
 //	     List<SalaryInfo> sl2 = salaryListService.querySalaryList(selectjyoken.getMonth());
@@ -98,7 +96,7 @@ public class SalarylistController {
 //			 model.addAttribute("selectjyoken",selectjyoken);
 //			 model.addAttribute("salarydate", sl2);
 //		 }
-		 return "/ems/salarylist";
+//		 return "/ems/salarylist";
 	}
 
 //
@@ -131,4 +129,3 @@ public class SalarylistController {
 //	  return new ResponseEntity<>(result.toString().getBytes("MS932"), h, HttpStatus.OK);
 //	}
 
-}

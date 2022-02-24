@@ -3,16 +3,13 @@
                 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.softtech.mapper.salarylistMapper">
+<mapper namespace="com.softtech.mapper.SalaryListMapper">
 
-<select id="getsalaryinfolist" parameterType="string" resultType="com.softtech.entity.SalaryInfo">
+<select id="getSalaryInfoList" parameterType="com.softtech.com.SalaryCommon" resultType="com.softtech.entity.SalaryInfo">
 <!--給料情報を取得する。-->
-		 select s.*,
-		       e.employeeName
-
-		from salaryinfo s
-		left join ems.employee e on s.employeeID = e.employeeID
-		where s.month=#{month}
-
+		select *
+		from salaryinfo
+		where month between #{fromMonth} and #{toMonth}
+		and employeeID=#{employeeID}
 	</select>
 </mapper>

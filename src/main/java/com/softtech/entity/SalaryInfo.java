@@ -1,5 +1,10 @@
 package com.softtech.entity;
-
+/**
+ * 概要：給料情報Entity
+ *
+ * 作成者：テー＠ソフトテク
+ * 作成日：2022/02/22
+ */
 public class SalaryInfo {
 	private String employeeName = "0";
 	private String employeeID = "0";
