@@ -27,7 +27,7 @@
 	<!-- エラーメッセー -->
      <p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" />
      <!-- 検索条件 -->
-	<table style="width:900px">
+	<table style="width:700px">
   	 	<tr>
 	 		<td style="background-color:#F0F8FF"> <span>開始年月: <input type="text" size = "8" th:field="*{fromMonth}" /></span></td>
 	 		<td style="background-color:#F0F8FF"> ～</td>
@@ -46,7 +46,7 @@
  </form>
 
 	<!-- 勤怠リスト -->
-    <table border="1"class="workdetaillist-table">
+    <table border="1" style="border-color:#000000"  class ="workdetaillist-table">
       <tr>
         <th style="background-color:#dcfeeb" width="200">社員ID</th>
         <th style="background-color:#dcfeeb" width="200">社員氏名</th>

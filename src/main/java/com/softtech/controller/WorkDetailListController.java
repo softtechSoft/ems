@@ -3,6 +3,7 @@ package com.softtech.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,6 +24,7 @@ import com.softtech.util.DateUtil;
 import com.softtech.util.FileUtil;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 /**
  * 概要：勤怠リスト機能
  *
@@ -60,16 +62,14 @@ public class WorkDetailListController {
 		workSelectJyoken.setDownloadFlg(false);
 		model.addAttribute("selectjyolken", workSelectJyoken);
 
-		String employeeID = (String) session.getAttribute("userEmoplyeeID");
-
+		// セッションからログインIDを取得する。
+		Map<String, String> mapper = new HashMap<String, String>();
+		mapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
+		mapper.put("fromMonth", di);
+		mapper.put("toMonth", month);
 		// DBから勤怠情報を取得
-		List<WorkDetail> workDetailList = workDetailListService.queryWorkDetail(employeeID,di,month);
-
+		List<WorkDetail> workDetailList = workDetailListService.queryWorkDetail(mapper);
 		model.addAttribute("timereport", workDetailList);
-
-		List<WorkDetail> workDetailList1 = new ArrayList<WorkDetail>();
-		 model.addAttribute("timereport", workDetailList1);
-
 		return "/ems/workdetaillist";
 	}
 
@@ -88,8 +88,13 @@ public class WorkDetailListController {
 		 }
 
 		// 入力した年月を持っち、DBから勤怠情報を取得
-		 String employeeID = (String) session.getAttribute("userEmoplyeeID");
-	     List<WorkDetail> workDetailList1 = workDetailListService.queryWorkDetail(employeeID,selectjyolken.getFromMonth(),selectjyolken.getToMonth());
+			// セッションからログインIDを取得する。
+			Map<String, String> mapper = new HashMap<String, String>();
+			mapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
+			mapper.put("fromMonth", selectjyolken.getFromMonth());
+			mapper.put("toMonth", selectjyolken.getToMonth());
+
+	     List<WorkDetail> workDetailList1 = workDetailListService.queryWorkDetail(mapper);
 
 		 // データダウンロード場合
 		 if(selectjyolken.getDownloadFlg()){
@@ -104,6 +109,7 @@ public class WorkDetailListController {
 
 		 // 検索する場合
 		 } else {
+
 
 			 model.addAttribute("selectjyolken", selectjyolken);
 			 model.addAttribute("timereport", workDetailList1);

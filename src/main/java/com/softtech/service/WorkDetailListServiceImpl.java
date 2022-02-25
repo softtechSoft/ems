@@ -1,6 +1,7 @@
 package com.softtech.service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class WorkDetailListServiceImpl implements WorkDetailListService{
 	@Autowired
 	WorkDetailListMapper workDetailListMapper;
 	@Override
-	public List<WorkDetail> queryWorkDetail(String employeeID,String fromMonth,String toMonth) {
+	public List<WorkDetail> queryWorkDetail(Map<String, String> map) {
 
         // YYYY/MM→yyyymmに変換
 //		String monthP = DateUtil.chgMonthToYM(month);
@@ -60,7 +61,7 @@ public class WorkDetailListServiceImpl implements WorkDetailListService{
 //			rtn.add(workDetail);
 //		}
 		// 勤怠リストを取得する
-		List<Transport> transportLst = workDetailListMapper.getWorkTransport(employeeID,fromMonth,toMonth);
+		List<Transport> transportLst = workDetailListMapper.getWorkTransport(map);
 
 		// 勤怠情報へ変更する。
 		List<WorkDetail> rtn  = transfter(transportLst);

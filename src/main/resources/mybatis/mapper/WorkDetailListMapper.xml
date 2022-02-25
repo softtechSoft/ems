@@ -24,7 +24,7 @@
 		where workMonth=#{month}
 	</select>
 	<!--勤怠情報を取得する。inner join-->
-	<select id="getWorkTransport" parameterType="string" resultType="com.softtech.entity.Transport">
+	<select id="getWorkTransport" parameterType="map" resultType="com.softtech.entity.Transport">
 		select
 			w.workMonth as workMonth,
 			w.workInfoID as employeeID,
@@ -39,7 +39,7 @@
             left join ems.salaryinfo s on w.workInfoID = s.employeeID
             left join ems.transport t on w.workInfoID = t.employeeID
 		where
-			employeeID=#{employeeID}
+			e.employeeID=#{employeeID}
 			AND w.workMonth >= #{fromMonth}
 			AND w.workMonth &lt;= #{toMonth}
 
