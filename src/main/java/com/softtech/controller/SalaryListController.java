@@ -26,7 +26,7 @@ import com.softtech.util.DateUtil;
  * 作成日：2021/4/13
  */
 @Controller
-public class SalarylistController {
+public class SalaryListController {
 
 	@Autowired
 	SalaryListService salaryListService;
