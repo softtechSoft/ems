@@ -68,7 +68,7 @@ public class SalaryInfoController {
 		SalaryInfoBean salaryInfoBean = salaryInfoService.tranferData(salary);
 		//対象年月を画面へ戻す。
 		salaryInfoBean.setMonth(DateUtil.chgYMToDate(salaryInfo.getMonth()));
-	    model.addAttribute("salarydata", salaryInfoBean);
+	    model.addAttribute("salarydataerror", salaryInfoBean);
 
 		return "/ems/salarydetail";
 	}
