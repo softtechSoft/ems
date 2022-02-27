@@ -28,6 +28,7 @@ public class DateUtil {
 		Date dNow = new Date( );
 		SimpleDateFormat a = new SimpleDateFormat ("yyyy");
 		 b = a.format(dNow);
+		//TETS COMMIT
 		return b;
 	}
 
