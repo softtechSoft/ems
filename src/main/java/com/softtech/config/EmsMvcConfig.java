@@ -13,7 +13,7 @@ public class EmsMvcConfig implements WebMvcConfigurer {
 		registry.addViewController("/index.html").setViewName("forward:/");
 		registry.addViewController("/main.html").setViewName("forward:/main");
 	}
-//test
+//test2
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new EmsInterceptor()).addPathPatterns("/**").excludePathPatterns("/index", "/ems",
