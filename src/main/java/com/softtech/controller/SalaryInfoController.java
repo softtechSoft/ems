@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.softtech.actionForm.SalaryInfoBean;
 import com.softtech.entity.SalaryInfo;
+import com.softtech.service.SalaryInfoService;
 import com.softtech.service.SalaryInfoServiceImpl;
 import com.softtech.util.DateUtil;
 
@@ -28,7 +29,7 @@ import com.softtech.util.DateUtil;
 @Controller
 public class SalaryInfoController {
 	@Autowired
-	SalaryInfoServiceImpl salaryInfoService;
+	SalaryInfoService salaryInfoService;
 
 	@RequestMapping("/salarydetail")
 	public String salarydetails(Model model) {
@@ -66,7 +67,7 @@ public class SalaryInfoController {
 		//画面表示するため設定する
 		SalaryInfoBean salaryInfoBean = salaryInfoService.tranferData(salary);
 		//対象年月を画面へ戻す。
-		salaryInfoBean.setMonth(DateUtil.chgYMToDate(salaryInfo.getMonth()));
+		//salaryInfoBean.setMonth(DateUtil.chgYMToDate(salaryInfo.getMonth()));
 	    model.addAttribute("salarydata", salaryInfoBean);
 
 		return "/ems/salarydetail";
