@@ -35,7 +35,7 @@ public class SalaryInfoController {
 	public String salarydetails(Model model) {
 
 		SalaryInfoBean salaryInfoBean = new SalaryInfoBean();
-
+		//戻る値を設定
 		model.addAttribute("salarydata", salaryInfoBean);
 		return "/ems/salarydetail";
 	}
