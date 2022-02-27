@@ -29,7 +29,7 @@ import com.softtech.util.DateUtil;
 @Controller
 public class SalaryInfoController {
 	@Autowired
-	SalaryInfoService salaryInfoService;
+	SalaryInfoServiceImpl salaryInfoService;
 
 	@RequestMapping("/salarydetail")
 	public String salarydetails(Model model) {
