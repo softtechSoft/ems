@@ -1,11 +1,21 @@
-
-.salrylist-table tr:nth-child(odd)
+.salrylist-table tr:nth-child(odd) td
 {
-    background-color:aliceblue;
+    background-color:#bfe1ff;
+}
+.salrylist-table tr:nth-child(even) td
+{
+    background-color:#dcfeeb;
 }
 .btn1
 {
 	display : block;
 	width : 100%
 	text-align :right;
+}
+.div{
+	display:flex;
+	justivy-content:right;
+}
+.button{
+	padding: 10px;
 }

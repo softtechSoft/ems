@@ -4,49 +4,69 @@
     <title>ソフトテク株式会社-社内管理システム</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" th:href="@{/src/ems/css/salarylist.css}">
+	<script type="text/javascript">
+	  /**
+	   * 前年度ボタンの処理
+	   */
+	  function clickBeforeYear(){
+		  document.getElementById('operationFlg').value='1';
+	  }
+
+	  /**
+	   * 次年度ボタンの処理
+	   */
+	  function clickAfterYear(){
+		  document.getElementById('operationFlg').value='2';
+	  }
+
+	</script>
 
 </head>
+
 <body>
 
   <form name="worksheet1" th:action="@{/salarylist}" th:object="${selectjyoken}" method="post">
      <p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" ></p>
 	<!-- 検索条件 -->
+
+<h1>給料明細リスト</h1>
+	<!--隠しフィールド（field）前/次年度フラグ-->
+	<span><input type="hidden" id="operationFlg" th:field="*{operationFlg}" /></span>
+
 	<table style="width:1750px">
-  	 	<tr>
-	 		<td> <button type="submit">前年度</button></td>
+  	  	<tr>
+	 		<td> <button type="submit" onclick="clickBeforeYear()">前年度</button></td>
 	 		<td th:text="*{year}"> </td>
-			<td> <button type="submit" class="btn btn-primary">次年度</button></td>
-
-
-
+			<td> <button type="submit" onclick="clickAfterYear()" class="btn btn-primary">次年度</button></td>
 	 	</tr>
     </table>
+
 	<!-- 給料リスト -->
-	<table border="1"class="salrylist-table">
+	<table border="1"  class="salrylist-table">
     	 <tr>
-        	<th style="background-color:#dcfeeb" width="200">年月</th>
-        	<th  style="background-color:#dcfeeb" width="400">基本給</th>
-        	<th  style="background-color:#dcfeeb" width="400">残業代</th>
-        	<th  style="background-color:#dcfeeb" width="400">交通費</th>
-        	<th  style="background-color:#dcfeeb"  width="300">控除（社会）</th>
-        	<th  style="background-color:#bfe1ff"   width="300">控除(源泉)</th>
-        	<th  style="background-color:#bfe1ff"   width="300">控除(住民税)</th>
-        	<th  style="background-color:#dcfeeb"    width="500">総額</th>
-        	<th  style="background-color:#dcfeeb"   width="300">明細へ</th>
+        	<th width="200">年月</th>
+        	<th   width="400">基本給</th>
+        	<th  width="400">残業代</th>
+        	<th   width="400">交通費</th>
+        	<th  width="300">控除（社会）</th>
+        	<th    width="300">控除(源泉)</th>
+        	<th     width="300">控除(住民税)</th>
+        	<th  width="500">総額</th>
+        	<th    width="300">明細へ</th>
      	</tr>
      	<tr   th:each="salary : ${salaryList}">
-	    	<td  style="background-color:#dcfeeb" th:text="${salary.month}"></td>
-	    	<td  style="background-color:#dcfeeb" th:text="${salary.base}"></td>
-	    	<td  style="background-color:#dcfeeb" th:text="${salary.overTimePlus}"></td>
-	    	<td  style="background-color:#dcfeeb" th:text="${salary.transportExpense}"></td>
-	    	<td  style="background-color:#dcfeeb"  th:text="${salary.welfarePensionComp}"></td>
-	    	<td  style="background-color:#bfe1ff"  th:text="${salary. withholdingTax}"></td>
-	    	<td  style="background-color:#bfe1ff"  th:text="${salary.municipalTax}"></td>
-	    	<td  style="background-color:#dcfeeb"  th:text="${salary.sum}"></td>
 
-	    	<!--  <td> <button type="submit"  th:href="@{/salarydetail}">明細</button>-->
+	    	<td  th:text="${salary.month}"></td>
+	    	<td  th:text="${salary.base}"></td>
+	    	<td  th:text="${salary.overTimePlus}"></td>
+	    	<td  th:text="${salary.transportExpense}"></td>
+	    	<td  th:text="${salary.welfarePensionComp}"></td>
+	    	<td  th:text="${salary. withholdingTax}"></td>
+	    	<td  th:text="${salary.municipalTax}"></td>
+	    	<td  th:text="${salary.sum}"></td>
 
-	    <td style="background-color:#dcfeeb" ><a th:href="@{/salarydetail}">明細</a>	</td>
+
+	    <td  ><a th:href="@{/salarydetail}">明細</a>	</td>
 
 
 		 </tr>
