@@ -27,8 +27,8 @@
 	<select id="getWorkTransport" parameterType="map" resultType="com.softtech.entity.Transport">
 		select
 			w.workMonth as workMonth,
-			w.workInfoID as employeeID,
-			e.employeeName as employeeName,
+<!--		w.workInfoID as employeeID,  -->
+<!--			e.employeeName as employeeName,-->
 			w.workTime as workTime,
 			s.transportExpense as transportExpense1,
 			t.transport as transport

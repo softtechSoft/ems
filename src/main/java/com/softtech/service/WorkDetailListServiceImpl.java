@@ -83,7 +83,7 @@ public class WorkDetailListServiceImpl implements WorkDetailListService{
 		for(Transport tt : lst) {
 			WorkDetail workDetail = new WorkDetail();
 			//社員ID
-			workDetail.setEmployeeID(tt.getEmployeeID());
+//			workDetail.setEmployeeID(tt.getEmployeeID());
 			//社員氏名
 			workDetail.setEmployeeName(tt.getEmployeeName());
 			//対象月

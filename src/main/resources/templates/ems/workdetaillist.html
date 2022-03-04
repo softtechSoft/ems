@@ -46,19 +46,17 @@
  </form>
 
 	<!-- 勤怠リスト -->
-    <table border="1" style="border-color:#000000"  class ="workdetaillist-table">
+    <table border="1" style="border-color:#000000"  class ="workdetaillist-table" id="A">
       <tr>
-        <th style="background-color:#dcfeeb" width="200">社員ID</th>
-        <th style="background-color:#dcfeeb" width="200">社員氏名</th>
-        <th style="background-color:#dcfeeb" width="200">対象月</th>
-        <th style="background-color:#dcfeeb" width="250">勤怠時間（H)</th>
-        <th style="background-color:#dcfeeb" width="250">定期券額（円）</th>
-        <th style="background-color:#dcfeeb" width="400">その他交通費（定期券以外）(円）</th>
+        <th style="background-color:#ffffff" width="200">対象月</th>
+        <th style="background-color:#ffffff" width="250">勤怠時間（H)</th>
+        <th style="background-color:#ffffff" width="250">定期券額（円）</th>
+        <th style="background-color:#ffffff" width="400">その他交通費（定期券以外）(円）</th>
       </tr>
 
 	  <tr th:each="workline : ${timereport}">
-    	<td th:text="${workline.employeeID}">E001</td>
-    	<td th:text="${workline.employeeName}">Yumi Wakatsuki</td>
+<!--    	<td th:text="${workline.employeeID}">E001</td>  -->
+<!--    	<td th:text="${workline.employeeName}">Yumi Wakatsuki</td>  -->
     	<td th:text="${workline.workMonth}">202103</td>
     	<td th:text="${workline.workTime}">180</td>
     	<td th:text="${workline.transportExpense}">定期券額（円)</td>

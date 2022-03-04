@@ -54,7 +54,12 @@
 			<div>
 				<label>出張交通費</label><input id="businessTrip" class="transportation" name="businessTrip" type="text" pattern="[0-9]{0,7}" th:value="${transport.businessTrip}" placeholder="例:500" autocomplete="off" title="stationinfo" disabled="disabled" >
 			</div>
-			<input class="enter" type="submit" value="提出">
+
+		    <div class="left">
+			<input class="enter" type="submit" value="修正"></div>
+			<div class="right">
+			<input class="enter" type="submit" value="提出"></div>
+
 		</form>
 	</div>
 	<div id="messagebox" class="messagebox">
