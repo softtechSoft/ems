@@ -4,6 +4,22 @@
     <title>ソフトテク株式会社-社内管理システム</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<link rel="stylesheet" th:href="@{/src/ems/css/salarylist.css}">
+	<script type="text/javascript">
+	  /**
+	   * 前年度ボタンの処理
+	   */
+	  function clickBeforeYear(){
+		  document.getElementById('operationFlg').value='1';
+	  }
+
+	  /**
+	   * 次年度ボタンの処理
+	   */
+	  function clickAfterYear(){
+		  document.getElementById('operationFlg').value='2';
+	  }
+
+	</script>
 
 </head>
 
@@ -14,19 +30,17 @@
 	<!-- 検索条件 -->
 
 <h1>給料明細リスト</h1>
-
+	<!--隠しフィールド（field）前/次年度フラグ-->
+	<span><input type="hidden" id="operationFlg" th:field="*{operationFlg}" /></span>
 
 	<table style="width:1750px">
   	  	<tr>
-	 		<td> <button type="submit">前年度</button></td>
+	 		<td> <button type="submit" onclick="clickBeforeYear()">前年度</button></td>
 	 		<td th:text="*{year}"> </td>
-
-			<td> <button type="submit"  class="btn btn-primary">次年度</button></td>
-
-
+			<td> <button type="submit" onclick="clickAfterYear()" class="btn btn-primary">次年度</button></td>
 	 	</tr>
-
     </table>
+
 	<!-- 給料リスト -->
 	<table border="1"  class="salrylist-table">
     	 <tr>

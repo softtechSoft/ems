@@ -42,7 +42,10 @@ public class SalaryListController {
 		String year = DateUtil.getNowYear();
 		//検索条件初期化
 		SalarySelectJyoken salarySelectJyoken = new SalarySelectJyoken();
+		// 当年度
 		salarySelectJyoken.setYear(year);
+		// 画面操作の初期値は前年度に設定する。
+		salarySelectJyoken.setOperationFlg("1");
 
 		//画面へデータを渡す
 		model.addAttribute("selectjyoken",salarySelectJyoken);
@@ -65,20 +68,32 @@ public class SalaryListController {
 		model.addAttribute("salarydata", salaryInfoBean);
 		return "/ems/salarydetail";
 	}
-
-
-
-
+	/**
+	 * 機能：前年度/次年度ボタン処理
+	 *
+	 *
+	 * @return  salarylist
+	 * @author テー@ソフトテク
+	 */
 	@PostMapping("/salarylist")
-	public String salarylistSubmit(HttpServletResponse response,@Valid @ModelAttribute("selectjyoken") SalarySelectJyoken selectjyoken,BindingResult bindingResult,Model model) {
+	public String salarylistSubmit(HttpServletResponse response,
+			@Valid @ModelAttribute("selectjyoken") SalarySelectJyoken selectjyoken,
+			BindingResult bindingResult,Model model) {
 
-//		// NotNullの入力した年月をチェック。
-//		 if (bindingResult.hasErrors()) {
-//			return "/ems/salarylist";
-//		 }
-		 return "/ems/salarylist";
+		//画面操作フラグを取得
+
+		//画面上の年度を取得
+
+		//画面上の年度から対象年度を生成（前年度の場合-1、次年度の場合+1)
+
+		//対象年度のデータをDBから取得
+
+		//DBデータ、年度データ、画面操作フラグのデータを画面へ設定する。
+
+		//給料リスト画面に戻る。
+		return "/ems/salarylist";
 	}
-	
+
 	}
 
 

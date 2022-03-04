@@ -20,6 +20,9 @@ public class SalarySelectJyoken {
 	//ダウンロード
 	private boolean downloadFlg;
 
+	//画面操作（１：前年度　２：次年度）
+	private String operationFlg  ;
+
 	/**
 	 * @return month
 	 */
@@ -54,6 +57,20 @@ public class SalarySelectJyoken {
 	 */
 	public void setYear(String year) {
 		this.year = year;
+	}
+
+	/**
+	 * @return operationFlg
+	 */
+	public String getOperationFlg() {
+		return operationFlg;
+	}
+
+	/**
+	 * @param operationFlg セットする operationFlg
+	 */
+	public void setOperationFlg(String operationFlg) {
+		this.operationFlg = operationFlg;
 	}
 
 }
