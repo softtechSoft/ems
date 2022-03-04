@@ -66,8 +66,19 @@ public class SalaryListServiceImpl implements SalaryListService{
 			salaryInfoBean.setMonth(si.getMonth());
 			//基本給
 			salaryInfoBean.setBase(si.getBase());
+			//残業代
+			salaryInfoBean.setOverTimePlus(si.getOverTimePlus());
+			//交通費
+			salaryInfoBean.setTransportExpense(si.getTransportExpense());
+			//控除（社会）
+			salaryInfoBean.setWelfarePensionComp(si.getWelfarePensionComp());
+			//控除(源泉)
+			salaryInfoBean.setWithholdingTax(si.getWithholdingTax());
+			//控除(住民税)
+			salaryInfoBean.setMunicipalTax(si.getMunicipalTax());
+			//総額
+			salaryInfoBean.setSum(si.getSum());
 			//他の画面項目を設定する
-
 			salaryInfoBeans.add(salaryInfoBean);
 		}
 		return salaryInfoBeans;
