@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.softtech.actionForm.EmployeeEditBean;
+import com.softtech.entity.Employee;
 //import com.softtech.entity.Employee;
 import com.softtech.service.EmployeeEditService;
 
@@ -38,11 +39,11 @@ public class EmployeeEditController {
 	@RequestMapping("/employeeedit")
 	public String employeeEdit(Model model, HttpSession session) throws ParseException {
 
-		//Employee employee = employeeEditService.queryEmployeeAll((String) session.getAttribute("userEmoplyeeID"));
+		Employee employee = employeeEditService.queryEmployeeAll((String) session.getAttribute("userEmoplyeeID"));
 
 		EmployeeEditBean employeeEditBean = new EmployeeEditBean();
 
-		/*employeeEditBean.setEmployeeName(employee.getEmployeeName());
+		employeeEditBean.setEmployeeName(employee.getEmployeeName());
 		employeeEditBean.setEmployeeID(employee.getEmployeeID());
 		employeeEditBean.setSex(employee.getSex());
 
@@ -61,15 +62,15 @@ public class EmployeeEditController {
 		employeeEditBean.setPostCode(employee.getPostCode());
 		employeeEditBean.setAddress(employee.getAddress());
 		employeeEditBean.setPhoneNumber(employee.getPhoneNumber());
-		employeeEditBean.setUpdateDate(employee.getUpdateDate());*/
-		employeeEditBean.setEmployeeID("2222");
+		employeeEditBean.setUpdateDate(employee.getUpdateDate());
+		/*employeeEditBean.setEmployeeID("2222");
 		employeeEditBean.setEmployeeName("yuzana");
 		employeeEditBean.setJoinedDateString("2022,4,3");
 		employeeEditBean.setJoinedTime("2022,4,1");
 		employeeEditBean.setPostCode("1710014");
 		employeeEditBean.setAddress("Ikebukuro");
 		employeeEditBean.setPhoneNumber("07048029428");
-		employeeEditBean.setUpdateDate("2022,3,1");
+		employeeEditBean.setUpdateDate("2022,3,1");*/
 
 
 		model.addAttribute("employeeEditBean", employeeEditBean);
