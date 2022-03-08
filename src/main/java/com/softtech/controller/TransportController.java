@@ -145,6 +145,7 @@ public class TransportController<WorkInfoComment> {
 
 
 	//修正
+	@RequestMapping("/transport-update")
 		public String updateTransport(HttpServletRequest request, HttpSession session,@RequestParam("file") MultipartFile file, Model model) throws Exception {
 
 			// セッションからログインIDを取得する。
@@ -195,7 +196,7 @@ public class TransportController<WorkInfoComment> {
 					}
 				}
 				mapper.put(entry.getKey(), entry.getValue()[0]);
-			} // for
+			} // forのEND
 
 			// 定期券チェックボックスがチェックされない場合、テーブルから交通費を取得
 			if(!flg) {

@@ -6,7 +6,8 @@
 <mapper namespace="com.softtech.mapper.WorkInfoMapper">
 	<insert id="insertWorkInfo" parameterType="map">
 	insert
-	into workinfo
+	into
+	workinfo
 	SELECT
 		conCat('W',subStr(contractID,3))as workInfoID,
 		contractID,
@@ -44,4 +45,19 @@
 
 
 	</select>
+
+		<update id="updateWorkInfo" parameterType="map">
+			update
+			workInfo
+			set
+			e.employeeName=#{employeeName},
+			w.workTime=#{workTime},
+			s.transportExpense=#{transportExpense},
+			t.transport=#{transport}
+		where
+			employeeID=#{employeeID}
+
+
+	</update>
+
 </mapper>

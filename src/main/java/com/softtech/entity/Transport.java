@@ -8,6 +8,7 @@ package com.softtech.entity;
 
 public class Transport {
 
+	private String flag ="2";
 	private String workMonth = "0";
 	private String startDate = "";
 	private String startStation = "";
@@ -68,7 +69,7 @@ public class Transport {
 		return midStation2;
 	}
 
-	public void setMidStation2(String midStation2) { 
+	public void setMidStation2(String midStation2) {
 		this.midStation2 = midStation2;
 	}
 
@@ -189,6 +190,14 @@ public class Transport {
 	 */
 	public void setWorkTime(float workTime) {
 		this.workTime = workTime;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
 

@@ -14,7 +14,7 @@
 		<h3>稼働管理</h3>
     </header>
     <div id="boder" class="boder">
-		<form th:action="@{/transport-workinfo}" class="wapper" method="POST" enctype="multipart/form-data">
+		<form th:action="@{/transport-workinfo}" id='transpirt' name="transpirt"  class="wapper" method="POST" enctype="multipart/form-data">
 				<label>社員名</label><span class="name" th:text="${session.userEmployeeName}">USER</span>
 			<div>
 				<label>稼働月</label><input id="workMonth" class="workinfo-month" name="workMonth" type="text" maxlength="7" title="稼働月" required />
@@ -58,13 +58,14 @@
 			<table>
 				<tr>
 					<td>
-						<input class="enter" type="submit" value="修正">
+						<input onclick="judge('1')" class="enter" type="button" value="修正">
 					</td>
 					<td>
-						<input class="enter" type="submit" value="提出">
+						<input onclick="judge('2')" class="enter" type="button" value="提出">
 					</td>
 				</tr>
 			</table>
+			<input type="hidden"  id ="flag" name="flag"/>
 
 		</form>
 	</div>
