@@ -31,4 +31,10 @@ public class WorkInfoServiceImpl implements WorkInfoService {
 		return workinfoMapper.queryWorkinfo(employeeID);
 	}
 
+	@Override
+	public int updateWorkInfo(Map<String, String> Map) {
+		// TODO 自動生成されたメソッド・スタブ
+		return 0;
+	}
+
 }

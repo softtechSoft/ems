@@ -88,7 +88,7 @@
 		status='0',
 		insertDate=date_format(now(),'%Y%m%d')
     	where
-		t.employeeID = #{employeeID},
+		t.employeeID = #{employeeID}
 	AND
 		t.workMonth = #{workMonth}
 	</update>
