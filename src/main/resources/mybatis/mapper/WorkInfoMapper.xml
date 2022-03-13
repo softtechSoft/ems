@@ -50,12 +50,19 @@
 			update
 			workInfo
 			set
-			e.employeeName=#{employeeName},
-			w.workTime=#{workTime},
-			s.transportExpense=#{transportExpense},
-			t.transport=#{transport}
-		where
+			conCat('W',subStr(contractID,3))as workInfoID,
+			contractID,
+			#{workMonth}as workMonth,
+    		#{workStartDay}as workStartDay ,
+   	 		#{workEndDay}as workEndDay,
+    		#{workTime}as workTime,
+   			null ,
+ 			null,
+    		date_format(now(),'%Y%m%d')
+			where
 			employeeID=#{employeeID}
+			AND workStartDay >= #{contractBeginDate}
+ 			and status = '1'
 
 
 	</update>
