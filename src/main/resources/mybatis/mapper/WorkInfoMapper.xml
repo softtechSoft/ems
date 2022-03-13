@@ -7,7 +7,7 @@
 	<insert id="insertWorkInfo" parameterType="map">
 	insert
 	into
-	workinfo
+		workInfo
 	SELECT
 		conCat('W',subStr(contractID,3))as workInfoID,
 		contractID,
@@ -21,9 +21,11 @@
     FROM
     	contract
     WHERE
-    	employeeID=#{employeeID}
- 		AND workStartDay >= #{contractBeginDate}
- 		and status = '1'
+    		employeeID=#{employeeID}
+ 		AND
+ 			workStartDay >= #{contractBeginDate}
+ 		AND
+ 			status = '1'
 	</insert>
 
 	<select id="queryWorkInfo" parameterType="map" resultType="WorkInfo">
@@ -48,23 +50,16 @@
 
 		<update id="updateWorkInfo" parameterType="map">
 			update
-			workInfo
+				workInfo
 			set
-			conCat('W',subStr(contractID,3))as workInfoID,
-			contractID,
-			#{workMonth}as workMonth,
-    		#{workStartDay}as workStartDay ,
-   	 		#{workEndDay}as workEndDay,
-    		#{workTime}as workTime,
-   			null ,
- 			null,
-    		date_format(now(),'%Y%m%d')
+    			workStartDay=#{workStartDay},
+   	 			workEndDay=#{workEndDay},
+    			workTime=#{workTime},
+    			updateDate=date_format(now(),'%Y%m%d')
 			where
-			employeeID=#{employeeID}
-			AND workStartDay >= #{contractBeginDate}
- 			and status = '1'
-
-
+				employeeID=#{employeeID}
+ 			AND
+ 				workMonth=#{workMonth}
 	</update>
 
 </mapper>

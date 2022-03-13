@@ -9,4 +9,6 @@ public interface WorkInfoMapper {
 	int insertWorkInfo(Map<String, String> map);
 
 	String queryWorkinfo(String employeeID);
+
+	int updateWorkInfo(Map<String,String> map);
 }

@@ -80,7 +80,9 @@
 				<div th:if="${(uploadInfo == '111')}">登録は成功しました。</div>
 				<div th:if="${(upTransportInfo == '001')}">稼働月の勤怠は既に提出済み。</div>
 				<div th:if="${(upTransportInfo == '002')}">登録は失敗しました</div>
+				<div th:if="${(updateTransportInfo == '003')}">修正は失敗しました</div>
 				<div th:if="${(upTransportInfo == '111')}">登録は成功しました</div>
+				<div th:if="${(updateTransportInfo == '222')}">修正は成功しました</div>
 			</div>
 			<div class="message-button"><button class="message-quit" onclick="messagetExit()">確認</button></div>
 		</div>
