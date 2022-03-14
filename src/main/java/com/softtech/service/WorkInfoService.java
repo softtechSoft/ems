@@ -9,5 +9,5 @@ public interface WorkInfoService {
 	String queryWorkinfo(String employeeID);
 
 	//更新と修正
-	int updateWorkInfo(Map<String,String> Map);
+	int updateWorkInfo(Map<String,String> map);
 }
