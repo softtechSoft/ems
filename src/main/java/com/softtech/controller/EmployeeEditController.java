@@ -52,12 +52,14 @@ public class EmployeeEditController {
 				+ "-" + employee.getBirthday().substring(6);
 		employeeEditBean.setBirthday(birthday);
 		employeeEditBean.setAge(employee.getAge());
+		employeeEditBean.setEpType(employee.getEpType());
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = sdFormat.parse(employee.getJoinedDate());
 		employeeEditBean.setJoinedDateString(sdFormat2.format(date));
-
+		employeeEditBean.setPersonNumber(employee.getPersonNumber());
+        employeeEditBean.setDepartment(employee.getDepartment());
 		employeeEditBean.setJoinedTime(employee.getJoinedTime());
 		employeeEditBean.setPostCode(employee.getPostCode());
 		employeeEditBean.setAddress(employee.getAddress());

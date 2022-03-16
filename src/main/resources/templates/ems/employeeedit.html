@@ -61,14 +61,9 @@
 				<tr style="background-color:#bfe1ff">
 					<th>社員タイプ</th>
 					<td>
-						<select name="epType">
-						<option value="">選択<option>
-						<option value="0">正社員<option>
-						<option value="1">契約社員<option>
-						<option value="2">個人事業<option>
-						<option value="3">その他<option>
-						</select>
+						<input type="text" id="epType" class="subject" name="epType" title="正社員" th:value="${employeeEditBean.epType}" />
 					</td>
+
 				</tr>
 
 
@@ -85,7 +80,7 @@
 				<tr style="background-color:#bfe1ff">
 					<th>個人番号</th>
 					<td>
-						<input id="employeeName" class="" name="" type="text" title="" />
+					<input type="text" id="employeeName" class="subject" name="personNumber" title="個人番号" th:value="${employeeEditBean.personNumber}" />
 					</td>
 				</tr>
 
@@ -110,13 +105,7 @@
 				<tr style="background-color:#dcfeeb">
 					<th class="subject">所属部門</th>
 					<td>
-						<select name="example1">
-						<option value="サンプル1">選択</option>
-						<option value="サンプル2">部門1></option>
-						<option value="サンプル3">部門2</option>
-						<option value="サンプル4">部門3</option>
-						<option value="サンプル5">そのた</option>
-						</select>
+						<input type="text" id="department" class="subject" name="department"title="所属部門" th:value="${employeeEditBean.department}" />
 					</td>
 				</tr>
 
@@ -159,12 +148,14 @@
 						<span class="name" th:text="${employeeEditBean.updateDate}"></span>
 					</td>
 
+				  </tr>
+				<tr>
+				<th></th>
+				<td><button type="submit" class="text-align:right" style="background-color:blue">更新</button></td>
 				</tr>
 
 			</table>
-			 <button type="submit" style="color:blue"  class="text-right">更新</button>
-
-
+			<!-- <button type="submit" class="text-align:right">更新</button>-->
 
 		</form>
 	</div>
