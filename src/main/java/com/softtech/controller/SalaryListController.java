@@ -1,5 +1,6 @@
 package com.softtech.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,7 @@ import com.softtech.util.DateUtil;
 @Controller
 public class SalaryListController {
 
+
 	@Autowired
 	SalaryListService salaryListService;
 
@@ -46,21 +48,22 @@ public class SalaryListController {
 		salarySelectJyoken.setYear(year);
 		// 画面操作の初期値は前年度に設定する。
 		salarySelectJyoken.setOperationFlg("1");
-
 		//画面へデータを渡す
 		model.addAttribute("selectjyoken",salarySelectJyoken);
-
 		//対象年度の給料リストを所得
 		String employeeID = (String) session.getAttribute("userEmoplyeeID");
 		List<SalaryInfoBean> sList = salaryListService.getSalaryList(year, employeeID);
-
 		//画面へ給料リストデータを渡す
 		model.addAttribute("salaryList",sList);
-
 		return "/ems/salarylist";
 	}
-   /*
-    * 明細画面表示
+   /**
+    *
+    *機能 : 明細画面遷移
+    *@param なし
+    *@return /salarydetail
+    * @exception なし
+    * @author テー@ソフトテク
     */
 	@GetMapping("/salarydetail")
 	public String SalaryDetails(Model model) {
@@ -74,26 +77,44 @@ public class SalaryListController {
 	 *
 	 * @return  salarylist
 	 * @author テー@ソフトテク
+	 * @throws ParseException
 	 */
 	@PostMapping("/salarylist")
 	public String salarylistSubmit(HttpServletResponse response,
 			@Valid @ModelAttribute("selectjyoken") SalarySelectJyoken selectjyoken,
-			BindingResult bindingResult,Model model) {
-
+			BindingResult bindingResult,Model model,HttpSession session) throws ParseException {
+		if (bindingResult.hasErrors()) {
+			return "/ems/salarylist";
+		 }
 		//画面操作フラグを取得
+		String optFlg = selectjyoken.getOperationFlg();
+
 
 		//画面上の年度を取得
+		String year=selectjyoken.getYear();
 
 		//画面上の年度から対象年度を生成（前年度の場合-1、次年度の場合+1)
+		//前年度の場合
+		if( "1".equals(optFlg)) {
+			year=DateUtil.yearMinus(year);
+
+		//次年度の場合
+		}else if( "2".equals(optFlg)) {
+			year=DateUtil.yearPlus(year);
+		}
 
 		//対象年度のデータをDBから取得
+		String employeeID = (String) session.getAttribute("userEmoplyeeID");
+		List<SalaryInfoBean> sList = salaryListService.getSalaryList(year,employeeID);
 
 		//DBデータ、年度データ、画面操作フラグのデータを画面へ設定する。
+		model.addAttribute("salaryList",sList);
+		selectjyoken.setYear(year);
 
 		//給料リスト画面に戻る。
 		return "/ems/salarylist";
-	}
 
 	}
+}
 
 

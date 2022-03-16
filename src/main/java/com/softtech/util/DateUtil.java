@@ -2,7 +2,9 @@
 package com.softtech.util;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -29,8 +31,67 @@ public class DateUtil {
 		SimpleDateFormat a = new SimpleDateFormat ("yyyy");
 		 b = a.format(dNow);
 		//TETS COMMIT
-		 //TEST 
+		 //TEST
 		return b;
+	}
+	/**
+	 * 機能：前年度を生成する
+	 *
+	 * @param 現在年度
+	 * @exception
+	 * @return 前年度
+	 * @author @ソフトテク
+	 */
+	public static String yearMinus(String year) {
+
+
+		SimpleDateFormat a = new SimpleDateFormat ("yyyy");
+
+		String s="";
+		try {
+			Date date = a.parse(year);
+			Calendar time= Calendar.getInstance();
+			time.setTime(date);
+			time.add(Calendar.YEAR,-1);
+
+			Date dt1 = time.getTime();
+			SimpleDateFormat a1 = new SimpleDateFormat ("yyyy");
+			s = a1.format(dt1);
+
+		} catch (ParseException e) {
+			s=year;
+		}
+		return s;
+
+	}/**
+	 * 機能：次年度を生成する
+	 *
+	 * @param 現在年度
+	 * @exception
+	 * @return 次年度
+	 * @author @ソフトテク
+	 */
+	public static String yearPlus(String year) {
+
+
+		SimpleDateFormat a = new SimpleDateFormat ("yyyy");
+
+		String s="";
+		try {
+			Date date = a.parse(year);
+			Calendar time= Calendar.getInstance();
+			time.setTime(date);
+			time.add(Calendar.YEAR,+1);
+
+			Date dt1 = time.getTime();
+			SimpleDateFormat a1 = new SimpleDateFormat ("yyyy");
+			s = a1.format(dt1);
+
+		} catch (ParseException e) {
+			s=year;
+		}
+		return s;
+
 	}
 
 	/**
@@ -87,5 +148,8 @@ public class DateUtil {
 	public static String formatTosepara(float getTransportExpense1) {
 		DecimalFormat df = new DecimalFormat("#,###.00");
 		return df.format(getTransportExpense1);
-		}
+	}
 }
+
+
+

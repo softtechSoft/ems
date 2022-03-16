@@ -20,24 +20,21 @@
 	  }
 
 	</script>
-
 </head>
-
 <body>
-
-  <form name="worksheet1" th:action="@{/salarylist}" th:object="${selectjyoken}" method="post">
+	<form name="worksheet1" th:action="@{/salarylist}" th:object="${selectjyoken}" method="post">
      <p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" ></p>
 	<!-- 検索条件 -->
 
 <h1>給料明細リスト</h1>
 	<!--隠しフィールド（field）前/次年度フラグ-->
 	<span><input type="hidden" id="operationFlg" th:field="*{operationFlg}" /></span>
-
+	<span><input type="hidden" id="year" th:field="*{year}" /></span>
 	<table style="width:1750px">
   	  	<tr>
-	 		<td> <button type="submit" onclick="clickBeforeYear()">前年度</button></td>
+	 		<td> <button type="submit"   onclick="clickBeforeYear()" class="btn btn-primary">前年度</button></td>
 	 		<td th:text="*{year}"> </td>
-			<td> <button type="submit" onclick="clickAfterYear()" class="btn btn-primary">次年度</button></td>
+			<td> <button type="submit"  onclick="clickAfterYear()" class="btn btn-primary">次年度</button></td>
 	 	</tr>
     </table>
 
