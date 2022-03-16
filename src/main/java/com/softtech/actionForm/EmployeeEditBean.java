@@ -69,6 +69,11 @@ public class EmployeeEditBean {
 	public void setEpType(String epType) {
 		this.epType = epType;
 	}
+	//個人番号
+	private String personNumber;
+
+	//所属部門
+	private String department;
 
 	public String getUpdateDate() {
 		return updateDate;
@@ -165,5 +170,23 @@ public class EmployeeEditBean {
 	public void setJoinedDateString(String joinedDateString) {
 		this.joinedDateString = joinedDateString;
 	}
+
+	public String getPersonNumber() {
+		return personNumber;
+	}
+
+	public void setPersonNumber(String personNumber) {
+		this.personNumber = personNumber;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+
 
 }

@@ -14,34 +14,41 @@
 <body th:onload="onload([[${state}]])">
 	<header>
 		<h3>社員情報変更</h3>
+
 	</header>
+
 	<div id="boder" class="boder">
-		<form class="wapper" method="POST" th:action="@{/btn-employeeEdit}" th:object="${employeeEditBean}" enctype="multipart/form-data">
-			<!-- エラーメッセージ -->
-			<ul style="text-align: center; color: red;">
+		<form class="text-left" method="POST" th:action="@{/btn-employeeEdit}" th:object="${employeeEditBean}" enctype="multipart/form-data">
+
+			<ul style="text-align :center; color: red;">
 				<li th:each="error : ${#fields.detailedErrors()}"><span th:text="${error.message}">Error message</span></li>
 			</ul>
-			<div style="text-align: center; color: red;">
+
+			<div style="text-algin:center; color: red;">
 				<span th:text="${updateMsg}"></span>
 			</div>
 
-			<!-- 社員情報 -->
+			<!-- <div style="text-align:center; color:red;" th:if="${employeeNameErr != ''}"><span th:text="${employeeNameErr}"></span></div>
+			<div style="text-align:center; color:red;" th:if="${joinedDateStringErr != ''}"><span th:text="${joinedDateStringErr}"></span></div> -->
 
 			<table>
-				<tr>
+				<tr style="background-color:#dcfeeb">
 					<th>社員ID</th>
 					<td>
 						<span class="name" th:text="${employeeEditBean.employeeID}"></span>
 						<input type="hidden" name="employeeID" th:value="${employeeEditBean.employeeID}">
 					</td>
+
 				</tr>
-				<tr>
+
+				<tr style="background-color:#bfe1ff">
 					<th class="subject">氏　名</th>
 					<td>
 						<input type="text" id="employeeName" class="subject" name="employeeName" title="氏名" th:value="${employeeEditBean.employeeName}" />
 					</td>
 				</tr>
-				<tr>
+
+				<tr style="background-color:#dcfeeb">
 					<th>性　別</th>
 					<td>
 						<input type="radio" name="sex" th:checked="${employeeEditBean.sex == '1'}" value="1" />
@@ -50,33 +57,35 @@
 						女
 					</td>
 				</tr>
-				<tr>
+
+				<tr style="background-color:#bfe1ff">
 					<th>社員タイプ</th>
 					<td>
-						<select name="epType">
-							<option value="">選択</option>
-							<option value="0">正社員</option>
-							<option value="1">契約社員</option>
-							<option value="2">個人事業</option>
-							<option value="3">その他</option>
-						</select>
+						<input type="text" id="epType" class="subject" name="epType" title="正社員" th:value="${employeeEditBean.epType}" />
 					</td>
+
 				</tr>
-				<tr>
+
+
+				<tr style="background-color:#dcfeeb">
 					<th>生年月日</th>
 					<td>
-						<input id="birthday" class="form-control" name="birthday" type="date" th:value="${employeeEditBean.birthday}" />
+						<input id="birthday" class="form-control-lg" name="birthday" type="date" th:value="${employeeEditBean.birthday}" />
 					</td>
 				</tr>
 
-				<tr>
+
+
+
+				<tr style="background-color:#bfe1ff">
 					<th>個人番号</th>
 					<td>
-						<input id="employeeName" class="" name="" type="text" title="" />
+					<input type="text" id="employeeName" class="subject" name="personNumber" title="個人番号" th:value="${employeeEditBean.personNumber}" />
 					</td>
 				</tr>
 
-				<tr>
+
+				<tr style="background-color:#dcfeeb">
 					<th>年　齢</th>
 					<td>
 						<span id="age"></span>
@@ -84,27 +93,23 @@
 					</td>
 				</tr>
 
-				<tr>
+
+				<tr style="background-color:#bfe1ff">
 					<th>入社年月日</th>
 					<td>
-						<input id="joinedDateString" class="" name="joinedDateString" type="date" th:value="${employeeEditBean.joinedDateString}" />
+						<input id="joinedDateString" class="form-control-lg" name="joinedDateString" type="date" th:value="${employeeEditBean.joinedDateString}" />
 					</td>
 				</tr>
 
-				<tr>
-					<th>所属部門</th>
+
+				<tr style="background-color:#dcfeeb">
+					<th class="subject">所属部門</th>
 					<td>
-						<select name="example1">
-							<option value="サンプル1">選択</option>
-							<option value="サンプル2">部門1</option>
-							<option value="サンプル3">部門2</option>
-							<option value="サンプル4">部門3</option>
-							<option value="サンプル5">そのた</option>
-						</select>
+						<input type="text" id="department" class="subject" name="department"title="所属部門" th:value="${employeeEditBean.department}" />
 					</td>
 				</tr>
 
-				<tr>
+				<tr style="background-color:#bfe1ff">
 					<th>社　齢</th>
 					<td>
 						<span id="joinedTime" class=""></span>
@@ -112,38 +117,46 @@
 					</td>
 				</tr>
 
-				<tr>
+
+				<tr style="background-color:#dcfeeb">
 					<th>郵便番号</th>
 					<td>
 						<input id="employeeName" class="" name="postCode" type="text" title="" th:value="${employeeEditBean.postCode}" />
 					</td>
 				</tr>
 
-				<tr>
+
+				<tr style="background-color:#bfe1ff">
 					<th>住　所</th>
 					<td>
 						<input id="employeeName" class="" name="address" type="text" title="" th:value="${employeeEditBean.address}" />
 					</td>
 				</tr>
 
-				<tr>
+
+				<tr style="background-color:#dcfeeb">
 					<th>電話番号</th>
 					<td>
 						<input id="employeeName" class="" name="phoneNumber" type="text" title="" th:value="${employeeEditBean.phoneNumber}" />
 					</td>
 				</tr>
 
-				<tr>
+
+				<tr style="background-color:#bfe1ff">
 					<th>前回更新日</th>
 					<td>
 						<span class="name" th:text="${employeeEditBean.updateDate}"></span>
 					</td>
 
+				  </tr>
+				<tr>
+				<th></th>
+				<td><button type="submit" class="text-align:right" style="background-color:blue">更新</button></td>
 				</tr>
 
 			</table>
+			<!-- <button type="submit" class="text-align:right">更新</button>-->
 
-			<input class="enter" type="submit" value="更新">
 		</form>
 	</div>
 </body>

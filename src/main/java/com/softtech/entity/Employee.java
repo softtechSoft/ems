@@ -2,7 +2,7 @@ package com.softtech.entity;
 
 public class Employee {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 	private String employeeID;
@@ -22,13 +22,16 @@ public class Employee {
 	private String remark;
 	private String insertDate;
 	private String updateDate;
+	private String epType;
+	private String personNumber;
+	private String department;
 
 	public Employee() {
 	}
 
 	public Employee(String employeeID, String employeeName, String password, String status, String sex, String birthday,
 			String age, String joinedDate, String joinedTime, String postCode, String address, String phoneNumber,
-			String authority, String mailAdress, String insertDate, String updateDate) {
+			String authority, String mailAdress, String insertDate, String updateDate, String epType, String personNumber,String department) {
 		super();
 		this.employeeID = employeeID;
 		this.employeeName = employeeName;
@@ -46,7 +49,11 @@ public class Employee {
 		this.mailAdress = mailAdress;
 		this.insertDate = insertDate;
 		this.updateDate = updateDate;
+		this.epType = epType;
+		this.personNumber = personNumber;
+		this.department = department;
 	}
+
 
 	public String getEmployeeID() {
 		return employeeID;
@@ -182,7 +189,7 @@ public class Employee {
 				+ ", status=" + status + ", sex=" + sex + ", birthday=" + birthday + ", age=" + age + ", joinedDate="
 				+ joinedDate + ", joinedTime=" + joinedTime + ", postCode=" + postCode + ", address=" + address
 				+ ", phoneNumber=" + phoneNumber + ", authority=" + authority + ", mailAdress=" + mailAdress
-				+ ", insertDate=" + insertDate + ", updateDate=" + updateDate + "]";
+				+ ", insertDate=" + insertDate + ", updateDate=" + updateDate + ",epType=" + epType + "]";
 	}
 
 	public String getRemark() {
@@ -192,4 +199,32 @@ public class Employee {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+
+	public String getEpType() {
+
+		return epType;
+
+	}
+	public void setEpType(String epType) {
+		this.epType = epType;
+	}
+
+	public String getPersonNumber() {
+		return personNumber;
+	}
+
+	public void setPersonNumber(String personNumber) {
+		this.personNumber = personNumber;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+
+
 }
