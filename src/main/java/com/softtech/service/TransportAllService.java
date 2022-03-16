@@ -123,36 +123,36 @@ public class TransportAllService {
 		try {
 			int updateWork = workinfoService.updateWorkInfo(mapper);
 			if (updateWork == 1) {
-				//追加成功の場合、画面に下記メッセージを表示する。
-				//登録が成功しました
-				model.addAttribute("uploadInfo", "111");
+				//修正成功の場合、画面に下記メッセージを表示する。
+				//修正が成功しました
+				model.addAttribute("updateloadInfo", "123");
 			}else {
-				//登録は失敗の場合、画面に下記メッセージを表示する。
-				//登録は失敗しました
-				model.addAttribute("uploadInfo", "002");
+				//修正は失敗の場合、画面に下記メッセージを表示する。
+				//修正は失敗しました
+				model.addAttribute("updateloadInfo", "012");
 			}
 		} catch (Exception e) {
 			//追加失敗の場合、画面に下記メッセージを表示する。
-			//対象稼働月は既に入力です
-			model.addAttribute("uploadInfo", "001");
+			//ファイルアプロードは失敗しました
+			model.addAttribute("uploadFile", "001");
 		}
 
 		// 交通費テーブル修正
 		try {
 			int updatetransport = transportService.updateTransport(mapper);
 			if(updatetransport == 1 ) {
-				//追加成功の場合、画面に下記メッセージを表示する。
-				//登録が成功しました
-				model.addAttribute("upTransportInfo", "111");
+				//修正成功の場合、画面に下記メッセージを表示する。
+				//修正が成功しました
+				model.addAttribute("updateTransportInfo", "222");
 			}else {
-				//登録は失敗の場合、画面に下記メッセージを表示する。
-				//登録は失敗しました
-				model.addAttribute("uploadInfo", "002");
+				//修正は失敗の場合、画面に下記メッセージを表示する。
+				//修正は失敗しました
+				model.addAttribute("updateTransportInfo", "003");
 			}
 		} catch (Exception e) {
 			//追加失敗の場合、画面に下記メッセージを表示する。
-			//対象稼働月は既に入力です。
-			model.addAttribute("upTransportInfo", "001");
+			//ファイルアプロードは失敗しました
+			model.addAttribute("uploadFile", "001");
 		}
 
 		// 交通情報を取得し戻る
