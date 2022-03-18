@@ -57,11 +57,17 @@
 						女
 					</td>
 				</tr>
-
+<!-- 修正 -->
 				<tr style="background-color:#bfe1ff">
 					<th>社員タイプ</th>
 					<td>
-						<input type="text" id="epType" class="subject" name="epType" title="正社員" th:value="${employeeEditBean.epType}" />
+			            <select name="epType">
+						<option value="0">正社員<option>
+						<option value="1">契約社員<option>
+						<option value="2">個人事業<option>
+						<option value="3">その他<option>
+						</select>
+
 					</td>
 
 				</tr>
@@ -101,11 +107,16 @@
 					</td>
 				</tr>
 
-
+<!-- 修正 -->
 				<tr style="background-color:#dcfeeb">
 					<th class="subject">所属部門</th>
 					<td>
-						<input type="text" id="department" class="subject" name="department"title="所属部門" th:value="${employeeEditBean.department}" />
+			            <select name="example1">
+						<option value="サンプル1">部門1</option>
+						<option value="サンプル2">部門2</option>
+						<option value="サンプル3">部門3</option>
+						<option value="サンプル4">そのた</option>
+						</select>
 					</td>
 				</tr>
 
