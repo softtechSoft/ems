@@ -20,12 +20,8 @@
     	null
     FROM
     	contract
-    WHERE
-    		employeeID=#{employeeID}
- 		AND
- 			workStartDay >= #{contractBeginDate}
- 		AND
- 			status = '1'
+    WHERE employeeID=#{employeeID}
+ 	AND status = '1'
 	</insert>
 
 	<select id="queryWorkInfo" parameterType="map" resultType="WorkInfo">
