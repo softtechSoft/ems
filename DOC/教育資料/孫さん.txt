@@ -1,0 +1,15 @@
+打ち合わせ　議事録
+
+2022/3/22
+１）テーブル調整
+　内容：勤怠情報テーブル（workinfo）から稼働情報ID（workInfoID）を削除
+　作業：
+　　①テーブル定義書修正
+　　　勤怠情報シート、履歴リストシート
+　　②CreateTable.sql
+　　③WorkInfoMapper.xml
+　　　・insertWorkInfo
+　　　・updateWorkInfo
+
+
+
