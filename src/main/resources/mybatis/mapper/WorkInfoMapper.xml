@@ -9,19 +9,20 @@
 	into
 		workInfo
 	SELECT
-		conCat('W',subStr(contractID,3))as workInfoID,
 		contractID,
 		#{workMonth}as workMonth,
     	#{workStartDay}as workStartDay ,
    	 	#{workEndDay}as workEndDay,
     	#{workTime}as workTime,
-   		null ,
+   		null,
     	date_format(now(),'%Y%m%d'),
     	null
     FROM
     	contract
-    WHERE employeeID=#{employeeID}
- 	AND status = '1'
+    WHERE
+    	employeeID=#{employeeID}
+ 	AND
+ 		status = '1'
 	</insert>
 
 	<select id="queryWorkInfo" parameterType="map" resultType="WorkInfo">
@@ -53,8 +54,6 @@
     			workTime=#{workTime},
     			updateDate=date_format(now(),'%Y%m%d')
 			where
-				workInfoID=#{workInfoID}
- 			AND
  				workMonth=#{workMonth}
 	</update>
 
