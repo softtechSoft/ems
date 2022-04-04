@@ -189,7 +189,7 @@ public class Employee {
 				+ ", status=" + status + ", sex=" + sex + ", birthday=" + birthday + ", age=" + age + ", joinedDate="
 				+ joinedDate + ", joinedTime=" + joinedTime + ", postCode=" + postCode + ", address=" + address
 				+ ", phoneNumber=" + phoneNumber + ", authority=" + authority + ", mailAdress=" + mailAdress
-				+ ", insertDate=" + insertDate + ", updateDate=" + updateDate + ",epType=" + epType + "]";
+				+ ", insertDate=" + insertDate + ", updateDate=" + updateDate + ",epType=" + epType + ",department=" + department + "]";
 	}
 
 	public String getRemark() {
