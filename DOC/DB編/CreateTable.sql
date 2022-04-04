@@ -115,10 +115,6 @@ insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日',
 primary key(contractID,workMonth)
 )comment'勤怠情報';
-Insert into workinfo values
-('W001','CT001','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null),
-('W002','CT002','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null),
-('W003','CT003','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null);
 alter table workinfo modify workTime float not null default 0 comment'稼働時間';
 
 drop table if exists claim;
