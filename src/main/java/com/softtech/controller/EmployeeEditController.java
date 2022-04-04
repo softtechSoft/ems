@@ -119,6 +119,7 @@ public class EmployeeEditController {
 		map.put("employeeName", employeeEditBean.getEmployeeName());
 		map.put("sex", employeeEditBean.getSex());
 		map.put("epType", employeeEditBean.getEpType());
+		map.put("department" ,employeeEditBean.getDepartment());
 
 		Date birthday_date = sdFormat.parse(employeeEditBean.getBirthday());
 		map.put("birthday", sdFormat.format(birthday_date));

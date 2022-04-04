@@ -28,16 +28,18 @@
 		update ems.employee set password = md5(#{password}),updateDate = date_format(now(),'%Y%m%d') where mailAdress=#{email}
 	</update>
 
-  	<update id="updateEmployee" parameterType="map">
+  <update id="updateEmployee" parameterType="map">
 		update ems.employee set employeeName = #{employeeName},password = #{password},
-		status = #{status}, sex = #{sex},birthday = #{birthday},age = #{age},joinedDate = #{joinedDate},
+		status = #{status}, sex = #{sex},birthday = #{birthday},age = #{age},joinedDate = #{joinedDate},epType=#{epType},department=#{department},
 		joinedTime = #{joinedTime},postCode = #{postCode},address = #{address},phoneNumber = #{phoneNumber},
 		authority = #{authority},mailAdress = #{mailAdress} where employeeID =#{employeeID}
 	</update>
 
+
+
   	<update id="updateEmployeeAll" parameterType="map">
 		update ems.employee set employeeName = #{employeeName},
-		sex = #{sex},birthday = #{birthday},age = #{age},joinedDate = #{joinedDate},
+		sex = #{sex},birthday = #{birthday},age = #{age},joinedDate = #{joinedDate},epType=#{epType},department=#{department},
 		joinedTime = #{joinedTime},postCode = #{postCode},address = #{address},phoneNumber = #{phoneNumber},
 		updateDate = #{updateDate} where employeeID =#{employeeID}
 	</update>

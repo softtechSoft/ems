@@ -61,13 +61,12 @@
 				<tr style="background-color:#bfe1ff">
 					<th>社員タイプ</th>
 					<td>
-			            <select name="epType">
-						<option value="0">正社員<option>
-						<option value="1">契約社員<option>
-						<option value="2">個人事業<option>
-						<option value="3">その他<option>
+			            <select name="epType" th:value ="${employeeEditBean.epType}">
+						<option value="正社員">正社員<option>
+						<option value="契約社員">契約社員<option>
+						<option value="個人事業">個人事業<option>
+						<option value="">その他<option>
 						</select>
-
 					</td>
 
 				</tr>
@@ -109,13 +108,13 @@
 
 <!-- 修正 -->
 				<tr style="background-color:#dcfeeb">
-					<th class="subject">所属部門</th>
+					<th>所属部門</th>
 					<td>
-			            <select name="example1">
-						<option value="サンプル1">部門1</option>
-						<option value="サンプル2">部門2</option>
-						<option value="サンプル3">部門3</option>
-						<option value="サンプル4">そのた</option>
+						<select name="department" th:value="${employeeEditBean.department}">
+						<option value="部門1">部門1</option>
+						<option value="部門2">部門2</option>
+						<option value="部門3">部門3</option>
+						<option value="部門4">そのた</option>
 						</select>
 					</td>
 				</tr>
