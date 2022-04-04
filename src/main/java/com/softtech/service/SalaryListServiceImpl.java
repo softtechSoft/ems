@@ -47,6 +47,7 @@ public class SalaryListServiceImpl implements SalaryListService{
 		// EntityからFormBeanへ変換。
 		return changeData(salaryInfoList);
 
+
 	}
 	/**
 	 * 機能：給料Entityから給料FormBeanに変換する
@@ -80,6 +81,8 @@ public class SalaryListServiceImpl implements SalaryListService{
 			salaryInfoBean.setSum(si.getSum());
 			//他の画面項目を設定する
 			salaryInfoBeans.add(salaryInfoBean);
+
+			salaryInfoBean.setEmployeeID(si.getEmployeeID());
 		}
 		return salaryInfoBeans;
 	}
