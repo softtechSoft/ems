@@ -149,6 +149,25 @@ public class DateUtil {
 		DecimalFormat df = new DecimalFormat("#,###.00");
 		return df.format(getTransportExpense1);
 	}
+
+	/**
+	 * 機能：YYYY/MMからYYYMMに変更
+	 *
+	 * @param 年月
+	 * @return 変更後年月
+	 * @exception なし
+	 */
+	public static String changeYMToDate(String month) {
+		// yyyymm→YYYY/MMに変換
+		if (month.length() < 4 ) return month;
+		String monthDate="";
+		monthDate = month.substring(0, 4) + month.substring(4);
+		return monthDate;
+	}
+
+
+
+
 }
 
 

@@ -38,6 +38,7 @@
 	 	</tr>
     </table>
 
+
 	<!-- 給料リスト -->
 	<table border="1"  class="salrylist-table">
     	 <tr>
@@ -62,8 +63,9 @@
 	    	<td  th:text="${salary.municipalTax}"></td>
 	    	<td  th:text="${salary.sum}"></td>
 
+					<!-- 給料明細データ -->
+	        <td  ><a th:href="@{/salarydetail(p1=${salary.month},p2=${salary.employeeID})}"  >明細</a></td>
 
-	    <td  ><a th:href="@{/salarydetail}">明細</a>	</td>
 
 
 		 </tr>

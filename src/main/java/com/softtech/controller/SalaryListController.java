@@ -1,7 +1,9 @@
 package com.softtech.controller;
 
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,9 +17,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.softtech.actionForm.SalaryInfoBean;
 import com.softtech.actionForm.SalarySelectJyoken;
+import com.softtech.entity.SalaryInfo;
+import com.softtech.service.SalaryInfoServiceImpl;
 import com.softtech.service.SalaryListService;
 import com.softtech.util.DateUtil;
 /**
@@ -30,8 +35,13 @@ import com.softtech.util.DateUtil;
 public class SalaryListController {
 
 
+
+
 	@Autowired
 	SalaryListService salaryListService;
+	@Autowired
+	SalaryInfoServiceImpl salaryInfoService;
+
 
 	/**
 	 * 機能：画面初期表示
@@ -57,20 +67,48 @@ public class SalaryListController {
 		model.addAttribute("salaryList",sList);
 		return "/ems/salarylist";
 	}
-   /**
-    *
-    *機能 : 明細画面遷移
-    *@param なし
-    *@return /salarydetail
-    * @exception なし
-    * @author テー@ソフトテク
-    */
+
+
+	/**
+	 * 機能　：明細画面データ遷移
+	 * @param model
+	 * @param p1
+	 * @param p2
+	 *
+	 */
 	@GetMapping("/salarydetail")
-	public String SalaryDetails(Model model) {
-		SalaryInfoBean salaryInfoBean = new SalaryInfoBean();
+	public String SalaryDetails(Model model,@RequestParam("p1")String p1,@RequestParam("p2")String p2) {
+
+
+
+
+		Map<String, String> sqlParam = new HashMap<>();
+		//yyyy/mm から yyyymmに変更
+
+		sqlParam.put("yearMonth", DateUtil.chgMonthToYM(p1));
+
+		sqlParam.put("employeeID", p2);
+
+
+		SalaryInfo salary = salaryInfoService.querySalaryInfo(sqlParam);
+		SalaryInfoBean salaryInfoBean = salaryInfoService.tranferData(salary);
+		//yyyymm から　yyyy/mm　に変更
+		salaryInfoBean.setMonth(DateUtil.changeYMToDate(p1));
+
+
+
 		model.addAttribute("salarydata", salaryInfoBean);
+
+
+
 		return "/ems/salarydetail";
+
 	}
+
+
+
+
+
 	/**
 	 * 機能：前年度/次年度ボタン処理
 	 *
@@ -115,6 +153,6 @@ public class SalaryListController {
 		return "/ems/salarylist";
 
 	}
+
+
 }
-
-
