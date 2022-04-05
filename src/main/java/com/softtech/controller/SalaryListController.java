@@ -76,7 +76,7 @@ public class SalaryListController {
 	 * @param p2
 	 *
 	 */
-	@GetMapping("/salarydetail")
+	@GetMapping("/toSalarydetail")
 	public String SalaryDetails(Model model,@RequestParam("p1")String p1,@RequestParam("p2")String p2) {
 
 
