@@ -354,5 +354,6 @@ public class SalaryInfo {
 	 */
 	public void setSpecialReduce(String specialReduce) {
 		this.specialReduce = specialReduce;
-	}
+}
+
 }

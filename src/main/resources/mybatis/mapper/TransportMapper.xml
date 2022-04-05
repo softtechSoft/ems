@@ -10,7 +10,8 @@
 
 	<insert id="insertTransport" parameterType="map">
 		insert
-		into transport(
+		into
+		transport(
 			employeeID,
 			workMonth,
 			startDate,
@@ -69,27 +70,24 @@
     		1
 	</select>
 	<update id="updateTransport"  parameterType="map">
-	    	update
-		transport
+	    update
+			transport
 		set
-		employeeID=#{employeeID},
-		workMonth=#{workMonth},
-		startDate#{startDate},
-		startStation=#{startStation},
-		endStation=#{endStation},
-		transportFacility=#{transportFacility},
-		transportExpense1=#{transportExpense1},
-		midStation1=#{midStation1},
-		transportFacility1=#{transportFacility1},
-		midStation2=#{midStation2},
-		midStation3=#{midStation3},
-		transport#{transport},
-		businessTrip=#{businessTrip},
-		status='0',
-		insertDate=date_format(now(),'%Y%m%d')
+	  		startDate=#{startDate},
+			startStation=#{startStation},
+			endStation=#{endStation},
+			transportFacility=#{transportFacility},
+			transportExpense1=#{transportExpense1},
+			midStation1=#{midStation1},
+			transportFacility1=#{transportFacility1},
+			midStation2=#{midStation2},
+			midStation3=#{midStation3},
+			transport=#{transport},
+			businessTrip=#{businessTrip},
+			updateDate=date_format(now(),'%Y%m%d')
     	where
-		t.employeeID = #{employeeID},
-	AND
-		t.workMonth = #{workMonth}
+			employeeID = #{employeeID}
+		AND
+			workMonth = #{workMonth}
 	</update>
 </mapper>

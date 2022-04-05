@@ -21,6 +21,7 @@ Insert into employee values
 ('E001' ,'社員１' ,md5('123456') ,'0' ,'0','0','19860101' ,'34','20190101','2','2310859','横浜市中区','07012344321','0', 'e001@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
 ('E002' ,'社員２' ,md5('123456') ,'0' ,'0' ,'0','19860102' ,'34','20190101','2','2310859','横浜市中区','07012344322','0', 'e002@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
 ('E003' ,'社員３' ,md5('123456') ,'0' ,'0' ,'0','19860103' ,'34','20190101','2','2310859','横浜市中区','07012344323','1','e003@it-softtech.com',date_format(now(),'%Y%m%d') ,null);
+alter table employee add column department varchar(1)
 
 drop table if exists ofcfunction;
 create table ofcfunction(
@@ -105,7 +106,6 @@ Insert into contract values
 
 drop table if exists workinfo;
 create table workinfo(
-workInfoID varchar(10) not null  comment'稼働情報ID',
 contractID varchar(10) not null  comment'契約ID',
 workMonth varchar(6) not null comment'稼働月',
 workStartDay varchar(8)	not null comment'稼働開始日',
@@ -114,12 +114,8 @@ workTime int(3) not null comment'稼働時間',
 workInfoFile varchar(50) comment'稼働表パス',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日',
-primary key(workInfoID,contractID,workMonth)
+primary key(contractID,workMonth)
 )comment'勤怠情報';
-Insert into workinfo values
-('W001','CT001','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null),
-('W002','CT002','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null),
-('W003','CT003','202101','20210101','20210131',180,'D:\\Sheet\\', date_format(now(), '%Y%m%d'), null);
 alter table workinfo modify workTime float not null default 0 comment'稼働時間';
 
 drop table if exists claim;

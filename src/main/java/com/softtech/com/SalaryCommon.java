@@ -15,6 +15,9 @@ public class SalaryCommon {
     // ユーザーID
     private String employeeID;
 
+
+
+
 	/**
 	 * @return employeeID
 	 */
@@ -55,5 +58,10 @@ public class SalaryCommon {
 	 */
 	public void setToMonth(String toMonth) {
 		this.toMonth = toMonth;
+
+
 	}
+
 }
+
+

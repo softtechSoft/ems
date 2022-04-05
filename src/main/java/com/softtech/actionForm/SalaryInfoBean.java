@@ -1,5 +1,9 @@
 package com.softtech.actionForm;
 
+import java.util.ArrayList;
+
+import com.softtech.com.MonthInfo;
+
 /**
  * 概要：給料詳細画面用Bean
  *
@@ -7,6 +11,7 @@ package com.softtech.actionForm;
  * 作成日：2021/7/20
  */
 public class SalaryInfoBean {
+
 
 	//ユーザID
 	private String employeeID ;
@@ -78,6 +83,12 @@ public class SalaryInfoBean {
 	private String insertDate ;
 	// 更新日
 	private String updateDate ;
+	// 月
+	public ArrayList<MonthInfo> monthInfoList;
+	// 選択されたid
+	private Integer selectedMonthId;
+
+
 	/**
 	 * @return employeeID
 	 */
@@ -498,6 +509,22 @@ public class SalaryInfoBean {
 	public void setSpecialReduce(String specialReduce) {
 		this.specialReduce = specialReduce;
 	}
+
+
+	
+	public ArrayList<MonthInfo> getMonthInfoList() {
+		return monthInfoList;
+	}
+	public void setMonthInfoList(ArrayList<MonthInfo> monthInfoList) {
+		this.monthInfoList = monthInfoList;
+	}
+	public Integer getSelectedMonthId() {
+		return selectedMonthId;
+	}
+	public void setSelectedMonthId(Integer selectedMonthId) {
+		this.selectedMonthId = selectedMonthId;
+	}
+
 
 
 }

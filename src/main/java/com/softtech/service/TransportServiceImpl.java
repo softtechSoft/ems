@@ -10,7 +10,7 @@ import com.softtech.entity.Transport;
 import com.softtech.mapper.TransportMapper;
 
 @Service
-public class TransportServiceImpl implements TransportService { 
+public  class TransportServiceImpl implements TransportService {
 	@Autowired
 	private TransportMapper transportMapper;
 
@@ -38,6 +38,10 @@ public class TransportServiceImpl implements TransportService {
 	public int insertTransport(Map<String, String> map) {
 
 		return transportMapper.insertTransport(map);
+	}
+	@Override
+	public int updateTransport(Map<String,String> Map) {
+	    return transportMapper.updateTransport(Map);
 	}
 
 }

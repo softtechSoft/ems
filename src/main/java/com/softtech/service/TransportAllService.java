@@ -99,6 +99,67 @@ public class TransportAllService {
 		transport = getTransportInf(mapper);
 		return transport;
 	}
+
+
+	//修正機能
+	public Transport updateTransport(MultipartFile file,Map<String, String> mapper, Model model) throws Exception {
+
+		//画面に入力したデータ
+		gamenParam.putAll(mapper);
+
+		Transport transport = new Transport();
+
+		//stateは非NULL状態、メッセージを表示する。
+		model.addAttribute("state", "1");
+
+		// ファイルアップロード
+		if (!uploadTimeReport(file)) {
+			//ファイルのアップロードに失敗の場合、画面に下記メッセージを表示する。
+			//アップロードは失敗しました
+			model.addAttribute("uploadInfo", "001");
+		}
+
+		// 勤怠テーブルに修正
+		try {
+			int updateWork = workinfoService.updateWorkInfo(mapper);
+			if (updateWork == 1) {
+				//修正成功の場合、画面に下記メッセージを表示する。
+				//修正が成功しました
+				model.addAttribute("updateloadInfo", "123");
+			}else {
+				//修正は失敗の場合、画面に下記メッセージを表示する。
+				//修正は失敗しました
+				model.addAttribute("updateloadInfo", "012");
+			}
+		} catch (Exception e) {
+			//追加失敗の場合、画面に下記メッセージを表示する。
+			//ファイルアプロードは失敗しました
+			model.addAttribute("uploadFile", "001");
+		}
+
+		// 交通費テーブル修正
+		try {
+			int updatetransport = transportService.updateTransport(mapper);
+			if(updatetransport == 1 ) {
+				//修正成功の場合、画面に下記メッセージを表示する。
+				//修正が成功しました
+				model.addAttribute("updateTransportInfo", "222");
+			}else {
+				//修正は失敗の場合、画面に下記メッセージを表示する。
+				//修正は失敗しました
+				model.addAttribute("updateTransportInfo", "003");
+			}
+		} catch (Exception e) {
+			//追加失敗の場合、画面に下記メッセージを表示する。
+			//ファイルアプロードは失敗しました
+			model.addAttribute("uploadFile", "001");
+		}
+
+		// 交通情報を取得し戻る
+		transport = getTransportInf(mapper);
+		return transport;
+	}
+
 	/**
 	 * 機能：交通費情報を取得する
 	 *
@@ -112,6 +173,7 @@ public class TransportAllService {
 		Transport transport = new Transport();
 
 		// 交通情報を取得し戻る
+		//query
 		Map<String, String> transportMapper = new HashMap<String, String>();
 		transportMapper.put("employeeID", mapper.get("employeeID"));
 		transport = transportService.queryTransport(transportMapper);

@@ -14,7 +14,7 @@
 		<h3>稼働管理</h3>
     </header>
     <div id="boder" class="boder">
-		<form th:action="@{/transport-workinfo}" class="wapper" method="POST" enctype="multipart/form-data">
+		<form th:action="@{/transport-workinfo}" id='transpirt' name="transpirt"  class="wapper" method="POST" enctype="multipart/form-data">
 				<label>社員名</label><span class="name" th:text="${session.userEmployeeName}">USER</span>
 			<div>
 				<label>稼働月</label><input id="workMonth" class="workinfo-month" name="workMonth" type="text" maxlength="7" title="稼働月" required />
@@ -58,13 +58,14 @@
 			<table>
 				<tr>
 					<td>
-						<input class="enter" type="submit" value="修正">
+						<input onclick="judge('1')" class="enter" type="button" value="修正">
 					</td>
 					<td>
-						<input class="enter" type="submit" value="提出">
+						<input onclick="judge('2')" class="enter" type="button" value="提出">
 					</td>
 				</tr>
 			</table>
+			<input type="hidden"  id ="flag" name="flag"/>
 
 		</form>
 	</div>
@@ -76,10 +77,14 @@
 				<div th:if="${(uploadFile == '111')}">ファイルアプロードは成功しました。</div>
 				<div th:if="${(uploadInfo == '001')}">稼働月の勤怠は既に提出済み。</div>
 				<div th:if="${(uploadInfo == '002')}">登録は失敗しました。</div>
+				<div th:if="${(updateloadInfo == '012')}">修正は失敗しました。</div>
 				<div th:if="${(uploadInfo == '111')}">登録は成功しました。</div>
+				<div th:if="${(updateloadInfo == '123')}">修正は成功しました。</div>
 				<div th:if="${(upTransportInfo == '001')}">稼働月の勤怠は既に提出済み。</div>
 				<div th:if="${(upTransportInfo == '002')}">登録は失敗しました</div>
+				<div th:if="${(updateTransportInfo == '003')}">修正は失敗しました</div>
 				<div th:if="${(upTransportInfo == '111')}">登録は成功しました</div>
+				<div th:if="${(updateTransportInfo == '222')}">修正は成功しました</div>
 			</div>
 			<div class="message-button"><button class="message-quit" onclick="messagetExit()">確認</button></div>
 		</div>

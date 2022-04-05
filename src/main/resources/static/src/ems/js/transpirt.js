@@ -75,6 +75,12 @@ function chekMonth()
 		return false;
 	}
 }
-
-
-
+//判断ボタン
+function judge(flag){
+	if (flag=="1"){
+	document.getElementById('transpirt').action="transport-update";
+	}else{
+		document.getElementById('transpirt').action="transport-workinfo";
+	}
+	document.transpirt.submit();
+}
