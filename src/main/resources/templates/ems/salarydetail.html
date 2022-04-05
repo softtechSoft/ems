@@ -36,43 +36,32 @@
 		<h3>給料明細</h3>
     </header>
 
- <form name="salaryDetail" th:action="@{/request-salarydetail}" th:object="${salarydata}" method="post">
-
-    <div class="control">
+ 		<form name="salaryDetail" th:action="@{/request-salarydetail}" th:object="${salarydata}" method="post">
+		 <div class="control">
 		<div class="options">
 			<select id="years" class="years" onchange="checkMonth()">
 			</select>
-			<span>年</span>
-			<select id="months" class="months">
-				<option>1</option>
-				<option>2</option>
-				<option>3</option>
-				<option>4</option>
-				<option>5</option>
-				<option>6</option>
-				<option>7</option>
-				<option>8</option>
-				<option>9</option>
-				<option>10</option>
-				<option>11</option>
-				<option>12</option>
-			</select>
-			<span>月</span>
+
 			<!--
 			<a class="button-search" href="javascript:querytData()">検索</a>
 			 -->
+			  <select id="selectedMonthId" name="selectedMonthId">
+   			<option th:each="month : *{monthInfoList}" th:value="${month.id}" th:text="${month.name}"
+          				 th:selected="${month.id} == *{selectedMonthId}" >
+   			 </option>
+  				</select>
 			 <!--隠しフィールド（field）-->
 			 <span><input type="hidden" id="month" th:field="*{month}" /></span>
 			<span>
 			 	<input type="button" onclick="search()" value="検索" />
-			 </span>
-		</div>
+				 </span>
+	</div>
 	</div>
 
 	<table>
-	 <td width="50"></td>
-	 <td>
-	    <table border="1" cellspacing="0" cellpadding="0"  width:100%; >
+				 <td width="50"></td>
+	 			<td>
+	   		 <table border="1" cellspacing="0" cellpadding="0"  width:100%; >
 			<tr style="background-color:#dcfeeb">
 			<td rowspan="12">  給与部分 </td>
 	        </tr>
