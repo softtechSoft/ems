@@ -30,17 +30,17 @@ import com.softtech.util.DateUtil;
 /**
  * 概要：給料リスト機能
  *
- * 作成者：王@ソフトテク
+ * 作成者：テー@ソフトテク
  * 作成日：2021/4/13
  */
 @Controller
 public class SalaryListController {
 
-
-
-
+	// 給料リストサービス
 	@Autowired
 	SalaryListService salaryListService;
+
+	// 給料サービス
 	@Autowired
 	SalaryInfoServiceImpl salaryInfoService;
 
@@ -72,10 +72,11 @@ public class SalaryListController {
 
 
 	/**
-	 * 機能　：明細画面データ遷移
+	 * 機能：明細画面データ遷移
+	 *
 	 * @param model
-	 * @param p1
-	 * @param p2
+	 * @param p1 選択された行の年月度
+	 * @param p2 ログイン者ID
 	 *
 	 */
 	@GetMapping("/toSalarydetail")
@@ -83,83 +84,86 @@ public class SalaryListController {
 
 		Map<String, String> sqlParam = new HashMap<>();
 		//yyyy/mm から yyyymmに変更
-
 		sqlParam.put("yearMonth", DateUtil.chgMonthToYM(p1));
-
 		sqlParam.put("employeeID", p2);
 
-
+		// 画面にされた行の年月、ログイン者IDの給料データを取得する
 		SalaryInfo salary = salaryInfoService.querySalaryInfo(sqlParam);
 		SalaryInfoBean salaryInfoBean = salaryInfoService.tranferData(salary);
 
 		ArrayList<MonthInfo> ml = new ArrayList<MonthInfo>();
 		MonthInfo info = new MonthInfo();
 		info.setId(1);
-		info.setName("1月");
+		info.setName("01");
 		ml.add(info);
-
 
 		MonthInfo info2 = new MonthInfo();
 		info2.setId(2);
-		info2.setName("2月");
+		info2.setName("02");
 		ml.add(info2);
-
 
 		MonthInfo info3 = new MonthInfo();
 		info3.setId(3);
-		info3.setName("3月");
+		info3.setName("03");
 		ml.add(info3);
 		MonthInfo info4 = new MonthInfo();
 		info4.setId(4);
-		info4.setName("4月");
+		info4.setName("04");
 		ml.add(info4);
+
 		MonthInfo info5 = new MonthInfo();
 		info5.setId(5);
-		info5.setName("5月");
+		info5.setName("05");
 		ml.add(info5);
+
 		MonthInfo info6= new MonthInfo();
 		info6.setId(6);
-		info6.setName("6月");
+		info6.setName("06");
 		ml.add(info6);
+
 		MonthInfo info7 = new MonthInfo();
 		info7.setId(7);
-		info7.setName("7月");
+		info7.setName("07");
 		ml.add(info7);
+
 		MonthInfo info8 = new MonthInfo();
 		info8.setId(8);
-		info8.setName("8月");
+		info8.setName("08");
 		ml.add(info8);
+
 		MonthInfo info9 = new MonthInfo();
 		info9.setId(9);
-		info9.setName("9月");
+		info9.setName("09");
 		ml.add(info9);
+
 		MonthInfo info10 = new MonthInfo();
 		info10.setId(10);
-		info10.setName("10月");
+		info10.setName("10");
 		ml.add(info10);
+
 		MonthInfo info11 = new MonthInfo();
 		info11.setId(11);
-		info11.setName("11月");
+		info11.setName("11");
 		ml.add(info11);
+
 		MonthInfo info12 = new MonthInfo();
 		info12.setId(12);
-		info12.setName("12月");
+		info12.setName("12");
 		ml.add(info12);
 
-
+		// 月度オープションを設定
 		salaryInfoBean.setMonthInfoList(ml);
-		//選択された月
 
+		//給料詳細画面にて選択された月を設定する
 		String monthID = DateUtil.chgMonthToYM(p1).substring(4);
 
 		switch (Integer.parseInt( monthID)){
 		case 1:
 			salaryInfoBean.setSelectedMonthId(1);
-
 			break;
 		case 2 :
-		salaryInfoBean.setSelectedMonthId(2);
-		break;
+			salaryInfoBean.setSelectedMonthId(2);
+			break;
 		case 3 :
 			salaryInfoBean.setSelectedMonthId(3);
 			break;
@@ -191,23 +195,18 @@ public class SalaryListController {
 			salaryInfoBean.setSelectedMonthId(12);
 			break;
 		default:
-
 			break;
 		}
 
+		//給料詳細画面へデータ渡す
 		model.addAttribute("salarydata", salaryInfoBean);
 
-
-
 		return "/ems/salarydetail";
-
-
 	}
 	/**
 	 * 機能：前年度/次年度ボタン処理
 	 *
-	 *
-	 * @return  salarylist
+	 * @return  リスト画面
 	 * @author テー@ソフトテク
 	 * @throws ParseException
 	 */
