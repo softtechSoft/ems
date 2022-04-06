@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.softtech.actionForm.SalaryInfoBean;
 import com.softtech.actionForm.SalarySelectJyoken;
 import com.softtech.com.MonthInfo;
+import com.softtech.com.YearInfo;
 import com.softtech.entity.SalaryInfo;
 import com.softtech.service.SalaryInfoServiceImpl;
 import com.softtech.service.SalaryListService;
@@ -198,11 +199,64 @@ public class SalaryListController {
 			break;
 		}
 
+		ArrayList<YearInfo> yl = new ArrayList<YearInfo>();
+		YearInfo year = new YearInfo();
+		year.setId(1);
+		year.setName("2023");
+		yl.add(year);
+
+		YearInfo year2 = new YearInfo();
+		year2.setId(2);
+		year2.setName("2022");
+		yl.add(year2);
+
+		YearInfo year3 = new YearInfo();
+		year3.setId(3);
+		year3.setName("2021");
+		yl.add(year3);
+
+		YearInfo year4 = new YearInfo();
+		year4.setId(4);
+		year4.setName("2020");
+		yl.add(year4);
+
+		YearInfo year5 = new YearInfo();
+		year5.setId(5);
+		year5.setName("2019");
+		yl.add(year5);
+
+		// 年度オープションを設定
+		salaryInfoBean.setYearInfoList(yl);
+
+		//給料詳細画面にて選択された年を設定する
+		String yearID = DateUtil.chgMonthToYM(p1).substring(4);
+
+		switch (Integer.parseInt( yearID)){
+		case 1:
+			salaryInfoBean.setSelectedYearId(1);
+			break;
+		case 2:
+			salaryInfoBean.setSelectedYearId(2);
+			break;
+		case 3:
+			salaryInfoBean.setSelectedYearId(3);
+			break;
+		case 4:
+			salaryInfoBean.setSelectedYearId(4);
+			break;
+		case 5:
+			salaryInfoBean.setSelectedYearId(5);
+			break;
+		default:
+			break;
+		}
+
 		//給料詳細画面へデータ渡す
 		model.addAttribute("salarydata", salaryInfoBean);
 
 		return "/ems/salarydetail";
 	}
+
 	/**
 	 * 機能：前年度/次年度ボタン処理
 	 *
@@ -246,6 +300,5 @@ public class SalaryListController {
 		return "/ems/salarylist";
 
 	}
-
 
 }
