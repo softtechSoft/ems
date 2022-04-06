@@ -22,11 +22,11 @@
 	</script>
 </head>
 <body>
-	<form name="worksheet1" th:action="@{/salarylist}" th:object="${selectjyoken}" method="post">
-     <p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" ></p>
+<form name="worksheet1" th:action="@{/salarylist}" th:object="${selectjyoken}" method="post">
+    <p style="color: red;" th:if="${#fields.hasErrors('month')}" th:errors="*{month}" ></p>
 	<!-- 検索条件 -->
 
-<h1>給料明細リスト</h1>
+	<h1>給料明細リスト</h1>
 	<!--隠しフィールド（field）前/次年度フラグ-->
 	<span><input type="hidden" id="operationFlg" th:field="*{operationFlg}" /></span>
 	<span><input type="hidden" id="year" th:field="*{year}" /></span>
@@ -38,22 +38,20 @@
 	 	</tr>
     </table>
 
-
 	<!-- 給料リスト -->
 	<table border="1"  class="salrylist-table">
     	 <tr>
         	<th width="200">年月</th>
-        	<th   width="400">基本給</th>
-        	<th  width="400">残業代</th>
-        	<th   width="400">交通費</th>
-        	<th  width="300">控除（社会）</th>
-        	<th    width="300">控除(源泉)</th>
-        	<th     width="300">控除(住民税)</th>
-        	<th  width="500">総額</th>
-        	<th    width="300">明細へ</th>
+        	<th width="400">基本給</th>
+        	<th width="400">残業代</th>
+        	<th width="400">交通費</th>
+        	<th width="300">控除（社会）</th>
+        	<th width="300">控除(源泉)</th>
+        	<th width="300">控除(住民税)</th>
+        	<th width="500">総額</th>
+        	<th width="300">明細へ</th>
      	</tr>
-     	<tr   th:each="salary : ${salaryList}">
-
+     	<tr th:each="salary : ${salaryList}">
 	    	<td  th:text="${salary.month}"></td>
 	    	<td  th:text="${salary.base}"></td>
 	    	<td  th:text="${salary.overTimePlus}"></td>
@@ -62,17 +60,11 @@
 	    	<td  th:text="${salary. withholdingTax}"></td>
 	    	<td  th:text="${salary.municipalTax}"></td>
 	    	<td  th:text="${salary.sum}"></td>
-
-					<!-- 給料明細データ -->
+			<!-- 給料明細データ -->
 	        <td  ><a th:href="@{/toSalarydetail(p1=${salary.month},p2=${salary.employeeID})}"  >明細</a></td>
-
-
-
 		 </tr>
 	</table>
 
- </form>
-
+</form>
 </body>
-
 </html>
