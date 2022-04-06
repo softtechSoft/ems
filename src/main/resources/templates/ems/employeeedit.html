@@ -61,15 +61,14 @@
 				<tr style="background-color:#bfe1ff">
 					<th>社員タイプ</th>
 					<td>
-			            <select name="epType">
-						<option value =正社員>正社員<option>
-						<option value =契約社員>契約社員<option>
-						<option value =個人事業>個人事業<option>
-						<option value="">その他<option>
-						</select>
+					<select id="selectedepTypeId" name="selectedepTypeId">
+   			<option th:each="epType : *{epTypeInfoList}" th:value="${epType.id}" th:text="${epType.name}"
+          				 th:selected="${epType.id} == *{selectedepTypeId}" >
+   			 </option>
+   			 </select>
 					</td>
+					</tr>
 
-				</tr>
 
 
 				<tr style="background-color:#dcfeeb">

@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.softtech.actionForm.EmployeeEditBean;
 import com.softtech.entity.Employee;
-//import com.softtech.entity.Employee;
 import com.softtech.service.EmployeeEditService;
 
 /**
@@ -36,13 +35,14 @@ public class EmployeeEditController {
 	@Autowired
 	EmployeeEditService employeeEditService;
 
+
+
 	@RequestMapping("/employeeedit")
 	public String employeeEdit(Model model, HttpSession session) throws ParseException {
 
 		Employee employee = employeeEditService.queryEmployeeAll((String) session.getAttribute("userEmoplyeeID"));
 
 		EmployeeEditBean employeeEditBean = new EmployeeEditBean();
-
 		employeeEditBean.setEmployeeName(employee.getEmployeeName());
 		employeeEditBean.setEmployeeID(employee.getEmployeeID());
 		employeeEditBean.setSex(employee.getSex());
