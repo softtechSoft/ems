@@ -3,6 +3,7 @@ package com.softtech.actionForm;
 import java.util.ArrayList;
 
 import com.softtech.com.MonthInfo;
+import com.softtech.com.YearInfo;
 
 /**
  * 概要：給料詳細画面用Bean
@@ -87,8 +88,16 @@ public class SalaryInfoBean {
 	public ArrayList<MonthInfo> monthInfoList;
 	// 選択されたid
 	private Integer selectedMonthId;
+	public ArrayList<YearInfo> yearInfoList;
+	private Integer selectedYearId;
 
 
+	public ArrayList<YearInfo> getYearInfoList() {
+		return yearInfoList;
+	}
+	public void setYearInfoList(ArrayList<YearInfo> yearInfoList) {
+		this.yearInfoList = yearInfoList;
+	}
 	/**
 	 * @return employeeID
 	 */
@@ -511,7 +520,7 @@ public class SalaryInfoBean {
 	}
 
 
-	
+
 	public ArrayList<MonthInfo> getMonthInfoList() {
 		return monthInfoList;
 	}
@@ -523,6 +532,12 @@ public class SalaryInfoBean {
 	}
 	public void setSelectedMonthId(Integer selectedMonthId) {
 		this.selectedMonthId = selectedMonthId;
+	}
+	public Integer getSelectedYearId() {
+		return selectedYearId;
+	}
+	public void setSelectedYearId(Integer selectedYearId) {
+		this.selectedYearId = selectedYearId;
 	}
 
 
