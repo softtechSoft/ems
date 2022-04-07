@@ -7,7 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.softtech.actionForm.EmployeeInfoBean;
-import com.softtech.com.epTypeInfo;
+import com.softtech.com.EptypeInfo;
+
 
 /**
  * 概要：社員情報処理
@@ -28,26 +29,33 @@ public class EmployeeInfoController {
 	 */
 	@RequestMapping("/employeeinfo")
 	public String employeeInfoInit(Model model) {
-		ArrayList<epTypeInfo> ml = new ArrayList<epTypeInfo>();
-		epTypeInfo info = new epTypeInfo();
+		//画面初期data準備
+		EmployeeInfoBean employeeInfoBean=new EmployeeInfoBean();
+		employeeInfoBean.setEmployeeID("123");
+		employeeInfoBean.setEmployeeName("りゅう");
+		employeeInfoBean.setAddress("abc");
+
+		ArrayList<EptypeInfo> ep = new ArrayList<EptypeInfo>();
+		EptypeInfo info = new EptypeInfo();
 		info.setId(1);
 		info.setName("正社員");
-		ml.add(info);
+		ep.add(info);
 
 
-		epTypeInfo info2 = new epTypeInfo();
+		EptypeInfo info2 = new EptypeInfo();
 		info2.setId(2);
 		info2.setName("契約社員");
-		ml.add(info2);
+		ep.add(info2);
 
 
-		epTypeInfo info3 = new epTypeInfo();
+		EptypeInfo info3 = new EptypeInfo();
 		info3.setId(3);
 		info3.setName("個人事業");
-		ml.add(info3);
+		ep.add(info3);
+
+		employeeInfoBean.setEpTypeInfoList(ep);
 
 
-	    //EmployeeInfoBean.setepTypeInfoList(ml);
 
 
 		/*switch (Integer.parseInt( I)){
@@ -67,11 +75,7 @@ public class EmployeeInfoController {
 			break;
 		`}*/
 
-		//画面初期data準備
-		EmployeeInfoBean employeeInfoBean=new EmployeeInfoBean();
-		employeeInfoBean.setEmployeeID("123");
-		employeeInfoBean.setEmployeeName("りゅう");
-		employeeInfoBean.setAddress("abc");
+
 
 		model.addAttribute("employeeInfo", employeeInfoBean);
 
