@@ -21,7 +21,7 @@ Insert into employee values
 ('E001' ,'社員１' ,md5('123456') ,'0' ,'0','0','19860101' ,'34','20190101','2','2310859','横浜市中区','07012344321','0', 'e001@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
 ('E002' ,'社員２' ,md5('123456') ,'0' ,'0' ,'0','19860102' ,'34','20190101','2','2310859','横浜市中区','07012344322','0', 'e002@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
 ('E003' ,'社員３' ,md5('123456') ,'0' ,'0' ,'0','19860103' ,'34','20190101','2','2310859','横浜市中区','07012344323','1','e003@it-softtech.com',date_format(now(),'%Y%m%d') ,null);
-alter table employee add column department varchar(1)
+alter table employee add column department varchar(1) comment'部門';
 
 drop table if exists ofcfunction;
 create table ofcfunction(
