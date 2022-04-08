@@ -1,10 +1,13 @@
 package com.softtech.actionForm;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import com.softtech.com.EptypeInfo;
 
 /**
  * 概要：給料詳細画面用Bean
@@ -74,6 +77,18 @@ public class EmployeeEditBean {
 
 	//所属部門
 	private String department;
+	//タイプ
+	public ArrayList<EptypeInfo> epTypeInfoList;
+	//選択されたid
+	private Integer selectedepTypeId;
+
+	public ArrayList<EptypeInfo> getEpTypeInfoList() {
+		return epTypeInfoList;
+	}
+
+	public void setEpTypeInfoList(ArrayList<EptypeInfo> epTypeInfoList) {
+		this.epTypeInfoList = epTypeInfoList;
+	}
 
 	public String getUpdateDate() {
 		return updateDate;
@@ -185,6 +200,14 @@ public class EmployeeEditBean {
 
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+
+	public Integer getSelectedepTypeId() {
+		return selectedepTypeId;
+	}
+
+	public void setSelectedepTypeId(Integer selectedepTypeId) {
+		this.selectedepTypeId = selectedepTypeId;
 	}
 
 	public class EmployeeInfo {

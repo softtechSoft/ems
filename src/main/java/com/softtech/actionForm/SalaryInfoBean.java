@@ -88,7 +88,9 @@ public class SalaryInfoBean {
 	public ArrayList<MonthInfo> monthInfoList;
 	// 選択されたid
 	private Integer selectedMonthId;
+	//年
 	public ArrayList<YearInfo> yearInfoList;
+	// 選択されたid
 	private Integer selectedYearId;
 
 

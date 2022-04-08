@@ -2,6 +2,7 @@ package com.softtech.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.softtech.actionForm.EmployeeEditBean;
+import com.softtech.com.EptypeInfo;
 import com.softtech.entity.Employee;
 import com.softtech.service.EmployeeEditService;
 
@@ -74,7 +76,26 @@ public class EmployeeEditController {
 		employeeEditBean.setPhoneNumber("07048029428");
 		employeeEditBean.setUpdateDate("2022,3,1");*/
 
+		ArrayList<EptypeInfo> ep = new ArrayList<EptypeInfo>();
+		EptypeInfo info = new EptypeInfo();
+		info.setId(1);
+		info.setName("正社員");
+		ep.add(info);
 
+
+		EptypeInfo info2 = new EptypeInfo();
+		info2.setId(2);
+		info2.setName("契約社員");
+		ep.add(info2);
+
+
+		EptypeInfo info3 = new EptypeInfo();
+		info3.setId(3);
+		info3.setName("個人事業");
+		ep.add(info3);
+		// タイプオープションを設定
+		employeeEditBean.setEpTypeInfoList(ep);
+		// 画面に渡す
 		model.addAttribute("employeeEditBean", employeeEditBean);
 
 		return "/ems/employeeedit";
@@ -152,5 +173,4 @@ public class EmployeeEditController {
 		return "/ems/employeeedit";
 
 	}
-
 }
