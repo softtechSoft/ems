@@ -41,13 +41,7 @@ function setAll()
 		}
 	}
 }
-function onload(actor)
-{
-	if(actor!=null)
-	{
-		document.getElementById("messagebox").style.display="block";
-	}
-}
+
 function messagetExit()
 {
     document.querySelector(".messagebox").style.display="none";

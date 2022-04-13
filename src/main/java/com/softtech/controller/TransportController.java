@@ -34,6 +34,32 @@ public class TransportController<WorkInfoComment> {
 	private TransportAllService transportAllService;
 
 
+	/**
+	 * 機能：対象年月が変更された場合の処理
+	 * 　　　対象年月のデータをDBから取得し画面へ渡す
+	 *
+	 *@param request　リクエスト
+	 * @param model　画面モデル
+	 * @return
+	 * @exception なし
+	 * @author 孫@ソフトテク
+	 */
+	@RequestMapping("/changeMonth")
+	public String changeMonth( HttpServletRequest request,HttpSession session,Model model)  {
+
+		// ①画面から、年月を取得
+
+		// ②セッションからログインIDを取得
+
+		//②年月、ログインIDを持っち、DBを検索する。（workinfo、transport）
+
+		//③DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+
+
+		//model.addAttribute("transport", transport);
+		return "/ems/transport";
+	}
+
 	@RequestMapping("/transport-workinfo")
 	//新規追加
 	public String insertTransport(HttpServletRequest request, HttpSession session,@RequestParam("file") MultipartFile file, Model model) throws Exception {
@@ -140,7 +166,7 @@ public class TransportController<WorkInfoComment> {
 
 		transport = transportAllService.doTransport(file, mapper, model);
 		model.addAttribute("transport", transport);
-		return "/ems/transpirt";
+		return "/ems/transport";
 	}
 
 
@@ -250,7 +276,7 @@ public class TransportController<WorkInfoComment> {
 
 			transport = transportAllService.updateTransport(file, mapper, model);
 			model.addAttribute("transport", transport);
-			return "/ems/transpirt";
+			return "/ems/transport";
 		}
 
 	/**
@@ -275,6 +301,6 @@ public class TransportController<WorkInfoComment> {
 		transport.setBusinessTrip("0");
 		//　画面へ戻す
 		model.addAttribute("transport", transport);
-		return "/ems/transpirt";
+		return "/ems/transport";
 	}
 }

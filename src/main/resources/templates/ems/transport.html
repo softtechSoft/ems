@@ -7,7 +7,30 @@
 	<link rel="stylesheet" th:href="@{/src/public/public.css}">
 	<link rel="stylesheet" th:href="@{/src/ems/css/transpirt.css}">
 	<script type="text/javascript" charset="UTF-8" th:src="@{/src/ems/js/transpirt.js}"></script>
-</head>
+	<script type="text/javascript" >
+		/*
+		 *概要：
+		 *　　年月を変わったら、リクエストする。
+		 */
+		function changeMonth()
+		{
+			document.getElementById('transpirt').action="changeMonth";
+			// Serverにリクエストをする
+			document.transpirt.submit();
+		}
+		/*
+		 *概要：
+		 *　　画面初期表示
+		 */
+		function onload(actor)
+		{
+			if(actor!=null)
+			{
+				document.getElementById("messagebox").style.display="block";
+			}
+
+		}
+	</script>
 </head>
 <body th:onload="onload([[${state}]])">
 	<header>
@@ -17,7 +40,7 @@
 		<form th:action="@{/transport-workinfo}" id='transpirt' name="transpirt"  class="wapper" method="POST" enctype="multipart/form-data">
 				<label>社員名</label><span class="name" th:text="${session.userEmployeeName}">USER</span>
 			<div>
-				<label>稼働月</label><input id="workMonth" class="workinfo-month" name="workMonth" type="text" maxlength="7" title="稼働月" required />
+				<label>稼働月</label><input id="workMonth" class="workinfo-month" name="workMonth" type="text" maxlength="7" title="稼働月" required onchange="changeMonth();"/>
 			</div>
 			<div class="workinfo">
 				<label>稼働開始日</label><input id="workStartDay" class="workinfo-startDate" name="workStartDay" onchange="startDateChange()" value="" type="date" required />

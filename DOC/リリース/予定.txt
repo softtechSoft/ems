@@ -1,0 +1,20 @@
+2022/4
+EMS
+　①給料明細ー改修
+　②給料リスト　新規
+　③社員情報変更　新規
+　④勤怠管理　ー改修
+　
+リソース
+　DB：
+　
+　　alter table employee add column department varchar(1) comment'部門';
+　　
+　ソース：
+
+
+
+
+
+
+
