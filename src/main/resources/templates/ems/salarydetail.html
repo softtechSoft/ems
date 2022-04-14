@@ -13,19 +13,22 @@
 	//検索ボタン
 	function search(){
 		// 年度取得
-		var years =document.getElementById('years').value;
+		var years =document.getElementById('selectedYearId').value;
 		// 月取得
-		var months =document.getElementById('months').value;
+		var months =document.getElementById('selectedMonthId').value;
 
 		// 月を2桁まで、補足する。例：1→01
 		if (months.length == 1)
 		{
-			months = '0'+ months;
+	    	months = '0'+ months;
+
 		}
 
 		document.getElementById('month').value=years + months;
 
 		document.salaryDetail.submit();
+
+
 	}
 
 	</script>
@@ -36,7 +39,7 @@
 		 <h3>給料明細</h3>
     </header>
 
- 	<form name="salaryDetail" th:action="@{/request-salarydetail}" th:object="${salarydata}" method="post">
+ 	<form name="salaryDetail" th:action="@{/request-salarydetail}"  th:object="${salarydata}" method="post">
 	<div class="control">
 	<div class="options">
 
@@ -44,7 +47,7 @@
    		 <option th:each="year : *{yearInfoList}" th:value="${year.id}" th:text="${year.name}"
           		th:selected="${year.id} == *{selectedYearId}" >
          </option>
-         </select>
+         </select>年
 
 		 <!--  <a class="button-search" href="javascript:querytData()">検索</a>-->
 
@@ -52,14 +55,20 @@
    		 <option th:each="month : *{monthInfoList}" th:value="${month.id}" th:text="${month.name}"
           		th:selected="${month.id} == *{selectedMonthId}">
    		 </option>
-  		 </select>
+  		 </select>月
 
 
 		 <!--隠しフィールド（field）-->
 		 <span><input type="hidden" id="month" th:field="*{month}"/></span>
-		 <span>
-			   <input type="button" onclick="search()"   value="検索" />
+		  <span><input type="hidden" id="base" th:field="*{base}"/></span>
+
+
+
+
+		 <span>  <input type="button" onclick="search()"   value="検索" />
+
 		 </span>
+
    </div>
    </div>
              <table>
@@ -79,7 +88,8 @@
 	         <tr style="background-color:#dcfeeb">
 	        	<!-- 基本給 ～手当理由 -->
 	        	<td>基本給</td>
-	       		<td th:text="*{base} != null ? *{base} + '円' : ''" width="200px"></td>
+	       		<td th:text="*{base} !=null ? *{base} + '円' : ''" width="200px"></td>
+
 			 </tr>
 
 	         <tr style="background-color:#dcfeeb">

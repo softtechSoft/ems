@@ -60,7 +60,7 @@ public class SalaryInfoController {
 		Map<String, String> sqlParam = new HashMap<>();
 
 		sqlParam.put("yearMonth", salaryInfo.getMonth());
-		sqlParam.put("employeeName", salaryInfo.getMonth());
+		sqlParam.put("employeeName", salaryInfo.getEmployeeName());
 		sqlParam.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
 		SalaryInfo salary = salaryInfoService.querySalaryInfo(sqlParam);
 		if (salary == null) {
@@ -76,7 +76,7 @@ public class SalaryInfoController {
 
 
 
-		model.addAttribute("salarydataerror", salaryInfoBean);
+		model.addAttribute("salarydata", salaryInfoBean);
 
 
 
