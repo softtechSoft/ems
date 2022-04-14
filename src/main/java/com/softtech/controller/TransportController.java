@@ -45,19 +45,25 @@ public class TransportController<WorkInfoComment> {
 	 * @author 孫@ソフトテク
 	 */
 	@RequestMapping("/changeMonth")
-	public String changeMonth( HttpServletRequest request,HttpSession session,Model model)  {
+	public String changeMonth(HttpServletRequest request,HttpSession session,@RequestParam("file") MultipartFile file,Model model) throws Exception {
 
+		// ②セッションからログインIDを取得する。
+		Map<String, String> mapper = new HashMap<String, String>();
+		mapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
+
+		boolean flg = false;
+		String workStartDay = "";
 		// ①画面から、年月を取得
 
-		// ②セッションからログインIDを取得
-
 		//②年月、ログインIDを持っち、DBを検索する。（workinfo、transport）
-
+		Map<String, String[]> map = request.getParameterMap();
 		//③DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
 
-
-		//model.addAttribute("transport", transport);
+		Transport transport = new Transport();
+		model.addAttribute("transport", transport);
 		return "/ems/transport";
+
+
 	}
 
 	@RequestMapping("/transport-workinfo")
