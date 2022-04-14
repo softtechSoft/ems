@@ -50,9 +50,6 @@ public class TransportController<WorkInfoComment> {
 		// ②セッションからログインIDを取得する。
 		Map<String, String> mapper = new HashMap<String, String>();
 		mapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
-
-		boolean flg = false;
-		String workStartDay = "";
 		// ①画面から、年月を取得
 
 		//②年月、ログインIDを持っち、DBを検索する。（workinfo、transport）
