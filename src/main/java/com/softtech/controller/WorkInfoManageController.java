@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.softtech.com.SelectJyokenCommon;
 import com.softtech.entity.Transport;
 import com.softtech.service.TransportAllService;
 import com.softtech.service.TransportService;
@@ -26,13 +27,38 @@ import com.softtech.service.TransportService;
  */
 
 @Controller
-public class TransportController<WorkInfoComment> {
+public class WorkInfoManageController<WorkInfoComment> {
 	@Autowired
 	private TransportService transportService;
 
 	@Autowired
 	private TransportAllService transportAllService;
 
+
+	/**
+	 * 機能：勤怠管理画面初期データ設定
+	 *
+	 * @param 画面情報
+	 * @return 遷移画面
+	 *
+	 * @author 楊@ソフトテク
+	 */
+	@RequestMapping(path="/workdetail", method= RequestMethod.GET)
+	public String Workdetail(HttpServletRequest request, HttpSession session, Model model) {
+
+		Map<String, String> sportMapper = new HashMap<String, String>();
+		//　交通情報取得
+		sportMapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
+		Transport transport = transportService.queryTransport(sportMapper);
+		if (transport == null) {
+			transport = new Transport();
+		}
+		// 交通費を０に設定。
+		transport.setBusinessTrip("0");
+		//　画面へ戻す
+		model.addAttribute("transport", transport);
+		return "/ems/workInfoManage";
+	}
 
 	/**
 	 * 機能：対象年月が変更された場合の処理
@@ -47,13 +73,31 @@ public class TransportController<WorkInfoComment> {
 	@RequestMapping("/changeMonth")
 	public String changeMonth(HttpServletRequest request,HttpSession session,@RequestParam("file") MultipartFile file,Model model) throws Exception {
 
-		// ②セッションからログインIDを取得する。
-		Map<String, String> mapper = new HashMap<String, String>();
-		mapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
 		// ①画面から、年月を取得
-
-		//②年月、ログインIDを持っち、DBを検索する。（workinfo、transport）
+		String month = "";
+		//パラメータ取得
 		Map<String, String[]> map = request.getParameterMap();
+		for (Map.Entry<String, String[]> entry : map.entrySet()) {
+			//稼働月を変換。YYYY/MM形をYYYYMM形に変換。
+			if(entry.getKey().equals("workMonth")){
+				month = entry.getValue()[0].replace("/", "");
+				break;
+			}
+		}
+
+		// ②セッションからログインIDを取得する。
+		String employeeID = (String) session.getAttribute("userEmoplyeeID");
+
+		//③年月、ログインIDを持っち、DBを検索する。（workinfo、transport）
+		SelectJyokenCommon selectJyokenCommon = new SelectJyokenCommon();
+		selectJyokenCommon.setEmplyeeID(employeeID);
+		selectJyokenCommon.setYearMonth(month);
+
+
+		if(transportAllService.hasWorkInfo(selectJyokenCommon)) {
+
+		}
+
 		//③DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
 
 		Transport transport = new Transport();
@@ -282,28 +326,4 @@ public class TransportController<WorkInfoComment> {
 			return "/ems/transport";
 		}
 
-	/**
-	 * 機能：勤怠管理画面初期データ設定
-	 *
-	 * @param 画面情報
-	 * @return 遷移画面
-	 *
-	 * @author 楊@ソフトテク
-	 */
-	@RequestMapping(path="/workdetail", method= RequestMethod.GET)
-	public String Workdetail(HttpServletRequest request, HttpSession session, Model model) {
-
-		Map<String, String> sportMapper = new HashMap<String, String>();
-		//　交通情報取得
-		sportMapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
-		Transport transport = transportService.queryTransport(sportMapper);
-		if (transport == null) {
-			transport = new Transport();
-		}
-		// 交通費を０に設定。
-		transport.setBusinessTrip("0");
-		//　画面へ戻す
-		model.addAttribute("transport", transport);
-		return "/ems/transport";
-	}
 }

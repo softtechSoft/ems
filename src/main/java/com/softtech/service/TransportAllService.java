@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.softtech.com.SelectJyokenCommon;
 import com.softtech.entity.Contract;
 import com.softtech.entity.Transport;
+import com.softtech.entity.WorkInfo;
 import com.softtech.util.FileUtil;
 
 /**
@@ -31,6 +33,39 @@ public class TransportAllService {
 	//画面に入力したデータ
 	Map<String, String> gamenParam = new HashMap<String, String>();
 
+	/**
+	 * 機能：勤怠情報を取得
+	 *
+	 * @param selectJyokenCommon　取得条件：社員ID、年月
+	 * @return 勤怠情報
+	 * @exception DB操作例外
+	 *
+	 * @author 郭@ソフトテク
+	 */
+	private WorkInfo getWorkInfo(SelectJyokenCommon selectJyokenCommon) throws Exception {
+
+		return null;
+	}
+
+	/**
+	 * 機能：勤怠情報存在チェック。
+	 *
+	 * @param selectJyokenCommon　取得条件：社員ID、年月
+	 * @return 勤怠情報存在状態。TRUE:存在。FALSE：存在していない
+	 *
+	 * @author 郭@ソフトテク
+	 * @throws Exception
+	 */
+	public boolean hasWorkInfo(SelectJyokenCommon selectJyokenCommon) throws Exception {
+		// 勤怠情報取得
+		WorkInfo workInfo = getWorkInfo(selectJyokenCommon);
+
+		if(workInfo == null) return false;
+
+		if(workInfo.getWorkTime() != null ) return true;
+
+		return false;
+	}
 	/**
 	 * 機能：①勤怠テーブル、交通費テーブルに新規追加する。
 	 * 　　　②画面情報を戻す
