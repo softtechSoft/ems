@@ -73,7 +73,7 @@ public class SalaryListController {
 
 
 	/**
-	 * 機能：明細画面データ遷移
+	 * 機能：給料明細画面データ遷移
 	 *
 	 * @param model
 	 * @param p1 選択された行の年月度
@@ -92,164 +92,20 @@ public class SalaryListController {
 		SalaryInfo salary = salaryInfoService.querySalaryInfo(sqlParam);
 		SalaryInfoBean salaryInfoBean = salaryInfoService.tranferData(salary);
 
-		ArrayList<MonthInfo> ml = new ArrayList<MonthInfo>();
-		MonthInfo info = new MonthInfo();
-		info.setId(1);
-		info.setName("01");
-		ml.add(info);
-
-		MonthInfo info2 = new MonthInfo();
-		info2.setId(2);
-		info2.setName("02");
-		ml.add(info2);
-
-		MonthInfo info3 = new MonthInfo();
-		info3.setId(3);
-		info3.setName("03");
-		ml.add(info3);
-		MonthInfo info4 = new MonthInfo();
-		info4.setId(4);
-		info4.setName("04");
-		ml.add(info4);
-
-		MonthInfo info5 = new MonthInfo();
-		info5.setId(5);
-		info5.setName("05");
-		ml.add(info5);
-
-		MonthInfo info6= new MonthInfo();
-		info6.setId(6);
-		info6.setName("06");
-		ml.add(info6);
-
-		MonthInfo info7 = new MonthInfo();
-		info7.setId(7);
-		info7.setName("07");
-		ml.add(info7);
-
-		MonthInfo info8 = new MonthInfo();
-		info8.setId(8);
-		info8.setName("08");
-		ml.add(info8);
-
-		MonthInfo info9 = new MonthInfo();
-		info9.setId(9);
-		info9.setName("09");
-		ml.add(info9);
-
-		MonthInfo info10 = new MonthInfo();
-		info10.setId(10);
-		info10.setName("10");
-		ml.add(info10);
-
-		MonthInfo info11 = new MonthInfo();
-		info11.setId(11);
-		info11.setName("11");
-		ml.add(info11);
-
-		MonthInfo info12 = new MonthInfo();
-		info12.setId(12);
-		info12.setName("12");
-		ml.add(info12);
-
-		// 月度オープションを設定
-		salaryInfoBean.setMonthInfoList(ml);
-
-		//給料詳細画面にて選択された月を設定する
-		String monthID = DateUtil.chgMonthToYM(p1).substring(4);
-
-		switch (Integer.parseInt( monthID)){
-		case 1:
-			salaryInfoBean.setSelectedMonthId(1);
-			break;
-		case 2 :
-			salaryInfoBean.setSelectedMonthId(2);
-			break;
-		case 3 :
-			salaryInfoBean.setSelectedMonthId(3);
-			break;
-		case 4 :
-			salaryInfoBean.setSelectedMonthId(4);
-			break;
-		case 5 :
-			salaryInfoBean.setSelectedMonthId(5);
-			break;
-		case 6 :
-			salaryInfoBean.setSelectedMonthId(6);
-			break;
-		case 7 :
-			salaryInfoBean.setSelectedMonthId(7);
-			break;
-		case 8 :
-			salaryInfoBean.setSelectedMonthId(8);
-			break;
-		case 9 :
-			salaryInfoBean.setSelectedMonthId(9);
-			break;
-		case 10 :
-			salaryInfoBean.setSelectedMonthId(10);
-			break;
-		case 11 :
-			salaryInfoBean.setSelectedMonthId(11);
-			break;
-		case 12 :
-			salaryInfoBean.setSelectedMonthId(12);
-			break;
-		default:
-			break;
-		}
-
-		ArrayList<YearInfo> yl = new ArrayList<YearInfo>();
-		YearInfo year = new YearInfo();
-		year.setId(1);
-		year.setName("2023");
-		yl.add(year);
-
-		YearInfo year2 = new YearInfo();
-		year2.setId(2);
-		year2.setName("2022");
-		yl.add(year2);
-
-		YearInfo year3 = new YearInfo();
-		year3.setId(3);
-		year3.setName("2021");
-		yl.add(year3);
-
-		YearInfo year4 = new YearInfo();
-		year4.setId(4);
-		year4.setName("2020");
-		yl.add(year4);
-
-		YearInfo year5 = new YearInfo();
-		year5.setId(5);
-		year5.setName("2019");
-		yl.add(year5);
-
-		// 年度オープションを設定
+		// 過去五年間の年度を生成する
+		ArrayList<YearInfo> yl = DateUtil.getBeforeYears(5);
+		// 年度候補を設定
 		salaryInfoBean.setYearInfoList(yl);
+		// 選択する年度の設定
+		salaryInfoBean = salaryInfoService.setSelectedYear(salaryInfoBean,p1);
 
-		//給料詳細画面にて選択された年を設定する
-		String yearID = DateUtil.chgMonthToYM(p1).substring(4);
+		//月度候補生成
+		ArrayList<MonthInfo> ml = DateUtil.getMonths() ;
+		//月度候補設定
+		salaryInfoBean.setMonthInfoList(ml);
+		//選択する月度の設定
+		salaryInfoBean = salaryInfoService.setSelectedMonth(salaryInfoBean,p1);
 
-		switch (Integer.parseInt( yearID)){
-		case 1:
-			salaryInfoBean.setSelectedYearId(1);
-			break;
-		case 2:
-			salaryInfoBean.setSelectedYearId(2);
-			break;
-		case 3:
-			salaryInfoBean.setSelectedYearId(3);
-			break;
-		case 4:
-			salaryInfoBean.setSelectedYearId(4);
-			break;
-		case 5:
-			salaryInfoBean.setSelectedYearId(5);
-			break;
-		default:
-			break;
-		}
 
 		//給料詳細画面へデータ渡す
 		model.addAttribute("salarydata", salaryInfoBean);

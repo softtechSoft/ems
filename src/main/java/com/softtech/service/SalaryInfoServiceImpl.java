@@ -1,5 +1,6 @@
 package com.softtech.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,10 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.softtech.actionForm.SalaryInfoBean;
+import com.softtech.com.YearInfo;
 import com.softtech.entity.SalaryInfo;
 import com.softtech.entity.SalaryInfoComment;
 import com.softtech.mapper.SalaryInfoMapper;
-
+import com.softtech.util.DateUtil;
+/**
+ * 概要：給料サービス暗さ于
+ *
+ * 作成者：開発@ソフトテク
+ * 作成日：2021/4/23
+ */
 @Service
 public class SalaryInfoServiceImpl implements SalaryInfoService {
 	@Autowired
@@ -48,6 +56,8 @@ public class SalaryInfoServiceImpl implements SalaryInfoService {
 		salaryInfoBean.setEmployeeName(salaryInfo.getEmployeeName());
 		//住所
 		salaryInfoBean.setAddress(salaryInfo.getAddress());
+		//対象月
+		salaryInfoBean.setMonth(salaryInfo.getMonth());
 		//支払日
 		salaryInfoBean.setPaymentDate(salaryInfo.getPaymentDate());
 		//基本給
@@ -113,4 +123,91 @@ public class SalaryInfoServiceImpl implements SalaryInfoService {
 
 		return salaryInfoBean;
 	}
+
+	/**
+	 * 機能：選択する年度IDの設定
+	 *
+	 * @param salaryInfoBean 給料情報
+	 * @param yearMonth 選択された年月度
+	 *
+	 * @return 給料情報
+	 * @author 開発@ソフトテク
+	 */
+	public SalaryInfoBean setSelectedYear(SalaryInfoBean salaryInfoBean,String yearMonth) {
+
+		// 年度リストを取得する
+		ArrayList<YearInfo> years = salaryInfoBean.getYearInfoList();
+
+		//給料詳細画面にて選択された年を設定する
+		String selectedYear = DateUtil.chgMonthToYM(yearMonth).substring(0,4);
+
+		//年度リストごとループ
+		for(YearInfo yearInfo:years) {
+			int yearID = yearInfo.getId();
+			String year = yearInfo.getName();
+			if(selectedYear.equals(year)) {
+				salaryInfoBean.setSelectedYearId(yearID);
+				break;
+			}
+		}
+		return salaryInfoBean;
+	}
+
+	/**
+	 * 機能：選択する月度IDの設定
+	 *
+	 * @param salaryInfoBean 給料情報
+	 * @param yearMonth 選択された年月度
+	 *
+	 * @return 給料情報
+	 * @author 開発@ソフトテク
+	 */
+	public SalaryInfoBean setSelectedMonth(SalaryInfoBean salaryInfoBean,String yearMonth) {
+
+		//選択された月を設定する
+		String monthID = DateUtil.chgMonthToYM(yearMonth).substring(4);
+		switch (Integer.parseInt( monthID)){
+		case 1:
+			salaryInfoBean.setSelectedMonthId(1);
+			break;
+		case 2 :
+			salaryInfoBean.setSelectedMonthId(2);
+			break;
+		case 3 :
+			salaryInfoBean.setSelectedMonthId(3);
+			break;
+		case 4 :
+			salaryInfoBean.setSelectedMonthId(4);
+			break;
+		case 5 :
+			salaryInfoBean.setSelectedMonthId(5);
+			break;
+		case 6 :
+			salaryInfoBean.setSelectedMonthId(6);
+			break;
+		case 7 :
+			salaryInfoBean.setSelectedMonthId(7);
+			break;
+		case 8 :
+			salaryInfoBean.setSelectedMonthId(8);
+			break;
+		case 9 :
+			salaryInfoBean.setSelectedMonthId(9);
+			break;
+		case 10 :
+			salaryInfoBean.setSelectedMonthId(10);
+			break;
+		case 11 :
+			salaryInfoBean.setSelectedMonthId(11);
+			break;
+		case 12 :
+			salaryInfoBean.setSelectedMonthId(12);
+			break;
+		default:
+			break;
+		}
+
+		return salaryInfoBean;
+	}
+
 }
