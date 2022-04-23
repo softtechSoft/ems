@@ -49,6 +49,9 @@
 
 	<select id="queryTransport" parameterType="map" resultType="Transport">
     	select
+    	    w.workStartDay,
+            w.workEndDay,
+            w.workTime,
     		t.workMonth,
     		t.startDate,
     		t.startStation,
@@ -61,13 +64,12 @@
     		t.midStation3,
     		t.transport,
     		t.businessTrip
-    	from
-    		ems.transport t
-    		where t.employeeID = #{employeeID}
-    	order by
-    		t.workMonth DESC
-    	limit
-    		1
+        from
+            ems.transport t
+        left join
+            ems.workinfo w
+         ON w.workMonth =  t.workMonth
+        where t.employeeID = #{employeeID} and t.workMonth = #{workMonth}
 	</select>
 	<update id="updateTransport"  parameterType="map">
 	    update
