@@ -1,7 +1,11 @@
 package com.softtech.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,11 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.softtech.actionForm.WorkDetail;
 import com.softtech.actionForm.WorkSelectJyoken;
 import com.softtech.service.WorkDetailListService;
-import com.softtech.util.DateUtil;
 import com.softtech.util.FileUtil;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
 /**
  * 概要：勤怠リスト機能
  *
@@ -39,15 +39,16 @@ public class WorkDetailListController {
 	@RequestMapping("/workinfolist")
 	public String toWorkDetailList(Model model,HttpSession session) {
 
-        //現在年月取得
-		String month=DateUtil.getNowMonth();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM");
 
+        //現在年月取得
+		Calendar calNow = Calendar.getInstance();
+		String month=sdf.format(calNow.getTime());
 
 		//半年前時間
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.MONTH, -6);
 //		GregorianCalendar gr=new GregorianCalendar();
-		   SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 //		 gr.set(GregorianCalendar.YEAR,GregorianCalendar.MONTH-6,GregorianCalendar.DATE);
 
 		    String di=null;
@@ -87,12 +88,27 @@ public class WorkDetailListController {
 			return "/ems/workdetaillist";
 		 }
 
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+			DateFormat sdFormat2 = new SimpleDateFormat("yyyy/MM");
+
+			Date selFstDate = new Date();
+			Date selEndDate = new Date();
+			try {
+				selFstDate = sdFormat2.parse(selectjyolken.getFromMonth());
+				selEndDate = sdFormat2.parse(selectjyolken.getToMonth());
+			} catch (ParseException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+
+
+
 		// 入力した年月を持っち、DBから勤怠情報を取得
 			// セッションからログインIDを取得する。
 			Map<String, String> mapper = new HashMap<String, String>();
 			mapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
-			mapper.put("fromMonth", selectjyolken.getFromMonth());
-			mapper.put("toMonth", selectjyolken.getToMonth());
+			mapper.put("fromMonth", sdf.format(selFstDate));
+			mapper.put("toMonth", sdf.format(selEndDate));
 
 	     List<WorkDetail> workDetailList1 = workDetailListService.queryWorkDetail(mapper);
 
