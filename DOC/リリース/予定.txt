@@ -1,6 +1,17 @@
--- 社員情報カラム追加
-alter table employee add column department varchar(1) comment'部門';
-alter table workinfo drop column workInfoID ;
+2022/4
+EMS
+１）給料機能
+
+２）勤怠機能
+
+３）社員情報更新
+
+
+
+
+
+
+
 
 
 

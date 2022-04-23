@@ -1,2 +1,3 @@
 -- 社員情報カラム追加
 alter table employee add column department varchar(1) comment'部門';
+alter table workinfo drop column workInfoID ;
