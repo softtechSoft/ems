@@ -1,2 +1,2 @@
--- Ğˆõî•ñƒJƒ‰ƒ€’Ç‰Á
-alter table employee add column department varchar(1) comment'•”–å';
+-- ç¤¾å“¡æƒ…å ±ã‚«ãƒ©ãƒ è¿½åŠ 
+alter table employee add column department varchar(1) comment'éƒ¨é–€';
