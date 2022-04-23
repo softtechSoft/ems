@@ -171,6 +171,41 @@ public class EmployeeEditController {
 		} else {
 			model.addAttribute("updateMsg", "社員情報の更新に失敗しました。");
 		}
+		//画面再表示
+		employeeEditBean.setUpdateDate(str);
+		// 社員タイプ
+		ArrayList<EptypeInfo> ep = new ArrayList<EptypeInfo>();
+		EptypeInfo info = new EptypeInfo();
+		info.setId(1);
+		info.setName("正社員");
+		ep.add(info);
+		EptypeInfo info2 = new EptypeInfo();
+		info2.setId(2);
+		info2.setName("契約社員");
+		ep.add(info2);
+		EptypeInfo info3 = new EptypeInfo();
+		info3.setId(3);
+		info3.setName("個人事業");
+		ep.add(info3);
+		// タイプオープションを設定
+		employeeEditBean.setEpTypeInfoList(ep);
+
+		// 部門タイプ
+		ArrayList<departmentInfo> deplist = new ArrayList<departmentInfo>();
+		departmentInfo deinfo = new departmentInfo();
+		deinfo.setId(1);
+		deinfo.setName("開発一部");
+		deplist.add(deinfo);
+		departmentInfo deinfo2 = new departmentInfo();
+		deinfo2.setId(2);
+		deinfo2.setName("開発二部");
+		deplist.add(deinfo2);
+		departmentInfo deinfo3 = new departmentInfo();
+		deinfo3.setId(3);
+		deinfo3.setName("管理部");
+		deplist.add(deinfo3);
+		// タイプオープションを設定
+		employeeEditBean.setDepTypeInfoList(deplist);
 
 		return "/ems/employeeedit";
 
