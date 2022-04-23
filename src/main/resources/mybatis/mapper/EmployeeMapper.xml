@@ -41,7 +41,7 @@
 		update ems.employee set employeeName = #{employeeName},
 		sex = #{sex},birthday = #{birthday},age = #{age},joinedDate = #{joinedDate},epType=#{epType},department=#{department},
 		joinedTime = #{joinedTime},postCode = #{postCode},address = #{address},phoneNumber = #{phoneNumber},
-		updateDate = #{updateDate} where employeeID =#{employeeID}
+		updateDate = #{updateDate},personNumber = #{personNumber} where employeeID =#{employeeID}
 	</update>
 
 	<update id="updateStatus" parameterType="map">

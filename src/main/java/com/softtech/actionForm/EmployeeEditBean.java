@@ -8,6 +8,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.softtech.com.EptypeInfo;
+import com.softtech.com.departmentInfo;
 
 /**
  * 概要：給料詳細画面用Bean
@@ -49,6 +50,8 @@ public class EmployeeEditBean {
 
 	//社齢
 	public String joinedTime;
+	
+	public String joinedAge;
 
 	//郵便番号
 	@NotEmpty(message = "郵便番号を入力してください。")
@@ -81,6 +84,18 @@ public class EmployeeEditBean {
 	public ArrayList<EptypeInfo> epTypeInfoList;
 	//選択されたid
 	private Integer selectedepTypeId;
+	//タイプ
+	public ArrayList<departmentInfo> depTypeInfoList;
+	//選択されたid
+	private Integer selectedDepTypeId;
+	
+	public ArrayList<departmentInfo> getDepTypeInfoList() {
+		return depTypeInfoList;
+	}
+
+	public void setDepTypeInfoList(ArrayList<departmentInfo> depTypeInfoList) {
+		this.depTypeInfoList = depTypeInfoList;
+	}
 
 	public ArrayList<EptypeInfo> getEpTypeInfoList() {
 		return epTypeInfoList;
@@ -153,6 +168,14 @@ public class EmployeeEditBean {
 	public void setJoinedTime(String joinedTime) {
 		this.joinedTime = joinedTime;
 	}
+	
+	public String getJoinedAge() {
+		return joinedAge;
+	}
+
+	public void setJoinedAge(String joinedAge) {
+		this.joinedAge = joinedAge;
+	}
 
 	public String getPostCode() {
 		return postCode;
@@ -208,6 +231,14 @@ public class EmployeeEditBean {
 
 	public void setSelectedepTypeId(Integer selectedepTypeId) {
 		this.selectedepTypeId = selectedepTypeId;
+	}
+	
+	public Integer getSelectedDepTypeId() {
+		return selectedDepTypeId;
+	}
+
+	public void setSelectedDepTypeId(Integer selectedDepTypeId) {
+		this.selectedDepTypeId = selectedDepTypeId;
 	}
 
 	public class EmployeeInfo {

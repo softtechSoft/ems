@@ -6,10 +6,8 @@ function(){
 	};
 
 
-	getJoinedTime();
-	document.getElementById("joinedDateString").onchange = function() {
-		getJoinedTime();
-	};
+	getJoinedAge();
+	document.getElementById("joinedDateString").onchange = function() {getJoinedAge();};
 
 }
 ,false);
@@ -25,23 +23,21 @@ function getAge() {
 	var age = Math.floor(df / 1000 / 60 / 60 / 24 / 365); // ミリ秒を年に変換(切り捨て)
 
 	document.getElementById('age').innerText = age;
-	document.getElementByName('age').value = age;
+	//document.getElementByName('age').value = age;
 }
 
-function getJoinedTime() {
+function getJoinedAge() {
 
 	var joinedDate = document.getElementById('joinedDateString').value;
 
-
-
 	var bArr = joinedDate.split('-');
-	var joinedDate = new Date(bArr[0], (bArr[1] - 1), bArr[2]); // 入社日の日付
+	var joinedDatetmp = new Date(bArr[0], (bArr[1] - 1), bArr[2]); // 入社日の日付
 	var today = new Date(); // 今日の日付
-	var df = today - joinedDate; // 今日と入社日の差(ミリ秒)
-	var joinedTime = Math.floor(df / 1000 / 60 / 60 / 24 / 365); // ミリ秒を年に変換(切り捨て)
+	var df = today - joinedDatetmp; // 今日と入社日の差(ミリ秒)
+	var joinedAge = Math.floor(df / 1000 / 60 / 60 / 24 / 365); // ミリ秒を年に変換(切り捨て)
 
-	document.getElementById('joinedTime').innerText = joinedTime;
-	document.getElementByName('joinedTime').value = joinedTime;
+	document.getElementById('joinedAge').innerText = joinedAge;
+	//document.getElementByName('joinedDate').value = joinedAge;
 }
 
 
