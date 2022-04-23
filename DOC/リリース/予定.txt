@@ -1,20 +1,6 @@
-2022/4
-EMS
-@‡@‹‹—¿–¾×[‰üC
-@‡A‹‹—¿ƒŠƒXƒg@V‹K
-@‡BĞˆõî•ñ•ÏX@V‹K
-@‡C‹Î‘ÓŠÇ—@[‰üC
-@
-ƒŠƒ\[ƒX
-@DBF
-@
-@@alter table employee add column department varchar(1) comment'•”–å';
-@@
-@ƒ\[ƒXF
-
-
-
-
+-- ç¤¾å“¡æƒ…å ±ã‚«ãƒ©ãƒ è¿½åŠ 
+alter table employee add column department varchar(1) comment'éƒ¨é–€';
+alter table workinfo drop column workInfoID ;
 
 
 
