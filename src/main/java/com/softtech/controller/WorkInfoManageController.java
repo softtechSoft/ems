@@ -280,17 +280,29 @@ public class WorkInfoManageController<WorkInfoComment> {
 
 		transport = transportAllService.doTransport(file, mapper, model);
 
+		//稼働開始日、稼働最終日の設定
 		SimpleDateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat sdFormat3 = new SimpleDateFormat("yyyyMMdd");
-		// 初期化稼働開始日
-	    Calendar calFstDate = Calendar.getInstance();
-	    calFstDate.setTime(sdFormat3.parse(transport.getWorkStartDay()));
-	    transport.setWorkStartDay(sdFormat2.format(calFstDate.getTime()));
 
-		// 初期化稼働最終日
-		Calendar calEndDate = Calendar.getInstance();
-		calEndDate.setTime(sdFormat3.parse(transport.getWorkEndDay()));
-		transport.setWorkEndDay(sdFormat2.format(calEndDate.getTime()));
+		if (transport == null) {
+			transport = new Transport();
+
+			// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+			transport.setState("0");
+		}else {
+			// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+			transport.setState("1");
+
+			// 初期化稼働開始日
+		    Calendar calFstDate = Calendar.getInstance();
+		    calFstDate.setTime(sdFormat3.parse(transport.getWorkStartDay()));
+		    transport.setWorkStartDay(sdFormat2.format(calFstDate.getTime()));
+
+			// 初期化稼働最終日
+			Calendar calEndDate = Calendar.getInstance();
+			calEndDate.setTime(sdFormat3.parse(transport.getWorkEndDay()));
+			transport.setWorkEndDay(sdFormat2.format(calEndDate.getTime()));
+		}
 
 		model.addAttribute("transport", transport);
 		return "/ems/workInfoManage";
@@ -403,17 +415,29 @@ public class WorkInfoManageController<WorkInfoComment> {
 
 			transport = transportAllService.updateTransport(file, mapper, model);
 
+			//稼働開始日、稼働最終日の設定
 			SimpleDateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
 			SimpleDateFormat sdFormat3 = new SimpleDateFormat("yyyyMMdd");
-			// 初期化稼働開始日
-		    Calendar calFstDate = Calendar.getInstance();
-		    calFstDate.setTime(sdFormat3.parse(transport.getWorkStartDay()));
-		    transport.setWorkStartDay(sdFormat2.format(calFstDate.getTime()));
 
-			// 初期化稼働最終日
-			Calendar calEndDate = Calendar.getInstance();
-			calEndDate.setTime(sdFormat3.parse(transport.getWorkEndDay()));
-			transport.setWorkEndDay(sdFormat2.format(calEndDate.getTime()));
+			if (transport == null) {
+				transport = new Transport();
+
+				// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+				transport.setState("0");
+			}else {
+				// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+				transport.setState("1");
+
+				// 初期化稼働開始日
+			    Calendar calFstDate = Calendar.getInstance();
+			    calFstDate.setTime(sdFormat3.parse(transport.getWorkStartDay()));
+			    transport.setWorkStartDay(sdFormat2.format(calFstDate.getTime()));
+
+				// 初期化稼働最終日
+				Calendar calEndDate = Calendar.getInstance();
+				calEndDate.setTime(sdFormat3.parse(transport.getWorkEndDay()));
+				transport.setWorkEndDay(sdFormat2.format(calEndDate.getTime()));
+			}
 
 			model.addAttribute("transport", transport);
 			return "/ems/workInfoManage";
