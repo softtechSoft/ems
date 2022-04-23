@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +19,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.softtech.actionForm.EmployeeEditBean;
+import com.softtech.com.DepartmentInfo;
 import com.softtech.com.EptypeInfo;
-import com.softtech.com.departmentInfo;
 import com.softtech.entity.Employee;
 import com.softtech.service.EmployeeEditService;
 
 /**
  * 概要：社員情報変更機能
  *
- * 作成者：○○@ソフトテク 作成日：2021/12/1
+ * 作成者：○○@ソフトテク
+ * 作成日：2021/12/1
  */
 @Controller
 public class EmployeeEditController {
@@ -37,95 +38,42 @@ public class EmployeeEditController {
 	@Autowired
 	EmployeeEditService employeeEditService;
 
+	/**
+	 * 機能：初期表示
+	 *
+	 * @param model
+	 * @return result
+	 * @exception JsonMappingException
+	 * @author 開発@ソフトテク
+	 */
 	@RequestMapping("/employeeedit")
 	public String employeeEdit(Model model, HttpSession session) throws ParseException {
 
+		// DB検索
 		Employee employee = employeeEditService.queryEmployeeAll((String) session.getAttribute("userEmoplyeeID"));
 
-		EmployeeEditBean employeeEditBean = new EmployeeEditBean();
-		employeeEditBean.setEmployeeName(employee.getEmployeeName());
-		employeeEditBean.setEmployeeID(employee.getEmployeeID());
-		employeeEditBean.setSex(employee.getSex());
-
-		String birthday = employee.getBirthday().substring(0, 4) + "-" + employee.getBirthday().substring(4, 6) + "-"
-				+ employee.getBirthday().substring(6);
-		employeeEditBean.setBirthday(birthday);
-		employeeEditBean.setAge(employee.getAge());
-		employeeEditBean.setEpType(employee.getEpType());
-
-		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
-		SimpleDateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = sdFormat.parse(employee.getJoinedDate());
-		employeeEditBean.setJoinedDateString(sdFormat2.format(date));
-		employeeEditBean.setPersonNumber(employee.getPersonNumber());
-		employeeEditBean.setDepartment(employee.getDepartment());
-		employeeEditBean.setJoinedTime(employee.getJoinedTime());
-		employeeEditBean.setPostCode(employee.getPostCode());
-		employeeEditBean.setAddress(employee.getAddress());
-		employeeEditBean.setPhoneNumber(employee.getPhoneNumber());
-		employeeEditBean.setUpdateDate(employee.getUpdateDate());
-		employeeEditBean.setSelectedepTypeId(Integer.valueOf(employee.getEpType()));
-		employeeEditBean.setSelectedDepTypeId(Integer.valueOf(employee.getDepartment()));
-		// 社員タイプ
-		ArrayList<EptypeInfo> ep = new ArrayList<EptypeInfo>();
-		EptypeInfo info = new EptypeInfo();
-		info.setId(1);
-		info.setName("正社員");
-		ep.add(info);
-		EptypeInfo info2 = new EptypeInfo();
-		info2.setId(2);
-		info2.setName("契約社員");
-		ep.add(info2);
-		EptypeInfo info3 = new EptypeInfo();
-		info3.setId(3);
-		info3.setName("個人事業");
-		ep.add(info3);
-		// タイプオープションを設定
-		employeeEditBean.setEpTypeInfoList(ep);
-
-		// 部門タイプ
-		ArrayList<departmentInfo> deplist = new ArrayList<departmentInfo>();
-		departmentInfo deinfo = new departmentInfo();
-		deinfo.setId(1);
-		deinfo.setName("開発一部");
-		deplist.add(deinfo);
-		departmentInfo deinfo2 = new departmentInfo();
-		deinfo2.setId(2);
-		deinfo2.setName("開発二部");
-		deplist.add(deinfo2);
-		departmentInfo deinfo3 = new departmentInfo();
-		deinfo3.setId(3);
-		deinfo3.setName("管理部");
-		deplist.add(deinfo3);
-		// タイプオープションを設定
-		employeeEditBean.setDepTypeInfoList(deplist);
+		//画面表示変更
+		EmployeeEditBean employeeEditBean = employeeEditService.transferDbToUI(employee);
 
 		// 画面に渡す
 		model.addAttribute("employeeEditBean", employeeEditBean);
 
 		return "/ems/employeeedit";
 	}
-
+	/**
+	 * 機能：更新
+	 *
+	 * @param employeeEditBean　画面データ
+	 * @return result
+	 * @exception ParseException
+	 *
+	 * @author 開発@ソフトテク
+	 */
 	@PostMapping("/btn-employeeEdit")
-	public String employeeEditSubmit(HttpServletResponse response,
-			@Validated @ModelAttribute("employeeEditBean") EmployeeEditBean employeeEditBean, BindingResult errors,
-			Model model, HttpSession session) throws ParseException {
-
-		// 氏名の必須チェック
-		if (employeeEditBean.getEmployeeName() == null || employeeEditBean.getEmployeeName().isEmpty()) {
-			model.addAttribute("employeeNameErr", "氏名を入力してください。");
-		} else if (employeeEditBean.getEmployeeName().length() > 12) {
-			model.addAttribute("employeeNameErr", "氏名は12文字以内で入力してください。");
-		}
-
-		// 入社年月日の必須チェック
-		if (employeeEditBean.getJoinedDateString() == null || employeeEditBean.getJoinedDateString().isEmpty()) {
-			model.addAttribute("joinedDateStringErr", "入社年月日を入力してください。");
-		} else {
-			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
-			Date date = sdFormat.parse(employeeEditBean.getJoinedDateString());
-			employeeEditBean.setJoinedDate(date);
-		}
+	public String employeeEditSubmit(
+								@Validated @ModelAttribute("employeeEditBean") EmployeeEditBean employeeEditBean,
+								BindingResult errors,
+								Model model, HttpSession session) throws ParseException {
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
 		Date date = sdFormat.parse(employeeEditBean.getJoinedDateString());
@@ -191,16 +139,16 @@ public class EmployeeEditController {
 		employeeEditBean.setEpTypeInfoList(ep);
 
 		// 部門タイプ
-		ArrayList<departmentInfo> deplist = new ArrayList<departmentInfo>();
-		departmentInfo deinfo = new departmentInfo();
+		ArrayList<DepartmentInfo> deplist = new ArrayList<DepartmentInfo>();
+		DepartmentInfo deinfo = new DepartmentInfo();
 		deinfo.setId(1);
 		deinfo.setName("開発一部");
 		deplist.add(deinfo);
-		departmentInfo deinfo2 = new departmentInfo();
+		DepartmentInfo deinfo2 = new DepartmentInfo();
 		deinfo2.setId(2);
 		deinfo2.setName("開発二部");
 		deplist.add(deinfo2);
-		departmentInfo deinfo3 = new departmentInfo();
+		DepartmentInfo deinfo3 = new DepartmentInfo();
 		deinfo3.setId(3);
 		deinfo3.setName("管理部");
 		deplist.add(deinfo3);

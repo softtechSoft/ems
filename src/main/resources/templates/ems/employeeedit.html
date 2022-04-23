@@ -51,9 +51,9 @@
 				<tr style="background-color:#dcfeeb">
 					<th>性　別</th>
 					<td>
-						<input type="radio" name="sex" th:checked="${employeeEditBean.sex == '1'}" value="1" />
-						男
 						<input type="radio" name="sex" th:checked="${employeeEditBean.sex == '0'}" value="0" />
+						男
+						<input type="radio" name="sex" th:checked="${employeeEditBean.sex == '1'}" value="1" />
 						女
 					</td>
 				</tr>
@@ -84,6 +84,7 @@
 					<td>
 						<span id="age"></span>
 						<input type="hidden" name="age">
+
 					</td>
 				</tr>
 				<tr style="background-color:#bfe1ff">
@@ -106,8 +107,8 @@
 				<tr style="background-color:#bfe1ff">
 					<th>社　齢</th>
 					<td>
-						<span id="joinedAge" class=""></span>
-						<input type="hidden" name="joinedAge">
+					<span id="joinedAge"></span>
+					<input type="hidden" name="joinedAge">
 					</td>
 				</tr>
 
