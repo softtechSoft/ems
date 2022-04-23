@@ -171,7 +171,7 @@ public class EmployeeEditController {
 		} else {
 			model.addAttribute("updateMsg", "社員情報の更新に失敗しました。");
 		}
-		//画面再表示
+		//画面再表示用属性設定
 		employeeEditBean.setUpdateDate(str);
 		// 社員タイプ
 		ArrayList<EptypeInfo> ep = new ArrayList<EptypeInfo>();
