@@ -1,5 +1,8 @@
 package com.softtech.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.softtech.com.SelectJyokenCommon;
 import com.softtech.entity.Transport;
 import com.softtech.service.TransportAllService;
 import com.softtech.service.TransportService;
@@ -46,15 +48,46 @@ public class WorkInfoManageController<WorkInfoComment> {
 	@RequestMapping(path="/workdetail", method= RequestMethod.GET)
 	public String Workdetail(HttpServletRequest request, HttpSession session, Model model) {
 
+		//現在日付
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+		SimpleDateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+
+		String month = sdf.format(cal.getTime());
+
 		Map<String, String> sportMapper = new HashMap<String, String>();
 		//　交通情報取得
 		sportMapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
+		sportMapper.put("workMonth", month);
 		Transport transport = transportService.queryTransport(sportMapper);
 		if (transport == null) {
 			transport = new Transport();
+
+			// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+			transport.setState("0");
+		}else {
+			// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+			transport.setState("1");
+
+			//画面に値をセット
 		}
+		// 稼働月設定。
+		transport.setWorkMonth(month);
+
+		// 初期化稼働開始日
+	    Calendar calFstDate = Calendar.getInstance();
+	    calFstDate.set(Calendar.DAY_OF_MONTH,1);
+	    transport.setWorkStartDay(sdFormat2.format(calFstDate.getTime()));
+
+		// 初期化稼働最終日
+		Calendar calEndDate = Calendar.getInstance();
+		calEndDate.setTime(calFstDate.getTime());
+		calEndDate.add(Calendar.MONTH, 1);
+		calEndDate.add(Calendar.DATE, -1);
+		transport.setWorkEndDay(sdFormat2.format(calEndDate.getTime()));
 		// 交通費を０に設定。
 		transport.setBusinessTrip("0");
+
 		//　画面へ戻す
 		model.addAttribute("transport", transport);
 		return "/ems/workInfoManage";
@@ -73,6 +106,10 @@ public class WorkInfoManageController<WorkInfoComment> {
 	@RequestMapping("/changeMonth")
 	public String changeMonth(HttpServletRequest request,HttpSession session,@RequestParam("file") MultipartFile file,Model model) throws Exception {
 
+		SimpleDateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat sdFormat1 = new SimpleDateFormat("yyyyMM");
+		DateFormat sdFormat3 = new SimpleDateFormat("yyyyMMdd");
+
 		// ①画面から、年月を取得
 		String month = "";
 		//パラメータ取得
@@ -89,20 +126,50 @@ public class WorkInfoManageController<WorkInfoComment> {
 		String employeeID = (String) session.getAttribute("userEmoplyeeID");
 
 		//③年月、ログインIDを持っち、DBを検索する。（workinfo、transport）
-		SelectJyokenCommon selectJyokenCommon = new SelectJyokenCommon();
-		selectJyokenCommon.setEmplyeeID(employeeID);
-		selectJyokenCommon.setYearMonth(month);
+		Map<String, String> sportMapper = new HashMap<String, String>();
+		//　交通情報取得
+		sportMapper.put("employeeID", employeeID);
+		sportMapper.put("workMonth", month);
+		Transport transport = transportService.queryTransport(sportMapper);
+		if (transport == null) {
+			transport = new Transport();
 
+			// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+			transport.setState("0");
 
-		if(transportAllService.hasWorkInfo(selectJyokenCommon)) {
+			// 初期化稼働開始日
+		    Calendar calFstDate = Calendar.getInstance();
+		    calFstDate.setTime(sdFormat1.parse(month));
+		    calFstDate.set(Calendar.DAY_OF_MONTH,1);
+		    transport.setWorkStartDay(sdFormat2.format(calFstDate.getTime()));
 
+			// 初期化稼働最終日
+			Calendar calEndDate = Calendar.getInstance();
+			calEndDate.setTime(calFstDate.getTime());
+			calEndDate.add(Calendar.MONTH, 1);
+			calEndDate.add(Calendar.DATE, -1);
+			transport.setWorkEndDay(sdFormat2.format(calEndDate.getTime()));
+		}else {
+			// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+			transport.setState("1");
+
+			//画面に値をセット
+			// 初期化稼働開始日
+		    Calendar calFstDate = Calendar.getInstance();
+		    calFstDate.setTime(sdFormat3.parse(transport.getWorkStartDay()));
+		    transport.setWorkStartDay(sdFormat2.format(calFstDate.getTime()));
+
+			// 初期化稼働最終日
+			Calendar calEndDate = Calendar.getInstance();
+			calEndDate.setTime(sdFormat3.parse(transport.getWorkEndDay()));
+			transport.setWorkEndDay(sdFormat2.format(calEndDate.getTime()));
 		}
 
-		//③DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+		// 稼働月設定。
+		transport.setWorkMonth(month);
 
-		Transport transport = new Transport();
 		model.addAttribute("transport", transport);
-		return "/ems/transport";
+		return "/ems/workInfoManage";
 
 
 	}
@@ -212,8 +279,33 @@ public class WorkInfoManageController<WorkInfoComment> {
 		Transport transport = new Transport();
 
 		transport = transportAllService.doTransport(file, mapper, model);
+
+		//稼働開始日、稼働最終日の設定
+		SimpleDateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdFormat3 = new SimpleDateFormat("yyyyMMdd");
+
+		if (transport == null) {
+			transport = new Transport();
+
+			// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+			transport.setState("0");
+		}else {
+			// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+			transport.setState("1");
+
+			// 初期化稼働開始日
+		    Calendar calFstDate = Calendar.getInstance();
+		    calFstDate.setTime(sdFormat3.parse(transport.getWorkStartDay()));
+		    transport.setWorkStartDay(sdFormat2.format(calFstDate.getTime()));
+
+			// 初期化稼働最終日
+			Calendar calEndDate = Calendar.getInstance();
+			calEndDate.setTime(sdFormat3.parse(transport.getWorkEndDay()));
+			transport.setWorkEndDay(sdFormat2.format(calEndDate.getTime()));
+		}
+
 		model.addAttribute("transport", transport);
-		return "/ems/transport";
+		return "/ems/workInfoManage";
 	}
 
 
@@ -322,8 +414,33 @@ public class WorkInfoManageController<WorkInfoComment> {
 			Transport transport = new Transport();
 
 			transport = transportAllService.updateTransport(file, mapper, model);
+
+			//稼働開始日、稼働最終日の設定
+			SimpleDateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat sdFormat3 = new SimpleDateFormat("yyyyMMdd");
+
+			if (transport == null) {
+				transport = new Transport();
+
+				// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+				transport.setState("0");
+			}else {
+				// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
+				transport.setState("1");
+
+				// 初期化稼働開始日
+			    Calendar calFstDate = Calendar.getInstance();
+			    calFstDate.setTime(sdFormat3.parse(transport.getWorkStartDay()));
+			    transport.setWorkStartDay(sdFormat2.format(calFstDate.getTime()));
+
+				// 初期化稼働最終日
+				Calendar calEndDate = Calendar.getInstance();
+				calEndDate.setTime(sdFormat3.parse(transport.getWorkEndDay()));
+				transport.setWorkEndDay(sdFormat2.format(calEndDate.getTime()));
+			}
+
 			model.addAttribute("transport", transport);
-			return "/ems/transport";
+			return "/ems/workInfoManage";
 		}
 
 }

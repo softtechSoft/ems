@@ -211,6 +211,7 @@ public class TransportAllService {
 		//query
 		Map<String, String> transportMapper = new HashMap<String, String>();
 		transportMapper.put("employeeID", mapper.get("employeeID"));
+		transportMapper.put("workMonth", mapper.get("workMonth"));
 		transport = transportService.queryTransport(transportMapper);
 		if (transport == null) {
 			transport = new Transport();

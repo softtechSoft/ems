@@ -10,10 +10,10 @@ function()
 	  if(month<10)month='0'+(month+1);
 
 	  // 稼働月設定
-	  document.getElementById('workMonth').value=year+'/'+month;
+	  //document.getElementById('workMonth').value=year+'/'+month;
 
       // 交通非開始日設定
-	  document.getElementById('startDate').value=year+'/'+month+'/01';
+	  //document.getElementById('startDate').value=year+'/'+month+'/01';
 }
 ,false);
 function startDateChange()

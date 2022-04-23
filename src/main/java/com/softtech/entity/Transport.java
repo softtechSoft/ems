@@ -18,6 +18,9 @@ public class Transport {
 	private String transportFacility1 = "";
 	private String midStation2 = "";
 	private String midStation3 = "";
+	private String state = "";
+	private String workStartDay;
+	private String workEndDay;
 	//定期券額（円)
 	private String transportExpense = "0";
 	private String businessTrip = "0";
@@ -200,5 +203,28 @@ public class Transport {
 		this.flag = flag;
 	}
 
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getWorkStartDay() {
+		return workStartDay;
+	}
+
+	public void setWorkStartDay(String workStartDay) {
+		this.workStartDay = workStartDay;
+	}
+
+	public String getWorkEndDay() {
+		return workEndDay;
+	}
+
+	public void setWorkEndDay(String workEndDay) {
+		this.workEndDay = workEndDay;
+	}
 
 }
