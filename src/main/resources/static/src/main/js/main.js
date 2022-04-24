@@ -60,7 +60,7 @@ function navigation(actor)
 	// リリース確認用www.it-softtech.com/office/
 	//var uriPre = "http://dev.it-softtech.com/ems/";
 	// 開発用www.it-softtech.com
-	var uriPre = "http://dev.it-softtech.com";
+	var uriPre = "http://dev.it-softtech.com/";
 
 	document.getElementById("iframe").src=uriPre+actor;
 }
