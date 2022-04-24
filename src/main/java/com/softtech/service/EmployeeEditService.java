@@ -17,4 +17,9 @@ public interface EmployeeEditService {
 	int updateEmployeeAll(Map<String, String> map);
 
 	public EmployeeEditBean transferDbToUI(Employee employee);
+
+	public Map<String, String> transferUIToPara(EmployeeEditBean employeeEditBean);
+
+	public EmployeeEditBean resetToUI(EmployeeEditBean employeeEditBean);
+
 }

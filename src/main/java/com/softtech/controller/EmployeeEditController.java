@@ -1,11 +1,6 @@
 package com.softtech.controller;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -21,15 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.softtech.actionForm.EmployeeEditBean;
-import com.softtech.com.DepartmentInfo;
-import com.softtech.com.EptypeInfo;
 import com.softtech.entity.Employee;
 import com.softtech.service.EmployeeEditService;
 
 /**
  * 概要：社員情報変更機能
  *
- * 作成者：○○@ソフトテク
+ * 作成者：開発@ソフトテク
  * 作成日：2021/12/1
  */
 @Controller
@@ -58,7 +51,7 @@ public class EmployeeEditController {
 		// 画面に渡す
 		model.addAttribute("employeeEditBean", employeeEditBean);
 
-		return "/ems/employeeedit";
+		return "/ems/employeeEdit";
 	}
 	/**
 	 * 機能：更新
@@ -74,44 +67,13 @@ public class EmployeeEditController {
 								@Validated @ModelAttribute("employeeEditBean") EmployeeEditBean employeeEditBean,
 								BindingResult errors,
 								Model model, HttpSession session) throws ParseException {
-
-		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
-		Date date = sdFormat.parse(employeeEditBean.getJoinedDateString());
-		employeeEditBean.setJoinedDate(date);
-
-		model.addAttribute("employeeEditBean", employeeEditBean);
-
+		// Validationチェックエラー時、エラー情報表示
 		if (errors.hasErrors()) {
-			return "/ems/employeeedit";
+			model.addAttribute("employeeEditBean", employeeEditBean);
+			return "/ems/employeeEdit";
 		}
-
 		// DB更新
-		Map<String, String> map = new HashMap<>();
-		map.put("employeeID", employeeEditBean.getEmployeeID());
-		map.put("employeeName", employeeEditBean.getEmployeeName());
-		map.put("sex", employeeEditBean.getSex());
-		map.put("epType", employeeEditBean.getSelectedepTypeId().toString());
-		map.put("department", employeeEditBean.getSelectedDepTypeId().toString());
-
-		Date birthday_date = sdFormat.parse(employeeEditBean.getBirthday());
-		map.put("birthday", sdFormat.format(birthday_date));
-
-		map.put("age", employeeEditBean.getAge());
-
-		Date joinedDate_date = sdFormat.parse(employeeEditBean.getJoinedDateString());
-		map.put("joinedDate", sdFormat.format(joinedDate_date));
-
-		map.put("joinedTime", employeeEditBean.getJoinedAge());
-		map.put("postCode", employeeEditBean.getPostCode());
-		map.put("address", employeeEditBean.getAddress());
-		map.put("phoneNumber", employeeEditBean.getPhoneNumber());
-		map.put("personNumber", employeeEditBean.getPersonNumber());
-
-		Calendar cl = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String str = sdf.format(cl.getTime());
-		map.put("updateDate", str);
-
+		Map<String, String> map = employeeEditService.transferUIToPara(employeeEditBean);
 		int num = employeeEditService.updateEmployeeAll(map);
 
 		if (num == 1) {
@@ -119,43 +81,13 @@ public class EmployeeEditController {
 		} else {
 			model.addAttribute("updateMsg", "社員情報の更新に失敗しました。");
 		}
-		//画面再表示用属性設定
-		employeeEditBean.setUpdateDate(str);
-		// 社員タイプ
-		ArrayList<EptypeInfo> ep = new ArrayList<EptypeInfo>();
-		EptypeInfo info = new EptypeInfo();
-		info.setId(1);
-		info.setName("正社員");
-		ep.add(info);
-		EptypeInfo info2 = new EptypeInfo();
-		info2.setId(2);
-		info2.setName("契約社員");
-		ep.add(info2);
-		EptypeInfo info3 = new EptypeInfo();
-		info3.setId(3);
-		info3.setName("個人事業");
-		ep.add(info3);
-		// タイプオープションを設定
-		employeeEditBean.setEpTypeInfoList(ep);
 
-		// 部門タイプ
-		ArrayList<DepartmentInfo> deplist = new ArrayList<DepartmentInfo>();
-		DepartmentInfo deinfo = new DepartmentInfo();
-		deinfo.setId(1);
-		deinfo.setName("開発一部");
-		deplist.add(deinfo);
-		DepartmentInfo deinfo2 = new DepartmentInfo();
-		deinfo2.setId(2);
-		deinfo2.setName("開発二部");
-		deplist.add(deinfo2);
-		DepartmentInfo deinfo3 = new DepartmentInfo();
-		deinfo3.setId(3);
-		deinfo3.setName("管理部");
-		deplist.add(deinfo3);
-		// タイプオープションを設定
-		employeeEditBean.setDepTypeInfoList(deplist);
+		// 画面再表示設定
+		employeeEditBean = employeeEditService.resetToUI(employeeEditBean);
+		model.addAttribute("employeeEditBean", employeeEditBean);
 
-		return "/ems/employeeedit";
+		return "/ems/employeeEdit";
 
 	}
+
 }

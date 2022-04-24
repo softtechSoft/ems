@@ -1,17 +1,22 @@
 package com.softtech.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.softtech.actionForm.EmployeeEditBean;
 import com.softtech.com.DepartmentInfo;
 import com.softtech.com.EptypeInfo;
 import com.softtech.entity.Employee;
 import com.softtech.mapper.EmployeeMapper;
+import com.softtech.util.DateUtil;
 /**
  * 概要：社員情報変更サービス
  *
@@ -27,7 +32,14 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	public Employee queryEmployeeAll(String employeeID) {
 		return employeeMapper.queryEmployeeAll(employeeID);
 	}
-
+	/**
+	 * 機能：DB更新
+	 *
+	 * @param employee　DBデータ
+	 * @return 更新行数　1:成功
+	 *
+	 * @author 開発@ソフトテク
+	 */
 	@Override
 	public int updateEmployeeAll(Map<String, String> map) {
 		return employeeMapper.updateEmployeeAll(map);
@@ -35,11 +47,12 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	/**
 	 * 機能：DBデータを画面要データへ変更
 	 *
-	 * @param yearMonthとsession
-	 * @return result
-	 * @exception JsonMappingException
-	 * @author ○○@ソフトテク
+	 * @param employee　DBデータ
+	 * @return 画面Form
+	 *
+	 * @author 開発@ソフトテク
 	 */
+	@Override
 	public EmployeeEditBean transferDbToUI(Employee employee) {
 		EmployeeEditBean employeeEditBean = new EmployeeEditBean();
 		//社員名前
@@ -70,7 +83,7 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 		employeeEditBean.setPostCode(employee.getPostCode());
 		employeeEditBean.setAddress(employee.getAddress());
 		employeeEditBean.setPhoneNumber(employee.getPhoneNumber());
-		employeeEditBean.setUpdateDate(employee.getUpdateDate());
+		employeeEditBean.setUpdateDate(DateUtil.chgYMDToDate(employee.getUpdateDate()));
 
 		// 社員タイプ
 		ArrayList<EptypeInfo> ep = mkEmployeeType();
@@ -84,7 +97,86 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 		// 部門タイプオープションを設定
 		employeeEditBean.setDepTypeInfoList(deplist);
 		// 部門タイプ設定
-		employeeEditBean.setSelectedepTypeId(Integer.parseInt(employee.getDepartment()));
+		employeeEditBean.setSelectedDepTypeId(Integer.parseInt(employee.getDepartment()));
+
+		return employeeEditBean;
+	}
+	/**
+	 * 機能：画面要データをMapに設定
+	 *
+	 * @param employeeEditBean　画面データ
+	 * @return Map
+	 *
+	 * @author 開発@ソフトテク
+	 */
+	@Override
+	public Map<String, String> transferUIToPara(EmployeeEditBean employeeEditBean)
+	{
+		Map<String, String> map = new HashMap<>();
+
+		map.put("employeeID", employeeEditBean.getEmployeeID());
+		map.put("employeeName", employeeEditBean.getEmployeeName());
+		map.put("sex", employeeEditBean.getSex());
+		map.put("epType", employeeEditBean.getSelectedepTypeId().toString());
+		map.put("department", employeeEditBean.getSelectedDepTypeId().toString());
+
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
+		Date birthday_date;
+		try {
+			birthday_date = sdFormat.parse(employeeEditBean.getBirthday());
+			map.put("birthday", sdFormat.format(birthday_date));
+		} catch (ParseException e) {
+			map.put("birthday", "00000000");
+		}
+
+		map.put("age", employeeEditBean.getAge());
+
+		Date joinedDate_date;
+		try {
+			joinedDate_date = sdFormat.parse(employeeEditBean.getJoinedDateString());
+			map.put("joinedDate", sdFormat.format(joinedDate_date));
+		} catch (ParseException e) {
+			map.put("joinedDate", "00000000");
+		}
+
+		map.put("joinedTime", employeeEditBean.getJoinedTime());
+		map.put("postCode", employeeEditBean.getPostCode());
+		map.put("address", employeeEditBean.getAddress());
+		map.put("phoneNumber", employeeEditBean.getPhoneNumber());
+		map.put("personNumber", employeeEditBean.getPersonNumber());
+
+		Calendar cl = Calendar.getInstance();
+		String str = sdFormat.format(cl.getTime());
+		map.put("updateDate", str);
+
+		return map;
+	}
+	/**
+	 * 機能：画面再表示の設定
+	 *
+	 * @param employeeEditBean　画面データ
+	 * @return 画面データ
+	 *
+	 * @author 開発@ソフトテク
+	 */
+	@Override
+	public EmployeeEditBean resetToUI(EmployeeEditBean employeeEditBean) {
+
+		//最終更新日
+		Calendar cl = Calendar.getInstance();
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
+		String str = sdFormat.format(cl.getTime());
+		employeeEditBean.setUpdateDate(str);
+
+		// 社員タイプ候補
+		ArrayList<EptypeInfo> ep = mkEmployeeType();
+		// タイプオープションを設定
+		employeeEditBean.setEpTypeInfoList(ep);
+
+		// 部門タイプ候補
+		ArrayList<DepartmentInfo> deplist = mkDepartment();
+		// タイプオープションを設定
+		employeeEditBean.setDepTypeInfoList(deplist);
 
 		return employeeEditBean;
 	}
@@ -99,15 +191,15 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	private ArrayList<EptypeInfo> mkEmployeeType(){
 		ArrayList<EptypeInfo> ep = new ArrayList<EptypeInfo>();
 		EptypeInfo info = new EptypeInfo();
-		info.setId(1);
+		info.setId(0);
 		info.setName("正社員");
 		ep.add(info);
 		EptypeInfo info2 = new EptypeInfo();
-		info2.setId(2);
+		info2.setId(1);
 		info2.setName("契約社員");
 		ep.add(info2);
 		EptypeInfo info3 = new EptypeInfo();
-		info3.setId(3);
+		info3.setId(2);
 		info3.setName("個人事業");
 		ep.add(info3);
 
@@ -139,4 +231,6 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 
 		return deplist;
 	}
+
+
 }

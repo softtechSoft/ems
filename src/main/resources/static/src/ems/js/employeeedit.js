@@ -22,8 +22,8 @@ function getAge() {
 	var df = today - birth; // 今日と誕生日の差(ミリ秒)
 	var age = Math.floor(df / 1000 / 60 / 60 / 24 / 365); // ミリ秒を年に変換(切り捨て)
 
-	document.getElementById('age').innerText = age;
-	//document.getElementByName('age').value = age;
+	document.getElementById('ageDisp').innerText = age;
+	document.getElementById('age').value = age;
 }
 
 function getJoinedAge() {
@@ -37,7 +37,7 @@ function getJoinedAge() {
 	var joinedAge = Math.floor(df / 1000 / 60 / 60 / 24 / 365); // ミリ秒を年に変換(切り捨て)
 
 	document.getElementById('joinedAge').innerText = joinedAge;
-	//document.getElementByName('joinedDate').value = joinedAge;
+	document.getElementById('joinedTime').value = joinedAge;
 }
 
 
