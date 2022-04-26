@@ -1,0 +1,51 @@
+Java:
+前提：
+　下記概念を理解したこと
+　・オブジェクト指向
+　・クラスおよびインスタンス
+　　クラスは定義
+　　インスタンスはクラスを利用する時宣言し生成（new)したもの。
+分岐：
+1)if(){
+　} else {
+　
+　}
+  1-1) switch()
+       case :
+       
+       case:
+  
+       end 
+
+2)ループ
+　for(){
+　
+　}
+  2-1)
+      foreach(){
+      }
+
+基本クラス：
+ （下記JavaDocを毎日30分間見る事は大事！！！
+ https://docs.oracle.com/javase/jp/10/docs/api/index.html?java/lang/Integer.html）
+１）String
+　　・length
+　　・substr
+　　・+
+　　・indexof
+　　・replace
+　　1-1)StringBuffer
+
+２）Integer
+　　・intValue()
+　　・parseInt()
+　　2-1)Double、Float
+
+３）List（ArrayList）
+
+４）HashTable/HashMap
+　　　Key=Value式のデータを使う時、利用する
+
+５）Date/Calendar
+　　日付の機能
+
