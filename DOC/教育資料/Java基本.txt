@@ -7,18 +7,19 @@ Java:
 　　インスタンスはクラスを利用する時宣言し生成（new)したもの。
 分岐：
 1)if(){
+
 　} else {
 　
 　}
   1-1) switch()
        case :
-       
+
        case:
-  
-       end 
+
+       end
 
 2)ループ
-　for(){
+　for(int i=0;i<10;i++){
 　
 　}
   2-1)
@@ -36,7 +37,7 @@ Java:
 　　・replace
 　　1-1)StringBuffer
 
-２）Integer
+２）Integer int ⇔　String
 　　・intValue()
 　　・parseInt()
 　　2-1)Double、Float
@@ -48,4 +49,7 @@ Java:
 
 ５）Date/Calendar
 　　日付の機能
+
+JSPタグ：
+　https://qiita.com/omiso/items/a14d506fd9de9f159aa1
 
