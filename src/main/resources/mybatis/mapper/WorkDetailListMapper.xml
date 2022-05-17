@@ -34,7 +34,7 @@
 			ems.workinfo w
             left join ems.contract ct on w.contractID = ct.contractID
             left join ems.employee e on ct.employeeID = e.employeeID
-            left join ems.transport t on ct.employeeID = t.employeeID
+            left join ems.transport t on ct.employeeID = t.employeeID and w.workMonth = t.workMonth
 		where
 			e.employeeID=#{employeeID}
 			AND w.workMonth >= #{fromMonth}
