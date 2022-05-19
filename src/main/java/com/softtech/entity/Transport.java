@@ -121,8 +121,10 @@ public class Transport {
 	}
 
 	public void setStartDate(String startDate) {
-		this.startDate = String.format("%s/%s/%s", startDate.substring(0, 4), startDate.substring(4, 6),
+		if(startDate != null && startDate.length()>4) {
+			this.startDate = String.format("%s/%s/%s", startDate.substring(0, 4), startDate.substring(4, 6),
 				startDate.substring(6, 8));
+		}
 	}
 
 	/**
