@@ -83,7 +83,9 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 		employeeEditBean.setPostCode(employee.getPostCode());
 		employeeEditBean.setAddress(employee.getAddress());
 		employeeEditBean.setPhoneNumber(employee.getPhoneNumber());
-		employeeEditBean.setUpdateDate(DateUtil.chgYMDToDate(employee.getUpdateDate()));
+		if (employee.getUpdateDate()!=null && !"".equals(employee.getUpdateDate()) ){
+			employeeEditBean.setUpdateDate(DateUtil.chgYMDToDate(employee.getUpdateDate()));
+		}
 
 		// 社員タイプ
 		ArrayList<EptypeInfo> ep = mkEmployeeType();
@@ -97,7 +99,9 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 		// 部門タイプオープションを設定
 		employeeEditBean.setDepTypeInfoList(deplist);
 		// 部門タイプ設定
-		employeeEditBean.setSelectedDepTypeId(Integer.parseInt(employee.getDepartment()));
+		if (employee.getDepartment()!=null && !"".equals(employee.getDepartment()) ){
+			employeeEditBean.setSelectedDepTypeId(Integer.parseInt(employee.getDepartment()));
+		}
 
 		return employeeEditBean;
 	}
