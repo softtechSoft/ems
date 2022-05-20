@@ -282,8 +282,7 @@ status int not null comment'利用ステータス',
 insertDate varchar(8) not null comment'作成日',
 updateDate varchar(8) not null comment'更新日',
 baseSalaryID varchar(8) not null PRIMARY KEY comment'基本給ID',
-employeeID varchar(8) not null comment'社員ID',
-FOREIGN KEY (employeeID) REFERENCES employee (employeeID)
+employeeID varchar(8) not null comment'社員ID'
 )comment'基本給_マスタ機能';
 
 
