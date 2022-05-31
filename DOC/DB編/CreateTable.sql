@@ -288,7 +288,7 @@ employeeID varchar(8) not null comment'社員ID'
 
 drop table if exists m_welfarefee;
 create table m_welfarefee(
-welfarefeeID int not null PRIMARY KEY comment'厚生保険料ID',
+welfarefeeID varchar(10) not null PRIMARY KEY comment'厚生保険料ID',
 year varchar(8) not null comment'対象年度',
 area varchar(8) not null comment'対象エリア',
 standSalary int not null comment'標準報酬',
