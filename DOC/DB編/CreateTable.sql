@@ -282,8 +282,22 @@ status int not null comment'利用ステータス',
 insertDate varchar(8) not null comment'作成日',
 updateDate varchar(8) not null comment'更新日',
 baseSalaryID varchar(8) not null PRIMARY KEY comment'基本給ID',
-employeeID varchar(8) not null comment'社員ID',
-FOREIGN KEY (employeeID) REFERENCES employee (employeeID)
+employeeID varchar(8) not null comment'社員ID'
 )comment'基本給_マスタ機能';
 
 
+drop table if exists m_welfarefee;
+create table m_welfarefee(
+welfarefeeID varchar(10) not null PRIMARY KEY comment'厚生保険料ID',
+year varchar(8) not null comment'対象年度',
+area varchar(8) not null comment'対象エリア',
+standSalary int not null comment'標準報酬',
+salaryFrom int not null comment'給料From',
+salaryTo int not null comment'給料To',
+notCareRatio float(6,5) not null comment'介護必要ない料率',
+careRatio float(6,5) not null comment'介護必要料率',
+annuityRatio float(6,5) not null comment'厚生年金保険料率',
+status int not null comment'利用ステータス',
+insertDate varchar(8) not null comment'作成日',
+updateDate varchar(8) not null comment'更新日'
+) comment '厚生保険料マスタ'

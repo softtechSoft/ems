@@ -2,3 +2,16 @@
 alter table employee add column department varchar(1) comment'部門';
 alter table employee add column personNumber varchar(12) comment'個人番号';
 alter table workinfo drop column workInfoID ;
+
+alter table ems.employee modify employeeName varchar(50);
+
+insert into ems.employee (employeeID,employeeName,password,status,epType,mailAdress)
+values('E00013','孫 曄',md5('123456'),'0','0','sy@it-softtech.com');
+
+insert into ems.employee (employeeID,employeeName,password,status,epType,mailAdress)
+values('E00014','CHO ZIN WIN HTET（テー）',md5('123456'),'0','0','czwh@it-softtech.com');
+
+insert into ems.employee (employeeID,employeeName,password,status,epType,mailAdress)
+values('E00015','YUZANA HLAING（ユ）',md5('123456'),'0','0','yuzh@it-softtech.com');
+
+--2022/5/18 投入済み--

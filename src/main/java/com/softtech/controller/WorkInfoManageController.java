@@ -46,12 +46,13 @@ public class WorkInfoManageController<WorkInfoComment> {
 	 * @author 楊@ソフトテク
 	 */
 	@RequestMapping(path="/workdetail", method= RequestMethod.GET)
-	public String Workdetail(HttpServletRequest request, HttpSession session, Model model) {
+	public String Workdetail(HttpServletRequest request, HttpSession session, Model model) throws Exception{
 
 		//現在日付
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 		SimpleDateFormat sdFormat2 = new SimpleDateFormat("yyyy-MM-dd");
+		DateFormat sdFormat3 = new SimpleDateFormat("yyyyMMdd");
 
 		String month = sdf.format(cal.getTime());
 
@@ -65,26 +66,39 @@ public class WorkInfoManageController<WorkInfoComment> {
 
 			// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
 			transport.setState("0");
+
+			// 初期化稼働開始日
+		    Calendar calFstDate = Calendar.getInstance();
+		    calFstDate.set(Calendar.DAY_OF_MONTH,1);
+		    transport.setWorkStartDay(sdFormat2.format(calFstDate.getTime()));
+
+			// 初期化稼働最終日
+			Calendar calEndDate = Calendar.getInstance();
+			calEndDate.setTime(calFstDate.getTime());
+			calEndDate.add(Calendar.MONTH, 1);
+			calEndDate.add(Calendar.DATE, -1);
+			transport.setWorkEndDay(sdFormat2.format(calEndDate.getTime()));
 		}else {
 			// DBデータが存在する場合、修正できるように設定する（state=1:修正、0:新規登録(提出),9:エラー)
 			transport.setState("1");
+
+			//画面に値をセット
+			// 初期化稼働開始日
+		    Calendar calFstDate = Calendar.getInstance();
+		    calFstDate.setTime(sdFormat3.parse(transport.getWorkStartDay()));
+		    transport.setWorkStartDay(sdFormat2.format(calFstDate.getTime()));
+
+			// 初期化稼働最終日
+			Calendar calEndDate = Calendar.getInstance();
+			calEndDate.setTime(sdFormat3.parse(transport.getWorkEndDay()));
+			transport.setWorkEndDay(sdFormat2.format(calEndDate.getTime()));
 
 			//画面に値をセット
 		}
 		// 稼働月設定。
 		transport.setWorkMonth(month);
 
-		// 初期化稼働開始日
-	    Calendar calFstDate = Calendar.getInstance();
-	    calFstDate.set(Calendar.DAY_OF_MONTH,1);
-	    transport.setWorkStartDay(sdFormat2.format(calFstDate.getTime()));
 
-		// 初期化稼働最終日
-		Calendar calEndDate = Calendar.getInstance();
-		calEndDate.setTime(calFstDate.getTime());
-		calEndDate.add(Calendar.MONTH, 1);
-		calEndDate.add(Calendar.DATE, -1);
-		transport.setWorkEndDay(sdFormat2.format(calEndDate.getTime()));
 		// 交通費を０に設定。
 		transport.setBusinessTrip("0");
 

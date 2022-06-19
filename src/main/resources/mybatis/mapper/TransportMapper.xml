@@ -69,7 +69,7 @@
         left join
             ems.workinfo w
          ON w.workMonth =  t.workMonth
-        where t.employeeID = #{employeeID} and t.workMonth = #{workMonth}
+        where t.employeeID = #{employeeID} and t.workMonth = #{workMonth} and w.contractID = (select contractID from contract where employeeID = #{employeeID} )
 	</select>
 	<update id="updateTransport"  parameterType="map">
 	    update
