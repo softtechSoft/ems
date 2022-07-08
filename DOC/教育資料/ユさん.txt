@@ -44,7 +44,9 @@ https://zoom.us/j/8032549721?pwd=d2pZeGJ2U3MxWHNHVzRQU1VOS3kwZz09
 　　　　　基本設計_emsm_福祉情報リスト.xls
 　　作成(～7/5）
 　　レビュー（7/6）
-　②詳細設計
+　②詳細設計　7/8　から
+　　サンプル：
+　　　詳細設計_emsm_基本給_マスタ機能2.xlsx
 
 　③コーディング
 
