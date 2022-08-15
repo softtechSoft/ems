@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+  <meta charset="UTF-8">
+  <title>ソフトテク株式会社-社内管理システム</title>
+  <script type="text/javascript" >
+  function abc( xyz) {
+   alert(xyz.name);
+  }
+  </script>
+</head>
+<body>
+<h1>基本給一覧</h1>
+  <table>
+    <tr>
+      <td style="background-color:#F0F8FF"> <span>社員ID: <input type="text" size = "8"  /></span></td>
+      <td> <button type="button"   class="btn btn-primary">検索</button></td>
+    </tr>
+  </table>
+<table border="1">
+  <tr>
+    <th width="200">基本給ID</th>
+    <th width="200">基本給</th>
+    <th width="200">稼働期間From</th>
+    <th width="200">稼働期間To</th>
+    <th width="200">不足減単価(h)</th>
+    <th width="100">残業加単価(h)</th>
+    <th width="100">利用ステータス</th>
+    <th width="100">作成日</th>
+    <th width="100">更新日</th>
+    <th width="45">更新</th>
+  </tr>
+</table>
+<table border="1">
+  <tr>
+    <th width="200">E00001</th>
+    <th width="200">255555</th>
+    <th width="200">160</th>
+    <th width="200">200</th>
+    <th width="200">0</th>
+    <th width="100">0</th>
+    <th width="100">1</th>
+    <th width="100">2022/04/01</th>
+    <th width="100">2022/04/11</th>
+    <td> <button type="submit"   class="btn btn-primary">更新</button></td>
+  </tr>
+</table>
+<button type="submit"   class="btn btn-primary">新規</button>
+<select id="expensesType" name="expensesType" onChange="abc(this);">
+			<option value="1">種別1</option><option value="2">通勤交通費</option><option value="3">出張旅費</option><option value="4">一般経費</option><option value="5">接待交際費</option><option value="6">会議費用</option><option value="7">その他</option>
+			</select>
+</body>
+</html>
