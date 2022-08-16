@@ -318,3 +318,38 @@ status int not null comment'利用ステータス',
 insertDate varchar(8) not null comment'作成日',
 updateDate varchar(8) not null comment'更新日'
 ) comment '雇用保険率テーブル'
+
+
+drop table if exists m_incometax; 
+create table m_incometax(
+incomeTaxID varchar(10) NOT NULL PRIMARY KEY COMMENT '所得税ID',
+employeeID varchar(8) NOT NULL COMMENT '社員ID',
+year varchar(8) NOT NULL COMMENT '対象年度',
+incomeTax1 int NOT NULL COMMENT '一月所得税',
+incomeTax2 int NOT NULL COMMENT '二月所得税',
+incomeTax3 int NOT NULL COMMENT '三月所得税',
+incomeTax4 int NOT NULL COMMENT '四月所得税',
+incomeTax5 int NOT NULL COMMENT '五月所得税',
+incomeTax6 int NOT NULL COMMENT '六月所得税',
+incomeTax7 int NOT NULL COMMENT '七月所得税',
+incomeTax8 int NOT NULL COMMENT '八月所得税',
+incomeTax9 int NOT NULL COMMENT '九月所得税',
+incomeTax10 int NOT NULL COMMENT '十月所得税',
+incomeTax11 int NOT NULL COMMENT '十一月所得税',
+incomeTax12 int NOT NULL COMMENT '十二月所得税',
+residentTax1 int NOT NULL COMMENT '一月住民税',
+residentTax2 int NOT NULL COMMENT '二月住民税',
+residentTax3 int NOT NULL COMMENT '三月住民税',
+residentTax4 int NOT NULL COMMENT '四月住民税',
+residentTax5 int NOT NULL COMMENT '五月住民税',
+residentTax6 int NOT NULL COMMENT '六月住民税',
+residentTax7 int NOT NULL COMMENT '七月住民税',
+residentTax8 int NOT NULL COMMENT '八月住民税',
+residentTax9 int NOT NULL COMMENT '九月住民税',
+residentTax10 int NOT NULL COMMENT '十月住民税',
+residentTax11 int NOT NULL COMMENT '十一月住民税',
+residentTax12 int NOT NULL COMMENT '十二月住民税',
+status int NOT NULL COMMENT '利用ステータス',
+insertDate varchar(8) NOT NULL COMMENT '作成日',
+updateDate varchar(8) NOT NULL COMMENT '更新日'
+) comment '所得税と住民税マスター管理'
