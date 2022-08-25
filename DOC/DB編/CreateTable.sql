@@ -251,25 +251,29 @@ primary key(employeeID,startDate)
 )comment'福祉情報';
 
 drop table if exists expenses;
-create table expenses(
-expensesID varchar(10) not null comment'経費ID',
-accrualDate varchar(8) not null comment'発生日',
-cost int(6) not null not null comment'金額',
-tantouName varchar(6) comment'担当者',
-confirmStaus varchar(1) not null comment'承認ステータス',
-confirmDate varchar(8) comment'承認日',
-confirmerID varchar(6) comment'承認者ID',
-confirmerName varchar(6) comment'承認者',
-stmtlStaus varchar(1) not null comment'精算ステータス',
-stmtlDate varchar(8) comment'精算日',
-paymentType varchar(1) not null comment'出金タイプ',
-remark varchar(30) comment'備考',
-insertID varchar(6) comment'作成者ID',
-insertDate varchar(8) comment'作成日',
-updateID varchar(6) comment'更新者ID',
-updateDate varchar(8) comment'更新日',
-primary key(expensesID)
-)comment'一般経費';
+create table expenses
+(
+    expensesID         varchar(10) NOT NULL PRIMARY KEY COMMENT '経費ID',
+    accrualDate        varchar(8)  not null comment '発生日',
+    cost               int(6)      not null not null comment '金額',
+    tantouName         varchar(6)  not null comment '担当者',
+    confirmStaus       varchar(1)  not null comment '承認ステータス',
+    confirmDate        varchar(8)  not null comment '承認日',
+    confirmerID        varchar(6)  not null comment '承認者ID',
+    confirmerName      varchar(6)  not null comment '承認者',
+    stmtlStaus         varchar(1)  not null comment '精算ステータス',
+    stmtlDate          varchar(8)  not null comment '精算日',
+    paymentType        varchar(1)  not null comment '出金タイプ',
+    insertID           varchar(6)  not null comment '作成者ID',
+    insertDate         varchar(8)  not null comment '作成日',
+    updateID           varchar(6)  not null comment '更新者ID',
+    updateDate         varchar(8)  not null comment '更新日',
+    expensesType       varchar(2)  not null COMMENT '経費種別',
+    expensesTypeDetail varchar(2)  not null COMMENT '経費種別明細',
+    deleteFlg          varchar(2)  not null COMMENT '削除フラグ',
+    happenAddress      varchar(50) not null COMMENT '場所',
+    remark             varchar(50) not null COMMENT '備考'
+) comment '一般経費';
 
 drop table if exists m_basesalary;
 create table m_basesalary(
