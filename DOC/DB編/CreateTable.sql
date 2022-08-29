@@ -6,7 +6,7 @@ password varchar(50) not null comment'パスワード',
 status varchar(1) not null comment'ステータス',
 sex varchar(1) comment'性別',
 epType varchar(1) not null comment'タイプ',
-birthday varchar(8) comment'生年月日',
+birthday DateTime comment'生年月日',
 age varchar(2) comment'年齢',
 joinedDate varchar(8) comment'入社年月日',
 joinedTime varchar(2) comment'社齢',
@@ -18,9 +18,9 @@ mailAdress varchar(40) not null comment'メール',
 insertDate varchar(8) comment'作成日',
 updateDate varchar(8) comment'更新日')comment'社員情報';
 Insert into employee values
-('E001' ,'社員１' ,md5('123456') ,'0' ,'0','0','19860101' ,'34','20190101','2','2310859','横浜市中区','07012344321','0', 'e001@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
-('E002' ,'社員２' ,md5('123456') ,'0' ,'0' ,'0','19860102' ,'34','20190101','2','2310859','横浜市中区','07012344322','0', 'e002@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
-('E003' ,'社員３' ,md5('123456') ,'0' ,'0' ,'0','19860103' ,'34','20190101','2','2310859','横浜市中区','07012344323','1','e003@it-softtech.com',date_format(now(),'%Y%m%d') ,null);
+('E001' ,'社員１' ,md5('123456') ,'0' ,'0','0','1986-01-01' ,'34','20190101','2','2310859','横浜市中区','07012344321','0', 'e001@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
+('E002' ,'社員２' ,md5('123456') ,'0' ,'0' ,'0','1986-01-02' ,'34','20190101','2','2310859','横浜市中区','07012344322','0', 'e002@it-softtech.com',date_format(now(),'%Y%m%d') ,null),
+('E003' ,'社員３' ,md5('123456') ,'0' ,'0' ,'0','1986-01-03' ,'34','20190101','2','2310859','横浜市中区','07012344323','1','e003@it-softtech.com',date_format(now(),'%Y%m%d') ,null);
 alter table employee add column department varchar(1) comment'部門';
 alter table employee add column personNumber varchar(12) comment'個人番号';
 
@@ -282,6 +282,8 @@ minusHour int not null comment'残業不足時間',
 plusHour int not null comment'残業時間',
 wkPeriodFrom int not null comment'稼働期間From',
 wkPeriodTo int not null comment'稼働期間To',
+overtimePay DECIMAL(7,1) not null comment'残業単価',
+insufficienttimePay DECIMAL(7,1) not null comment'控除単価',
 status int not null comment'利用ステータス',
 insertDate varchar(8) not null comment'作成日',
 updateDate varchar(8) not null comment'更新日',
