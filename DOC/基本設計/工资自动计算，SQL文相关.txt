@@ -2,20 +2,30 @@
 基本给+残業単価-控除単価+交通费+出张旅费-厚生健康保险-厚生年金(注意年金和保险算的是1/2，有一半公司负担)-雇用保险劳动者负担部分
 源泉和住民税目前是手动输入数字，因此直接查就可以
 
+查询员工ID
+SELECT employeeID
+FROM employee
+
 根据员工ID查他的基本给，残業単価和控除単価，残業単価和控除単価这俩必然有一个没有或者干脆都没有，在没有的情况下查出来的是0，不影响计算也就无所谓了
-不对
+子查询加内连接
+正确
 SELECT m.baseSalary,m.overtimePay,m.insufficienttimePay
-FROM m_basesalary m LEFT JOIN employee e
+FROM m_basesalary m INNER JOIN employee e
 ON m.employeeID = e.employeeID AND m.employeeID = #{employeeID}
-WHERE now() > (
+WHERE date_format(now(), '%Y%m%d') > (
 	SELECT MAX(m.updateDate)
 	FROM m_basesalary
 )
 
-查交通费和出张费(不对)
-SELECT t.transportExpense1,t.businessTrip,MAX(t.updateDate)
-FROM transport t LEFT JOIN employee e
+查交通费和出张费要求是最新的一条(正确)
+内连接
+SELECT t.transportExpense1,t.businessTrip
+FROM transport t INNER JOIN employee e
 ON t.employeeID = e.employeeID AND t.employeeID = #{employeeID}
+WHERE date_format(now(), '%Y%m%d') > (
+	SELECT MAX(t.updateDate)
+	FROM transport
+)
 
 相关子查询 找到最大主键ID对应的数据，查出最新的一条关于厚生保险率的数据
 正确
@@ -29,6 +39,7 @@ from m_welfarefee
 年龄>=40 使用介護必要料率，if做判断
 
 SQL计算年龄：根据员工ID
+正确
 SELECT TIMESTAMPDIFF( YEAR, birthday, CURDATE() )
 FROM employee
 WHERE employeeID = #{employeeID}
@@ -36,18 +47,21 @@ WHERE employeeID = #{employeeID}
 需要检索对应人的employeeID
 
 厚生健康保险，厚生年金 为 给料From<基本给<=给料To 的情况下查找对应的标准报酬，然后标准报酬乘保险率：注意和你的实际收入没关系，只和对应的那一档标准报酬有关
-不对
+正确
 SELECT w.standSalary
-FROM m_welfarefee w LEFT JOIN m_basesalary b
+FROM m_welfarefee w   INNER JOIN m_basesalary b
 ON b.baseSalary > w.salaryFrom AND b.baseSalary <= w.salaryTo
+WHERE b.employeeID = #{employeeID}
 
 根据年份查雇佣保险，只有 雇用保険労働者負担料率‰ 参与计算员工工资
 直接根据当年时间计算即可
+正确
 SELECT laborBurdenRate
 FROM m_emplyinsrate
 WHERE year = date_format(now(), '%Y')
 
 查询所得税，住民税，需要注意月份对应，因为不是每个月的住民税和所得税都一样，只能根据每个月单独算，所以是SELECT * 也就是把每个月数据全算出来然后java或者jsp一个个算
+正确
 SELECT *
 FROM m_incometax m LEFT JOIN employee e
 ON m.employeeID = e.employeeID
@@ -55,11 +69,3 @@ WHERE m.year = date_format(now(), '%Y')
 
 
 实体类：
-employeeID 主键ID
-year 年份
-age  SQL计算返回的年龄
-baseSalary 基本给
-overtimePay 残業単価
-insufficienttimePay 控除単価
-transportExpense 交通费
-businessTrip 出张旅费
