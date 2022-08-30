@@ -54,7 +54,11 @@ Insert into ofcfunction values
 ('A4','welfareList','&#xe681;&emsp;福祉控除リスト','1','/emsm/welfarelist','0' ,'0',date_format(now(),'%Y%m%d') ,null),
 ('A3','workInfoList','&#xe681;&emsp;勤怠情報リスト','0','/workinfolist','５' ,'0',date_format(now(),'%Y%m%d') ,null),
 ('A5','salaryList','&#xe681;&emsp;給料明細リスト','0','/salarylist','５' ,'0',date_format(now(),'%Y%m%d') ,null),
-('A6','workdetailli','&#xe60c;&emsp;勤怠リスト','1','/emsm/workdetaillist','3' ,'0',date_format(now(),'%Y%m%d') ,null);
+('A6','workdetailli','&#xe60c;&emsp;勤怠リスト','1','/emsm/workdetaillist','3' ,'0',date_format(now(),'%Y%m%d') ,null),
+('B1','expenses','&#xe60c;&emsp;一般経費','1','/emsm/initExpensesManagement','1' ,'0',date_format(now(),'%Y%m%d') ,null),
+('B2','basesalary','&#xe60c;&emsp;基本給情報リスト','1','/emsm/initBaseSalaryList','2' ,'0',date_format(now(),'%Y%m%d') ,null),
+('S8','welfarefee','&#xe60c;&emsp;厚生保険料マスタ','1','/emsm/initWelfarefeeInfoList','8' ,'0',date_format(now(),'%Y%m%d') ,null),
+('S9','emplyinsrate','&#xe60c;&emsp;雇用保険率テーブル','1','/emsm/initEmplyinsrateInfoList','9' ,'0',date_format(now(),'%Y%m%d') ,null);
 alter table ofcfunction add column sysType varchar(1);
 
 drop table if exists company;
