@@ -28,7 +28,7 @@ public class EmployeeEditBean {
 
 	// 住所
 	@NotEmpty(message = "住所を入力してください。")
-	@Pattern(regexp = "^[^ -~｡-ﾟ]*$", message = "住所を全角で入力してください。")
+	//@Pattern(regexp = "^[^ -~｡-ﾟ]*$", message = "住所を全角で入力してください。")
 	private String address;
 
 	// 性別
