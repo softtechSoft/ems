@@ -54,4 +54,16 @@ https://zoom.us/j/8032549721?pwd=d2pZeGJ2U3MxWHNHVzRQU1VOS3kwZz09
 　　https://www.it-softtech.com
      (Global　IPを持っちPC）
 
+11/21
+復習
+　①VB.NET基礎　を勉強済み
+　　・画面レイアウト
+　　　ボタン、テキストボックス、セレクトボックス、Gride、ラジオボタン、チェックボックス
+　　・画面遷移
+　　　
+　②MySQL
+　　　・INSERT、Update、Delete、Select
+　　　・テーブルの結合　2テーブル以上のテーブルから検索する場合
+　
+
 

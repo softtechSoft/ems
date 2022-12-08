@@ -15,3 +15,35 @@ insert into ems.employee (employeeID,employeeName,password,status,epType,mailAdr
 values('E00015','YUZANA HLAING（ユ）',md5('123456'),'0','0','yuzh@it-softtech.com');
 
 --2022/5/18 投入済み--
+
+alter table transport add column transportExpense2 float DEFAULT NULL COMMENT '定期券金額(2ヶ月)';
+alter table transport add column transportExpense3 float DEFAULT NULL COMMENT '定期券金額(3ヶ月)';
+
+insert into ems.contract (contractID,contractName,employeeID,companyID,epType,mailAdress)
+values('E00014','CHO ZIN WIN HTET（テー）',md5('123456'),'0','0','czwh@it-softtech.com');
+insert into ems.contract (contractID,contractName,employeeID,companyID,price,payOff,lowerTime,lowerPrice,upperTime,upperPrice,contractBeginDate,contractEndDate,paymentTerm,timeReportPath,  status)
+values(                   'CT00000011','汎用契約','P00003',  'C00004', 0,    0,   123,      123,       123,       1,         '2000010',        '2099010',     60,         '/opt/timereport',1);
+insert into ems.contract (contractID,contractName,employeeID,companyID,price,payOff,lowerTime,lowerPrice,upperTime,upperPrice,contractBeginDate,contractEndDate,paymentTerm,timeReportPath,  status)
+values(                   'CT00000012','汎用契約','e00005',  'C00004', 0,    0,   123,      123,       123,       1,         '2000010',        '2099010',     60,         '/opt/timereport',1);
+insert into ems.contract (contractID,contractName,employeeID,companyID,price,payOff,lowerTime,lowerPrice,upperTime,upperPrice,contractBeginDate,contractEndDate,paymentTerm,timeReportPath,  status)
+values(                   'CT00000013','汎用契約','e00008',  'C00004', 0,    0,   123,      123,       123,       1,         '2000010',        '2099010',     60,         '/opt/timereport',1);
+insert into ems.contract (contractID,contractName,employeeID,companyID,price,payOff,lowerTime,lowerPrice,upperTime,upperPrice,contractBeginDate,contractEndDate,paymentTerm,timeReportPath,  status)
+values(                   'CT00000014','汎用契約','e00009',  'C00004', 0,    0,   123,      123,       123,       1,         '2000010',        '2099010',     60,         '/opt/timereport',1);
+insert into ems.contract (contractID,contractName,employeeID,companyID,price,payOff,lowerTime,lowerPrice,upperTime,upperPrice,contractBeginDate,contractEndDate,paymentTerm,timeReportPath,  status)
+values(                   'CT00000015','汎用契約','e00010',  'C00004', 0,    0,   123,      123,       123,       1,         '2000010',        '2099010',     60,         '/opt/timereport',1);
+insert into ems.contract (contractID,contractName,employeeID,companyID,price,payOff,lowerTime,lowerPrice,upperTime,upperPrice,contractBeginDate,contractEndDate,paymentTerm,timeReportPath,  status)
+values(                   'CT00000016','汎用契約','e00011',  'C00004', 0,    0,   123,      123,       123,       1,         '2000010',        '2099010',     60,         '/opt/timereport',1);
+insert into ems.contract (contractID,contractName,employeeID,companyID,price,payOff,lowerTime,lowerPrice,upperTime,upperPrice,contractBeginDate,contractEndDate,paymentTerm,timeReportPath,  status)
+values(                   'CT00000017','汎用契約','e00012',  'C00004', 0,    0,   123,      123,       123,       1,         '2000010',        '2099010',     60,         '/opt/timereport',1);
+insert into ems.contract (contractID,contractName,employeeID,companyID,price,payOff,lowerTime,lowerPrice,upperTime,upperPrice,contractBeginDate,contractEndDate,paymentTerm,timeReportPath,  status)
+values(                   'CT00000018','汎用契約','e00013',  'C00004', 0,    0,   123,      123,       123,       1,         '2000010',        '2099010',     60,         '/opt/timereport',1);
+insert into ems.contract (contractID,contractName,employeeID,companyID,price,payOff,lowerTime,lowerPrice,upperTime,upperPrice,contractBeginDate,contractEndDate,paymentTerm,timeReportPath,  status)
+values(                   'CT00000019','汎用契約','e00014',  'C00004', 0,    0,   123,      123,       123,       1,         '2000010',        '2099010',     60,         '/opt/timereport',1);
+insert into ems.contract (contractID,contractName,employeeID,companyID,price,payOff,lowerTime,lowerPrice,upperTime,upperPrice,contractBeginDate,contractEndDate,paymentTerm,timeReportPath,  status)
+values(                   'CT00000020','汎用契約','e00015',  'C00004', 0,    0,   123,      123,       123,       1,         '2000010',        '2099010',     60,         '/opt/timereport',1);
+insert into ems.contract (contractID,contractName,employeeID,companyID,price,payOff,lowerTime,lowerPrice,upperTime,upperPrice,contractBeginDate,contractEndDate,paymentTerm,timeReportPath,  status)
+values(                   'CT00000021','汎用契約','e00016',  'C00004', 0,    0,   123,      123,       123,       1,         '2000010',        '2099010',     60,         '/opt/timereport',1);
+insert into ems.contract (contractID,contractName,employeeID,companyID,price,payOff,lowerTime,lowerPrice,upperTime,upperPrice,contractBeginDate,contractEndDate,paymentTerm,timeReportPath,  status)
+values(                   'CT00000022','汎用契約','e00017',  'C00004', 0,    0,   123,      123,       123,       1,         '2000010',        '2099010',     60,         '/opt/timereport',1);
+
+
