@@ -1,0 +1,20 @@
+2月
+　木3回、土４回
+　総7回
+　
+　目標：
+　　　　（MySQL
+　　　　　はじめのメールを確認して、勉強。
+　　　　　）
+　　　　　VB.NET
+　　　　　　　QA担当　黄（郭）
+　内容：
+　　　①HTTP/TCP/IP/MVC/工程　概念の理解
+　　　　HTTP-TCPIP.docx
+　　　　
+　　　　
+3月
+　　aspx.NET
+　　
+https://hironimo.com/category/prog/vbnet/
+　　　　

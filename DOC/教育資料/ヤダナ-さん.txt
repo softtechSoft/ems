@@ -8,6 +8,22 @@
 　内容：
 　　　①HTTP/TCP/IP/MVC/工程　概念の理解
 　　　　HTTP-TCPIP.docx
+　　　　
+　　　　MVC:
+　　　　 https://system-kaihatu.com/archives/3204#:~:text=MVC%E3%83%A2%E3%83%87%E3%83%AB%E3%81%A8%E3%81%AF%E3%80%81%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0,%E3%83%A2%E3%83%87%E3%83%AB%E3%81%A8%E5%91%BC%E3%81%B0%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82
+　　　　
+　　　　Model   -- View   --- Control
+　　　　
+　　　　開発工程：
+　　　　　計画--
+　　　　　　　　　　　　　　　｜-----------------教育範囲-----------------------ーーーーーーーーーーーーー｜
+　　工程：　　要件定義　　→　基本設計　　→　詳細設計　　　→製造（コーディング）→単体テスト　　　　→結合テスト　　　→他のテスト（受入テスト、業務テスト）→リリース→保守
+　　成果物：　要件定義書　　　基本設計書　　　詳細設計書　　ソース　　　　　　　　　単体テスト仕様書　　結合テスト仕様書　他のテスト仕様書　　　　　　　　　　　
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　*.HTML 　　　　　　　　エビデンス　　　　　エビデンス　　　　エビデンス
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　*.js　　　　　　　　　JUNITソース
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　*.java
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　*.xml
+
 　　　②SpringBoot(HTML/JS）-Mybatisの理解
 　　　　HTML_CSS_JS入門.xlsx
 　　　　SpringBoot入門.docx
