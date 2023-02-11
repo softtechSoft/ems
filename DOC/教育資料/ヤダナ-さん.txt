@@ -24,12 +24,27 @@
 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　*.java
 　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　*.xml
 
-　　　②SpringBoot(HTML/JS）-Mybatisの理解
-　　　　HTML_CSS_JS入門.xlsx
-　　　　SpringBoot入門.docx
-　　　　Thymleaf入門.docx
-　　　　MyBatis入門.docx
-　　　　
+②HTML_CSS_JS入門.xlsx　13日週
+　JS:
+　①JavaScriptの基本事項
+　②数値：数値リテラルの記述方法
+　③文字列
+　④変数
+　⑤演算子
+　⑥繰り返し処理
+　⑦条件分岐
+　⑧オブジェクト　プロパティの値の取得と新しい値の代入
+　⑨関数
+　⑩イベント処理：
+　　clickイベント：マウスがクリックされたとき
+　　loadイベント：ページの読み込みが完了したとき
+　　changeイベント：フォームや選択メニューが変更されたとき
+
+　　　　SpringBoot入門.docx　　20日週
+　　　　Thymleaf入門.docx　　　20日週
+　　　　MyBatis入門.docx　　　27日週前半
+　　　　　　　　　　　　　　　　　　　　----3時間/日　　21時間/週
+      　EMS　障害対応開始　　27日週後半
 
 3月
 　木5回、土3回
