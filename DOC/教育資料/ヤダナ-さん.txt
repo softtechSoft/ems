@@ -41,11 +41,31 @@
 　　changeイベント：フォームや選択メニューが変更されたとき
 
 
-　　　　SpringBoot入門.docx　　20日週
-　　　　Thymleaf入門.docx　　　20日週
-　　　　MyBatis入門.docx　　　27日週前半
+SpringBoot入門.docx　　20日週
+ 各アノテーション
+ 　①@Controller/@Service/@Mapper
+ 　②@RequestMapping/@PostMapping
+ 　③@Autowired
+　　
+Thymleaf入門.docx　　　20日週
+　①タグ
+　　＜Form　th:action　th:object…
+　　　　各タグ
+　　/>
+　②Controller層と連携、データ転送
+　　連携：
+　　　例：更新ボタンをクリックすると、どうやてController層の関数と連携する
+　　　　　（--アノテーション）
+　　データ転送：
+　　　　th:objectで利用するなど
+
+MyBatis入門.docx　　　20日週
+　①Mapper　Interface　定義できる
+　②XML文で、SQLを書ける
+
+
 　　　　　　　　　　　　　　　　　　　　----3時間/日　　21時間/週
-      　EMS　障害対応開始　　27日週後半
+      　EMS　障害対応開始　　27日週
 
 2月　4日　　　　ems
 
