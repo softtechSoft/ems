@@ -59,13 +59,35 @@ Thymleaf入門.docx　　　20日週
 　　データ転送：
 　　　　th:objectで利用するなど
 
-MyBatis入門.docx　　　20日週
+MyBatis入門.docx　　　27日週
 　①Mapper　Interface　定義できる
 　②XML文で、SQLを書ける
+　③用語集：
+
+　④EMS　障害対応開始　　27日週
+　　社員情報変更画面の障害
+　　　HTML:src/main/resources/templates/ems/employeeEdit.html
+　　　Controller:src/main/java/com/softtech/controller/EmplyeeEditController.java
+
+    親画面：
+    　HTML:src/main/resources/templates/main/main.html
+           画面、左側の「社員情報変更」リンクをクリックすると、
+           　　　システムの”/employeeedit”へリクエストをする。
+
+　　障害の事象：
+　　　社員情報テーブル（employee)生年月日（birthday),入社日（joindate）がからの場合、
+　　　エラー発生する。
+　
+　⑤テーブル定義書
+　　1)ems/DOC/DB編/社内管理_DB編.xlsx
+    　　Eclipseの外で開く
+    2)CreateTable.sql
+    　テーブルをDBに投入するSQL
+    上記１）、２）は基本的に参照のみ。修正する必要な場合、リーダーに相談して進み。
+    　社内管理_DB編.xlsxを変更する場合、必ずCreateTable.sqlも同期に修正する。
 
 
-　　　　　　　　　　　　　　　　　　　　----3時間/日　　21時間/週
-      　EMS　障害対応開始　　27日週
+
 
 2月　4日　　　　ems
 
