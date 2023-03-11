@@ -115,7 +115,7 @@ MyBatis入門.docx　　　27日週
 
 3/6 週
 　障害を直す。（生年月日、入社日）
-
+   employeeEdit.html→EmplyeeEditController.java→EmployeeEditServicelmpl.java→EmployeeMapper.java→EmployeeMapper.xml
 
 　目標：EMS-社員変更　改修
 　　　（テーブル定義書：社内管理_DB編.xlsx
