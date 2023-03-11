@@ -62,17 +62,22 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 		//社員性別
 		employeeEditBean.setSex(employee.getSex());
 		//生年月日
-		String birthday = employee.getBirthday().substring(0, 4) + "-" + employee.getBirthday().substring(4, 6) + "-"
-				+ employee.getBirthday().substring(6);
-		employeeEditBean.setBirthday(birthday);
+		if(employee.getBirthday()!=null && !"".equals(employee.getBirthday()) ){
+			String birthday = employee.getBirthday().substring(0, 4) + "-" + employee.getBirthday().substring(4, 6) + "-"
+					+ employee.getBirthday().substring(6);
+
+			employeeEditBean.setBirthday(birthday);
+		}
 		//年齢
 		employeeEditBean.setAge(employee.getAge());
 		//社員タイプ
 		employeeEditBean.setEpType(employee.getEpType());
 		//入社日
+		if(employee.getJoinedDate()!=null  && !"".equals(employee.getJoinedDate()) ){
 		String joinDate = employee.getJoinedDate().substring(0, 4) + "-" + employee.getJoinedDate().substring(4, 6) + "-"
 				+ employee.getJoinedDate().substring(6);
 		employeeEditBean.setJoinedDateString(joinDate);
+		}
 
 		employeeEditBean.setJoinedTime(employee.getJoinedTime());
 		//個人番号
