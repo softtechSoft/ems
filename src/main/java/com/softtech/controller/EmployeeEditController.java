@@ -44,6 +44,7 @@ public class EmployeeEditController {
 
 		// DB検索
 		Employee employee = employeeEditService.queryEmployeeAll((String) session.getAttribute("userEmoplyeeID"));
+		//Employee employee = employeeEditService.queryEmployeeAll("E001");
 
 		//画面表示変更
 		EmployeeEditBean employeeEditBean = employeeEditService.transferDbToUI(employee);
