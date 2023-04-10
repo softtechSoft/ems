@@ -102,17 +102,25 @@
 
    4/10   質問	：	DAO層に書くときEmlpoyeeEditMapper.javaあるけどEmployeeMapper.javaとEmployeeMapper.xml
 					を使うのはどうしてですか？
-
+  ⇒ MyBatisから決めた事です。
+  　EmlpoyeeEditMapper.java　がないと、サービス層からSQLの実行ができない。
+  　EmployeeMapper.xmlがないと、どんなSQL文を実行するかは分からないです。
 
 
 
 		  質問	：	サービス層のメソッド名にpublicとかprivateとか書いてあるのですが、書いてないところもあるので、
 		  			何が違いますか？
-
+　⇒Javaの資料を確認してください。
+　　デフォルトはPublicだけ？
 
 
 		  進捗	：	マスタテーブル（社員タイプテーブル、部門テーブル）を新規作成しましたが、
 		  			テーブルのデータ情報は何を入れるべきが分からないので、一応リストだけで作成しました。
+　　　⇒リストだけでもOKです。
+　　　　DB定義書、CreateTable.sqlも同期更新しください。
+
+   4/11　予定：社員タイプテーブル、部門テーブルを利用して、ハードコーディング部分を改修する。
+   　サービス層のmkEmployeeType、mkDepartmentの所
 
 
 
