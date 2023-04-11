@@ -195,10 +195,14 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	 *
 	 * @return 社員タイプリスト
 	 * @author 開発@ソフトテク
+	 * @param eptypeId
 	 *
 	 */
 	private ArrayList<EptypeInfo> mkEmployeeType(){
 		ArrayList<EptypeInfo> ep = new ArrayList<EptypeInfo>();
+		//List<EptypeInfo> ep = new ArrayList<EptypeInfo>();
+
+
 		EptypeInfo info = new EptypeInfo();
 		info.setId(0);
 		info.setName("正社員");
@@ -214,6 +218,7 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 
 		return ep;
 	}
+
 
 	/**
 	 * 機能：部門リスト作成
@@ -240,6 +245,19 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 
 		return deplist;
 	}
+
+	/**
+	 * 機能：DBから取得した部門リスト
+	 *
+	 * @return 社員タイプリスト
+	 * @author 開発@ソフトテク
+	 */
+
+
+
+
+
+
 
 
 }

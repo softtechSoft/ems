@@ -363,3 +363,20 @@ status int NOT NULL COMMENT '利用ステータス',
 insertDate varchar(8) NOT NULL COMMENT '作成日',
 updateDate varchar(8) NOT NULL COMMENT '更新日'
 ) comment '所得税と住民税マスター管理'
+
+
+drop table if exists m_department;
+create table m_department(
+    departmentID varchar(2) not null primary key comment'部門ID' ,
+    departmentName varchar(5) not null comment '部門名称',
+) comment '部門_マスタ機能';
+Insert into m_department values ('1','開発一部') , ('2','開発二部') , ('3','管理部');
+
+
+drop table if exists m_eptype ;
+create table m_eptype (
+    epTypeID varchar (2) not null primary key comment '社員タイプID' ,
+    epTypeName varchar (5) not null comment '社員タイプ名称'　
+)　comment '社員タイプ_マスタ機能' ;
+Insert into m_eptype values ('0','正社員') , ('1','契約社員') , ('2','個人')　;
+
