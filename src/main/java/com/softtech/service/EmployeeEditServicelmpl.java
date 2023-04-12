@@ -198,26 +198,41 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	 * @param eptypeId
 	 *
 	 */
-	private ArrayList<EptypeInfo> mkEmployeeType(){
-		ArrayList<EptypeInfo> ep = new ArrayList<EptypeInfo>();
-		//List<EptypeInfo> ep = new ArrayList<EptypeInfo>();
+   // private ArrayList<EptypeInfo> mkEmployeeType(){
+//		ArrayList<EptypeInfo> ep = new ArrayList<EptypeInfo>();
+//
+//		EptypeInfo info = new EptypeInfo();
+//		info.setId(0);
+//		info.setName("正社員");
+//		ep.add(info);
+//		EptypeInfo info2 = new EptypeInfo();
+//		info2.setId(1);
+//		info2.setName("契約社員");
+//		ep.add(info2);
+//		EptypeInfo info3 = new EptypeInfo();
+//		info3.setId(2);
+//		info3.setName("個人事業");
+//		ep.add(info3);
+//
+//		return ep;
+//	}
 
 
-		EptypeInfo info = new EptypeInfo();
-		info.setId(0);
-		info.setName("正社員");
-		ep.add(info);
-		EptypeInfo info2 = new EptypeInfo();
-		info2.setId(1);
-		info2.setName("契約社員");
-		ep.add(info2);
-		EptypeInfo info3 = new EptypeInfo();
-		info3.setId(2);
-		info3.setName("個人事業");
-		ep.add(info3);
+	// yadanar
 
-		return ep;
-	}
+//	@Autowired
+//	EptypeMapper eptypeMapper;
+//
+//	@Override
+//	public List<EmployeeEditBean> getEptype() {
+//
+//	}
+
+
+
+
+
+
 
 
 	/**
