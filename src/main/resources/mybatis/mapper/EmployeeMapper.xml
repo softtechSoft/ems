@@ -23,6 +23,14 @@
 		and password = md5(#{password})
 
 	</select>
+	
+	
+	<select id="getEpTypeInfoList" parameterType="string" resultType="Employee">
+		select * from ems.m_eptype
+	
+	
+	</select>
+	
 
 	<update id="updatePassword" parameterType="map">
 		update ems.employee set password = md5(#{password}),updateDate = date_format(now(),'%Y%m%d') where mailAdress=#{email}

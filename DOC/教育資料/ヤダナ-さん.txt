@@ -144,8 +144,8 @@
  　　　　　　②ハードコーディング部分を改修する
  				ー改修中です。まだ終わってないです。
   ⇒　4/13　にも引き続き改修してください。
-
-
+  		ー	社員タイプのEptypeMapper.xml 、EptypeMapper.java を作ってEmployeeEditServiceImpl.java と
+  			EmployeeEditService.java に改修しました。ご指導よろしくお願いします。
 
 
 

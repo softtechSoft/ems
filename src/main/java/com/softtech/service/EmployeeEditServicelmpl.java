@@ -16,6 +16,7 @@ import com.softtech.com.DepartmentInfo;
 import com.softtech.com.EptypeInfo;
 import com.softtech.entity.Employee;
 import com.softtech.mapper.EmployeeMapper;
+import com.softtech.mapper.EptypeMapper;
 import com.softtech.util.DateUtil;
 /**
  * 概要：社員情報変更サービス
@@ -198,7 +199,14 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	 * @param eptypeId
 	 *
 	 */
-   // private ArrayList<EptypeInfo> mkEmployeeType(){
+	@Autowired
+	EptypeMapper eptypeMapper;
+
+    private ArrayList<EptypeInfo> mkEmployeeType(){
+
+    	return eptypeMapper.getEptypeInfoList();
+
+
 //		ArrayList<EptypeInfo> ep = new ArrayList<EptypeInfo>();
 //
 //		EptypeInfo info = new EptypeInfo();
@@ -215,24 +223,12 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 //		ep.add(info3);
 //
 //		return ep;
-//	}
+	}
 
-
-	// yadanar
-
-//	@Autowired
-//	EptypeMapper eptypeMapper;
-//
 //	@Override
-//	public List<EmployeeEditBean> getEptype() {
-//
+//	public List<EptypeInfo> getEptypeInfoList() {
+//		return eptypeMapper.getEptypeInfoList();
 //	}
-
-
-
-
-
-
 
 
 	/**
