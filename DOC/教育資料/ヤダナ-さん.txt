@@ -147,7 +147,29 @@
   		ー	社員タイプのEptypeMapper.xml 、EptypeMapper.java を作ってEmployeeEditServiceImpl.java と
   			EmployeeEditService.java に改修しました。ご指導よろしくお願いします。
 
+  ⇒①ems\DOC\DB編\社内管理_DB編.xlsxのマスタ＿部門、マスタ＿社員タイプにおけるカラムの中どのカラムがPK
+  　　かを記入してください。
+  　②EptypeMapper.javaは問題ない
+  　③Beanクラスの使い方：
+  　　1)画面データを格納用Beanは
+  　　　　com.softtech.actionFormパケージ
+  　　2)DBデータを格納用Beanは
+  　　　　com.softtech.entityパケージ
+  　　3)その他は
+  　　　　com.softtech.comパケージ　に属する
+  　　　EptypeInfoはDBデータを格納用Beanですので、com.softtech.entityへ移動してください。
+  　　　ただ他のクラスから使っている場合、別名称のクラスを新規作成してください。
+　　　４）詳細設計_emsm_福祉情報リスト.xlsも修正しましたか？
+　　　　この場合、必ず修正履歴に記載してください。
+　　　　じゃないと、どこにどのように修正したかは分からない。
+　　　５）今勉強中で、いいですが、現場に入ったら絶対にエラー状態のソースをGitにPushしないでください。
 
+  　　他もある。。。
+  　　やっぱり、詳細設計から考え方がいい？
+
+  　4/14にも改修作業をしてください。
+
+  　
 
 
 
