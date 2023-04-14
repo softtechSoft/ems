@@ -5,8 +5,8 @@
 
 <mapper namespace="com.softtech.mapper.EptypeMapper">
 
-<select id="getEpTypeInfoList"  resultType="EmployeepType">
-		select * from ems.m_eptype
+<select id="getDepTypeInfoList"  resultType="Department">
+		select * from ems.m_department
 
 	</select>
 

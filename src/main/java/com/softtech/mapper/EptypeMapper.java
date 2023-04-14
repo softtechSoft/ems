@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.softtech.com.EptypeInfo;
+import com.softtech.entity.EmployeepType;
 /**
  * 概要：社員タイプリスト取得
  *
@@ -21,6 +21,6 @@ public interface EptypeMapper {
 	 *
 	 * @author ヤダナー@ソフトテク
 	 */
-	ArrayList<EptypeInfo> getEptypeInfoList();
+	ArrayList<EmployeepType> getEptypeInfoList();
 
 }

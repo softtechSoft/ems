@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,10 @@ import org.springframework.stereotype.Service;
 import com.softtech.actionForm.EmployeeEditBean;
 import com.softtech.com.DepartmentInfo;
 import com.softtech.com.EptypeInfo;
+import com.softtech.entity.Department;
 import com.softtech.entity.Employee;
+import com.softtech.entity.EmployeepType;
+import com.softtech.mapper.DepartmentMapper;
 import com.softtech.mapper.EmployeeMapper;
 import com.softtech.mapper.EptypeMapper;
 import com.softtech.util.DateUtil;
@@ -202,33 +206,36 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	@Autowired
 	EptypeMapper eptypeMapper;
 
-    private ArrayList<EptypeInfo> mkEmployeeType(){
+	@Override
+	public List<EptypeInfo> getEptypeInfoList() {
 
-    	return eptypeMapper.getEptypeInfoList();
-
-
-//		ArrayList<EptypeInfo> ep = new ArrayList<EptypeInfo>();
-//
-//		EptypeInfo info = new EptypeInfo();
-//		info.setId(0);
-//		info.setName("正社員");
-//		ep.add(info);
-//		EptypeInfo info2 = new EptypeInfo();
-//		info2.setId(1);
-//		info2.setName("契約社員");
-//		ep.add(info2);
-//		EptypeInfo info3 = new EptypeInfo();
-//		info3.setId(2);
-//		info3.setName("個人事業");
-//		ep.add(info3);
-//
-//		return ep;
+		return null ;
 	}
 
-//	@Override
-//	public List<EptypeInfo> getEptypeInfoList() {
-//		return eptypeMapper.getEptypeInfoList();
-//	}
+    private ArrayList<EptypeInfo> mkEmployeeType(){
+    	ArrayList<EmployeepType> eptypeInfoList = eptypeMapper.getEptypeInfoList();
+    	return changeData(eptypeInfoList) ;
+
+    }
+
+    /**
+     *
+	 * 機能：employeeEditBeanからentity.EmployeepTypeに変換する
+	 * @return社員タイプのリスト
+	 *
+	 * @author ヤダナー@ソフトテク
+	 */
+    private ArrayList<EptypeInfo> changeData(ArrayList<EmployeepType> employeepType)
+    {
+    	ArrayList<EptypeInfo> EptypeInfo = new ArrayList<EptypeInfo>();
+    	if(employeepType == null) return EptypeInfo;
+    	for(EmployeepType eType:employeepType ) {
+    		EptypeInfo eptypeInfo = new EptypeInfo();
+    		eptypeInfo.setId(eType.getId());
+
+    		eptypeInfo.setName(eType.getName());
+    	} return EptypeInfo;
+    }
 
 
 	/**
@@ -237,25 +244,65 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	 * @return 社員タイプリスト
 	 * @author 開発@ソフトテク
 	 */
+
+
+    @Autowired
+    DepartmentMapper departmentMapper;
+
 	private ArrayList<DepartmentInfo> mkDepartment(){
+		ArrayList<Department> departmentInfoList = departmentMapper.getDepTypeInfoList();
+	    	return chgData(departmentInfoList) ;
 
-		ArrayList<DepartmentInfo> deplist = new ArrayList<DepartmentInfo>();
+	    }
+	/**
+    *
+	 * 機能：employeeEditBeanからentity.EmployeepTypeに変換する
+	 * @return社員タイプのリスト
+	 *
+	 * @author ヤダナー@ソフトテク
+	 */
+   private ArrayList<DepartmentInfo> chgData(ArrayList<Department> department)
+   {
+   	ArrayList<DepartmentInfo> DepartmentInfo = new ArrayList<DepartmentInfo>();
+   	if(department == null) return DepartmentInfo;
+   	for(Department dm:department ) {
+   		DepartmentInfo departmentInfo = new DepartmentInfo();
+   		departmentInfo.setId(dm.getId());
 
-		DepartmentInfo deinfo = new DepartmentInfo();
-		deinfo.setId(1);
-		deinfo.setName("開発一部");
-		deplist.add(deinfo);
-		DepartmentInfo deinfo2 = new DepartmentInfo();
-		deinfo2.setId(2);
-		deinfo2.setName("開発二部");
-		deplist.add(deinfo2);
-		DepartmentInfo deinfo3 = new DepartmentInfo();
-		deinfo3.setId(3);
-		deinfo3.setName("管理部");
-		deplist.add(deinfo3);
+   		departmentInfo.setName(dm.getName());
+   	} return DepartmentInfo;
+   }
 
-		return deplist;
-	}
+
+
+
+
+
+
+
+
+
+
+//		ArrayList<DepartmentInfo> deplist = new ArrayList<DepartmentInfo>();
+//
+//		DepartmentInfo deinfo = new DepartmentInfo();
+//		deinfo.setId(1);
+//		deinfo.setName("開発一部");
+//		deplist.add(deinfo);
+//		DepartmentInfo deinfo2 = new DepartmentInfo();
+//		deinfo2.setId(2);
+//		deinfo2.setName("開発二部");
+//		deplist.add(deinfo2);
+//		DepartmentInfo deinfo3 = new DepartmentInfo();
+//		deinfo3.setId(3);
+//		deinfo3.setName("管理部");
+//		deplist.add(deinfo3);
+//
+//		return deplist;
+//	}
+
+
+
 
 	/**
 	 * 機能：DBから取得した部門リスト

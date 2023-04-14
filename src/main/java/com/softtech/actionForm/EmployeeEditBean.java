@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
 
 import com.softtech.com.DepartmentInfo;
 import com.softtech.com.EptypeInfo;
+//import com.softtech.entity.EmployeepType;
 
 /**
  * 概要：給料詳細画面用Bean
@@ -260,6 +261,8 @@ public class EmployeeEditBean {
 
 
 	}
+
+
 
 
 

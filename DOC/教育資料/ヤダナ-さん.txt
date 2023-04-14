@@ -175,6 +175,10 @@
 
      部門マスタかも同じ対応。
 
+
+    	ー　Mapper　に　DepartmentMapper.xml 、DepartmentMapper.java ,　entity にDepartment.java と EmployeepType.java
+    	を作ってEmployeeEditServiceImpl.java にも改修しました。なんかまだエラーあるみたいです。
+    	ー　詳細設計書にも修正しました。よろしくお願いいたします。
   　
 
 

@@ -25,11 +25,7 @@
 	</select>
 	
 	
-	<select id="getEpTypeInfoList" parameterType="string" resultType="Employee">
-		select * from ems.m_eptype
 	
-	
-	</select>
 	
 
 	<update id="updatePassword" parameterType="map">
