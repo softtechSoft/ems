@@ -15,14 +15,13 @@ import com.softtech.entity.Department;
 @Mapper
 public interface DepartmentMapper {
 
-	/**
+	/*
 	 * 機能：DBから部門リストを取得する。
 	 *
 	 * @return 部門リスト
 	 *
 	 * @author ヤダナー@ソフトテク
 	 */
-
 	ArrayList<Department> getDepTypeInfoList();
 
 }

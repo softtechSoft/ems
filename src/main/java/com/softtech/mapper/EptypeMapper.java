@@ -14,7 +14,7 @@ import com.softtech.entity.EmployeepType;
 @Mapper
 public interface EptypeMapper {
 
-	/**
+	/*
 	 * 機能：DBから社員タイプリストを取得する。
 	 *
 	 * @return 社員タイプリスト

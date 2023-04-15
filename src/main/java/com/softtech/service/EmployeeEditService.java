@@ -1,10 +1,8 @@
 package com.softtech.service;
 
-import java.util.List;
 import java.util.Map;
 
 import com.softtech.actionForm.EmployeeEditBean;
-import com.softtech.com.EptypeInfo;
 import com.softtech.entity.Employee;
 /**
  * 概要：社員情報変更サービス
@@ -24,13 +22,5 @@ public interface EmployeeEditService {
 
 	public EmployeeEditBean resetToUI(EmployeeEditBean employeeEditBean);
 
-	/**
-	 * 機能：DBから取得したデータを取得する。
-	 *
-	 * @return 社員タイプリスト
-	 *
-	 * @author ヤダナー@ソフトテク
-	 */
-	List<EptypeInfo> getEptypeInfoList();
 
 }

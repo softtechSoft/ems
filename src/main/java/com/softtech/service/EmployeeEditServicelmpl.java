@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +32,18 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	@Autowired
 	EmployeeMapper employeeMapper;
 
+	@Autowired
+	EptypeMapper eptypeMapper;
+
+    @Autowired
+    DepartmentMapper departmentMapper;
+
 	@Override
 	public Employee queryEmployeeAll(String employeeID) {
 		return employeeMapper.queryEmployeeAll(employeeID);
 	}
-	/**
+
+	/*
 	 * 機能：DB更新
 	 *
 	 * @param employee　DBデータ
@@ -49,7 +55,7 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	public int updateEmployeeAll(Map<String, String> map) {
 		return employeeMapper.updateEmployeeAll(map);
 	}
-	/**
+	/*
 	 * 機能：DBデータを画面要データへ変更
 	 *
 	 * @param employee　DBデータ
@@ -115,7 +121,7 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 
 		return employeeEditBean;
 	}
-	/**
+	/*
 	 * 機能：画面要データをMapに設定
 	 *
 	 * @param employeeEditBean　画面データ
@@ -165,7 +171,7 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 
 		return map;
 	}
-	/**
+	/*
 	 * 機能：画面再表示の設定
 	 *
 	 * @param employeeEditBean　画面データ
@@ -194,128 +200,74 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 
 		return employeeEditBean;
 	}
-
-	/**
-	 * 機能：社員タイプリスト作成
+	/*
+	 * 機能：社員タイプ取得
 	 *
+	 * @param なし
 	 * @return 社員タイプリスト
-	 * @author 開発@ソフトテク
-	 * @param eptypeId
 	 *
+	 * @author 開発@ソフトテク
 	 */
-	@Autowired
-	EptypeMapper eptypeMapper;
-
-	@Override
-	public List<EptypeInfo> getEptypeInfoList() {
-
-		return null ;
-	}
-
     private ArrayList<EptypeInfo> mkEmployeeType(){
     	ArrayList<EmployeepType> eptypeInfoList = eptypeMapper.getEptypeInfoList();
     	return changeData(eptypeInfoList) ;
 
     }
 
-    /**
-     *
-	 * 機能：employeeEditBeanからentity.EmployeepTypeに変換する
-	 * @return社員タイプのリスト
+    /*
+	 * 機能：社員タイプ変換。エンティティ⇒アクションフォマード
 	 *
+	 * @param 社員タイプエンティティ
+	 * @return 社員タイプリスト
 	 * @author ヤダナー@ソフトテク
 	 */
-    private ArrayList<EptypeInfo> changeData(ArrayList<EmployeepType> employeepType)
+    private ArrayList<EptypeInfo> changeData(ArrayList<EmployeepType> employeepTypes)
     {
-    	ArrayList<EptypeInfo> EptypeInfo = new ArrayList<EptypeInfo>();
-    	if(employeepType == null) return EptypeInfo;
-    	for(EmployeepType eType:employeepType ) {
+    	ArrayList<EptypeInfo> eptypeInfos = new ArrayList<EptypeInfo>();
+    	if(employeepTypes == null) return eptypeInfos;
+
+    	for(EmployeepType eType:employeepTypes ) {
     		EptypeInfo eptypeInfo = new EptypeInfo();
     		eptypeInfo.setId(eType.getId());
-
     		eptypeInfo.setName(eType.getName());
-    	} return EptypeInfo;
+    		//リストに追加
+    		eptypeInfos.add(eptypeInfo);
+    	}
+    	return eptypeInfos;
     }
-
-
-	/**
+	/*
 	 * 機能：部門リスト作成
 	 *
-	 * @return 社員タイプリスト
+	 * @param なし
+	 * @return 部門リスト
 	 * @author 開発@ソフトテク
 	 */
-
-
-    @Autowired
-    DepartmentMapper departmentMapper;
-
 	private ArrayList<DepartmentInfo> mkDepartment(){
-		ArrayList<Department> departmentInfoList = departmentMapper.getDepTypeInfoList();
-	    	return chgData(departmentInfoList) ;
 
-	    }
-	/**
-    *
-	 * 機能：employeeEditBeanからentity.EmployeepTypeに変換する
-	 * @return社員タイプのリスト
+		ArrayList<Department> departmentInfoList = departmentMapper.getDepTypeInfoList();
+	    return chgData(departmentInfoList) ;
+	}
+	/*
+	 * 機能：機能：部門リスト変換。エンティティ⇒アクションフォマード
 	 *
+	 * @param 部門リストエンティティ
+	 * @return社員タイプのリスト
 	 * @author ヤダナー@ソフトテク
 	 */
-   private ArrayList<DepartmentInfo> chgData(ArrayList<Department> department)
+   private ArrayList<DepartmentInfo> chgData(ArrayList<Department> departments)
    {
-   	ArrayList<DepartmentInfo> DepartmentInfo = new ArrayList<DepartmentInfo>();
-   	if(department == null) return DepartmentInfo;
-   	for(Department dm:department ) {
+   	 ArrayList<DepartmentInfo> departmentInfos = new ArrayList<DepartmentInfo>();
+   	 if(departments == null) return departmentInfos;
+
+   	 for(Department dm:departments ) {
    		DepartmentInfo departmentInfo = new DepartmentInfo();
    		departmentInfo.setId(dm.getId());
-
    		departmentInfo.setName(dm.getName());
-   	} return DepartmentInfo;
+
+   		//リストに追加
+   		departmentInfos.add(departmentInfo);
+   	 }
+
+   	 return departmentInfos;
    }
-
-
-
-
-
-
-
-
-
-
-
-//		ArrayList<DepartmentInfo> deplist = new ArrayList<DepartmentInfo>();
-//
-//		DepartmentInfo deinfo = new DepartmentInfo();
-//		deinfo.setId(1);
-//		deinfo.setName("開発一部");
-//		deplist.add(deinfo);
-//		DepartmentInfo deinfo2 = new DepartmentInfo();
-//		deinfo2.setId(2);
-//		deinfo2.setName("開発二部");
-//		deplist.add(deinfo2);
-//		DepartmentInfo deinfo3 = new DepartmentInfo();
-//		deinfo3.setId(3);
-//		deinfo3.setName("管理部");
-//		deplist.add(deinfo3);
-//
-//		return deplist;
-//	}
-
-
-
-
-	/**
-	 * 機能：DBから取得した部門リスト
-	 *
-	 * @return 社員タイプリスト
-	 * @author 開発@ソフトテク
-	 */
-
-
-
-
-
-
-
-
 }
