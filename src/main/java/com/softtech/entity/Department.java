@@ -2,9 +2,9 @@ package com.softtech.entity;
 
 public class Department {
 	//部門ID
-	private Integer id;
+	private Integer id;    //フィールド(メンバ変数)
 	//部門名称
-	private String name;
+	private String name;	//フィールド(メンバ変数)
 
 	/**
 	 * @return id
