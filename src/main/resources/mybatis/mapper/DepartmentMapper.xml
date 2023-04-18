@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.softtech.mapper.DepartmentMapper">
-	<select id="getDepTypeInfoList"  resultType="Department">
-		select * from ems.m_department
+	<select id="getDepTypeInfoList"  parameterType='string' resultType="Department">
+		select departmentID as ID , departmentName as Name from ems.m_department
 	</select>
 </mapper>

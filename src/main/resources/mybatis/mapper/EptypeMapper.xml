@@ -2,7 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.softtech.mapper.EptypeMapper">
-	<select id="getEpTypeInfoList"  resultType="EmployeepType">
-		select * from ems.m_eptype
+	<select id="getEpTypeInfoList" parameterType='string' resultType="EmployeepType">
+
+	select epTypeID as ID , epTypeName as Name from  ems.m_eptype
 	</select>
 </mapper>
+

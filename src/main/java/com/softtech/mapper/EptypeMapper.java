@@ -21,6 +21,6 @@ public interface EptypeMapper {
 	 *
 	 * @author ヤダナー@ソフトテク
 	 */
-	ArrayList<EmployeepType> getEptypeInfoList();
+	ArrayList<EmployeepType> getEpTypeInfoList();
 
 }

@@ -105,6 +105,7 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 
 		// 社員タイプ
 		ArrayList<EptypeInfo> ep = mkEmployeeType();
+//		ArrayList<EptypeInfo> ep = getEptypeInfoList();
 		// 社員タイプオープションを設定
 		employeeEditBean.setEpTypeInfoList(ep);
 		// 社員タイプ設定
@@ -209,7 +210,7 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	 * @author 開発@ソフトテク
 	 */
     private ArrayList<EptypeInfo> mkEmployeeType(){
-    	ArrayList<EmployeepType> eptypeInfoList = eptypeMapper.getEptypeInfoList();
+    	ArrayList<EmployeepType> eptypeInfoList = eptypeMapper.getEpTypeInfoList();
     	return changeData(eptypeInfoList) ;
 
     }
@@ -270,4 +271,6 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 
    	 return departmentInfos;
    }
+
+
 }
