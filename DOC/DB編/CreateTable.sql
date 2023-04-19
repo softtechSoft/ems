@@ -330,7 +330,7 @@ updateDate varchar(8) not null comment'更新日'
 ) comment '雇用保険率テーブル'
 
 
-drop table if exists m_incometax; 
+drop table if exists m_incometax;
 create table m_incometax(
 incomeTaxID varchar(10) NOT NULL PRIMARY KEY COMMENT '所得税ID',
 employeeID varchar(8) NOT NULL COMMENT '社員ID',
@@ -379,4 +379,24 @@ create table m_eptype (
     epTypeName varchar (5) not null comment '社員タイプ名称'　
 )　comment '社員タイプ_マスタ機能' ;
 Insert into m_eptype values ('0','正社員') , ('1','契約社員') , ('2','個人')　;
+
+
+--employee table 社員タイプの桁数変更
+alter table employee modify epType varchar(2)DEFAULT NULL COMMENT '社員タイプ' ;
+
+--employee table 部門の桁数変更
+alter table employee modify department varchar(2)DEFAULT NULL COMMENT '部門' ;
+
+--m_eptype table 各columnの桁数変更
+alter table m_eptype modify epTypeID varchar(2) NOT NULL COMMENT '社員タイプID';
+alter table m_eptype modify epTypeName varchar(5) NOT NULL COMMENT '社員タイプ名称';
+
+--m_department table 各columnの桁数変更
+alter table m_department modify departmentID varchar(2) NOT NULL COMMENT '部門ID';
+alter table m_department modify departmentName varchar(5) NOT NULL COMMENT '部門名称';
+
+
+
+
+
 

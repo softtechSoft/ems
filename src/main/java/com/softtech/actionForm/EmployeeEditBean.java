@@ -60,7 +60,7 @@ public class EmployeeEditBean {
 	public String postCode;
 
 	//電話番号
-	@Pattern(regexp = "^[0-9]*$", message = "電話番号を半角で入力してください。")
+	@Pattern(regexp = "^[0-9]*$", message = "電話番号を半角数字で入力してください。")
 	public String phoneNumber;
 
 	//入更新日
@@ -77,6 +77,7 @@ public class EmployeeEditBean {
 		this.epType = epType;
 	}
 	//個人番号
+	@Pattern(regexp = "^[0-9]*$", message = "個人番号を半角数字で入力してください。")
 	private String personNumber;
 
 	//所属部門
