@@ -29,7 +29,8 @@ public class EmployeeEditBean {
 
 	// 住所
 	@NotEmpty(message = "住所を入力してください。")
-	//@Pattern(regexp = "^[^ -~｡-ﾟ]*$", message = "住所を全角で入力してください。")
+//	@Pattern(regexp = "^[^ -~｡-ﾟ]*$", message = "住所を全角で入力してください。")
+	@Size(max = 200, message = "住所は200文字以内で入力してください。")
 	private String address;
 
 	// 性別
@@ -56,11 +57,15 @@ public class EmployeeEditBean {
 
 	//郵便番号
 	@NotEmpty(message = "郵便番号を入力してください。")
-	@Pattern(regexp = "^([0-9]{3}?[0-9]{4})?$", message = "郵便番号形式で入力してください。")
+	@Size(max = 7, message = "郵便番号は(-)無し、半角７桁数字以内で入力してください。")
+	@Pattern(regexp = "^([0-9]{3}?[0-9]{4})?$", message = "(-)無し、郵便番号形式で入力してください。")
 	public String postCode;
 
 	//電話番号
-	@Pattern(regexp = "^[0-9]*$", message = "電話番号を半角数字で入力してください。")
+	@NotEmpty (message = "電話番号を入力してください")
+//	@Pattern(regexp = "^([0-9]{3}?[0-9]{4}?[0-9]{4})?$", message = "電話番号は(-)無し、半角数字で入力してください。")
+//	@Pattern(regexp = "^[0-9]*$", message = "電話番号を半角数字で入力してください。")
+	@Size(max = 15 ,message = "電話番号は半角15桁数字で入力してください")
 	public String phoneNumber;
 
 	//入更新日
@@ -77,7 +82,9 @@ public class EmployeeEditBean {
 		this.epType = epType;
 	}
 	//個人番号
-	@Pattern(regexp = "^[0-9]*$", message = "個人番号を半角数字で入力してください。")
+	@NotEmpty(message = "個人番号を入力してください。")
+	@Size(max = 12, message = "個人番号は半角12桁数字以内で入力してください。")
+	@Pattern(regexp = "^[0-9]*$", message = "個人番号は半角数字で入力してください。")
 	private String personNumber;
 
 	//所属部門
