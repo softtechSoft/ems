@@ -376,8 +376,8 @@ Insert into m_department values ('1','開発一部') , ('2','開発二部') , ('
 drop table if exists m_eptype ;
 create table m_eptype (
     epTypeID varchar (2) not null primary key comment '社員タイプID' ,
-    epTypeName varchar (5) not null comment '社員タイプ名称'　
-)　comment '社員タイプ_マスタ機能' ;
+    epTypeName varchar (5) not null comment '社員タイプ名称'
+)comment '社員タイプ_マスタ機能' ;
 Insert into m_eptype values ('0','正社員') , ('1','契約社員') , ('2','個人')　;
 
 
