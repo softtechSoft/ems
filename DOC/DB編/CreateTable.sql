@@ -23,6 +23,8 @@ Insert into employee values
 ('E003' ,'社員３' ,md5('123456') ,'0' ,'0' ,'0','1986-01-03' ,'34','20190101','2','2310859','横浜市中区','07012344323','1','e003@it-softtech.com',date_format(now(),'%Y%m%d') ,null);
 alter table employee add column department varchar(1) comment'部門';
 alter table employee add column personNumber varchar(12) comment'個人番号';
+alter table employee modify birthday varchar(8) DEFAULT NULL COMMENT '生年月日';
+
 
 drop table if exists ofcfunction;
 create table ofcfunction(
@@ -394,6 +396,8 @@ alter table m_eptype modify epTypeName varchar(5) NOT NULL COMMENT '社員タイ
 --m_department table 各columnの桁数変更
 alter table m_department modify departmentID varchar(2) NOT NULL COMMENT '部門ID';
 alter table m_department modify departmentName varchar(5) NOT NULL COMMENT '部門名称';
+
+
 
 
 

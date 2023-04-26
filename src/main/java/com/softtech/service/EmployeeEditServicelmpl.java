@@ -1,10 +1,8 @@
 package com.softtech.service;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,7 +72,7 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 		employeeEditBean.setSex(employee.getSex());
 		//生年月日
 		if(employee.getBirthday()!=null && !"".equals(employee.getBirthday()) ){
-			String birthday = employee.getBirthday().substring(0, 4) + "-" + employee.getBirthday().substring(4, 6) + "-"
+			String birthday = employee.getBirthday().substring(0, 4) + "-" +  employee.getBirthday().substring(4, 6) + "-"
 					+ employee.getBirthday().substring(6);
 
 			employeeEditBean.setBirthday(birthday);
@@ -109,7 +107,10 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 		// 社員タイプオープションを設定
 		employeeEditBean.setEpTypeInfoList(ep);
 		// 社員タイプ設定
-		employeeEditBean.setSelectedepTypeId(Integer.parseInt(employee.getEpType()));
+		if (employee.getEpType()!=null && !"".equals(employee.getEpType()) ){
+			employeeEditBean.setSelectedepTypeId(Integer.parseInt(employee.getEpType()));
+		}
+
 
 		// 部門タイプ
 		ArrayList<DepartmentInfo> deplist = mkDepartment();
@@ -141,24 +142,13 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 		map.put("epType", employeeEditBean.getSelectedepTypeId().toString());
 		map.put("department", employeeEditBean.getSelectedDepTypeId().toString());
 
-		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
-		Date birthday_date;
-		try {
-			birthday_date = sdFormat.parse(employeeEditBean.getBirthday());
-			map.put("birthday", sdFormat.format(birthday_date));
-		} catch (ParseException e) {
-			map.put("birthday", "00000000");
-		}
+//		String birthDay = employeeEditBean.getBirthday();  // yyyy-mm-dd
+		map.put("birthday", DateUtil.chgdateToYMD(employeeEditBean.getBirthday()));
+
+//		String joinedDATE = employeeEditBean.getJoinedDateString();   //yyyy-mm-dd
+		map.put("joinedDate",DateUtil.chgdateToYMD(employeeEditBean.getJoinedDateString()));
 
 		map.put("age", employeeEditBean.getAge());
-
-		Date joinedDate_date;
-		try {
-			joinedDate_date = sdFormat.parse(employeeEditBean.getJoinedDateString());
-			map.put("joinedDate", sdFormat.format(joinedDate_date));
-		} catch (ParseException e) {
-			map.put("joinedDate", "00000000");
-		}
 
 		map.put("joinedTime", employeeEditBean.getJoinedTime());
 		map.put("postCode", employeeEditBean.getPostCode());
@@ -166,6 +156,7 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 		map.put("phoneNumber", employeeEditBean.getPhoneNumber());
 		map.put("personNumber", employeeEditBean.getPersonNumber());
 
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
 		Calendar cl = Calendar.getInstance();
 		String str = sdFormat.format(cl.getTime());
 		map.put("updateDate", str);

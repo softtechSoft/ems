@@ -34,6 +34,7 @@ public class DateUtil {
 		Date dNow = new Date( );
 		SimpleDateFormat a = new SimpleDateFormat ("yyyy");
 		 b = a.format(dNow);
+
 		//TETS COMMIT
 		 //TEST
 		return b;
@@ -112,6 +113,7 @@ public class DateUtil {
 		Date dNow = new Date( );
 		SimpleDateFormat a = new SimpleDateFormat ("yyyyMM");
 		 b = a.format(dNow);
+
 		return b;
 	}
 	/**
@@ -126,6 +128,23 @@ public class DateUtil {
 		// YYYY/MM→yyyymmに変換
 		return month.replace("/", "");
 	}
+	
+	/**
+	 * 機能：YYYY-MM-DDからYYYYMMDDに変更
+	 *
+	 * @param 日付
+	 * @return 変更後年月
+	 * @exception なし
+	 * @author 馬@ソフトテク
+	 */
+	public static String chgdateToYMD(String date) {
+		// YYYY-MM-DD→yyyymmddに変換
+		return date.replace("-", "");
+	}
+	
+	
+	
+
 	/**
 	 * 機能：YYYMMからYYYY/MMに変更
 	 *
