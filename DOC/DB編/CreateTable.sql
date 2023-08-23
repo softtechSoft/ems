@@ -23,8 +23,6 @@ Insert into employee values
 ('E003' ,'社員３' ,md5('123456') ,'0' ,'0' ,'0','1986-01-03' ,'34','20190101','2','2310859','横浜市中区','07012344323','1','e003@it-softtech.com',date_format(now(),'%Y%m%d') ,null);
 alter table employee add column department varchar(1) comment'部門';
 alter table employee add column personNumber varchar(12) comment'個人番号';
-alter table employee modify birthday varchar(8) DEFAULT NULL COMMENT '生年月日';
-
 
 drop table if exists ofcfunction;
 create table ofcfunction(
@@ -59,8 +57,15 @@ Insert into ofcfunction values
 ('A6','workdetailli','&#xe60c;&emsp;勤怠リスト','1','/emsm/workdetaillist','3' ,'0',date_format(now(),'%Y%m%d') ,null),
 ('B1','expenses','&#xe60c;&emsp;一般経費','1','/emsm/initExpensesManagement','1' ,'0',date_format(now(),'%Y%m%d') ,null),
 ('B2','basesalary','&#xe60c;&emsp;基本給情報リスト','1','/emsm/initBaseSalaryList','2' ,'0',date_format(now(),'%Y%m%d') ,null),
-('S8','welfarefee','&#xe60c;&emsp;厚生保険料マスタ','1','/emsm/initWelfarefeeInfoList','8' ,'0',date_format(now(),'%Y%m%d') ,null),
-('S9','emplyinsrate','&#xe60c;&emsp;雇用保険率テーブル','1','/emsm/initEmplyinsrateInfoList','9' ,'0',date_format(now(),'%Y%m%d') ,null);
+('W1','welfarefee','&#xe60c;&emsp;マスタ_厚生保険料','1','/emsm/initWelfarefeeInfoList','8' ,'0',date_format(now(),'%Y%m%d') ,null),
+('S9','emplyinsrate','&#xe60c;&emsp;雇用保険率テーブル','1','/emsm/initEmplyinsrateInfoList','9' ,'0',date_format(now(),'%Y%m%d') ,null),
+('M1','incomeTax','&#xe60c;&emsp;消費税テーブル','1','/emsm/initIncomeTaxInfoList','9' ,'0',date_format(now(),'%Y%m%d') ,null);
+insert into ofcfunction('functionID','functionName','functionText','authority','functionLink','deleteFlg')
+values
+('M1','incomeTax','&#xe60c;&emsp;消費税テーブル','1','/emsm/initIncomeTaxInfoList','0');
+
+
+
 alter table ofcfunction add column sysType varchar(1);
 
 drop table if exists company;
@@ -296,7 +301,7 @@ updateDate varchar(8) not null comment'更新日',
 baseSalaryID varchar(8) not null PRIMARY KEY comment'基本給ID',
 employeeID varchar(8) not null comment'社員ID'
 )comment'基本給_マスタ機能';
-
+ALTER TABLE m_basesalary ADD year varchar(4) NOT NULL comment'対象年度';
 
 drop table if exists m_welfarefee;
 create table m_welfarefee(
@@ -313,7 +318,7 @@ contributionRate DECIMAL(6,5) not null comment'厚生子育拠出金率',
 status int not null comment'利用ステータス',
 insertDate varchar(8) not null comment'作成日',
 updateDate varchar(8) not null comment'更新日'
-) comment '厚生保険料マスタ'
+) comment '厚生保険料マスタ';
 
 
 drop table if exists m_emplyinsrate;
@@ -329,7 +334,7 @@ contributionRate DECIMAL(6,5) not null comment'一般拠出金料率(全額事�
 status int not null comment'利用ステータス',
 insertDate varchar(8) not null comment'作成日',
 updateDate varchar(8) not null comment'更新日'
-) comment '雇用保険率テーブル'
+) comment '雇用保険率テーブル';
 
 
 drop table if exists m_incometax;
@@ -364,13 +369,13 @@ residentTax12 int NOT NULL COMMENT '十二月住民税',
 status int NOT NULL COMMENT '利用ステータス',
 insertDate varchar(8) NOT NULL COMMENT '作成日',
 updateDate varchar(8) NOT NULL COMMENT '更新日'
-) comment '所得税と住民税マスター管理'
+) comment '所得税と住民税マスター管理';
 
 
 drop table if exists m_department;
 create table m_department(
     departmentID varchar(2) not null primary key comment'部門ID' ,
-    departmentName varchar(5) not null comment '部門名称',
+    departmentName varchar(5) not null comment '部門名称'
 ) comment '部門_マスタ機能';
 Insert into m_department values ('1','開発一部') , ('2','開発二部') , ('3','管理部');
 
@@ -380,7 +385,7 @@ create table m_eptype (
     epTypeID varchar (2) not null primary key comment '社員タイプID' ,
     epTypeName varchar (5) not null comment '社員タイプ名称'
 )comment '社員タイプ_マスタ機能' ;
-Insert into m_eptype values ('0','正社員') , ('1','契約社員') , ('2','個人')　;
+Insert into m_eptype values ('0','正社員') , ('1','契約社員') , ('2','個人');
 
 
 --employee table 社員タイプの桁数変更
@@ -397,10 +402,142 @@ alter table m_eptype modify epTypeName varchar(5) NOT NULL COMMENT '社員タイ
 alter table m_department modify departmentID varchar(2) NOT NULL COMMENT '部門ID';
 alter table m_department modify departmentName varchar(5) NOT NULL COMMENT '部門名称';
 
+drop table if exists m_basesalary;
+create table m_basesalary(
+baseSalary int not null comment'基本給',
+year varchar(4) not null comment'対象年度',
+minusHour int not null comment'残業不足時間',
+plusHour int not null comment'残業時間',
+wkPeriodFrom int not null comment'稼働期間From',
+wkPeriodTo int not null comment'稼働期間To',
+overtimePay DECIMAL(7,1) not null comment'残業単価',
+insufficienttimePay DECIMAL(7,1) not null comment'控除単価',
+status int not null comment'利用ステータス',
+insertDate varchar(8) not null comment'作成日',
+updateDate varchar(8) not null comment'更新日',
+baseSalaryID varchar(8) not null PRIMARY KEY comment'基本給ID',
+employeeID varchar(8) not null comment'社員ID'
+)comment'基本給_マスタ機能';
+
+drop table if exists m_welfarebabyrate;
+create table m_welfarebabyrate(
+    rateID int not null primary key comment'徴収ID',
+    year varchar(4) not null comment'対処年度',
+    area varchar(8) not null comment'対処エリア',
+    rate decimal(6,5) NOT NULL COMMENT '徴収率',
+    status int NOT NULL COMMENT '利用ステータス',
+    insertDate varchar(8) NOT NULL COMMENT '作成日',
+    updateDate varchar(8) NOT NULL COMMENT '更新日'
+    )comment 'マスタ＿厚生子育徴収率';
 
 
+alter table m_welfarefee modify notCareRatio decimal(6,3) NOT NULL COMMENT '介護必要ない料率';
+alter table m_welfarefee modify careRatio decimal(6,3) NOT NULL COMMENT '介護必要料率';
+alter table m_welfarefee modify annuityRatio decimal(6,3) NOT NULL COMMENT '厚生年金保険料率';
 
+alter table salaryinfo modify overTime float NOT NULL DEFAULT '0' COMMENT '残業時間';
+alter table salaryinfo modify shortage float NOT NULL DEFAULT '0' COMMENT '不足時間';
 
+alter table m_welfarefee drop column contributionRate;
+alter table m_basesalary drop column minusHour;
+alter table m_basesalary drop column plusHour;
 
+alter table m_emplyinsrate drop column employmentInsuranceRate;
+alter table m_emplyinsrate drop column laborInsuranceRate;
 
+---------プロシージャ------
+CREATE  PROCEDURE `makewelfare`(in gamenMode VarChar(1)
+,in employeeID1 VarChar(6)
+,in startDate1 VarChar(8)
+,in base Int
+,in welfarePensionSelf1 Int
+,in welfarePensionComp1 Int
+,in welfareHealthComp1 Int
+,in welfareHealthSelf1 Int
+,in welfareBaby1 Int
+,in eplyInsSelf1 Int
+,in eplyInsComp1 Int
+,in eplyInsWithdraw1 Int
+,in wkAcccpsIns1 Int
+,in withholdingTax1 Int
+,in municipalTax1 Int
+,in rental1 Int
+,in rentalMgmtFee1 Int
+,in status1 VarChar(1)
+,in insertEmployee1 VarChar(6)
+,in updateEmployee1 VarChar(6)
+)
+BEGIN
+
+IF (gamenMode='2') then
+update welfareinfo set
+base=base,
+welfarePensionSelf=welfarePensionSelf1,
+welfarePensionComp=welfarePensionComp1,
+welfareHealthComp=welfareHealthComp1,
+welfareHealthSelf=welfareHealthSelf1,
+welfareBaby=welfareBaby1,
+eplyInsSelf=eplyInsSelf1,
+eplyInsComp=eplyInsComp1,
+eplyInsWithdraw=eplyInsWithdraw1,
+wkAcccpsIns=wkAcccpsIns1,
+withholdingTax=withholdingTax1,
+municipalTax=municipalTax1,
+rental=rental1,
+rentalMgmtFee=rentalMgmtFee1,
+status=status1,
+insertDate=CURDATE(),
+insertEmployee=insertEmployee1,
+updateDate=CURDATE(),
+updateEmployee=updateEmployee1
+where welfareinfo.employeeID=employeeID1
+and   welfareinfo.startDate=startDate1;
+
+ELSEIF (gamenMode='1') then
+insert into welfareinfo(
+employeeID
+,startDate
+,base
+,welfarePensionSelf
+,welfarePensionComp
+,welfareHealthComp
+,welfareHealthSelf
+,welfareBaby
+,eplyInsSelf
+,eplyInsComp
+,wkAcccpsIns
+,eplyInsWithdraw
+,withholdingTax
+,municipalTax
+,rental
+,rentalMgmtFee
+,status
+,insertDate
+,insertEmployee
+,updateDate
+,updateEmployee
+)
+VALUES(employeeID1
+,startDate1
+,base
+,welfarePensionSelf1
+,welfarePensionComp1
+,welfareHealthComp1
+,welfareHealthSelf1
+,welfareBaby1
+,eplyInsSelf1
+,eplyInsComp1
+,eplyInsWithdraw1
+,wkAcccpsIns1
+,withholdingTax1
+,municipalTax1
+,rental1
+,rentalMgmtFee1
+,status1
+,CURDATE()
+,insertEmployee1
+,CURDATE()
+,updateEmployee1);
+END IF;
+END
 
