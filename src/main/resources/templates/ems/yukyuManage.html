@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>yukyuTable</title>
+</head>
+<body>
+	<header>
+		<h3>有給管理</h3>
+	</header>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>社員ID</th>
+	                <th>年度</th>
+	                <th>総日数</th>
+	                <th>消化日数</th>
+	                <th>作成日</th>
+	                <th>更新日</th>
+				</tr>
+			</thead>
+			<tbody>
+            <tr th:each="row : ${yukyuList}">
+                <td th:text="${row.employeeID}">Employee ID</td>
+                <td th:text="${row.nendo}">Nendo</td>
+                <td th:text="${row.totalDay}">Total Day</td>
+                <td th:text="${row.usedDay}">Used Day</td>
+                <td th:text="${row.insertDate}">Insert Date</td>
+                <td th:text="${row.updateDate}">Update Date</td>
+                <td>
+                    <!-- Form for updating a record -->
+                    <form th:action="@{'/update/' + ${row.employeeID} + '/' + ${row.nendo}}" method="post">
+                        <input type="text" name="newTotalDay" placeholder="New Total Day" />
+                        <input type="text" name="newUsedDay" placeholder="New Used Day" />
+                        <input type="submit" value="Update" />
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+		</table>
+	</form>
+</body>
+</html>
