@@ -1,14 +1,31 @@
 package com.softtech.actionForm;
 
+import javax.validation.constraints.Pattern;
+
 public class YukyuDetail {
 
+	//ユーザID
 	private String employeeID;
+
+	//年度
     private String nendo;
+
+    //総日数
     private String totalDay;
+
+    //消化日数
+
+    @Pattern(regexp = "^[0-9]+$")
     private String usedDay;
+
+    //作成日
     private String insertDate;
+
+    //更新日
     private String updateDate;
-	public YukyuDetail() {
+
+    //構造関数
+    public YukyuDetail() {
 
 	}
 	public String getEmployeeID() {
