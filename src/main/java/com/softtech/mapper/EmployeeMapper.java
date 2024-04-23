@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.softtech.actionForm.EmployeeEditFormBean;
 import com.softtech.entity.Employee;
 
 @Mapper
@@ -26,4 +27,8 @@ public interface EmployeeMapper {
 	int updateEmployeeAll(Map<String, String> map);
 
 	int updateStatus(Map<String, String> map);
+
+	void update(EmployeeEditFormBean employeeEditBean);
+
+
 }

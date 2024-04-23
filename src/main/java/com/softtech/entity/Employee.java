@@ -225,6 +225,10 @@ public class Employee {
 		this.department = department;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 
 
 }

@@ -1,7 +1,8 @@
 package com.softtech.controller;
 
 import java.text.ParseException;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,13 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.softtech.actionForm.EmployeeEditBean;
+import com.softtech.actionForm.EmployeeEditFormBean;
 import com.softtech.entity.Employee;
 import com.softtech.service.EmployeeEditService;
 
@@ -44,10 +46,10 @@ public class EmployeeEditController {
 
 		// DB検索
 		Employee employee = employeeEditService.queryEmployeeAll((String) session.getAttribute("userEmoplyeeID"));
-		//Employee employee = employeeEditService.queryEmployeeAll("E001");
+
 
 		//画面表示変更
-		EmployeeEditBean employeeEditBean = employeeEditService.transferDbToUI(employee);
+		EmployeeEditFormBean employeeEditBean = employeeEditService.transferDbToUI(employee);
 
 		// 画面に渡す
 		model.addAttribute("employeeEditBean", employeeEditBean);
@@ -63,32 +65,21 @@ public class EmployeeEditController {
 	 *
 	 * @author 開発@ソフトテク
 	 */
+
 	@PostMapping("/btn-employeeEdit")
-	public String employeeEditSubmit(
-								@Validated @ModelAttribute("employeeEditBean") EmployeeEditBean employeeEditBean,
-								BindingResult errors,
-								Model model, HttpSession session) throws ParseException {
-		// Validationチェックエラー時、エラー情報表示
-		if (errors.hasErrors()) {
-			model.addAttribute("employeeEditBean", employeeEditBean);
-			return "/ems/employeeEdit";
-		}
-		// DB更新
-		Map<String, String> map = employeeEditService.transferUIToPara(employeeEditBean);
-		int num = employeeEditService.updateEmployeeAll(map);
+	 public String update(@Validated @ModelAttribute  EmployeeEditFormBean employeeEditBean, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            List<String> errorList = new ArrayList<String>();
+            for (ObjectError error : result.getAllErrors()) {
+                errorList.add(error.getDefaultMessage());
+            }
+            model.addAttribute("validationError", errorList);
+            return "/ems/employeeEdit";
+        }
+        // ユーザー情報の更新
+        employeeEditService.update(employeeEditBean);
+        model.addAttribute("successMessage", "更新完了");
+        return "/ems/employeeEdit";
 
-		if (num == 1) {
-			model.addAttribute("updateMsg", "社員情報を更新しました。");
-		} else {
-			model.addAttribute("updateMsg", "社員情報の更新に失敗しました。");
-		}
-
-		// 画面再表示設定
-		employeeEditBean = employeeEditService.resetToUI(employeeEditBean);
-		model.addAttribute("employeeEditBean", employeeEditBean);
-
-		return "/ems/employeeEdit";
-
-	}
-
+}
 }

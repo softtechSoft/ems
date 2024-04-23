@@ -1,56 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-        <!DOCTYPE mapper
-                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--namespace=Dao/Mapper-->
 <mapper namespace="com.softtech.mapper.EmployeeMapper">
-	<select id="queryEmployeeAll" parameterType="string" resultType="Employee">
-		select * from ems.employee where
-		employeeID = #{employeeID}
-	</select>
-	<select id="queryEmployee" parameterType="string" resultType="Employee">
-		select * from ems.employee where status = '0'
-		<if test = "email!=null">
-		and mailAdress = #{email}
-		</if>
-	</select>
+    <select id="queryEmployeeAll" parameterType="string" resultType="Employee">
+        select * from ems.employee where
+        employeeID = #{employeeID}
+    </select>
+    <select id="queryEmployee" parameterType="string" resultType="Employee">
+        select * from ems.employee where status = '0'
+        <if test="email != null">
+            and mailAdress = #{email}
+        </if>
+    </select>
     <!-- ログイン -->
     <select id="login" parameterType="Employee" resultType="Employee">
-		select * from ems.employee
-		where status = '0'
-		and mailAdress = #{mailAdress}
-		and password = md5(#{password})
+        select * from ems.employee
+        where status = '0'
+        and mailAdress = #{mailAdress}
+        and password = md5(#{password})
+    </select>
 
-	</select>
-	
-	
-	
-	
+    <update id="updatePassword" parameterType="map">
+        update ems.employee set password = md5(#{password}), updateDate = date_format(now(),'%Y%m%d') where mailAdress=#{email}
+    </update>
 
-	<update id="updatePassword" parameterType="map">
-		update ems.employee set password = md5(#{password}),updateDate = date_format(now(),'%Y%m%d') where mailAdress=#{email}
-	</update>
+    <update id="updateEmployee" parameterType="map">
+        update ems.employee set employeeName = #{employeeName}, password = #{password},
+        status = #{status}, sex = #{sex}, birthday = #{birthday}, age = #{age}, joinedDate = #{joinedDate}, epType=#{epType}, department=#{department},
+        joinedTime = #{joinedTime}, postCode = #{postCode}, address = #{address}, phoneNumber = #{phoneNumber},
+        authority = #{authority}, mailAdress = #{mailAdress} where employeeID =#{employeeID}
+    </update>
 
-  <update id="updateEmployee" parameterType="map">
-		update ems.employee set employeeName = #{employeeName},password = #{password},
-		status = #{status}, sex = #{sex},birthday = #{birthday},age = #{age},joinedDate = #{joinedDate},epType=#{epType},department=#{department},
-		joinedTime = #{joinedTime},postCode = #{postCode},address = #{address},phoneNumber = #{phoneNumber},
-		authority = #{authority},mailAdress = #{mailAdress} where employeeID =#{employeeID}
-	</update>
+    <update id="updateEmployeeAll" parameterType="map">
+        update ems.employee set employeeName = #{employeeName},
+        sex = #{sex}, birthday = #{birthday}, age = #{age}, joinedDate = #{joinedDate}, epType=#{epType}, department=#{department},
+        joinedTime = #{joinedTime}, postCode = #{postCode}, address = #{address}, phoneNumber = #{phoneNumber},
+        updateDate = #{updateDate}, personNumber = #{personNumber} where employeeID =#{employeeID}
+    </update>
 
-
-
-  	<update id="updateEmployeeAll" parameterType="map">
-		update ems.employee set employeeName = #{employeeName},
-		sex = #{sex},birthday = #{birthday},age = #{age},joinedDate = #{joinedDate},epType=#{epType},department=#{department},
-		joinedTime = #{joinedTime},postCode = #{postCode},address = #{address},phoneNumber = #{phoneNumber},
-		updateDate = #{updateDate},personNumber = #{personNumber} where employeeID =#{employeeID}
-	</update>
-
-	<update id="updateStatus" parameterType="map">
-		update ems.employee set status = '9' where employeeID =#{employeeID}
-	</update>
-
+    <update id="updateStatus" parameterType="map">
+        update ems.employee set status = '9' where employeeID =#{employeeID}
+    </update>
+    <update id="update" parameterType="map">
+        update ems.employee set employeeName = #{employeeName},
+        sex = #{sex}, birthday = #{birthday}, age = #{age}, joinedDate = #{joinedDate}, epType=#{epType}, department=#{department},
+        joinedTime = #{joinedTime}, postCode = #{postCode}, address = #{address}, phoneNumber = #{phoneNumber},personNumber = #{personNumber}
+        where employeeID =#{employeeID}
+    </update>
 
 </mapper>

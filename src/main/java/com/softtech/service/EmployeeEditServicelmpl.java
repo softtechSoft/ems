@@ -9,7 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.softtech.actionForm.EmployeeEditBean;
+import com.softtech.actionForm.EmployeeEditFormBean;
 import com.softtech.com.DepartmentInfo;
 import com.softtech.com.EptypeInfo;
 import com.softtech.entity.Department;
@@ -62,8 +62,8 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	 * @author 開発@ソフトテク
 	 */
 	@Override
-	public EmployeeEditBean transferDbToUI(Employee employee) {
-		EmployeeEditBean employeeEditBean = new EmployeeEditBean();
+	public EmployeeEditFormBean transferDbToUI(Employee employee) {
+		EmployeeEditFormBean employeeEditBean = new EmployeeEditFormBean();
 		//社員名前
 		employeeEditBean.setEmployeeName(employee.getEmployeeName());
 		//社員ID
@@ -132,7 +132,7 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	 * @author 開発@ソフトテク
 	 */
 	@Override
-	public Map<String, String> transferUIToPara(EmployeeEditBean employeeEditBean)
+	public Map<String, String> transferUIToPara(EmployeeEditFormBean employeeEditBean)
 	{
 		Map<String, String> map = new HashMap<>();
 
@@ -172,7 +172,7 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	 * @author 開発@ソフトテク
 	 */
 	@Override
-	public EmployeeEditBean resetToUI(EmployeeEditBean employeeEditBean) {
+	public EmployeeEditFormBean resetToUI(EmployeeEditFormBean employeeEditBean) {
 
 		//最終更新日
 		Calendar cl = Calendar.getInstance();
@@ -262,6 +262,8 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 
    	 return departmentInfos;
    }
-
+   public void update(EmployeeEditFormBean employeeEditBean) {
+	   employeeMapper.update(employeeEditBean);
+   }
 
 }

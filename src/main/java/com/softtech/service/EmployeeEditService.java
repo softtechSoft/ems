@@ -2,7 +2,7 @@ package com.softtech.service;
 
 import java.util.Map;
 
-import com.softtech.actionForm.EmployeeEditBean;
+import com.softtech.actionForm.EmployeeEditFormBean;
 import com.softtech.entity.Employee;
 /**
  * 概要：社員情報変更サービス
@@ -16,11 +16,12 @@ public interface EmployeeEditService {
 
 	int updateEmployeeAll(Map<String, String> map);
 
-	public EmployeeEditBean transferDbToUI(Employee employee);
+	public EmployeeEditFormBean transferDbToUI(Employee employee);
 
-	public Map<String, String> transferUIToPara(EmployeeEditBean employeeEditBean);
+	public Map<String, String> transferUIToPara(EmployeeEditFormBean employeeEditBean);
 
-	public EmployeeEditBean resetToUI(EmployeeEditBean employeeEditBean);
+	public EmployeeEditFormBean resetToUI(EmployeeEditFormBean employeeEditBean);
 
+	public void update(EmployeeEditFormBean employeeEditBean);
 
 }

@@ -17,7 +17,7 @@ import com.softtech.com.EptypeInfo;
  * 作成者：劉@ソフトテク
  * 作成日：2021/7/20
  */
-public class EmployeeEditBean {
+public class EmployeeEditFormBean {
 
 	//ユーザID
 	private String employeeID;
@@ -265,6 +265,17 @@ public class EmployeeEditBean {
 		public void setName(String name) {
 			this.name = name;
 		}
+//		private String password;
+//
+//	    // Getter for 'password'
+//	    public String getPassword() {
+//	        return password;
+//	    }
+//
+//	    // Setter for 'password' (nếu cần)
+//	    public void setPassword(String password) {
+//	        this.password = password;
+//	    }
 
 
 	}
