@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.softtech.actionForm.YukyuDetail;
+import com.softtech.actionForm.YukyuDetailFormBean;
 import com.softtech.service.YukyuDetailService;
+import com.softtech.util.DateUtil;
 /**
  * 概要：有給管理機能
  *
@@ -42,33 +43,25 @@ public class YukyuDetailController {
 	 * @author 孫@ソフトテク
 	 */
 
-//    @RequestMapping("/yukyu")
-//    public String getYukyuDetail(Model model) {
-//        List<YukyuDetail> yukyuDetail = yukyuDetailService.findAll();
-//        model.addAttribute("detail", yukyuDetail);
-//        return "ems/yukyuManage";
-//    }
 
 	//画面初期化
     @RequestMapping("/yukyu")
     public String toYukyuList(Model model,HttpSession session) {
-        //自分社員IDを取る
+        //自分社員IDを取得
     	String employeeID=(String) session.getAttribute("userEmoplyeeID");
+    	//現在の年度を取得
+    	String nendo = DateUtil.getNowYear();
+    	//DB検索（自分社員IDを取得と現在の年度を取得),給管理テーブルからデータを取得
+    	Map<String, String> sqlParam = yukyuDetailService.getIdAndNendoForPara(employeeID, nendo);
+    	YukyuDetailFormBean yukyuDetailep = yukyuDetailService.findIDnendo(sqlParam);
+    	//DB検索（自分社員IDを取得),給管理テーブルからデータを取得
+//    	YukyuDetailFormBean yukyuDetailep = yukyuDetailService.findEmployeeID(employeeID);
+    	//年月日をフォーマット
+    	YukyuDetailFormBean yukyuDetail = yukyuDetailService.transferDbToUI(yukyuDetailep);
+        model.addAttribute("yukyuDetail", yukyuDetail);
 
-//    	//有給管理テーブルからデータ取得
-//        List<YukyuDetail> yukyuDetailList = yukyuDetailService.queryEmployeeID(employeeID);
-//        model.addAttribute("yukyuDetailListl", yukyuDetailList);
-
-    	// employeeIDがnullでない場合のみ有給管理テーブルからデータを取得
-        if (employeeID != null) {
-            YukyuDetail yukyuDetailList = yukyuDetailService.queryYukyuDetail(employeeID);
-
-            // yukyuDetailListがnullでない場合のみモデルに追加
-            if (yukyuDetailList != null) {
-                model.addAttribute("detail", yukyuDetailList);
-            }
-        }
         // 有給管理画面
+
         return "ems/yukyuManage";
     }
 
@@ -84,12 +77,13 @@ public class YukyuDetailController {
     //更新ボタン
     @PostMapping("/btn-yukyuUpdate")
 	public String yukyuSubmit(
-			@Validated @ModelAttribute("detail") YukyuDetail yukyuDetail,
+			@Validated @ModelAttribute("yukyuDetail") YukyuDetailFormBean yukyuDetail,
 			BindingResult errors,
-			Model model, HttpSession session) throws ParseException {
+			Model model) throws ParseException {
+
 		// Validationチェックエラー時、エラー情報表示
 		if (errors.hasErrors()) {
-			model.addAttribute("detail", yukyuDetail);
+			model.addAttribute("yukyuDetail", yukyuDetail);
 			return "/ems/yukyuManage";
 		}
 		// DB更新
@@ -101,12 +95,12 @@ public class YukyuDetailController {
 		} else {
 			model.addAttribute("updateMsg", "有給情報の更新に失敗しました。");
 		}
-		String employeeID=(String) session.getAttribute("userEmoplyeeID");
-		YukyuDetail yukyuDetailp = yukyuDetailService.queryYukyuDetail(employeeID);
-
 		// 画面再表示設定
-		yukyuDetail = yukyuDetailService.resetToUI(yukyuDetailp);
-		model.addAttribute("detail", yukyuDetail);
+    	YukyuDetailFormBean yukyuDetaileps= yukyuDetailService.findIDnendo(map);
+    	//年月日をフォーマット
+    	YukyuDetailFormBean yukyuDetails= yukyuDetailService.transferDbToUI(yukyuDetaileps);
+
+		model.addAttribute("yukyuDetail", yukyuDetails);
 
 		return "/ems/yukyuManage";
 

@@ -3,7 +3,7 @@ package com.softtech.service;
 import java.util.List;
 import java.util.Map;
 
-import com.softtech.actionForm.YukyuDetail;
+import com.softtech.actionForm.YukyuDetailFormBean;
 
 /**
  * 概要：有給情報変更サービス
@@ -13,19 +13,28 @@ import com.softtech.actionForm.YukyuDetail;
  */
 public interface YukyuDetailService{
 
-	List<YukyuDetail> findAll();
+	List<YukyuDetailFormBean> findAll();
 
-	List<YukyuDetail> queryYukyuDetail(Map<String, String> map);
+	List<YukyuDetailFormBean> queryYukyuDetail(Map<String, String> map);
 
-	YukyuDetail queryYukyuDetail(String employeeID);
+	YukyuDetailFormBean findYukyuDetail(String employeeID, String nendo);
 
 
 
-	Map<String, String> transferUIToPara(YukyuDetail yukyuDetail);
+	Map<String, String> transferUIToPara(YukyuDetailFormBean yukyuDetail);
 
-	YukyuDetail resetToUI(YukyuDetail yukyuDetail);
+//	Map<String, String> transferUIToIdNePara(YukyuDetailFormBean yukyuDetail);
+	Map<String, String> getIdAndNendoForPara(String employeeID,String nendo);
+
+	YukyuDetailFormBean resetToUI(YukyuDetailFormBean yukyuDetail);
 
 	int updateYukyuDetail(Map<String, String> map);
+
+	YukyuDetailFormBean findIDnendo(Map<String, String> map);
+
+	YukyuDetailFormBean findEmployeeID(String employeeID);
+
+	YukyuDetailFormBean transferDbToUI(YukyuDetailFormBean yukyuDetailep);
 
 
 

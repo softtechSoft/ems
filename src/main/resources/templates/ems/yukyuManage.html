@@ -7,10 +7,10 @@
 </head>
 <body >
 	<header>
-		<h3>有給管理</h3>
+		<h3>有給状況</h3>
 	</header>
  	<div id="boder" class="boder">
-    <form class="text-left" th:action="@{/btn-yukyuUpdate}" th:object="${detail}" method="POST">
+    <form class="text-left" th:action="@{/btn-yukyuUpdate}" th:object="${yukyuDetail}" method="POST">
 
 		<div style="text-align:center; color: red;">
 			<span th:text="${updateMsg}"></span>
@@ -21,31 +21,31 @@
                     <th>社員ID</th>
                     <!-- 社員ID -->
                     <td>
-						<span class="name" th:if="${detail != null}" th:text="${detail.employeeID}"></span>
-						<input type="hidden" class="subject" name="employeeID" th:value="${detail.employeeID}">
+						<span class="name"  th:text="${yukyuDetail.employeeID}"></span>
+						<input type="hidden" class="subject" name="employeeID" th:value="${yukyuDetail.employeeID}">
 					</td>
                 </tr>
                 <tr style="background-color:#bfe1ff">
                     <th>年度</th>
                     <!-- 年度 -->
                     <td>
-                    	<span class="name" th:if="${detail != null}" th:text="${detail.nendo}"></span>
-                    	<input type="hidden" class="subject" name="nendo" th:value="${detail.nendo}">
+                    	<span class="name"  th:text="${yukyuDetail.nendo}"></span>
+                    	<input type="hidden" class="subject" name="nendo" th:value="${yukyuDetail.nendo}">
                     </td>
                 </tr>
                 <tr style="background-color:#dcfeeb">
                     <th>総日数</th>
                     <!-- 総日数 -->
                     <td>
-						<span class="name" th:if="${detail != null}" th:text="${detail.totalDay}"></span>
-
+						<span class="name"  th:text="${yukyuDetail.totalDay}"></span>
+						<input type="hidden" class="subject" name="totalDay" th:value="${yukyuDetail.totalDay}">
 					</td>
                 </tr>
                 <tr style="background-color:#bfe1ff">
                     <th>消化日数</th>
                     <!-- 消化日数 -->
                     <td>
-                        <input type="text" id="usedDay" class="subject" name="usedDay" th:value="${detail.usedDay}"><br>
+                        <input type="text" id="usedDay" class="subject" name="usedDay" th:value="${yukyuDetail.usedDay}"><br>
                          <span th:if="${#fields.hasErrors('usedDay')}" th:errors="*{usedDay}" style="color: red;"></span>
                     </td>
                 </tr>
@@ -53,24 +53,20 @@
                     <th>作成日</th>
                     <!-- 作成日 -->
                     <td>
-						<span class="name" th:if="${detail != null}" th:text="${detail.insertDate}"></span>
-
+						<span class="name"  th:text="${yukyuDetail.insertDate}"></span>
+						<input type="hidden" class="subject" name="insertDate" th:value="${yukyuDetail.insertDate}">
 					</td>
                 </tr>
                 <tr style="background-color:#bfe1ff">
                     <th>更新日</th>
                     <!-- 更新日 -->
                     <td>
-						<span class="name" th:if="${detail != null}" th:text="${detail.updateDate}"></span>
-
+						<span class="name"  th:text="${yukyuDetail.updateDate}"></span>
+						<input type="hidden" class="subject" name="updateDate" th:value="${yukyuDetail.updateDate}">
 					</td>
                 </tr>
                 <tr>
-	                <th></th>
-	                <th></th>
-	                <th></th>
-	                <th></th>
-	                <th></th>
+
 	                <!-- 更新button -->
 	                <td><button type="submit" class="text-align:right">更新</button></td>
 	            </tr>
