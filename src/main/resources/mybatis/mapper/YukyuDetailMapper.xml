@@ -3,23 +3,28 @@
           PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.softtech.mapper.YukyuDetailMapper">
-	<select id="findAll" parameterType="string" resultType="com.softtech.actionForm.YukyuDetail">
+	<select id="findAll" parameterType="string" resultType="com.softtech.actionForm.YukyuDetailFormBean">
 		select * from yukyu where employeeID = #{employeeID}
 	</select>
-	<select id="queryYukyuDetail" parameterType="string" resultType="com.softtech.actionForm.YukyuDetail">
-		SELECT * FROM yukyu
-        WHERE
-
+	<select id="findIDnendo" parameterType="string" resultType="com.softtech.actionForm.YukyuDetailFormBean">
+		SELECT *
+		FROM yukyu
+		WHERE
         employeeID = #{employeeID}
+		and nendo = #{nendo}
 
 	</select>
-	<select id="queryEmployeeID" parameterType="string" resultType="com.softtech.actionForm.YukyuDetail">
+	<select id="queryYukyuDetail" parameterType="string" resultType="com.softtech.actionForm.YukyuDetailFormBean">
 		SELECT * FROM yukyu
-        <where>
-        	<if test="employeeID != null">
-            	and employeeID = #{employeeID}
-	        </if>
-        </where>
+        WHERE
+        employeeID = #{employeeID}
+		and nendo = #{nendo}
+	</select>
+	<select id="findEmployeeID" parameterType="string" resultType="com.softtech.actionForm.YukyuDetailFormBean">
+		SELECT * FROM yukyu
+        WHERE
+        employeeID = #{employeeID}
+
 	</select>
 	<update id="updateYukyuDetail" parameterType="map">
 		update ems.yukyu
