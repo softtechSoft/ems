@@ -39,7 +39,7 @@ updateDate varchar(8) comment'更新日'
 
 
 Insert into ofcfunction values
-('S1','employee','&#xe666;&emsp;社員情報管理','1','/employee','0' ,'0',date_format(now(),'%Y%m%d') ,null),
+('S1','employee','&#xe666;&emsp;個人情報管理','1','/employee','0' ,'0',date_format(now(),'%Y%m%d') ,null),
 ('S2','company','&#xe65c;&emsp;取引先情報管理','1','/company','1' ,'0',date_format(now(),'%Y%m%d') ,null),
 ('S3','contract','&#xe65d;&emsp;契約情報管理','1','/contract','2' ,'1',date_format(now(),'%Y%m%d') ,null),
 ('S4','workInfo','&#xe672;&emsp;勤怠情報管理','1','/workInfo','3' ,'1',date_format(now(),'%Y%m%d') ,null),
