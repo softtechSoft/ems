@@ -128,7 +128,7 @@ public class DateUtil {
 		// YYYY/MM→yyyymmに変換
 		return month.replace("/", "");
 	}
-	
+
 	/**
 	 * 機能：YYYY-MM-DDからYYYYMMDDに変更
 	 *
@@ -141,9 +141,9 @@ public class DateUtil {
 		// YYYY-MM-DD→yyyymmddに変換
 		return date.replace("-", "");
 	}
-	
-	
-	
+
+
+
 
 	/**
 	 * 機能：YYYMMからYYYY/MMに変更
@@ -174,6 +174,18 @@ public class DateUtil {
 		String monthDate="";
 		monthDate = month.substring(0, 4) + "/" + month.substring(4,6)+ "/" + month.substring(6);
 		return monthDate;
+	}
+	/**
+	 * 機能：YYYY/MM/DDからYYYYMMDDに変更
+	 *
+	 * @param 年月
+	 * @return 変更後年月
+	 * @exception なし
+	 * @author 馬@ソフトテク
+	 */
+	public static String chgYMDToDateGyaku(String month) {
+		// YYYY/MM→yyyymmに変換
+		return month.replace("/", "");
 	}
 	/**
 	 * 機能：float→Stringに変換
