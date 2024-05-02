@@ -1,11 +1,11 @@
-package com.softtech.actionForm;
+package com.softtech.entity;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Pattern;
 
-public class YukyuDetailFormBean {
+//Entity
+//Table(name = "yukyu")
+public class YukyuInfo {
 
-	//ユーザID
+	//社員ID
 	private String employeeID;
 
 	//年度
@@ -15,9 +15,6 @@ public class YukyuDetailFormBean {
     private String totalDay;
 
     //消化日数
-
-    @Max(value = 20, message = "入力値は 20 以下!")
-    @Pattern(regexp = "^[0-9]+$", message = "入力値は整数!")
     private String usedDay;
 
     //作成日
@@ -26,10 +23,8 @@ public class YukyuDetailFormBean {
     //更新日
     private String updateDate;
 
-    //構造関数
-    public YukyuDetailFormBean() {
 
-	}
+    // Getters and setters
 	public String getEmployeeID() {
 		return employeeID;
 	}
@@ -66,10 +61,6 @@ public class YukyuDetailFormBean {
 	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
-	@Override
-	public String toString() {
-		return "YukyuDetail [employeeID=" + employeeID + ", nendo=" + nendo + ", totalDay=" + totalDay + ", usedDay="
-				+ usedDay + ", insertDate=" + insertDate + ", updateDate=" + updateDate + "]";
-	}
+
 
 }

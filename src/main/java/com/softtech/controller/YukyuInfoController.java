@@ -1,7 +1,6 @@
 package com.softtech.controller;
 
 import java.text.ParseException;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,8 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.softtech.actionForm.YukyuDetailFormBean;
-import com.softtech.service.YukyuDetailService;
+import com.softtech.actionForm.YukyuInfoFormBean;
+import com.softtech.service.YukyuInfoService;
 import com.softtech.util.DateUtil;
 /**
  * 概要：有給管理機能
@@ -24,12 +23,12 @@ import com.softtech.util.DateUtil;
  * 作成日：2024/4/9
  */
 @Controller
-public class YukyuDetailController {
+public class YukyuInfoController {
 
 	@Autowired
-	private final YukyuDetailService yukyuDetailService;
+	private final YukyuInfoService yukyuDetailService;
 
-	public YukyuDetailController(YukyuDetailService yukyuDetailService) {
+	public YukyuInfoController(YukyuInfoService yukyuDetailService) {
         this.yukyuDetailService = yukyuDetailService;
     }
 
@@ -47,18 +46,20 @@ public class YukyuDetailController {
 	//画面初期化
     @RequestMapping("/yukyu")
     public String toYukyuList(Model model,HttpSession session) {
-        //自分社員IDを取得
+    	YukyuInfoFormBean DetailForm = new YukyuInfoFormBean();
+        //登録の社員IDを取得
     	String employeeID=(String) session.getAttribute("userEmoplyeeID");
+    	DetailForm.setEmployeeID(employeeID);
     	//現在の年度を取得
     	String nendo = DateUtil.getNowYear();
-    	//DB検索（自分社員IDを取得と現在の年度を取得),給管理テーブルからデータを取得
-    	Map<String, String> sqlParam = yukyuDetailService.getIdAndNendoForPara(employeeID, nendo);
-    	YukyuDetailFormBean yukyuDetailep = yukyuDetailService.findIDnendo(sqlParam);
-    	//DB検索（自分社員IDを取得),給管理テーブルからデータを取得
-//    	YukyuDetailFormBean yukyuDetailep = yukyuDetailService.findEmployeeID(employeeID);
-    	//年月日をフォーマット
-    	YukyuDetailFormBean yukyuDetail = yukyuDetailService.transferDbToUI(yukyuDetailep);
-        model.addAttribute("yukyuDetail", yukyuDetail);
+    	DetailForm.setNendo(nendo);
+		//
+//    	Map<String, String> sqlParam = yukyuDetailService.transferUIToMap(yukyuDetailFormBean);
+//    	YukyuDetailFormBean YukyuDetailFormBean = yukyuDetailService.findIDnendo(sqlParam);
+
+    	YukyuInfoFormBean yukyuDetailFormBean = yukyuDetailService.findIDnendo1(DetailForm);
+
+        model.addAttribute("yukyuDetail", yukyuDetailFormBean);
 
         // 有給管理画面
 
@@ -77,30 +78,27 @@ public class YukyuDetailController {
     //更新ボタン
     @PostMapping("/btn-yukyuUpdate")
 	public String yukyuSubmit(
-			@Validated @ModelAttribute("yukyuDetail") YukyuDetailFormBean yukyuDetail,
+			@Validated @ModelAttribute("yukyuDetail") YukyuInfoFormBean yukyuDetailFormBean,
 			BindingResult errors,
 			Model model) throws ParseException {
 
 		// Validationチェックエラー時、エラー情報表示
 		if (errors.hasErrors()) {
-			model.addAttribute("yukyuDetail", yukyuDetail);
 			return "/ems/yukyuManage";
 		}
 		// DB更新
-		Map<String, String> map = yukyuDetailService.transferUIToPara(yukyuDetail);
-		int num = yukyuDetailService.updateYukyuDetail(map);
+//		Map<String, String> map = yukyuDetailService.transferUIToMap(yukyuDetailFormBean);
+//		int num = yukyuDetailService.update(map);
+//
+//		if (num == 1) {
+//			model.addAttribute("updateMsg", "有給情報を更新しました。");
+//		}
 
-		if (num == 1) {
+		boolean updated = yukyuDetailService.update1(yukyuDetailFormBean);
+		if (updated == true) {
 			model.addAttribute("updateMsg", "有給情報を更新しました。");
-		} else {
-			model.addAttribute("updateMsg", "有給情報の更新に失敗しました。");
 		}
-		// 画面再表示設定
-    	YukyuDetailFormBean yukyuDetaileps= yukyuDetailService.findIDnendo(map);
-    	//年月日をフォーマット
-    	YukyuDetailFormBean yukyuDetails= yukyuDetailService.transferDbToUI(yukyuDetaileps);
 
-		model.addAttribute("yukyuDetail", yukyuDetails);
 
 		return "/ems/yukyuManage";
 
