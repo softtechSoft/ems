@@ -71,7 +71,7 @@ public class LoginController {
 		//ユーザ登録チェック
 		Employee employeeUser = employeeService.queryEmployee(userMail);
 		if(employeeUser==null || employeeUser.getMailAdress()==null || employeeUser.getMailAdress().isEmpty()) {
-			//失敗：メールアドレス（ユーザID）が存在していません。
+			//失敗：メールアドレス（ユーザID）が存在していません
 			return "001";
 		}
 

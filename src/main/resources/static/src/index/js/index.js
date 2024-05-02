@@ -103,7 +103,7 @@ function login()
     }
     function inspectionResult(actor)
     {
-        var userName={id:"userMessage",pattern:/[A-Za-z0-9_]{1,15}@[A-Za-z0-9]{1,10}.com/,message:"メールアドレスが存在していません。システム管理者に連絡してください。"};
+        var userName={id:"userMessage",pattern:/[A-Za-z0-9_]{1,15}@[A-Za-z0-9]{1,10}.com/,message:"メールアドレスが存在していない。システム管理者に連絡してください。"};
         var password={id:"passwordMessage",pattern:/^[^ ]+$/,message:"パスワードが不正。システム管理者に連絡してください。"};
         switch(actor)
         {
