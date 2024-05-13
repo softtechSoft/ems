@@ -38,6 +38,8 @@ public class YukyuInfoServiceImpl implements YukyuInfoService {
 
 		return yukyuDetailFormBean;
 	}
+
+
 	//
 	@Override
 	public YukyuInfoFormBean findIDnendo1(YukyuInfoFormBean DetailForm) {

@@ -1,6 +1,7 @@
 package com.softtech.controller;
 
 import java.text.ParseException;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,10 +27,10 @@ import com.softtech.util.DateUtil;
 public class YukyuInfoController {
 
 	@Autowired
-	private final YukyuInfoService yukyuDetailService;
+	private final YukyuInfoService yukyuInfoService;
 
-	public YukyuInfoController(YukyuInfoService yukyuDetailService) {
-        this.yukyuDetailService = yukyuDetailService;
+	public YukyuInfoController(YukyuInfoService yukyuInfoService) {
+        this.yukyuInfoService = yukyuInfoService;
     }
 
     /**
@@ -46,18 +47,21 @@ public class YukyuInfoController {
 	//画面初期化
     @RequestMapping("/yukyu")
     public String toYukyuList(Model model,HttpSession session) {
-    	YukyuInfoFormBean DetailForm = new YukyuInfoFormBean();
         //登録の社員IDを取得
     	String employeeID=(String) session.getAttribute("userEmoplyeeID");
-    	DetailForm.setEmployeeID(employeeID);
     	//現在の年度を取得
     	String nendo = DateUtil.getNowYear();
+    	//取得したIDと年を受け取るコンテナを新規作成します
+    	YukyuInfoFormBean DetailForm = new YukyuInfoFormBean();
+    	DetailForm.setEmployeeID(employeeID);
     	DetailForm.setNendo(nendo);
-		//
-//    	Map<String, String> sqlParam = yukyuDetailService.transferUIToMap(yukyuDetailFormBean);
-//    	YukyuDetailFormBean YukyuDetailFormBean = yukyuDetailService.findIDnendo(sqlParam);
+		//コンテナをマップに変換する
+    	Map<String, String> sqlParam = yukyuInfoService.transferUIToMap(DetailForm);
+    	//マップ型データでDBを検索し、最終的にFromBean形式に変換します
+    	YukyuInfoFormBean yukyuDetailFormBean = yukyuInfoService.findIDnendo(sqlParam);
 
-    	YukyuInfoFormBean yukyuDetailFormBean = yukyuDetailService.findIDnendo1(DetailForm);
+
+//    	YukyuInfoFormBean yukyuDetailFormBean = yukyuInfoService.findIDnendo1(DetailForm);
 
         model.addAttribute("yukyuDetail", yukyuDetailFormBean);
 
@@ -78,7 +82,7 @@ public class YukyuInfoController {
     //更新ボタン
     @PostMapping("/btn-yukyuUpdate")
 	public String yukyuSubmit(
-			@Validated @ModelAttribute("yukyuDetail") YukyuInfoFormBean yukyuDetailFormBean,
+			@Validated @ModelAttribute("yukyuDetail") YukyuInfoFormBean yukyuInfoFormBean,
 			BindingResult errors,
 			Model model) throws ParseException {
 
@@ -87,14 +91,14 @@ public class YukyuInfoController {
 			return "/ems/yukyuManage";
 		}
 		// DB更新
-//		Map<String, String> map = yukyuDetailService.transferUIToMap(yukyuDetailFormBean);
-//		int num = yukyuDetailService.update(map);
+//		Map<String, String> map = yukyuInfoService.transferUIToMap(yukyuInfoFormBean);
+//		int num = yukyuInfoService.update(map);
 //
 //		if (num == 1) {
 //			model.addAttribute("updateMsg", "有給情報を更新しました。");
 //		}
 
-		boolean updated = yukyuDetailService.update1(yukyuDetailFormBean);
+		boolean updated = yukyuInfoService.update1(yukyuInfoFormBean);
 		if (updated == true) {
 			model.addAttribute("updateMsg", "有給情報を更新しました。");
 		}
