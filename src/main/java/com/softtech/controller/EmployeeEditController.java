@@ -49,17 +49,17 @@ public class EmployeeEditController {
 
 
 		//画面表示変更
-		EmployeeEditFormBean employeeEditBean = employeeEditService.transferDbToUI(employee);
+		EmployeeEditFormBean employeeEditFormBean = employeeEditService.transferDbToUI(employee);
 
 		// 画面に渡す
-		model.addAttribute("employeeEditBean", employeeEditBean);
+		model.addAttribute("employeeEditFormBean", employeeEditFormBean);
 
 		return "/ems/employeeEdit";
 	}
 	/**
 	 * 機能：更新
 	 *
-	 * @param employeeEditBean　画面データ
+	 * @param employeeEditFormBean　画面データ
 	 * @return result
 	 * @exception ParseException
 	 *
@@ -67,7 +67,7 @@ public class EmployeeEditController {
 	 */
 
 	@PostMapping("/btn-employeeEdit")
-	 public String update(@Validated @ModelAttribute  EmployeeEditFormBean employeeEditBean, BindingResult result, Model model) {
+	 public String update(@Validated @ModelAttribute  EmployeeEditFormBean employeeEditFormBean, BindingResult result, Model model) {
         if (result.hasErrors()) {
             List<String> errorList = new ArrayList<String>();
             for (ObjectError error : result.getAllErrors()) {
@@ -77,7 +77,7 @@ public class EmployeeEditController {
             return "/ems/employeeEdit";
         }
         // ユーザー情報の更新
-        employeeEditService.update(employeeEditBean);
+        employeeEditService.update(employeeEditFormBean);
         model.addAttribute("successMessage", "更新完了");
         return "/ems/employeeEdit";
 

@@ -63,65 +63,65 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	 */
 	@Override
 	public EmployeeEditFormBean transferDbToUI(Employee employee) {
-		EmployeeEditFormBean employeeEditBean = new EmployeeEditFormBean();
+		EmployeeEditFormBean employeeEditFormBean = new EmployeeEditFormBean();
 		//社員名前
-		employeeEditBean.setEmployeeName(employee.getEmployeeName());
+		employeeEditFormBean.setEmployeeName(employee.getEmployeeName());
 		//社員ID
-		employeeEditBean.setEmployeeID(employee.getEmployeeID());
+		employeeEditFormBean.setEmployeeID(employee.getEmployeeID());
 		//社員性別
-		employeeEditBean.setSex(employee.getSex());
+		employeeEditFormBean.setSex(employee.getSex());
 		//生年月日
 		if(employee.getBirthday()!=null && !"".equals(employee.getBirthday()) ){
 			String birthday = employee.getBirthday().substring(0, 4) + "-" +  employee.getBirthday().substring(4, 6) + "-"
 					+ employee.getBirthday().substring(6);
 
-			employeeEditBean.setBirthday(birthday);
+			employeeEditFormBean.setBirthday(birthday);
 		}
 		//年齢
-		employeeEditBean.setAge(employee.getAge());
+		employeeEditFormBean.setAge(employee.getAge());
 		//社員タイプ
-		employeeEditBean.setEpType(employee.getEpType());
+		employeeEditFormBean.setEpType(employee.getEpType());
 		//入社日
 		if(employee.getJoinedDate()!=null  && !"".equals(employee.getJoinedDate()) ){
 		String joinDate = employee.getJoinedDate().substring(0, 4) + "-" + employee.getJoinedDate().substring(4, 6) + "-"
 				+ employee.getJoinedDate().substring(6);
-		employeeEditBean.setJoinedDateString(joinDate);
+		employeeEditFormBean.setJoinedDateString(joinDate);
 		}
 
-		employeeEditBean.setJoinedTime(employee.getJoinedTime());
+		employeeEditFormBean.setJoinedTime(employee.getJoinedTime());
 		//個人番号
-		employeeEditBean.setPersonNumber(employee.getPersonNumber());
+		employeeEditFormBean.setPersonNumber(employee.getPersonNumber());
 
-		employeeEditBean.setDepartment(employee.getDepartment());
+		employeeEditFormBean.setDepartment(employee.getDepartment());
 
-		employeeEditBean.setPostCode(employee.getPostCode());
-		employeeEditBean.setAddress(employee.getAddress());
-		employeeEditBean.setPhoneNumber(employee.getPhoneNumber());
+		employeeEditFormBean.setPostCode(employee.getPostCode());
+		employeeEditFormBean.setAddress(employee.getAddress());
+		employeeEditFormBean.setPhoneNumber(employee.getPhoneNumber());
 		if (employee.getUpdateDate()!=null && !"".equals(employee.getUpdateDate()) ){
-			employeeEditBean.setUpdateDate(DateUtil.chgYMDToDate(employee.getUpdateDate()));
+			employeeEditFormBean.setUpdateDate(DateUtil.chgYMDToDate(employee.getUpdateDate()));
 		}
 
 		// 社員タイプ
 		ArrayList<EptypeInfo> ep = mkEmployeeType();
 //		ArrayList<EptypeInfo> ep = getEptypeInfoList();
 		// 社員タイプオープションを設定
-		employeeEditBean.setEpTypeInfoList(ep);
+		employeeEditFormBean.setEpTypeInfoList(ep);
 		// 社員タイプ設定
 		if (employee.getEpType()!=null && !"".equals(employee.getEpType()) ){
-			employeeEditBean.setSelectedepTypeId(Integer.parseInt(employee.getEpType()));
+			employeeEditFormBean.setSelectedepTypeId(Integer.parseInt(employee.getEpType()));
 		}
 
 
 		// 部門タイプ
 		ArrayList<DepartmentInfo> deplist = mkDepartment();
 		// 部門タイプオープションを設定
-		employeeEditBean.setDepTypeInfoList(deplist);
+		employeeEditFormBean.setDepTypeInfoList(deplist);
 		// 部門タイプ設定
 		if (employee.getDepartment()!=null && !"".equals(employee.getDepartment()) ){
-			employeeEditBean.setSelectedDepTypeId(Integer.parseInt(employee.getDepartment()));
+			employeeEditFormBean.setSelectedDepTypeId(Integer.parseInt(employee.getDepartment()));
 		}
 
-		return employeeEditBean;
+		return employeeEditFormBean;
 	}
 	/*
 	 * 機能：画面要データをMapに設定
@@ -132,29 +132,29 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	 * @author 開発@ソフトテク
 	 */
 	@Override
-	public Map<String, String> transferUIToPara(EmployeeEditFormBean employeeEditBean)
+	public Map<String, String> transferUIToPara(EmployeeEditFormBean employeeEditFormBean)
 	{
 		Map<String, String> map = new HashMap<>();
 
-		map.put("employeeID", employeeEditBean.getEmployeeID());
-		map.put("employeeName", employeeEditBean.getEmployeeName());
-		map.put("sex", employeeEditBean.getSex());
-		map.put("epType", employeeEditBean.getSelectedepTypeId().toString());
-		map.put("department", employeeEditBean.getSelectedDepTypeId().toString());
+		map.put("employeeID", employeeEditFormBean.getEmployeeID());
+		map.put("employeeName", employeeEditFormBean.getEmployeeName());
+		map.put("sex", employeeEditFormBean.getSex());
+		map.put("epType", employeeEditFormBean.getSelectedepTypeId().toString());
+		map.put("department", employeeEditFormBean.getSelectedDepTypeId().toString());
 
 //		String birthDay = employeeEditBean.getBirthday();  // yyyy-mm-dd
-		map.put("birthday", DateUtil.chgdateToYMD(employeeEditBean.getBirthday()));
+		map.put("birthday", DateUtil.chgdateToYMD(employeeEditFormBean.getBirthday()));
 
 //		String joinedDATE = employeeEditBean.getJoinedDateString();   //yyyy-mm-dd
-		map.put("joinedDate",DateUtil.chgdateToYMD(employeeEditBean.getJoinedDateString()));
+		map.put("joinedDate",DateUtil.chgdateToYMD(employeeEditFormBean.getJoinedDateString()));
 
-		map.put("age", employeeEditBean.getAge());
+		map.put("age", employeeEditFormBean.getAge());
 
-		map.put("joinedTime", employeeEditBean.getJoinedTime());
-		map.put("postCode", employeeEditBean.getPostCode());
-		map.put("address", employeeEditBean.getAddress());
-		map.put("phoneNumber", employeeEditBean.getPhoneNumber());
-		map.put("personNumber", employeeEditBean.getPersonNumber());
+		map.put("joinedTime", employeeEditFormBean.getJoinedTime());
+		map.put("postCode", employeeEditFormBean.getPostCode());
+		map.put("address", employeeEditFormBean.getAddress());
+		map.put("phoneNumber", employeeEditFormBean.getPhoneNumber());
+		map.put("personNumber", employeeEditFormBean.getPersonNumber());
 
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyyMMdd");
 		Calendar cl = Calendar.getInstance();
@@ -172,25 +172,25 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	 * @author 開発@ソフトテク
 	 */
 	@Override
-	public EmployeeEditFormBean resetToUI(EmployeeEditFormBean employeeEditBean) {
+	public EmployeeEditFormBean resetToUI(EmployeeEditFormBean employeeEditFormBean) {
 
 		//最終更新日
 		Calendar cl = Calendar.getInstance();
 		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
 		String str = sdFormat.format(cl.getTime());
-		employeeEditBean.setUpdateDate(str);
+		employeeEditFormBean.setUpdateDate(str);
 
 		// 社員タイプ候補
 		ArrayList<EptypeInfo> ep = mkEmployeeType();
 		// タイプオープションを設定
-		employeeEditBean.setEpTypeInfoList(ep);
+		employeeEditFormBean.setEpTypeInfoList(ep);
 
 		// 部門タイプ候補
 		ArrayList<DepartmentInfo> deplist = mkDepartment();
 		// タイプオープションを設定
-		employeeEditBean.setDepTypeInfoList(deplist);
+		employeeEditFormBean.setDepTypeInfoList(deplist);
 
-		return employeeEditBean;
+		return employeeEditFormBean;
 	}
 	/*
 	 * 機能：社員タイプ取得
@@ -262,8 +262,8 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 
    	 return departmentInfos;
    }
-   public void update(EmployeeEditFormBean employeeEditBean) {
-	   employeeMapper.update(employeeEditBean);
+   public void update(EmployeeEditFormBean employeeEditFormBean) {
+	   employeeMapper.update(employeeEditFormBean);
    }
 
 }

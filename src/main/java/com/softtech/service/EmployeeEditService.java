@@ -18,10 +18,10 @@ public interface EmployeeEditService {
 
 	public EmployeeEditFormBean transferDbToUI(Employee employee);
 
-	public Map<String, String> transferUIToPara(EmployeeEditFormBean employeeEditBean);
+	public Map<String, String> transferUIToPara(EmployeeEditFormBean employeeEditFormBean);
 
-	public EmployeeEditFormBean resetToUI(EmployeeEditFormBean employeeEditBean);
+	public EmployeeEditFormBean resetToUI(EmployeeEditFormBean employeeEditFormBean);
 
-	public void update(EmployeeEditFormBean employeeEditBean);
+	public void update(EmployeeEditFormBean employeeEditFormBean);
 
 }

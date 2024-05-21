@@ -28,7 +28,7 @@ public interface EmployeeMapper {
 
 	int updateStatus(Map<String, String> map);
 
-	void update(EmployeeEditFormBean employeeEditBean);
+	void update(EmployeeEditFormBean employeeEditFormBean);
 
 
 }
