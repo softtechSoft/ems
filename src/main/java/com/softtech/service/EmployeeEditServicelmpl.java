@@ -85,7 +85,7 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 		if(employee.getJoinedDate()!=null  && !"".equals(employee.getJoinedDate()) ){
 		String joinDate = employee.getJoinedDate().substring(0, 4) + "-" + employee.getJoinedDate().substring(4, 6) + "-"
 				+ employee.getJoinedDate().substring(6);
-		employeeEditFormBean.setJoinedDateString(joinDate);
+		employeeEditFormBean.setJoinedDate(joinDate);
 		}
 
 		employeeEditFormBean.setJoinedTime(employee.getJoinedTime());
@@ -145,8 +145,8 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 //		String birthDay = employeeEditBean.getBirthday();  // yyyy-mm-dd
 		map.put("birthday", DateUtil.chgdateToYMD(employeeEditFormBean.getBirthday()));
 
-//		String joinedDATE = employeeEditBean.getJoinedDateString();   //yyyy-mm-dd
-		map.put("joinedDate",DateUtil.chgdateToYMD(employeeEditFormBean.getJoinedDateString()));
+
+		map.put("joinedDate",DateUtil.chgdateToYMD(employeeEditFormBean.getJoinedDate()));
 
 		map.put("age", employeeEditFormBean.getAge());
 
@@ -263,6 +263,15 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
    	 return departmentInfos;
    }
    public void update(EmployeeEditFormBean employeeEditFormBean) {
+	   if (employeeEditFormBean.getBirthday() != null) {
+	        String birthday = employeeEditFormBean.getBirthday().replaceAll("-", "");
+	        employeeEditFormBean.setBirthday(birthday);
+	    }
+
+	    if (employeeEditFormBean.getJoinedDate() != null) {
+	        String joinedDate = employeeEditFormBean.getJoinedDate().replaceAll("-", "");
+	        employeeEditFormBean.setJoinedDate(joinedDate);
+	    }
 	   employeeMapper.update(employeeEditFormBean);
    }
 

@@ -17,9 +17,11 @@
 	</header>
 	<div id="boder" class="boder">
 		<form class="text-left" method="POST" th:action="@{/btn-employeeEdit}" th:object="${employeeEditFormBean}" enctype="multipart/form-data">
-
+			<div th:if="${successMessage}"  style="color: red;">
+        <p th:text="${successMessage}"></p>
+    </div>
 			<ul style="text-align :center; color: red;">
-				<li th:each="error : ${#fields.detailedErrors()}"><span th:text="${error.message}">Error message</span></li>
+				<li th:each="error : ${#fields.detailedErrors()}"><span th:text="${error.message}">Error message</span><br></li>
 			</ul>
 
 			<div style="text-align:center; color: red;">
@@ -70,15 +72,25 @@
 				<tr style="background-color:#bfe1ff">
 					<th>入社年月日</th>
 					<td>
-					<input id="joinedDateString" class="form-control-lg" name="joinedDateString" type="date" th:value="${employeeEditFormBean.joinedDateString}" />
+					<input id="joinedDateString" class="form-control-lg" name="joinedDate" type="date" th:value="${employeeEditFormBean.joinedDate}" />
 				</td>
 				</tr>
+
 
 				<tr style="background-color:#bfe1ff">
 					<th>社　齢</th>
 					<td>
 						<span id="joinedAge"></span>
 						<input type="hidden" id="joinedTime" name="joinedTime" th:value="${employeeEditFormBean.joinedTime}">
+					</td>
+				</tr>
+				<tr style="background-color:#dcfeeb">
+					<th>部門</th>
+					<td>
+						<input type="radio" name="department" th:checked="${employeeEditFormBean.department == '1'}" value="1" />
+						1部
+						<input type="radio" name="department" th:checked="${employeeEditFormBean.department == '2'}" value="2" />
+						2部
 					</td>
 				</tr>
 
@@ -147,9 +159,7 @@
 			</table>
 		</form>
 	</div>
-	 <div th:if="${successMessage}"  style="color: red;">
-        <p th:text="${successMessage}"></p>
-    </div>
+
 </body>
 </html>
 

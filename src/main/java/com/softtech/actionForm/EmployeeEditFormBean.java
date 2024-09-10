@@ -1,7 +1,6 @@
 package com.softtech.actionForm;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
@@ -44,11 +43,12 @@ public class EmployeeEditFormBean {
 	private String age;
 
 	//入社年月日
-	private Date joinedDate;
-
-	//入社年月日
 	@NotEmpty(message = "入社年月日を入力してください。")
-	private String joinedDateString;
+	private String joinedDate;
+
+
+
+
 
 	//社齢
 	public String joinedTime;
@@ -201,21 +201,15 @@ public class EmployeeEditFormBean {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Date getJoinedDate() {
+	public String getJoinedDate() {
 		return joinedDate;
 	}
 
-	public void setJoinedDate(Date joinedDate) {
+	public void setJoinedDate(String joinedDate) {
 		this.joinedDate = joinedDate;
 	}
 
-	public String getJoinedDateString() {
-		return joinedDateString;
-	}
 
-	public void setJoinedDateString(String joinedDateString) {
-		this.joinedDateString = joinedDateString;
-	}
 
 	public String getPersonNumber() {
 		return personNumber;
