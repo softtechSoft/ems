@@ -196,7 +196,7 @@ public class WorkInfoManageController<WorkInfoComment> {
 		Map<String, String> mapper = new HashMap<String, String>();
 		mapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
 
-		boolean flg = false;
+		boolean flg = true;
 		String workStartDay = "";
 
 		//パラメータ取得

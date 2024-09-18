@@ -47,35 +47,34 @@
 			</div>
 				<label>稼働最終日</label><input id="endMonth" class="workinfo-endDate" name="workEndDay" th:value="${transport.workEndDay}" type="date" required />
 			<div>
-				<label>稼働時間</label><input class="workinfo-time" name="workTime" type="text" maxlength="8" pattern="[0-9.]{0,8}" th:value="${transport.workTime}" placeholder="例:150" title="稼働時間" required />
+				<label>稼働時間(h)</label><input class="workinfo-time" name="workTime" type="text" maxlength="8" pattern="[0-9.]{0,8}" th:value="${transport.workTime}" placeholder="例:150" title="稼働時間" required />
 			</div>
 			<div class="file">
 				<input id="file" type="file" name="file"/>
 			</div>
-				<label>定期券変更あり</label><input id="teiki" class="ticket" name="teiki" Value='1' type="checkbox" onclick="setAll()"/>
 			<div>
-				<label>定期券開始日</label><input id="startDate" class="start" name="startDate" value="" type="text" title="stationinfo" th:value="${transport.startDate}" disabled="disabled" required />
+				<label>定期券開始日</label><input id="startDate" class="start" name="startDate" value="" type="text" title="stationinfo" th:value="${transport.startDate}"  required />
 			</div>
 			<div class="station">
-				<label>起点駅</label><input id="startStation" class="station-start" name="startStation" type="text" title="stationinfo" th:value="${transport.startStation}" disabled="disabled" required />
+				<label>起点駅</label><input id="startStation" class="station-start" name="startStation" type="text" title="stationinfo" th:value="${transport.startStation}"  required />
 			</div>
-				<label>終点駅</label><input id="endStation" class="station-end" name="endStation" type="text" title="stationinfo" th:value="${transport.endStation}" disabled="disabled" required />
+				<label>終点駅</label><input id="endStation" class="station-end" name="endStation" type="text" title="stationinfo" th:value="${transport.endStation}"  required />
 			<div>
-				<label>交通機関</label><input id="transportFacility" class="station-traffic" name="transportFacility" type="text" th:value="${transport.transportFacility}" title="stationinfo" disabled="disabled" required />
+				<label>交通機関</label><input id="transportFacility" class="station-traffic" name="transportFacility" type="text" th:value="${transport.transportFacility}" title="stationinfo"  required />
 			</div>
-				<label>中間駅1</label><input id="midStation1" class="station-a" name="midStation1" type="text" th:value="${transport.midStation1}" title="stationinfo" disabled="disabled" >
+				<label>中間駅1</label><input id="midStation1" class="station-a" name="midStation1" type="text" th:value="${transport.midStation1}" title="stationinfo"  >
 			<div>
-				<label>交通機関1</label><input id="transportFacility1" class="station-traffic-a" name="transportFacility1" type="text" th:value="${transport.transportFacility1}" title="stationinfo" disabled="disabled" >
-			</div>
-			<div>
-				<label>中間駅2</label><input id="midStation2" class="station-a" name="midStation2" type="text" th:value="${transport.midStation2}" title="stationinfo" disabled="disabled" >
-			</div>
-				<label>中間駅3</label><input id="midStation3" class="station-a" name="midStation3" type="text" th:value="${transport.midStation3}" title="stationinfo" disabled="disabled" >
-			<div>
-				<label>定期券金額(1ヶ月)</label><input id="transportExpense1" class="amount" name="transportExpense1" type="text" pattern="[0-9]{0,7}" th:value="${transport.transportExpense1}" placeholder="例:5000" title="stationinfo" disabled="disabled" required/>
+				<label>交通機関1</label><input id="transportFacility1" class="station-traffic-a" name="transportFacility1" type="text" th:value="${transport.transportFacility1}" title="stationinfo"  >
 			</div>
 			<div>
-				<label>出張交通費</label><input id="businessTrip" class="transportation" name="businessTrip" type="text" pattern="[0-9]{0,7}" th:value="${transport.businessTrip}" placeholder="例:500" autocomplete="off" title="stationinfo" disabled="disabled" >
+				<label>中間駅2</label><input id="midStation2" class="station-a" name="midStation2" type="text" th:value="${transport.midStation2}" title="stationinfo"  >
+			</div>
+				<label>中間駅3</label><input id="midStation3" class="station-a" name="midStation3" type="text" th:value="${transport.midStation3}" title="stationinfo"  >
+			<div>
+				<label>定期券金額(1ヶ月)(円)</label><input id="transportExpense1" class="amount" name="transportExpense1" type="text" pattern="[0-9]{0,7}" th:value="${transport.transportExpense1}" placeholder="例:5000" title="stationinfo"  required/>
+			</div>
+			<div>
+				<label>定期券以外交通費(円)</label><input id="businessTrip" class="transportation" name="businessTrip" type="text" pattern="[0-9]{0,7}" th:value="${transport.businessTrip}" placeholder="例:500" autocomplete="off" title="stationinfo"  >
 			</div>
 
 			<table>
