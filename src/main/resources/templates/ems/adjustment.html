@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>年末調整画面</title>
+    <style>
+        .table-container {
+            width: 50%;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 2px solid #b3cbde;
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            height: 40px;
+            width: 20%;
+        }
+        .upload-area {
+            margin-bottom: 20px;
+        }
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+        .file-item {
+            margin-bottom: 5px;
+        }
+        .file-input {
+            display: none;
+        }
+        .custom-button {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #7fa3bc;
+            color: white;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .delete-btn {
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .button-container {
+            text-align: right;
+            padding-right: 10px;
+            padding-top: 10px;
+        }
+        .history-header {
+            width: 10%;
+            text-align: left;
+        }
+        .year-header, .file-name-header {
+            height: 30px;
+        }
+        .year-header {
+            width: 10%;
+            text-align: left;
+        }
+        .file-name-header {
+            width: 80%;
+            text-align: left;
+        }
+        .file-name-cell {
+            height: 50px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <h1>年末調整</h1>
+        <table>
+            <tr>
+                <th>年度</th>
+                
+                <td th:text="${currentYear}"></td>
+
+            </tr>
+            <tr>
+                <th>申請書</th>
+                <td>
+                    <div th:if="${requestFile1ULStatus == 1}">
+                        <a th:href="@{/download/{filename}(filename=${requestFile1Name})}" th:text="${requestFile1Name}"></a>
+                    </div>
+                    <div th:if="${requestFile2ULStatus == 1}">
+                        <a th:href="@{/download/{filename}(filename=${requestFile2Name})}" th:text="${requestFile2Name}"></a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th>アップロード</th>
+                <td>
+                    <div class="upload-area">
+                        <input type="file" id="fileUpload" multiple class="file-input" onchange="updateFileList()"/>
+                        <label for="fileUpload" class="custom-button">ファイルを選択</label>
+                        <ul id="fileList"></ul>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="button-container">
+            <button onclick="submitFiles()">確定</button>
+        </div>
+        <!-- 新增结果表格 -->
+        <table>
+            <tr>
+                <th>結果</th>
+                <td th:each="file : ${resultFiles}">
+                    <a th:if="${file != null}" th:href="@{|/Users/yangxiwen/Documents/work/${fileYear}/${employeeEmail}/${file.fileName}|}" th:text="${file.fileName}"></a>
+                </td>
+            </tr>
+        </table>
+        <!-- 履歴表格 -->
+        <table>
+            <tr>
+        <th class="history-header" rowspan="11">履歴</th>
+        <th class="year-header">年度</th>
+        <th class="file-name-header">ファイル</th>
+    </tr>
+    <tr th:each="entry : ${historiesByYear}">
+    <td class="year-header" th:text="${entry.key}"></td>
+    <td class="file-name-cell">
+        <div th:each="file : ${entry.value}">
+            <a th:if="${file.fileName != null}"
+               th:href="@{/download/{fileYear}/{employeeEmail}/{filename}(fileYear=${file.fileYear},employeeEmail=${file.employeeEmail},filename=${file.fileName})}"
+               th:text="${file.fileName}"></a>
+        </div>
+    </td>
+</tr>
+
+</table>
+
+    </div>
+    <script>
+        function updateFileList() {
+            const input = document.getElementById('fileUpload');
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = ''; // Clear existing list
+
+            Array.from(input.files).forEach((file, index) => {
+                const li = document.createElement('li');
+                li.textContent = file.name;
+                li.classList.add('file-item');
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = '削除';
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.onclick = function() { this.parentElement.remove(); };
+                li.appendChild(deleteBtn);
+                fileList.appendChild(li);
+            });
+        }
+
+        function submitFiles() {
+    const files = document.getElementById('fileUpload').files;
+    if (files.length === 0) {
+        alert('ファイルを選択してください。');
+        return;
+    }
+
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+        formData.append('files', files[i]);
+    }
+
+    console.log("Sending POST request to /saveFileAndDetail with files.");
+
+    fetch('/saveFileAndDetail', {
+        method: 'POST',
+        body: formData,
+        credentials: 'include'  // 保持session信息
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        } else {
+            throw new Error('サーバーで問題が発生しました！');
+        }
+    })
+    .then(data => {
+        console.log("Upload successful: ", data);
+        alert('ファイルのアップロードに成功しました: ' + data);
+    })
+    .catch(error => {
+        console.error("Upload failed: ", error);
+        alert('ファイルのアップロードに失敗しました: ' + error);
+    });
+}
+
+    </script>
+</body>
+</html>

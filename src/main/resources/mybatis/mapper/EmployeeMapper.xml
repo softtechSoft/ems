@@ -22,6 +22,9 @@
         and mailAdress = #{mailAdress}
         and password = md5(#{password})
     </select>
+    <select id="queryEmployeeByEmail" parameterType="string" resultType="com.softtech.entity.Employee">
+        SELECT * FROM employee WHERE mailAdress = #{email}
+    </select>
 
     <update id="updatePassword" parameterType="map">
         update ems.employee set password = md5(#{password}), updateDate = date_format(now(),'%Y%m%d') where mailAdress=#{email}

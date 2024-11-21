@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.softtech.mapper.AdjustmentDetailMapper">
+    <resultMap id="AdjustmentDetailResultMap" type="com.softtech.entity.AdjustmentDetail">
+        <id property="id" column="id"/>
+        <result property="employeeID" column="employeeID"/>
+        <result property="employeeEmail" column="employeeEmail"/>
+        <result property="year" column="year"/>
+        <result property="uploadStatus" column="uploadStatus"/>
+        <result property="adjustmentStatus" column="adjustmentStatus"/>
+        <result property="insertDate" column="insertDate"/>
+        <result property="updateDate" column="updateDate"/>
+    </resultMap>
+    
+    <!-- SQL Queries -->
+    <select id="selectAll" resultMap="AdjustmentDetailResultMap">
+        SELECT * FROM adjustmentDetail
+    </select>
+    
+    <select id="selectById" parameterType="Integer" resultMap="AdjustmentDetailResultMap">
+        SELECT * FROM adjustmentDetail WHERE id = #{id}
+    </select>
+    
+    <select id="findByEmployeeEmailAndYear" resultType="com.softtech.entity.AdjustmentDetail">
+    SELECT * FROM adjustmentDetail
+    WHERE employeeEmail = #{employeeEmail} AND year = #{year}
+</select>
+    
+    <insert id="insert" parameterType="com.softtech.entity.AdjustmentDetail">
+        INSERT INTO adjustmentDetail (employeeID, employeeEmail, year, uploadStatus, adjustmentStatus, insertDate, updateDate)
+        VALUES (#{employeeID}, #{employeeEmail}, #{year}, #{uploadStatus}, #{adjustmentStatus}, #{insertDate}, #{updateDate})
+    </insert>
+    
+    <update id="update" parameterType="com.softtech.entity.AdjustmentDetail">
+        UPDATE adjustmentDetail SET employeeID = #{employeeID}, employeeEmail = #{employeeEmail}, year = #{year}, uploadStatus = #{uploadStatus}, adjustmentStatus = #{adjustmentStatus}, insertDate = #{insertDate}, updateDate = #{updateDate}
+        WHERE id = #{id}
+    </update>
+    
+    <delete id="deleteById" parameterType="Integer">
+        DELETE FROM adjustmentDetail WHERE id = #{id}
+    </delete>
+</mapper>

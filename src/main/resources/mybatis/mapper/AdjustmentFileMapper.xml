@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.softtech.mapper.AdjustmentFileMapper">
+    <!-- Result Mapping -->
+    <resultMap id="AdjustmentFileResultMap" type="com.softtech.entity.AdjustmentFile">
+        <id property="fileID" column="fileID"/>
+        <result property="employeeID" column="employeeID"/>
+        <result property="employeeEmail" column="employeeEmail"/>
+        <result property="fileType" column="fileType"/>
+        <result property="fileYear" column="fileYear"/>
+        <result property="fileName" column="fileName"/>
+        <result property="filePath" column="filePath"/>
+    </resultMap>
+
+    <!-- SQL Queries -->
+    <select id="selectAll" resultMap="AdjustmentFileResultMap">
+        SELECT * FROM adjustmentFile
+    </select>
+    
+    <select id="findFilesByEmployeeEmail" parameterType="String" resultMap="AdjustmentFileResultMap">
+        SELECT * FROM adjustmentFile WHERE employeeEmail = #{employeeEmail}
+    </select>
+
+    <select id="selectByFileID" parameterType="Integer" resultMap="AdjustmentFileResultMap">
+        SELECT * FROM adjustmentFile WHERE fileID = #{fileID}
+    </select>
+
+    <insert id="insert" parameterType="com.softtech.entity.AdjustmentFile">
+        INSERT INTO adjustmentFile (employeeID, employeeEmail, fileType, fileYear, fileName, filePath)
+        VALUES (#{employeeID}, #{employeeEmail}, #{fileType}, #{fileYear}, #{fileName}, #{filePath})
+    </insert>
+
+    <update id="update" parameterType="com.softtech.entity.AdjustmentFile">
+        UPDATE adjustmentFile SET employeeID = #{employeeID}, employeeEmail = #{employeeEmail}, 
+        fileType = #{fileType}, fileYear = #{fileYear}, fileName = #{fileName}, filePath = #{filePath}
+        WHERE fileID = #{fileID}
+    </update>
+
+    <delete id="deleteByFileID" parameterType="Integer">
+        DELETE FROM adjustmentFile WHERE fileID = #{fileID}
+    </delete>
+</mapper>

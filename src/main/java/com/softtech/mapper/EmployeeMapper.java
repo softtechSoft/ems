@@ -29,6 +29,8 @@ public interface EmployeeMapper {
 	int updateStatus(Map<String, String> map);
 
 	void update(EmployeeEditFormBean employeeEditFormBean);
+	
+	Employee queryEmployeeByEmail(@Param("email") String email);
 
 
 }
