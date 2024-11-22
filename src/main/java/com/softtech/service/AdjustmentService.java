@@ -18,9 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.softtech.entity.AdjustmentDetail;
 import com.softtech.entity.AdjustmentFile;
+import com.softtech.entity.AdjustmentRequestFiles;
 import com.softtech.entity.Employee;
 import com.softtech.mapper.AdjustmentDetailMapper;
 import com.softtech.mapper.AdjustmentFileMapper;
+import com.softtech.mapper.AdjustmentRequestFilesMapper;
 import com.softtech.mapper.EmployeeMapper;
 
 @Service
@@ -32,6 +34,10 @@ public class AdjustmentService {
     private AdjustmentDetailMapper adjustmentDetailMapper;
     @Autowired
     private EmployeeMapper employeeMapper;
+    @Autowired
+    private AdjustmentRequestFilesMapper adjustmentRequestFilesMapper;
+
+    private final Path requestFilesLocation = Paths.get("/Users/yangxiwen/Documents/work/templates");
 
     public void saveFilesAndDetails(MultipartFile[] files, String employeeEmail, int fileYear, String fileType) throws IOException {
         // 获取员工信息
@@ -62,7 +68,7 @@ public class AdjustmentService {
             detail = details.get(0);
             detail.setUploadStatus("1:アップロード完了");  // 更新为上传完了
 
-            // 将 LocalDateTime 转换为 Date
+            
             Date currentDate = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
             detail.setUpdateDate(currentDate);
 
@@ -81,15 +87,27 @@ public class AdjustmentService {
         String originalFileName = file.getOriginalFilename();
         Path destinationFile = saveFileToDisk(file, year, employeeEmail);
 
-        AdjustmentFile adjustmentFile = new AdjustmentFile();
-        adjustmentFile.setEmployeeID(employeeID);
-        adjustmentFile.setEmployeeEmail(employeeEmail);
-        adjustmentFile.setFileName(originalFileName);
-        adjustmentFile.setFilePath(destinationFile.toString());
-        adjustmentFile.setFileYear(year);
-        adjustmentFile.setFileType(fileType);
-        adjustmentFileMapper.insert(adjustmentFile);
+        // 检查是否存在同名文件
+        AdjustmentFile existingFile = adjustmentFileMapper.findByEmployeeIDAndYearAndFileName(employeeID, year, originalFileName);
+
+        if (existingFile != null) {
+            // 更新已有的记录
+            existingFile.setFilePath(destinationFile.toString());
+            existingFile.setFileType(fileType);
+            adjustmentFileMapper.updateByEmployeeIDAndYearAndFileName(existingFile);
+        } else {
+            // 插入新记录
+            AdjustmentFile adjustmentFile = new AdjustmentFile();
+            adjustmentFile.setEmployeeID(employeeID);
+            adjustmentFile.setEmployeeEmail(employeeEmail);
+            adjustmentFile.setFileName(originalFileName);
+            adjustmentFile.setFilePath(destinationFile.toString());
+            adjustmentFile.setFileYear(year);
+            adjustmentFile.setFileType(fileType);
+            adjustmentFileMapper.insert(adjustmentFile);
+        }
     }
+
 
     private Path saveFileToDisk(MultipartFile file, int year, String employeeEmail) throws IOException {
         Path yearDirectory = Paths.get("/Users/yangxiwen/Documents/work", String.valueOf(year), employeeEmail);
@@ -121,5 +139,15 @@ public class AdjustmentService {
 
     public Path getFilePath(String filename, String employeeEmail, int fileYear) {
         return Paths.get("/Users/yangxiwen/Documents/work", String.valueOf(fileYear), employeeEmail, filename);
+    }
+
+    // 新增方法：获取申请书列表
+    public List<AdjustmentRequestFiles> getRequestFilesForYear(int year) {
+        return adjustmentRequestFilesMapper.findByYearAndStatus(year, "1");
+    }
+
+    // 新增方法：获取申请书文件路径
+    public Path getRequestFilePath(String filename) {
+        return requestFilesLocation.resolve(filename).normalize();
     }
 }

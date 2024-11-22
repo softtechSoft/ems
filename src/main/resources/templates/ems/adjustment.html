@@ -89,17 +89,18 @@
                 <td th:text="${currentYear}"></td>
 
             </tr>
-            <tr>
-                <th>申請書</th>
-                <td>
-                    <div th:if="${requestFile1ULStatus == 1}">
-                        <a th:href="@{/download/{filename}(filename=${requestFile1Name})}" th:text="${requestFile1Name}"></a>
-                    </div>
-                    <div th:if="${requestFile2ULStatus == 1}">
-                        <a th:href="@{/download/{filename}(filename=${requestFile2Name})}" th:text="${requestFile2Name}"></a>
-                    </div>
-                </td>
-            </tr>
+           
+			<tr>
+    			<th>申請書</th>
+    				<td>
+        				<div th:each="file : ${requestFiles}">
+            				<a th:href="@{/download/{filename}(filename=${file.fileName})}"
+               				th:text="${file.fileName}"></a>
+        				</div>
+    				</td>
+			</tr>
+
+
             <tr>
                 <th>アップロード</th>
                 <td>
@@ -148,7 +149,7 @@
         function updateFileList() {
             const input = document.getElementById('fileUpload');
             const fileList = document.getElementById('fileList');
-            fileList.innerHTML = ''; // Clear existing list
+            fileList.innerHTML = ''; // 清空文件列表
 
             Array.from(input.files).forEach((file, index) => {
                 const li = document.createElement('li');
@@ -164,41 +165,45 @@
         }
 
         function submitFiles() {
-    const files = document.getElementById('fileUpload').files;
-    if (files.length === 0) {
-        alert('ファイルを選択してください。');
-        return;
-    }
+            const input = document.getElementById('fileUpload');
+            const files = input.files;
+            if (files.length === 0) {
+                alert('ファイルを選択してください。');
+                return;
+            }
 
-    const formData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-        formData.append('files', files[i]);
-    }
+            const formData = new FormData();
+            for (let i = 0; i < files.length; i++) {
+                formData.append('files', files[i]);
+            }
 
-    console.log("Sending POST request to /saveFileAndDetail with files.");
+            console.log("Sending POST request to /saveFileAndDetail with files.");
 
-    fetch('/saveFileAndDetail', {
-        method: 'POST',
-        body: formData,
-        credentials: 'include'  // 保持session信息
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.text();
-        } else {
-            throw new Error('サーバーで問題が発生しました！');
+            fetch('/saveFileAndDetail', {
+                method: 'POST',
+                body: formData,
+                credentials: 'include'  // 保持session信息
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json(); 
+                } else {
+                    return response.json().then(errorData => {
+                        throw new Error(errorData.error || 'サーバーで問題が発生しました！');
+                    });
+                }
+            })
+            .then(data => {
+                console.log("Upload successful: ", data);
+                alert('ファイルのアップロードに成功しました: ' + data.message);
+                
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error("Upload failed: ", error);
+                alert('ファイルのアップロードに失敗しました: ' + error.message);
+            });
         }
-    })
-    .then(data => {
-        console.log("Upload successful: ", data);
-        alert('ファイルのアップロードに成功しました: ' + data);
-    })
-    .catch(error => {
-        console.error("Upload failed: ", error);
-        alert('ファイルのアップロードに失敗しました: ' + error);
-    });
-}
-
     </script>
 </body>
 </html>

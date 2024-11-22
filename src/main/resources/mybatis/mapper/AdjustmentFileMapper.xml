@@ -24,6 +24,11 @@
     <select id="selectByFileID" parameterType="Integer" resultMap="AdjustmentFileResultMap">
         SELECT * FROM adjustmentFile WHERE fileID = #{fileID}
     </select>
+    
+    <select id="findByEmployeeIDAndYearAndFileName" parameterType="map" resultMap="AdjustmentFileResultMap">
+    SELECT * FROM adjustmentFile
+    WHERE employeeID = #{employeeID} AND fileYear = #{fileYear} AND fileName = #{fileName}
+	</select>
 
     <insert id="insert" parameterType="com.softtech.entity.AdjustmentFile">
         INSERT INTO adjustmentFile (employeeID, employeeEmail, fileType, fileYear, fileName, filePath)
@@ -35,6 +40,13 @@
         fileType = #{fileType}, fileYear = #{fileYear}, fileName = #{fileName}, filePath = #{filePath}
         WHERE fileID = #{fileID}
     </update>
+    
+    <update id="updateByEmployeeIDAndYearAndFileName" parameterType="com.softtech.entity.AdjustmentFile">
+    UPDATE adjustmentFile SET
+    filePath = #{filePath},
+    fileType = #{fileType}
+    WHERE employeeID = #{employeeID} AND fileYear = #{fileYear} AND fileName = #{fileName}
+	</update>
 
     <delete id="deleteByFileID" parameterType="Integer">
         DELETE FROM adjustmentFile WHERE fileID = #{fileID}

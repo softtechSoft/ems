@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.softtech.mappers.AdjustmentRequestFilesMapper">
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.softtech.mapper.AdjustmentRequestFilesMapper">
 
     <!-- ResultMap for AdjustmentRequestFiles -->
     <resultMap id="AdjustmentRequestFilesResultMap" type="com.softtech.entity.AdjustmentRequestFiles">
@@ -19,12 +21,24 @@
         SELECT * FROM ems.adjustmentRequestFiles
     </select>
 
-    <select id="selectByFileID" parameterType="Integer" resultMap="AdjustmentRequestFilesResultMap">
-        SELECT * FROM ems.adjustmentRequestFiles WHERE fileID = #{fileID}
+    <!-- 其他查询和更新语句 -->
+
+    <select id="findByYearAndStatus" resultMap="AdjustmentRequestFilesResultMap">
+        SELECT * FROM ems.adjustmentRequestFiles
+        WHERE fileYear = #{year} AND fileULStatus = #{status}
     </select>
 
-    <select id="selectByStatus" parameterType="String" resultMap="AdjustmentRequestFilesResultMap">
-        SELECT * FROM ems.adjustmentRequestFiles WHERE fileULStatus = #{status}
+    <!-- 查询所有匹配的记录 -->
+    <select id="selectByFileNameAndEmployeeIDAndYear" parameterType="map" resultMap="AdjustmentRequestFilesResultMap">
+        SELECT * FROM ems.adjustmentRequestFiles
+        WHERE fileName = #{fileName} AND employeeID = #{employeeID} AND fileYear = #{fileYear}
+    </select>
+
+    <!-- 查询单条记录 -->
+    <select id="selectByFileNameAndEmployeeIDAndYearSingle" parameterType="map" resultMap="AdjustmentRequestFilesResultMap">
+        SELECT * FROM ems.adjustmentRequestFiles
+        WHERE fileName = #{fileName} AND employeeID = #{employeeID} AND fileYear = #{fileYear}
+        LIMIT 1
     </select>
 
     <insert id="insert" parameterType="com.softtech.entity.AdjustmentRequestFiles">
@@ -32,6 +46,7 @@
         VALUES (#{employeeID}, #{employeeEmail}, #{fileName}, #{fileYear}, #{fileULStatus}, #{fileInsertDate}, #{fileUpdateDate})
     </insert>
 
+    <!-- 修改 update 方法的 id，确保唯一 -->
     <update id="update" parameterType="com.softtech.entity.AdjustmentRequestFiles">
         UPDATE ems.adjustmentRequestFiles SET
         employeeID = #{employeeID},
@@ -42,6 +57,15 @@
         fileInsertDate = #{fileInsertDate},
         fileUpdateDate = #{fileUpdateDate}
         WHERE fileID = #{fileID}
+    </update>
+
+    <update id="updateByEmployeeIDAndFileYearAndFileName" parameterType="com.softtech.entity.AdjustmentRequestFiles">
+        UPDATE ems.adjustmentRequestFiles SET
+        employeeEmail = #{employeeEmail},
+        fileULStatus = #{fileULStatus},
+        fileInsertDate = #{fileInsertDate},
+        fileUpdateDate = #{fileUpdateDate}
+        WHERE employeeID = #{employeeID} AND fileYear = #{fileYear} AND fileName = #{fileName}
     </update>
 
     <delete id="deleteByFileID" parameterType="Integer">
