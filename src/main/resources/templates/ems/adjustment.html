@@ -85,22 +85,17 @@
         <table>
             <tr>
                 <th>年度</th>
-                
                 <td th:text="${currentYear}"></td>
-
             </tr>
-           
-			<tr>
-    			<th>申請書</th>
-    				<td>
-        				<div th:each="file : ${requestFiles}">
-            				<a th:href="@{/download/{filename}(filename=${file.fileName})}"
-               				th:text="${file.fileName}"></a>
-        				</div>
-    				</td>
-			</tr>
-
-
+            <tr>
+                <th>申請書</th>
+                <td>
+                    <div th:each="file : ${requestFiles}">
+                        <a th:href="@{/download/{filename}(filename=${file.fileName})}"
+                           th:text="${file.fileName}"></a>
+                    </div>
+                </td>
+            </tr>
             <tr>
                 <th>アップロード</th>
                 <td>
@@ -119,37 +114,38 @@
         <table>
             <tr>
                 <th>結果</th>
-                <td th:each="file : ${resultFiles}">
-                    <a th:if="${file != null}" th:href="@{|/Users/yangxiwen/Documents/work/${fileYear}/${employeeEmail}/${file.fileName}|}" th:text="${file.fileName}"></a>
+                <td>
+                    <div th:each="file : ${resultFiles}">
+                        <a th:href="@{/download/{fileYear}/{employeeEmail}/{filename}(fileYear=${file.fileYear}, employeeEmail=${file.employeeEmail}, filename=${file.fileName})}"
+                           th:text="${file.fileName}"></a>
+                    </div>
                 </td>
             </tr>
         </table>
         <!-- 履歴表格 -->
         <table>
             <tr>
-        <th class="history-header" rowspan="11">履歴</th>
-        <th class="year-header">年度</th>
-        <th class="file-name-header">ファイル</th>
-    </tr>
-    <tr th:each="entry : ${historiesByYear}">
-    <td class="year-header" th:text="${entry.key}"></td>
-    <td class="file-name-cell">
-        <div th:each="file : ${entry.value}">
-            <a th:if="${file.fileName != null}"
-               th:href="@{/download/{fileYear}/{employeeEmail}/{filename}(fileYear=${file.fileYear},employeeEmail=${file.employeeEmail},filename=${file.fileName})}"
-               th:text="${file.fileName}"></a>
-        </div>
-    </td>
-</tr>
-
-</table>
-
+                <th class="history-header" rowspan="11">履歴</th>
+                <th class="year-header">年度</th>
+                <th class="file-name-header">ファイル</th>
+            </tr>
+            <tr th:each="entry : ${historiesByYear}">
+                <td class="year-header" th:text="${entry.key}"></td>
+                <td class="file-name-cell">
+                    <div th:each="file : ${entry.value}">
+                        <a th:if="${file.fileName != null}"
+                           th:href="@{/download/{fileYear}/{employeeEmail}/{filename}(fileYear=${file.fileYear}, employeeEmail=${file.employeeEmail}, filename=${file.fileName})}"
+                           th:text="${file.fileName}"></a>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
     <script>
         function updateFileList() {
             const input = document.getElementById('fileUpload');
             const fileList = document.getElementById('fileList');
-            fileList.innerHTML = ''; // 清空文件列表
+            fileList.innerHTML = '';
 
             Array.from(input.files).forEach((file, index) => {
                 const li = document.createElement('li');
@@ -177,8 +173,6 @@
                 formData.append('files', files[i]);
             }
 
-            console.log("Sending POST request to /saveFileAndDetail with files.");
-
             fetch('/saveFileAndDetail', {
                 method: 'POST',
                 body: formData,
@@ -194,9 +188,7 @@
                 }
             })
             .then(data => {
-                console.log("Upload successful: ", data);
                 alert('ファイルのアップロードに成功しました: ' + data.message);
-                
                 window.location.reload();
             })
             .catch(error => {

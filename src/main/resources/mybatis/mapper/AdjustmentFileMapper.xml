@@ -29,6 +29,12 @@
     SELECT * FROM adjustmentFile
     WHERE employeeID = #{employeeID} AND fileYear = #{fileYear} AND fileName = #{fileName}
 	</select>
+	
+	<select id="findFilesByTypeAndEmployee" parameterType="map" resultMap="AdjustmentFileResultMap">
+    SELECT * FROM adjustmentFile
+    WHERE fileType = #{fileType} AND employeeEmail = #{employeeEmail} AND fileYear = #{fileYear}
+	</select>
+	
 
     <insert id="insert" parameterType="com.softtech.entity.AdjustmentFile">
         INSERT INTO adjustmentFile (employeeID, employeeEmail, fileType, fileYear, fileName, filePath)

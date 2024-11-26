@@ -150,4 +150,10 @@ public class AdjustmentService {
     public Path getRequestFilePath(String filename) {
         return requestFilesLocation.resolve(filename).normalize();
     }
+    
+    public List<AdjustmentFile> getFilesByTypeAndEmployee(String fileType, String employeeEmail, int fileYear) {
+        return adjustmentFileMapper.findFilesByTypeAndEmployee(fileType, employeeEmail, fileYear);
+    }
+
+    
 }
