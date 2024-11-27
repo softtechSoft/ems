@@ -21,6 +21,8 @@ public interface AdjustmentFileMapper {
     int updateByEmployeeIDAndYearAndFileName(AdjustmentFile adjustmentFile);
     
     List<AdjustmentFile> findFilesByTypeAndEmployee(@Param("fileType") String fileType, @Param("employeeEmail") String employeeEmail, @Param("fileYear") int fileYear);
+    
+    List<AdjustmentFile> findResultFilesByEmployeeEmail(@Param("employeeEmail") String employeeEmail);
 
 
 }

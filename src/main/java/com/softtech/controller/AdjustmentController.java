@@ -45,19 +45,22 @@ public class AdjustmentController {
         int currentYear = LocalDate.now().getYear();
         model.addAttribute("currentYear", currentYear);
 
-        // 现有代码
-        Map<Integer, List<AdjustmentFile>> historiesByYear = adjustmentService.getHistoricalFilesGroupedByYear(employeeEmail);
+        // 获取历史文件（只获取 resultType 的文件）
+        Map<Integer, List<AdjustmentFile>> historiesByYear = adjustmentService.getResultFilesGroupedByYear(employeeEmail);
         model.addAttribute("historiesByYear", historiesByYear);
 
+        // 获取申請書
         List<AdjustmentRequestFiles> requestFiles = adjustmentService.getRequestFilesForYear(currentYear);
         model.addAttribute("requestFiles", requestFiles);
 
-        // 新增代码：获取 resultType 的文件
+        // 获取当前年份的 resultType 文件
         List<AdjustmentFile> resultFiles = adjustmentService.getFilesByTypeAndEmployee("resultType", employeeEmail, currentYear);
         model.addAttribute("resultFiles", resultFiles);
 
         return "ems/adjustment";
     }
+
+
 
 
     @PostMapping("/saveFileAndDetail")

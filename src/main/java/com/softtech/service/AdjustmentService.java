@@ -7,9 +7,12 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -154,6 +157,16 @@ public class AdjustmentService {
     public List<AdjustmentFile> getFilesByTypeAndEmployee(String fileType, String employeeEmail, int fileYear) {
         return adjustmentFileMapper.findFilesByTypeAndEmployee(fileType, employeeEmail, fileYear);
     }
+    
+    public Map<Integer, List<AdjustmentFile>> getResultFilesGroupedByYear(String employeeEmail) {
+        List<AdjustmentFile> files = adjustmentFileMapper.findResultFilesByEmployeeEmail(employeeEmail);
+        Map<Integer, List<AdjustmentFile>> filesByYear = new TreeMap<>(Collections.reverseOrder());
+        for (AdjustmentFile file : files) {
+            filesByYear.computeIfAbsent(file.getFileYear(), k -> new ArrayList<>()).add(file);
+        }
+        return filesByYear;
+    }
+
 
     
 }
