@@ -109,6 +109,21 @@
         <div class="button-container">
             <button type="button" onclick="submitFiles()">確定</button>
         </div>
+        
+        <!-- 新增：アップ済み -->
+        <table>
+            <tr>
+                <th>アップ済み</th>
+                <td>
+                    <div th:each="file : ${detailFiles}">
+                        <a th:href="@{/download/{fileYear}/{employeeEmail}/{filename}(fileYear=${file.fileYear}, employeeEmail=${file.employeeEmail}, filename=${file.fileName})}"
+                           th:text="${file.fileName}"></a><br/>
+                    </div>
+                </td>
+            </tr>
+        </table>
+       
+        
         <!-- 结果表格 -->
         <table>
             <tr>

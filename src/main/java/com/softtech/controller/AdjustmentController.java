@@ -57,8 +57,14 @@ public class AdjustmentController {
                 currentYear);
         model.addAttribute("resultFiles", resultFiles);
 
+        // 現在の年度のdetailTypeファイルを取得
+        List<AdjustmentFile> detailFiles = adjustmentService.getFilesByTypeAndEmployee("detailType", employeeEmail,
+                currentYear);
+        model.addAttribute("detailFiles", detailFiles);
+
         return "ems/adjustment";
     }
+
 
     /**
      * ファイルと詳細を保存する
