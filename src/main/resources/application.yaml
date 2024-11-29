@@ -26,4 +26,6 @@ file:
   storage:
     location: files/storage
   request:
-    location: files/templates
+    location: templates
+
+

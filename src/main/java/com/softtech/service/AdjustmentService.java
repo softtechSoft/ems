@@ -56,8 +56,9 @@ public class AdjustmentService {
     }
 
     private Path getRequestFilesLocation() {
-        return Paths.get(requestFilesLocation);
+        return getRootLocation().resolve(requestFilesLocation);
     }
+
 
     /**
      * ファイルと詳細を保存する
