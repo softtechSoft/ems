@@ -21,3 +21,9 @@ mybatis:
     - classpath:mybatis/mapper/*.xml
     
  
+# ファイルの保存場所を指定
+file:
+  storage:
+    location: files/storage
+  request:
+    location: files/templates

@@ -24,7 +24,12 @@
     <select id="findByEmployeeEmailAndYear" resultType="com.softtech.entity.AdjustmentDetail">
     SELECT * FROM adjustmentDetail
     WHERE employeeEmail = #{employeeEmail} AND year = #{year}
-</select>
+	</select>
+	
+	<select id="findByEmployeeIdAndYear" parameterType="map" resultMap="AdjustmentDetailResultMap">
+        SELECT * FROM adjustmentDetail WHERE employeeID = #{employeeID} AND year = #{year}
+    </select>
+	
     
     <insert id="insert" parameterType="com.softtech.entity.AdjustmentDetail">
         INSERT INTO adjustmentDetail (employeeID, employeeEmail, year, uploadStatus, adjustmentStatus, insertDate, updateDate)

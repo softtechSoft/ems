@@ -15,5 +15,7 @@ public interface AdjustmentDetailMapper {
     int update(AdjustmentDetail adjustmentDetail);
     int deleteById(Integer id);
     List<AdjustmentDetail> findByEmployeeEmailAndYear(@Param("employeeEmail") String employeeEmail, @Param("year") int year);
+    AdjustmentDetail findByEmployeeIdAndYear(@Param("employeeID") String employeeID, @Param("year") String year);
+
 
 }

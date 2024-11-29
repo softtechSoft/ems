@@ -41,13 +41,12 @@
         .file-input {
             display: none;
         }
-        .custom-button {
-            display: inline-block;
-            padding: 10px 15px;
-            background-color: #7fa3bc;
-            color: white;
+        button {
+            border-radius: px;
+            padding: 3px 7px;
+            font-size: 13px;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 5px;
         }
         .delete-btn {
             margin-left: 10px;
@@ -92,7 +91,7 @@
                 <td>
                     <div th:each="file : ${requestFiles}">
                         <a th:href="@{/download/{filename}(filename=${file.fileName})}"
-                           th:text="${file.fileName}"></a>
+                           th:text="${file.fileName}"></a><br/>
                     </div>
                 </td>
             </tr>
@@ -101,23 +100,23 @@
                 <td>
                     <div class="upload-area">
                         <input type="file" id="fileUpload" multiple class="file-input" onchange="updateFileList()"/>
-                        <label for="fileUpload" class="custom-button">ファイルを選択</label>
-                        <ul id="fileList"></ul>
+                        <button type="button" onclick="document.getElementById('fileUpload').click();">ファイルを選択</button>
+                        <ul id="fileList" class="file-list"></ul>
                     </div>
                 </td>
             </tr>
         </table>
         <div class="button-container">
-            <button onclick="submitFiles()">確定</button>
+            <button type="button" onclick="submitFiles()">確定</button>
         </div>
-        <!-- 新增结果表格 -->
+        <!-- 结果表格 -->
         <table>
             <tr>
                 <th>結果</th>
                 <td>
                     <div th:each="file : ${resultFiles}">
                         <a th:href="@{/download/{fileYear}/{employeeEmail}/{filename}(fileYear=${file.fileYear}, employeeEmail=${file.employeeEmail}, filename=${file.fileName})}"
-                           th:text="${file.fileName}"></a>
+                           th:text="${file.fileName}"></a><br/>
                     </div>
                 </td>
             </tr>
@@ -135,12 +134,11 @@
                     <div th:each="file : ${entry.value}">
                         <a th:if="${file.fileName != null}"
                            th:href="@{/download/{fileYear}/{employeeEmail}/{filename}(fileYear=${file.fileYear}, employeeEmail=${file.employeeEmail}, filename=${file.fileName})}"
-                           th:text="${file.fileName}"></a>
+                           th:text="${file.fileName}"></a><br/>
                     </div>
                 </td>
             </tr>
         </table>
-
     </div>
     <script>
         function updateFileList() {
@@ -155,7 +153,14 @@
                 const deleteBtn = document.createElement('button');
                 deleteBtn.textContent = '削除';
                 deleteBtn.className = 'delete-btn';
-                deleteBtn.onclick = function() { this.parentElement.remove(); };
+                deleteBtn.onclick = function() {
+                    const dt = new DataTransfer();
+                    const filesArray = Array.from(input.files);
+                    filesArray.splice(index, 1);
+                    filesArray.forEach(file => dt.items.add(file));
+                    input.files = dt.files;
+                    this.parentElement.remove();
+                };
                 li.appendChild(deleteBtn);
                 fileList.appendChild(li);
             });
