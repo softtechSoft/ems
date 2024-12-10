@@ -24,8 +24,8 @@ mybatis:
 # ファイルの保存場所を指定
 file:
   storage:
-    location: files/storage
+    location: ./ems_files
   request:
-    location: templates
+    location: requestFiles
 
 

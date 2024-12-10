@@ -12,7 +12,7 @@ public class AdjustmentDetail {
     private Date insertDate;
     private Date updateDate;
 
-    // Getters and Setters
+
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
     public String getEmployeeID() { return employeeID; }

@@ -3,12 +3,11 @@
 <mapper namespace="com.softtech.mapper.AdjustmentFileMapper">
     <!-- Result Mapping -->
     <resultMap id="AdjustmentFileResultMap" type="com.softtech.entity.AdjustmentFile">
-        <id property="fileID" column="fileID"/>
         <result property="employeeID" column="employeeID"/>
-        <result property="employeeEmail" column="employeeEmail"/>
         <result property="fileType" column="fileType"/>
         <result property="fileYear" column="fileYear"/>
         <result property="fileName" column="fileName"/>
+        <result property="fileStatus" column="fileStatus"/>
         <result property="filePath" column="filePath"/>
     </resultMap>
 
@@ -17,50 +16,57 @@
         SELECT * FROM adjustmentFile
     </select>
     
-    <select id="findFilesByEmployeeEmail" parameterType="String" resultMap="AdjustmentFileResultMap">
-        SELECT * FROM adjustmentFile WHERE employeeEmail = #{employeeEmail}
+    <select id="findFilesByEmployeeID" parameterType="String" resultMap="AdjustmentFileResultMap">
+        SELECT * FROM adjustmentFile WHERE employeeID = #{employeeID}
     </select>
 
-    <select id="selectByFileID" parameterType="Integer" resultMap="AdjustmentFileResultMap">
-        SELECT * FROM adjustmentFile WHERE fileID = #{fileID}
-    </select>
     
-    <select id="findByEmployeeIDAndYearAndFileName" parameterType="map" resultMap="AdjustmentFileResultMap">
-    SELECT * FROM adjustmentFile
-    WHERE employeeID = #{employeeID} AND fileYear = #{fileYear} AND fileName = #{fileName}
+	<select id="findByEmployeeIDAndYearAndFileName" resultType="com.softtech.entity.AdjustmentFile">
+    SELECT * FROM AdjustmentFile
+    WHERE employeeID = #{employeeID}
+      AND fileYear = #{fileYear}
+      AND fileName = #{fileName}
+      AND fileType = #{fileType}
 	</select>
 	
 	<select id="findFilesByTypeAndEmployee" parameterType="map" resultMap="AdjustmentFileResultMap">
     SELECT * FROM adjustmentFile
-    WHERE fileType = #{fileType} AND employeeEmail = #{employeeEmail} AND fileYear = #{fileYear}
+    WHERE fileType = #{fileType} AND employeeID = #{employeeID} AND fileYear = #{fileYear}
 	</select>
 	
-	<select id="findResultFilesByEmployeeEmail" parameterType="String" resultMap="AdjustmentFileResultMap">
+	<select id="findResultFilesByEmployeeID" parameterType="String" resultMap="AdjustmentFileResultMap">
     SELECT * FROM adjustmentFile
-    WHERE employeeEmail = #{employeeEmail} AND fileType = 'resultType'
+    WHERE employeeID = #{employeeID} AND fileType = 'resultType'
 	</select>
 	
 	
 
     <insert id="insert" parameterType="com.softtech.entity.AdjustmentFile">
-        INSERT INTO adjustmentFile (employeeID, employeeEmail, fileType, fileYear, fileName, filePath)
-        VALUES (#{employeeID}, #{employeeEmail}, #{fileType}, #{fileYear}, #{fileName}, #{filePath})
+        INSERT INTO adjustmentFile (employeeID, fileType, fileYear, fileName, fileStatus, filePath)
+        VALUES (#{employeeID},  #{fileType}, #{fileYear}, #{fileName}, #{fileStatus}, #{filePath})
     </insert>
 
     <update id="update" parameterType="com.softtech.entity.AdjustmentFile">
-        UPDATE adjustmentFile SET employeeID = #{employeeID}, employeeEmail = #{employeeEmail}, 
-        fileType = #{fileType}, fileYear = #{fileYear}, fileName = #{fileName}, filePath = #{filePath}
-        WHERE fileID = #{fileID}
+        UPDATE adjustmentFile SET employeeID = #{employeeID}, 
+        fileType = #{fileType}, fileYear = #{fileYear}, fileName = #{fileName}, fileStatus = #{fileStatus}, filePath = #{filePath}
     </update>
     
-    <update id="updateByEmployeeIDAndYearAndFileName" parameterType="com.softtech.entity.AdjustmentFile">
-    UPDATE adjustmentFile SET
-    filePath = #{filePath},
-    fileType = #{fileType}
-    WHERE employeeID = #{employeeID} AND fileYear = #{fileYear} AND fileName = #{fileName}
+	<update id="updateFileStatusByEmployeeIDAndYear" parameterType="map">
+    UPDATE adjustmentFile
+    SET fileStatus = #{newStatus}
+    WHERE employeeID = #{employeeID}
+      AND fileYear = #{fileYear}
+      AND fileType = #{fileType}
 	</update>
 
-    <delete id="deleteByFileID" parameterType="Integer">
-        DELETE FROM adjustmentFile WHERE fileID = #{fileID}
-    </delete>
+    
+	<update id="updateByEmployeeIDAndYearAndFileName" parameterType="com.softtech.entity.AdjustmentFile">
+    UPDATE AdjustmentFile
+    SET filePath = #{filePath}, fileType = #{fileType}
+    WHERE employeeID = #{employeeID}
+      AND fileYear = #{fileYear}
+      AND fileName = #{fileName}
+      AND fileType = #{fileType}
+	</update>
+
 </mapper>

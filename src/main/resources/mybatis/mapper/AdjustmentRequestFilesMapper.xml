@@ -6,35 +6,31 @@
 
     <!-- ResultMap for AdjustmentRequestFiles -->
     <resultMap id="AdjustmentRequestFilesResultMap" type="com.softtech.entity.AdjustmentRequestFiles">
-        <id property="fileID" column="fileID" />
-        <result property="employeeID" column="employeeID" />
-        <result property="employeeEmail" column="employeeEmail" />
         <result property="fileName" column="fileName" />
         <result property="fileYear" column="fileYear" />
         <result property="fileULStatus" column="fileULStatus" />
-        <result property="fileInsertDate" column="fileInsertDate" />
-        <result property="fileUpdateDate" column="fileUpdateDate" />
+        <result property="filePath" column="filePath" />
     </resultMap>
 
-    <!-- SQL Statements -->
+
     <select id="selectAll" resultMap="AdjustmentRequestFilesResultMap">
         SELECT * FROM ems.adjustmentRequestFiles
     </select>
 
-    <!-- 其他查询和更新语句 -->
+
 
     <select id="findByYearAndStatus" resultMap="AdjustmentRequestFilesResultMap">
         SELECT * FROM ems.adjustmentRequestFiles
         WHERE fileYear = #{year} AND fileULStatus = #{status}
     </select>
 
-    <!-- 查询所有匹配的记录 -->
+
     <select id="selectByFileNameAndEmployeeIDAndYear" parameterType="map" resultMap="AdjustmentRequestFilesResultMap">
         SELECT * FROM ems.adjustmentRequestFiles
         WHERE fileName = #{fileName} AND employeeID = #{employeeID} AND fileYear = #{fileYear}
     </select>
 
-    <!-- 查询单条记录 -->
+
     <select id="selectByFileNameAndEmployeeIDAndYearSingle" parameterType="map" resultMap="AdjustmentRequestFilesResultMap">
         SELECT * FROM ems.adjustmentRequestFiles
         WHERE fileName = #{fileName} AND employeeID = #{employeeID} AND fileYear = #{fileYear}
@@ -42,35 +38,20 @@
     </select>
 
     <insert id="insert" parameterType="com.softtech.entity.AdjustmentRequestFiles">
-        INSERT INTO ems.adjustmentRequestFiles (employeeID, employeeEmail, fileName, fileYear, fileULStatus, fileInsertDate, fileUpdateDate)
-        VALUES (#{employeeID}, #{employeeEmail}, #{fileName}, #{fileYear}, #{fileULStatus}, #{fileInsertDate}, #{fileUpdateDate})
+        INSERT INTO ems.adjustmentRequestFiles (fileName, fileYear, fileULStatus, filePath)
+        VALUES (#{fileName}, #{fileYear}, #{fileULStatus}, #{filePath})
     </insert>
 
-    <!-- 修改 update 方法的 id，确保唯一 -->
+
     <update id="update" parameterType="com.softtech.entity.AdjustmentRequestFiles">
         UPDATE ems.adjustmentRequestFiles SET
-        employeeID = #{employeeID},
-        employeeEmail = #{employeeEmail},
         fileName = #{fileName},
         fileYear = #{fileYear},
         fileULStatus = #{fileULStatus},
-        fileInsertDate = #{fileInsertDate},
-        fileUpdateDate = #{fileUpdateDate}
-        WHERE fileID = #{fileID}
+        filePath = #{filePath},
     </update>
 
-    <update id="updateByEmployeeIDAndFileYearAndFileName" parameterType="com.softtech.entity.AdjustmentRequestFiles">
-        UPDATE ems.adjustmentRequestFiles SET
-        employeeEmail = #{employeeEmail},
-        fileULStatus = #{fileULStatus},
-        fileInsertDate = #{fileInsertDate},
-        fileUpdateDate = #{fileUpdateDate}
-        WHERE employeeID = #{employeeID} AND fileYear = #{fileYear} AND fileName = #{fileName}
-    </update>
 
-    <delete id="deleteByFileID" parameterType="Integer">
-        DELETE FROM ems.adjustmentRequestFiles WHERE fileID = #{fileID}
-    </delete>
 
     <delete id="deleteByFileName" parameterType="String">
         DELETE FROM ems.adjustmentRequestFiles WHERE fileName = #{fileName}

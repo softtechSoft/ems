@@ -20,11 +20,6 @@
     <select id="selectById" parameterType="Integer" resultMap="AdjustmentDetailResultMap">
         SELECT * FROM adjustmentDetail WHERE id = #{id}
     </select>
-    
-    <select id="findByEmployeeEmailAndYear" resultType="com.softtech.entity.AdjustmentDetail">
-    SELECT * FROM adjustmentDetail
-    WHERE employeeEmail = #{employeeEmail} AND year = #{year}
-	</select>
 	
 	<select id="findByEmployeeIdAndYear" parameterType="map" resultMap="AdjustmentDetailResultMap">
         SELECT * FROM adjustmentDetail WHERE employeeID = #{employeeID} AND year = #{year}
@@ -39,6 +34,12 @@
     <update id="update" parameterType="com.softtech.entity.AdjustmentDetail">
         UPDATE adjustmentDetail SET employeeID = #{employeeID}, employeeEmail = #{employeeEmail}, year = #{year}, uploadStatus = #{uploadStatus}, adjustmentStatus = #{adjustmentStatus}, insertDate = #{insertDate}, updateDate = #{updateDate}
         WHERE id = #{id}
+    </update>
+    
+    <update id="updateUploadStatusByEmployeeIdAndYear" parameterType="map">
+        UPDATE adjustmentDetail
+        SET uploadStatus = #{uploadStatus}, updateDate = NOW()
+        WHERE employeeID = #{employeeID} AND year = #{year}
     </update>
     
     <delete id="deleteById" parameterType="Integer">
