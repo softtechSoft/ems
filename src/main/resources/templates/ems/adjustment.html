@@ -49,8 +49,8 @@
 
         /* ファイルリストのスタイル設定 */
         .file-list {
-            list-style: none;
-            padding: 0;
+            list-style-type: disc; /* 黒丸を表示 */
+            padding-left: 20px;    /* 左インデントを20px */
             margin: 0;
         }
 
@@ -118,7 +118,7 @@
             text-align: left;
         }
 
-        /* 履歴ファイルリストのスタイル設定 */
+        /* 履歴ファイルリストのスタイル設定：ここは元々同様のスタイルだが、既に .file-list に統一 */
         #historyFiles ul {
             list-style-type: disc;
             padding-left: 20px;
@@ -149,7 +149,7 @@
         <tr>
             <th>テンプレート</th>
             <td class="file-cell">
-                
+                <!-- テンプレートファイル的ファイルリスト显示/空列表显示 -->
                 <div th:if="${requestFiles == null || #lists.isEmpty(requestFiles)}"
                      class="no-file-message">
                     ファイルがありません
@@ -182,7 +182,7 @@
         <tr>
             <th>アップ済み</th>
             <td class="file-cell">
-                
+                <!-- detailFiles空时则显示ファイルがありません; 有文件则显示列表 -->
                 <div th:if="${detailFiles == null || #lists.isEmpty(detailFiles)}"
                      class="no-file-message">
                     ファイルがありません
@@ -239,23 +239,23 @@
             <th class="file-name-header">ファイル</th>
         </tr>
 
-        
+        <!-- 如果整个 historiesByYear 为空（null 或没有任何年度），统一显示一行“ファイルがありません” -->
         <tr th:if="${historiesByYear == null || #maps.isEmpty(historiesByYear)}">
             <td colspan="2" class="no-file-message" style="text-align: center;">
                 ファイルがありません
             </td>
         </tr>
         
-        
+        <!-- 否则对每个年度做循环 -->
         <tr th:each="entry : ${historiesByYear}" th:unless="${historiesByYear == null || #maps.isEmpty(historiesByYear)}">
-            <td class="year-header" th:text="${entry.key}"></td> 
+            <td class="year-header" th:text="${entry.key}"></td> <!-- 年度 -->
             <td class="file-name-cell file-cell" id="historyFiles">
-                
+                <!-- 如果某个年度对应的文件列表为空，则显示ファイルがありません -->
                 <div th:if="${entry.value == null || #lists.isEmpty(entry.value)}"
                      class="no-file-message">
                     ファイルがありません
                 </div>
-                
+                <!-- 否则遍历文件列表 -->
                 <ul th:if="${entry.value != null && !#lists.isEmpty(entry.value)}" class="file-list">
                     <li th:each="file : ${entry.value}">
                         <a th:if="${file.fileName != null}"
