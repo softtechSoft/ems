@@ -1,6 +1,7 @@
 package com.softtech.controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -130,9 +133,14 @@ public class AdjustmentController {
         try {
             // 申請書ファイルをリソースとして取得
             Resource resource = adjustmentService.loadRequestFileAsResource(filename);
-            // ファイルをダウンロード可能なレスポンスを返す
+            
+            ContentDisposition contentDisposition = ContentDisposition.builder("attachment")
+                    .filename(filename, StandardCharsets.UTF_8)
+                    .build();
+            
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition.toString())
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
                     .body(resource);
         } catch (Exception e) {
             // ファイルが見つからない場合は404レスポンスを返す
@@ -151,15 +159,22 @@ public class AdjustmentController {
      */
     @GetMapping("/download/{fileType}/{fileYear}/{employeeID}/{filename:.+}")
     @ResponseBody
-    public ResponseEntity<Resource> downloadUserFile(@PathVariable("fileType") String fileType,
-            @PathVariable("fileYear") int fileYear, @PathVariable("employeeID") String employeeID,
+    public ResponseEntity<Resource> downloadUserFile(
+            @PathVariable("fileType") String fileType,
+            @PathVariable("fileYear") int fileYear,
+            @PathVariable("employeeID") String employeeID,
             @PathVariable("filename") String filename) {
         try {
             // ユーザーファイルをリソースとして取得
             Resource resource = adjustmentService.loadUserFileAsResource(fileType, fileYear, employeeID, filename);
-            // ファイルをダウンロード可能なレスポンスを返す
+            
+            ContentDisposition contentDisposition = ContentDisposition.builder("attachment")
+                    .filename(filename, StandardCharsets.UTF_8)
+                    .build();
+            
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition.toString())
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
                     .body(resource);
         } catch (Exception e) {
             // ファイルが見つからない場合は404レスポンスを返す
