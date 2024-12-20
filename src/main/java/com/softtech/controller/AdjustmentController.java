@@ -2,6 +2,7 @@ package com.softtech.controller;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,8 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.softtech.entity.AdjustmentDetail;
 import com.softtech.entity.AdjustmentFile;
 import com.softtech.entity.AdjustmentRequestFiles;
+import com.softtech.mapper.AdjustmentDetailMapper;
 import com.softtech.service.AdjustmentService;
 
 /**
@@ -39,6 +42,9 @@ public class AdjustmentController {
 
     @Autowired
     private AdjustmentService adjustmentService;
+    
+    @Autowired
+    private AdjustmentDetailMapper adjustmentDetailMapper;
 
     /**
      * 年末調整ページを表示するメソッド
@@ -62,6 +68,30 @@ public class AdjustmentController {
         // 現在の年度を取得
         int currentYear = java.time.LocalDate.now().getYear();
         logger.debug("調整ページ表示 - メールアドレス: {}, 従業員ID: {}, 年: {}", employeeEmail, employeeID, currentYear);
+        
+        AdjustmentDetail detail = adjustmentDetailMapper.findByEmployeeIdAndYear(employeeID, String.valueOf(currentYear));
+        boolean isFinalized = false;
+        
+        if (detail == null) {
+            detail = new AdjustmentDetail();
+            detail.setEmployeeID(employeeID);
+            detail.setEmployeeEmail(employeeEmail);
+            detail.setYear(String.valueOf(currentYear));
+            detail.setUploadStatus("0"); // 未确认
+            detail.setAdjustmentStatus("0");
+            detail.setInsertDate(new Date());
+            detail.setUpdateDate(new Date());
+            adjustmentDetailMapper.insert(detail);
+            logger.debug("新年度の調整詳細を初期化しました - 従業員ID: {}, 年: {}", employeeID, currentYear);
+        } else {
+            
+            isFinalized = "1".equals(detail.getUploadStatus());
+        }
+
+        
+        model.addAttribute("isFinalized", isFinalized);
+        logger.debug("調整が確定されているか: {}", isFinalized);
+        
 
         // 履歴ファイルを年度ごとに取得しモデルに追加
         Map<Integer, List<AdjustmentFile>> historiesByYear = adjustmentService.getResultFilesGroupedByYear(employeeID);

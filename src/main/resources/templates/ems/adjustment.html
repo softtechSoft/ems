@@ -2,368 +2,388 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <title>年末調整画面</title>
-    <style>
-        /* テーブルコンテナのスタイル設定 */
-        .table-container {
-            width: 50%;
-            margin-left: 20px;
-            margin-bottom: 20px;
-        }
+	<meta charset="UTF-8">
+	<title>年末調整画面</title>
+	<style>
+		/* テーブルコンテナのスタイル設定 */
+		.table-container {
+			width: 50%;
+			margin-left: 20px;
+			margin-bottom: 20px;
+		}
 
-        /* 見出し1のスタイル設定 */
-        h1 {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
+		/* 見出し1のスタイル設定 */
+		h1 {
+			text-align: center;
+			font-size: 24px;
+			font-weight: bold;
+		}
 
-        /* テーブルのスタイル設定 */
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
+		/* テーブルのスタイル設定 */
+		table {
+			width: 100%;
+			margin-top: 20px;
+			border-collapse: collapse;
+		}
 
-        /* テーブルヘッダーとデータセルのスタイル設定 */
-        th,
-        td {
-            border: 2px solid #b3cbde;
-            padding: 15px;
-            text-align: left;
-        }
+		/* テーブルヘッダーとデータセルのスタイル設定 */
+		th,
+		td {
+			border: 2px solid #b3cbde;
+			padding: 15px;
+			text-align: left;
+		}
 
-        th {
-            height: 40px;
-            width: 20%;
-        }
+		th {
+			height: 40px;
+			width: 20%;
+		}
 
-        /* アップロードエリアのスタイル設定 */
-        .upload-area {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+		/* アップロードエリアのスタイル設定 */
+		.upload-area {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 20px;
+		}
 
-        /* ファイルリストのスタイル設定 */
-        .file-list {
-            list-style-type: disc; /* 黒丸を表示 */
-            padding-left: 20px;    /* 左インデントを20px */
-            margin: 0;
-        }
+		/* ファイルリストのスタイル設定 */
+		.file-list {
+			list-style-type: disc;
+			/* 黒丸を表示 */
+			padding-left: 20px;
+			/* 左インデントを20px */
+			margin: 0;
+		}
 
-        .file-item {
-            margin-bottom: 5px;
-        }
+		.file-item {
+			margin-bottom: 5px;
+		}
 
-        /* ファイル入力フィールドのスタイル設定 */
-        .file-input {
-            display: none;
-        }
+		/* ファイル入力フィールドのスタイル設定 */
+		.file-input {
+			display: none;
+		}
 
-        /* ボタンのスタイル設定 */
-        button {
-            padding: 3px 7px;
-            font-size: 13px;
-            cursor: pointer;
-            margin: 5px;
-        }
+		/* ボタンのスタイル設定 */
+		button {
+			padding: 3px 7px;
+			font-size: 13px;
+			cursor: pointer;
+			margin: 5px;
+		}
 
-        /* 削除ボタンのスタイル設定 */
-        .delete-btn {
-            margin-left: 10px;
-            cursor: pointer;
-        }
+		/* 削除ボタンのスタイル設定 */
+		.delete-btn {
+			margin-left: 10px;
+			cursor: pointer;
+		}
 
-        /* ボタンコンテナのスタイル設定 */
-        .button-container {
-            text-align: right;
-            padding-right: 10px;
-            padding-top: 10px;
-        }
+		/* ボタンコンテナのスタイル設定 */
+		.button-container {
+			text-align: right;
+			padding-right: 10px;
+			padding-top: 10px;
+		}
 
-        /* "ファイルがありません" メッセージのスタイル */
-        .no-file-message {
-            font-weight: bold;
-            color: #333;
-        }
+		/* "ファイルがありません" メッセージのスタイル */
+		.no-file-message {
+			font-weight: bold;
+			color: #333;
+		}
 
-        /* 履歴ヘッダーのスタイル設定 */
-        .history-header {
-            width: 10%;
-            text-align: left;
-        }
+		/* 履歴ヘッダーのスタイル設定 */
+		.history-header {
+			width: 10%;
+			text-align: left;
+		}
 
-        /* 年度ヘッダーとファイル名ヘッダーのスタイル設定 */
-        .year-header,
-        .file-name-header {
-            height: 30px;
-        }
+		/* 年度ヘッダーとファイル名ヘッダーのスタイル設定 */
+		.year-header,
+		.file-name-header {
+			height: 30px;
+		}
 
-        .year-header {
-            width: 10%;
-            text-align: left;
-        }
+		.year-header {
+			width: 10%;
+			text-align: left;
+		}
 
-        .file-name-header {
-            width: 80%;
-            text-align: left;
-        }
+		.file-name-header {
+			width: 80%;
+			text-align: left;
+		}
 
-        /* ファイル名セルのスタイル設定 */
-        .file-name-cell {
-            height: 50px;
-            text-align: left;
-        }
+		/* ファイル名セルのスタイル設定 */
+		.file-name-cell {
+			height: 50px;
+			text-align: left;
+		}
 
-        /* 履歴ファイルリストのスタイル設定：ここは元々同様のスタイルだが、既に .file-list に統一 */
-        #historyFiles ul {
-            list-style-type: disc;
-            padding-left: 20px;
-            margin: 0;
-        }
+		/* 履歴ファイルリストのスタイル設定：ここは元々同様のスタイルだが、既に .file-list に統一 */
+		#historyFiles ul {
+			list-style-type: disc;
+			padding-left: 20px;
+			margin: 0;
+		}
 
-        #historyFiles li {
-            margin-bottom: 5px;
-        }
+		#historyFiles li {
+			margin-bottom: 5px;
+		}
 
-        /* ファイルセルのスタイル設定 */
-        .file-cell {
-            padding-left: 15px;
-        }
-    </style>
+		/* ファイルセルのスタイル設定 */
+		.file-cell {
+			padding-left: 15px;
+		}
+	</style>
 </head>
 
 <body>
-<div class="table-container">
-    <h1>年末調整</h1>
+	<div class="table-container">
+		<h1>年末調整</h1>
 
-    <!-- 年度とテンプレート、アップロードセクションを表示するテーブル -->
-    <table>
-        <tr>
-            <th>年度</th>
-            <td th:text="${currentYear}"></td> <!-- 現在の年度を表示 -->
-        </tr>
-        <tr>
-            <th>テンプレート</th>
-            <td class="file-cell">
-                <!-- テンプレートファイル的ファイルリスト显示/空列表显示 -->
-                <div th:if="${requestFiles == null || #lists.isEmpty(requestFiles)}"
-                     class="no-file-message">
-                    ファイルがありません
-                </div>
-                <ul th:if="${requestFiles != null && !#lists.isEmpty(requestFiles)}"
-                    id="requestFiles" class="file-list">
-                    <li th:each="file : ${requestFiles}">
-                        <a th:href="@{/download/{filename}(filename=${file.fileName})}"
-                           th:text="${file.fileName}"></a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
+		<!-- 年度とテンプレート、アップロードセクションを表示するテーブル -->
+		<table>
+			<tr>
+				<th>年度</th>
+				<td th:text="${currentYear}"></td> <!-- 現在の年度を表示 -->
+			</tr>
+			<tr>
+				<th>テンプレート</th>
+				<td class="file-cell">
+					<!-- テンプレートファイル的ファイルリスト显示/空列表显示 -->
+					<div th:if="${requestFiles == null || #lists.isEmpty(requestFiles)}" class="no-file-message">
+						ファイルがありません
+					</div>
+					<ul th:if="${requestFiles != null && !#lists.isEmpty(requestFiles)}" id="requestFiles"
+						class="file-list">
+						<li th:each="file : ${requestFiles}">
+							<a th:href="@{/download/{filename}(filename=${file.fileName})}"
+								th:text="${file.fileName}"></a>
+						</li>
+					</ul>
+				</td>
+			</tr>
 
-        <tr>
-            <th>アップロード</th>
-            <td class="file-cell">
-                <div class="upload-area">
-                    <input type="file" id="fileUpload" multiple class="file-input" onchange="updateFileList()" />
-                    <button type="button" onclick="document.getElementById('fileUpload').click();">ファイルを選択</button>
-                    <button type="button" onclick="submitFiles()" id="uploadBtn">アップロード</button>
-                </div>
-                <ul id="fileList" class="file-list"></ul>
-            </td>
-        </tr>
-    </table>
+			<tr>
+				<th>アップロード</th>
+				<td class="file-cell">
+					<div class="upload-area">
+						<input type="file" id="fileUpload" multiple class="file-input" onchange="updateFileList()"
+							th:disabled="${isFinalized}" />
+						<button type="button" onclick="document.getElementById('fileUpload').click();"
+							th:disabled="${isFinalized}">ファイルを選択</button>
+						<button type="button" onclick="submitFiles()" id="uploadBtn"
+							th:attr="disabled=${isFinalized} ? 'disabled' : null">アップロード</button>
 
-    <!-- アップ済みファイルを表示するテーブル -->
-    <table>
-        <tr>
-            <th>アップ済み</th>
-            <td class="file-cell">
-                <!-- detailFiles空时则显示ファイルがありません; 有文件则显示列表 -->
-                <div th:if="${detailFiles == null || #lists.isEmpty(detailFiles)}"
-                     class="no-file-message">
-                    ファイルがありません
-                </div>
-                <ul th:if="${detailFiles != null && !#lists.isEmpty(detailFiles)}"
-                    id="uploadedFiles" class="file-list">
-                    <li th:each="file : ${detailFiles}">
-                        <a th:href="@{/download/detailType/{fileYear}/{employeeID}/{filename}(
+					</div>
+					<ul id="fileList" class="file-list"></ul>
+				</td>
+			</tr>
+		</table>
+
+		<!-- アップ済みファイルを表示するテーブル -->
+		<table>
+			<tr>
+				<th>アップ済み</th>
+				<td class="file-cell">
+					<!-- detailFiles空时则显示ファイルがありません; 有文件则显示列表 -->
+					<div th:if="${detailFiles == null || #lists.isEmpty(detailFiles)}" class="no-file-message">
+						ファイルがありません
+					</div>
+					<ul th:if="${detailFiles != null && !#lists.isEmpty(detailFiles)}" id="uploadedFiles"
+						class="file-list">
+						<li th:each="file : ${detailFiles}">
+							<a th:href="@{/download/detailType/{fileYear}/{employeeID}/{filename}(
                                fileYear=${file.fileYear}, 
                                employeeID=${file.employeeID}, 
                                filename=${file.fileName}
-                           )}"
-                           th:text="${file.fileName}"></a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    </table>
+                           )}" th:text="${file.fileName}"></a>
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
 
-    <!-- 確定ボタンを配置するコンテナ -->
-    <div class="button-container">
-        <button type="button" onclick="finalizeFiles()">確定</button>
-    </div>
+		<!-- 確定ボタンを配置するコンテナ -->
 
-    <!-- 結果ファイルを表示するテーブル -->
-    <table>
-        <tr>
-            <th>結果</th>
-            <td class="file-cell">
-                <div th:if="${resultFiles == null || #lists.isEmpty(resultFiles)}"
-                     class="no-file-message">
-                    ファイルがありません
-                </div>
-                <ul th:if="${resultFiles != null && !#lists.isEmpty(resultFiles)}"
-                    id="resultFiles" class="file-list">
-                    <li th:each="file : ${resultFiles}">
-                        <a th:href="@{/download/resultType/{fileYear}/{employeeID}/{filename}(
+		<div class="button-container">
+			<button type="button" onclick="finalizeFiles()"
+				th:attr="disabled=${isFinalized} ? 'disabled' : null">確定</button>
+		</div>
+
+
+		<!-- 結果ファイルを表示するテーブル -->
+		<table>
+			<tr>
+				<th>結果</th>
+				<td class="file-cell">
+					<div th:if="${resultFiles == null || #lists.isEmpty(resultFiles)}" class="no-file-message">
+						ファイルがありません
+					</div>
+					<ul th:if="${resultFiles != null && !#lists.isEmpty(resultFiles)}" id="resultFiles"
+						class="file-list">
+						<li th:each="file : ${resultFiles}">
+							<a th:href="@{/download/resultType/{fileYear}/{employeeID}/{filename}(
                                fileYear=${file.fileYear}, 
                                employeeID=${file.employeeID}, 
                                filename=${file.fileName}
-                           )}"
-                           th:text="${file.fileName}"></a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    </table>
+                           )}" th:text="${file.fileName}"></a>
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
 
-    <!-- 履歴を表示するテーブル -->
-    <table>
-        <tr>
-            <th class="history-header" rowspan="11">履歴</th>
-            <th class="year-header">年度</th>
-            <th class="file-name-header">ファイル</th>
-        </tr>
+		<!-- 履歴を表示するテーブル -->
+		<table>
+			<tr>
+				<th class="history-header" rowspan="11">履歴</th>
+				<th class="year-header">年度</th>
+				<th class="file-name-header">ファイル</th>
+			</tr>
 
-        <!-- 如果整个 historiesByYear 为空（null 或没有任何年度），统一显示一行“ファイルがありません” -->
-        <tr th:if="${historiesByYear == null || #maps.isEmpty(historiesByYear)}">
-            <td colspan="2" class="no-file-message" style="text-align: center;">
-                ファイルがありません
-            </td>
-        </tr>
-        
-        <!-- 否则对每个年度做循环 -->
-        <tr th:each="entry : ${historiesByYear}" th:unless="${historiesByYear == null || #maps.isEmpty(historiesByYear)}">
-            <td class="year-header" th:text="${entry.key}"></td> <!-- 年度 -->
-            <td class="file-name-cell file-cell" id="historyFiles">
-                <!-- 如果某个年度对应的文件列表为空，则显示ファイルがありません -->
-                <div th:if="${entry.value == null || #lists.isEmpty(entry.value)}"
-                     class="no-file-message">
-                    ファイルがありません
-                </div>
-                <!-- 否则遍历文件列表 -->
-                <ul th:if="${entry.value != null && !#lists.isEmpty(entry.value)}" class="file-list">
-                    <li th:each="file : ${entry.value}">
-                        <a th:if="${file.fileName != null}"
-                           th:href="@{/download/resultType/{fileYear}/{employeeID}/{filename}(
+			<!-- 如果整个 historiesByYear 为空（null 或没有任何年度），统一显示一行“ファイルがありません” -->
+			<tr th:if="${historiesByYear == null || #maps.isEmpty(historiesByYear)}">
+				<td colspan="2" class="no-file-message" style="text-align: center;">
+					ファイルがありません
+				</td>
+			</tr>
+
+			<!-- 否则对每个年度做循环 -->
+			<tr th:each="entry : ${historiesByYear}"
+				th:unless="${historiesByYear == null || #maps.isEmpty(historiesByYear)}">
+				<td class="year-header" th:text="${entry.key}"></td> <!-- 年度 -->
+				<td class="file-name-cell file-cell" id="historyFiles">
+					<!-- 如果某个年度对应的文件列表为空，则显示ファイルがありません -->
+					<div th:if="${entry.value == null || #lists.isEmpty(entry.value)}" class="no-file-message">
+						ファイルがありません
+					</div>
+					<!-- 否则遍历文件列表 -->
+					<ul th:if="${entry.value != null && !#lists.isEmpty(entry.value)}" class="file-list">
+						<li th:each="file : ${entry.value}">
+							<a th:if="${file.fileName != null}" th:href="@{/download/resultType/{fileYear}/{employeeID}/{filename}(
                                fileYear=${file.fileYear},
                                employeeID=${file.employeeID},
                                filename=${file.fileName}
-                           )}"
-                           th:text="${file.fileName}"></a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    </table>
-</div>
+                           )}" th:text="${file.fileName}"></a>
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+	</div>
 
-<script>
-    /**
-     * ファイルリストを更新する関数
-     */
-    function updateFileList() {
-        const input = document.getElementById('fileUpload');
-        const fileList = document.getElementById('fileList');
-        fileList.innerHTML = ''; // リストをクリア
+	<script>
+		/**
+		 * ファイルリストを更新する関数
+		 */
+		function updateFileList() {
+			const input = document.getElementById('fileUpload');
+			const fileList = document.getElementById('fileList');
+			fileList.innerHTML = ''; // リストをクリア
 
-        // 選択されたファイルをリストに追加
-        Array.from(input.files).forEach((file, index) => {
-            const li = document.createElement('li');
-            li.textContent = file.name; // ファイル名を表示
-            li.classList.add('file-item');
+			// 選択されたファイルをリストに追加
+			Array.from(input.files).forEach((file, index) => {
+				const li = document.createElement('li');
+				li.textContent = file.name; // ファイル名を表示
+				li.classList.add('file-item');
 
-            // 削除ボタン
-            const deleteBtn = document.createElement('button');
-            deleteBtn.textContent = '削除';
-            deleteBtn.className = 'delete-btn';
+				// 削除ボタン
+				const deleteBtn = document.createElement('button');
+				deleteBtn.textContent = '削除';
+				deleteBtn.className = 'delete-btn';
 
-            deleteBtn.onclick = function () {
-                const dt = new DataTransfer();
-                const filesArray = Array.from(input.files);
-                filesArray.splice(index, 1); // インデックスでファイルを削除
-                filesArray.forEach(f => dt.items.add(f));
-                input.files = dt.files;
-                this.parentElement.remove();
-            };
+				deleteBtn.onclick = function () {
+					const dt = new DataTransfer();
+					const filesArray = Array.from(input.files);
+					filesArray.splice(index, 1); // インデックスでファイルを削除
+					filesArray.forEach(f => dt.items.add(f));
+					input.files = dt.files;
+					this.parentElement.remove();
+				};
 
-            li.appendChild(deleteBtn);
-            fileList.appendChild(li);
-        });
-    }
+				li.appendChild(deleteBtn);
+				fileList.appendChild(li);
+			});
+		}
 
-    /**
-     * ファイルをサーバーにアップロードする関数
-     */
-    function submitFiles() {
-        const input = document.getElementById('fileUpload');
-        const files = input.files;
-        if (files.length === 0) {
-            alert('ファイルを選択してください。');
-            return;
-        }
+		/**
+			* ファイルをサーバーにアップロードする関数
+			*/
+		function submitFiles() {
+			const input = document.getElementById('fileUpload');
+			const files = input.files;
+			if (files.length === 0) {
+				alert('ファイルを選択してください。');
+				return;
+			}
 
-        const formData = new FormData();
-        for (let i = 0; i < files.length; i++) {
-            formData.append('files', files[i]);
-        }
+			const formData = new FormData();
+			for (let i = 0; i < files.length; i++) {
+				formData.append('files', files[i]);
+			}
 
-        fetch('/saveFileAndDetail', {
-            method: 'POST',
-            body: formData,
-            credentials: 'include'
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('サーバーエラー');
-            }
-            return response.json();
-        })
-        .then(data => {
-            alert(data.message);
-            // TODO: 必要であればリロードやアップ済みリストの再描画
-        })
-        .catch(error => {
-            console.error("Upload failed: ", error);
-            alert('ファイルのアップロードに失敗しました: ' + error);
-        });
-    }
+			fetch('/saveFileAndDetail', {
+				method: 'POST',
+				body: formData,
+				credentials: 'include'
+			})
+				.then(response => {
+					if (!response.ok) {
+						throw new Error('サーバーエラー');
+					}
+					return response.json();
+				})
+				.then(data => {
+					alert(data.message);
+					window.location.reload(); // 成功後にページをリロードしてファイルリストを更新
+				})
+				.catch(error => {
+					console.error("Upload failed: ", error);
+					alert('ファイルのアップロードに失敗しました: ' + error);
+				});
+		}
 
-    /**
-     * ファイルの処理を確定する関数
-     */
-    function finalizeFiles() {
-        fetch('/finalizeAdjustment', {
-            method: 'POST',
-            credentials: 'include'
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message) {
-                alert(data.message);
-            } else if (data.error) {
-                alert(data.error);
-            }
-        })
-        .catch(error => {
-            console.error("Processing failed: ", error);
-            alert('処理失敗しました: ' + error);
-        });
-    }
-</script>
+
+		/**
+		 * ファイルの処理を確定する関数
+		 */
+		function finalizeFiles() {
+			if (!confirm('注意：一旦確定すると、再アップロードはできなくなります。')) { 
+				return;
+			}
+			fetch('/finalizeAdjustment', {
+				method: 'POST',
+				credentials: 'include'
+			})
+				.then(response => response.json())
+				.then(data => {
+					if (data.message) {
+						alert(data.message);
+						// 禁用上传按钮
+						const uploadBtn = document.getElementById('uploadBtn');
+						uploadBtn.disabled = true;
+						uploadBtn.textContent = 'アップロード済み';
+
+						// 禁用ファイル選択ボタン
+						const fileSelectBtn = document.querySelector('.upload-area button:nth-of-type(1)');
+						fileSelectBtn.disabled = true;
+
+						// 禁用確定按钮
+						const finalizeBtn = document.querySelector('.button-container button');
+						finalizeBtn.disabled = true;
+						finalizeBtn.textContent = '確定済み';
+					} else if (data.error) {
+						alert(data.error);
+					}
+				})
+				.catch(error => {
+					console.error("Processing failed: ", error);
+					alert('処理失敗しました: ' + error);
+				});
+		}
+	</script>
 </body>
+
 </html>
