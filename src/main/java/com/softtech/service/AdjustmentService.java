@@ -35,38 +35,38 @@ import com.softtech.mapper.EmployeeMapper;
 /**
  * 年末調整サービスクラス
  * 
- * このクラスは、ファイルのアップロード、ダウンロード、保存、履歴管理など
- * 年末調整に関連するビジネスロジックを提供します。
+ * ファイルのアップロード、ダウンロード、保存、履歴管理など
+ * 年末調整に関連するビジネスロジックを提供するクラス。
  */
 @Service
 public class AdjustmentService {
     private static final Logger logger = LoggerFactory.getLogger(AdjustmentService.class);
 
     @Autowired
-    private AdjustmentFileMapper adjustmentFileMapper; // AdjustmentFileエンティティ用のマッパー
+    private AdjustmentFileMapper adjustmentFileMapper; 
     @Autowired
-    private AdjustmentDetailMapper adjustmentDetailMapper; // AdjustmentDetailエンティティ用のマッパー
+    private AdjustmentDetailMapper adjustmentDetailMapper;
     @Autowired
-    private EmployeeMapper employeeMapper; // Employeeエンティティ用のマッパー
+    private EmployeeMapper employeeMapper;
     @Autowired
-    private AdjustmentRequestFilesMapper adjustmentRequestFilesMapper; // AdjustmentRequestFilesエンティティ用のマッパー
+    private AdjustmentRequestFilesMapper adjustmentRequestFilesMapper;
 
     @Value("${file.storage.location}")
-    private String rootLocation; // ファイル保存のルートディレクトリパス
+    private String rootLocation; // ルートディレクトリパス
 
     @Value("${file.request.location}")
-    private String requestFilesLocation; // 申請ファイル保存のディレクトリパス
+    private String requestFilesLocation; // 申請書ファイル保存用ディレクトリパス
 
     /**
      * 初期化メソッド
-     * 
-     * 画面起動時に呼び出され、必要なディレクトリを作成します。
      */
     @PostConstruct
     public void init() {
         try {
-            Files.createDirectories(getRequestFilesLocation()); // 申請ファイル保存ディレクトリの作成
-            logger.debug("ファイル保存用ディレクトリの作成が完了しました - root: {}, requestFilesLocation: {}", getRootLocation(), getRequestFilesLocation());
+            // 申請書ファイル保存用ディレクトリを作成
+            Files.createDirectories(getRequestFilesLocation());
+            logger.debug("ファイル保存用ディレクトリの作成が完了: root={}, requestFilesLocation={}", 
+                         getRootLocation(), getRequestFilesLocation());
         } catch (IOException e) {
             logger.error("ストレージディレクトリの作成に失敗しました！", e);
             throw new RuntimeException("ストレージディレクトリの作成に失敗しました！", e);
@@ -74,52 +74,40 @@ public class AdjustmentService {
     }
 
     /**
-     * ルートディレクトリのパスを取得するメソッド
-     * 
-     * @return ルートディレクトリのPathオブジェクト
+     * ルートディレクトリのパスを取得
      */
     private Path getRootLocation() {
-        Path p = Paths.get(rootLocation).toAbsolutePath().normalize(); // ルートディレクトリの絶対パスを取得
+        Path p = Paths.get(rootLocation).toAbsolutePath().normalize();
         logger.debug("ルートロケーション取得: {}", p);
         return p;
     }
 
     /**
-     * 年末調整申請ファイル保存ディレクトリのパスを取得するメソッド
-     * 
-     * @return 申請ファイル保存ディレクトリのPathオブジェクト
+     * 申請書ファイル保存ディレクトリのパスを取得
      */
     private Path getRequestFilesLocation() {
-        Path p = getRootLocation().resolve(requestFilesLocation); // ルートディレクトリに申請ファイル保存ディレクトリを結合
+        Path p = getRootLocation().resolve(requestFilesLocation);
         logger.debug("リクエストファイルロケーション取得: {}", p);
         return p;
     }
 
     /**
      * ファイルと詳細情報を保存するメソッド
-     * 
-     * 指定されたファイルを保存し、関連する詳細情報をデータベースに保存または更新します。
-     * 
-     * @param files         アップロードされたファイルの配列
-     * @param employeeID    従業員ID
-     * @param employeeEmail 従業員のメールアドレス
-     * @param fileType      ファイルの種類（例: "detailType"）
-     * @throws IOException ファイルの保存中に発生する可能性のある例外
      */
-    public void saveFilesAndDetails(MultipartFile[] files, String employeeID, String employeeEmail, String fileType) throws IOException {
-        // 従業員情報を取得
+    public void saveFilesAndDetails(MultipartFile[] files, String employeeID, String employeeEmail, String fileType)
+            throws IOException {
+        // 従業員情報チェック
         Employee employee = employeeMapper.queryEmployeeAll(employeeID);
         if (employee == null) {
             throw new IllegalArgumentException("無効な従業員ID: " + employeeID);
         }
-        int fileYear = java.time.LocalDate.now().getYear(); // 現在の年度を取得
+        int fileYear = java.time.LocalDate.now().getYear(); // 現在の年
 
         // 年末調整詳細情報を取得または新規作成
         AdjustmentDetail detail = adjustmentDetailMapper.findByEmployeeIdAndYear(employeeID, String.valueOf(fileYear));
-        Date currentDate = new Date(); // 現在の日付を取得
+        Date currentDate = new Date();
 
         if (detail == null) {
-            // 年末調整詳細情報が存在しない場合は新規作成
             detail = new AdjustmentDetail();
             detail.setEmployeeID(employeeID);
             detail.setEmployeeEmail(employeeEmail);
@@ -128,54 +116,44 @@ public class AdjustmentService {
             detail.setAdjustmentStatus("0");
             detail.setInsertDate(currentDate);
             detail.setUpdateDate(currentDate);
-            adjustmentDetailMapper.insert(detail); // データベースに挿入
+            adjustmentDetailMapper.insert(detail);
         } else {
-            // 年末調整詳細情報が存在する場合は更新
             detail.setUploadStatus("0");
-            detail.setEmployeeEmail(employeeEmail); // 最新のメールアドレスを更新
+            detail.setEmployeeEmail(employeeEmail);
             detail.setUpdateDate(currentDate);
-            adjustmentDetailMapper.update(detail); // データベースを更新
+            adjustmentDetailMapper.update(detail);
         }
 
-        // 各ファイルを保存
+        // ファイルを一つずつ保存
         for (MultipartFile file : files) {
             if (!file.isEmpty()) {
-                saveFile(file, employeeID, fileYear, fileType); // ファイル保存メソッドを呼び出す
+                saveFile(file, employeeID, fileYear, fileType);
             }
         }
     }
 
     /**
-     * ファイルを保存するメソッド
-     * 
-     * 指定されたファイルをサーバーのファイルシステムに保存し、
-     * データベースにファイル情報を保存または更新します。
-     * 
-     * @param file       保存するファイル
-     * @param employeeID 従業員ID
-     * @param year       ファイルの年度
-     * @param fileType   ファイルの種類
-     * @throws IOException ファイルの保存中に発生する可能性のある例外
+     * 単一ファイルを保存する内部メソッド
      */
     private void saveFile(MultipartFile file, String employeeID, int year, String fileType) throws IOException {
-        String originalFileName = file.getOriginalFilename(); // 元のファイル名を取得
-
-        // ファイルを保存するディレクトリパスを取得
+        String originalFileName = file.getOriginalFilename();
+        // 保存先ディレクトリ
         Path fileTypeDirectory = getRootLocation().resolve(Paths.get(String.valueOf(year), employeeID, fileType));
-        Files.createDirectories(fileTypeDirectory); // 必要なディレクトリを作成
-        Path destinationFile = fileTypeDirectory.resolve(originalFileName); // 保存先のファイルパスを設定
-        Files.copy(file.getInputStream(), destinationFile, StandardCopyOption.REPLACE_EXISTING); // ファイルをコピー
+        Files.createDirectories(fileTypeDirectory);
+        Path destinationFile = fileTypeDirectory.resolve(originalFileName);
+        Files.copy(file.getInputStream(), destinationFile, StandardCopyOption.REPLACE_EXISTING);
 
-        // 既存のファイル情報をデータベースから取得
-        AdjustmentFile existingFile = adjustmentFileMapper.findByEmployeeIDAndYearAndFileName(employeeID, year, originalFileName, fileType);
+        // DBに存在チェック
+        AdjustmentFile existingFile = adjustmentFileMapper
+                .findByEmployeeIDAndYearAndFileName(employeeID, year, originalFileName, fileType);
         if (existingFile != null) {
-            // 既存のファイル情報が存在する場合は更新
+            // 既存ファイル更新
             existingFile.setFilePath(destinationFile.toString());
             existingFile.setFileType(fileType);
             existingFile.setFileStatus("0");
-            adjustmentFileMapper.updateByEmployeeIDAndYearAndFileName(existingFile); // データベースを更新
+            adjustmentFileMapper.updateByEmployeeIDAndYearAndFileName(existingFile);
         } else {
-            // 新規ファイル情報を作成してデータベースに挿入
+            // 新規ファイルINSERT
             AdjustmentFile adjustmentFile = new AdjustmentFile();
             adjustmentFile.setEmployeeID(employeeID);
             adjustmentFile.setFileName(originalFileName);
@@ -183,73 +161,48 @@ public class AdjustmentService {
             adjustmentFile.setFileYear(year);
             adjustmentFile.setFileType(fileType);
             adjustmentFile.setFileStatus("0");
-            adjustmentFileMapper.insert(adjustmentFile); // データベースに挿入
+            adjustmentFileMapper.insert(adjustmentFile);
         }
     }
 
     /**
-     * 年度ごとの結果ファイルを取得するメソッド
-     * 
-     * 指定された従業員IDに関連する結果ファイルを年度ごとにグループ化して取得します。
-     * 
-     * @param employeeID 従業員ID
-     * @return 年度ごとの結果ファイルを格納したマップ
+     * 年度ごとの結果ファイルを取得し、マップにまとめる
      */
     public Map<Integer, List<AdjustmentFile>> getResultFilesGroupedByYear(String employeeID) {
-        // 結果ファイルを従業員IDで取得
         List<AdjustmentFile> files = adjustmentFileMapper.findResultFilesByEmployeeID(employeeID);
-        // 年度ごとのファイルリストを格納するTreeMap（降順）
         Map<Integer, List<AdjustmentFile>> filesByYear = new TreeMap<>(Collections.reverseOrder());
         for (AdjustmentFile file : files) {
-            // ファイルを年度ごとにグループ化
             filesByYear.computeIfAbsent(file.getFileYear(), k -> new ArrayList<>()).add(file);
         }
         return filesByYear;
     }
 
     /**
-     * 指定タイプと従業員のファイルを取得するメソッド
-     * 
-     * 指定されたファイルタイプ、従業員ID、および年度に基づいてファイルを取得します。
-     * 
-     * @param fileType   ファイルの種類
-     * @param employeeID 従業員ID
-     * @param fileYear   ファイルの年度
-     * @return 指定条件に一致するファイルのリスト
+     * タイプと従業員ID、年度でファイルを検索
      */
     public List<AdjustmentFile> getFilesByTypeAndEmployee(String fileType, String employeeID, int fileYear) {
         return adjustmentFileMapper.findFilesByTypeAndEmployee(fileType, employeeID, fileYear);
     }
 
     /**
-     * 年度の申請書を取得するメソッド
-     * 
-     * 指定された年度に関連する申請書ファイルを取得します。
-     * 
-     * @param year 取得対象の年度
-     * @return 指定年度の申請書ファイルのリスト
+     * 指定年度の申請ファイルを取得
      */
     public List<AdjustmentRequestFiles> getRequestFilesForYear(int year) {
-        return adjustmentRequestFilesMapper.findByYearAndStatus(year, "1"); // ステータスが"1"のファイルを取得
+        return adjustmentRequestFilesMapper.findByYearAndStatus(year, "1");
     }
 
     /**
-     * 申請書ファイルをリソースとしてロードするメソッド
-     * 
-     * 指定されたファイル名の申請書ファイルをリソースとして取得します。
-     * 
-     * @param filename ダウンロードするファイル名
-     * @return ダウンロード可能なリソース
+     * 申請書ファイルをリソースとしてロード
      */
     public Resource loadRequestFileAsResource(String filename) {
-        int currentYear = java.time.LocalDate.now().getYear(); // 現在の年度を取得
-        List<AdjustmentRequestFiles> files = adjustmentRequestFilesMapper.findByYearAndStatus(currentYear, "1"); // 現在年度の申請書ファイルを取得
+        int currentYear = java.time.LocalDate.now().getYear();
+        List<AdjustmentRequestFiles> files = adjustmentRequestFilesMapper.findByYearAndStatus(currentYear, "1");
         for (AdjustmentRequestFiles f : files) {
             if (f.getFileName().equals(filename)) {
-                Path filePath = Paths.get(f.getFilePath()); // ファイルパスを取得
+                Path filePath = Paths.get(f.getFilePath());
                 if (Files.exists(filePath)) {
                     try {
-                        return new UrlResource(filePath.toUri()); // リソースとしてロード
+                        return new UrlResource(filePath.toUri());
                     } catch (Exception e) {
                         throw new RuntimeException("ファイルのロードに失敗しました: " + filename, e);
                     }
@@ -262,54 +215,74 @@ public class AdjustmentService {
     }
 
     /**
-     * ユーザーファイルをリソースとしてロードするメソッド
-     * 
-     * 指定されたファイルタイプ、年度、従業員ID、およびファイル名に基づいてファイルをリソースとして取得します。
-     * 
-     * @param fileType   ファイルの種類
-     * @param fileYear   ファイルの年度
-     * @param employeeID 従業員ID
-     * @param filename   ダウンロードするファイル名
-     * @return ダウンロード可能なリソース
+     * ユーザーファイルをリソースとしてロード
      */
     public Resource loadUserFileAsResource(String fileType, int fileYear, String employeeID, String filename) {
-        // 指定された条件でファイルをデータベースから取得
-        AdjustmentFile file = adjustmentFileMapper.findByEmployeeIDAndYearAndFileName(employeeID, fileYear, filename, fileType);
+        AdjustmentFile file = adjustmentFileMapper
+                .findByEmployeeIDAndYearAndFileName(employeeID, fileYear, filename, fileType);
         if (file == null) {
             throw new RuntimeException("ファイルが見つかりません: " + filename);
         }
-        Path filePath = Paths.get(file.getFilePath()); // ファイルパスを取得
+        Path filePath = Paths.get(file.getFilePath());
         if (!Files.exists(filePath)) {
             throw new RuntimeException("ファイルが見つかりません: " + filename);
         }
         try {
-            return new UrlResource(filePath.toUri()); // リソースとしてロード
+            return new UrlResource(filePath.toUri());
         } catch (Exception e) {
             throw new RuntimeException("ファイルのロードに失敗しました: " + filename, e);
         }
     }
+    
+    /**
+     * ファイルを削除するメソッド
+     */
+    public void deleteFile(String employeeID, int fileYear, String fileName, String fileType) {
+        logger.debug("ファイル削除開始 - employeeID: {}, fileYear: {}, fileName: {}, fileType: {}",
+                     employeeID, fileYear, fileName, fileType);
+        
+        // DBにファイルレコードを検索
+        AdjustmentFile file = adjustmentFileMapper.findByEmployeeIDAndYearAndFileName(employeeID, fileYear, fileName, fileType);
+        if (file == null) {
+            throw new RuntimeException("削除対象のファイルが見つかりません: " + fileName);
+        }
+
+        // 物理ファイルを削除
+        Path filePath = Paths.get(file.getFilePath());
+        try {
+            if (Files.exists(filePath)) {
+                Files.delete(filePath);
+                logger.debug("物理ファイルを削除しました: {}", filePath.toString());
+            } else {
+                logger.warn("物理ファイルが見つかりません: {}", filePath.toString());
+            }
+        } catch (IOException e) {
+            logger.error("ファイルの削除に失敗しました: {}", filePath.toString(), e);
+            throw new RuntimeException("ファイルの削除に失敗しました: " + fileName, e);
+        }
+
+        // DBからレコードを削除
+        int affectedRows = adjustmentFileMapper.deletefile(employeeID, fileYear, fileName, fileType);
+        if (affectedRows == 0) {
+            throw new RuntimeException("DBからファイルレコードを削除できませんでした: " + fileName);
+        }
+        
+        logger.debug("ファイル削除完了: {}", file.getFilePath());
+    }
 
     /**
-     * ファイルのステータスを確定するメソッド
-     * 
-     * 指定された従業員IDと年度に関連するファイルのステータスを確定します。
-     * 
-     * @param employeeID 従業員ID
-     * @param year       確定対象の年度
+     * 調整を確定するメソッド
      */
     public void finalizeAdjustment(String employeeID, int year) {
         try {
             logger.debug("確定処理開始 - 従業員ID: {}, 年: {}", employeeID, year);
-            
-            // 調整詳細情報のアップロードステータスを"1"に更新
+            // adjustmentDetailテーブルのuploadStatusを"1"に更新
             adjustmentDetailMapper.updateUploadStatusByEmployeeIdAndYear(employeeID, String.valueOf(year), "1");
-            logger.debug("adjustmentDetail の uploadStatus を 1 に更新しました。");
-            
+            logger.debug("adjustmentDetailのuploadStatusを1に更新しました。");
             logger.debug("確定処理完了 - 従業員ID: {}, 年: {}", employeeID, year);
         } catch (Exception e) {
-            logger.error("確定処理中にエラー発生: {}", e.getMessage(), e);
-            throw e; // 例外を再スロー
+            logger.error("確定処理中にエラー: {}", e.getMessage(), e);
+            throw e;
         }
     }
-
 }

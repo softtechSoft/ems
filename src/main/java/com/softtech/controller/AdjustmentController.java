@@ -2,6 +2,7 @@ package com.softtech.controller;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,6 +37,9 @@ import com.softtech.service.AdjustmentService;
 
 /**
  * 年末調整コントローラー
+ * 
+ * 年末調整画面の表示、ファイルのアップロード・ダウンロード・削除、
+ * および確定処理などの機能を提供するコントローラークラス。
  */
 @Controller
 public class AdjustmentController {
@@ -73,32 +78,32 @@ public class AdjustmentController {
         boolean isFinalized = false;
         
         if (detail == null) {
+            // 該当年度のdetailが無い場合、新規で作成しINSERT
             detail = new AdjustmentDetail();
             detail.setEmployeeID(employeeID);
             detail.setEmployeeEmail(employeeEmail);
             detail.setYear(String.valueOf(currentYear));
-            detail.setUploadStatus("0"); // 未确认
+            detail.setUploadStatus("0"); // 未確定
             detail.setAdjustmentStatus("0");
             detail.setInsertDate(new Date());
             detail.setUpdateDate(new Date());
             adjustmentDetailMapper.insert(detail);
             logger.debug("新年度の調整詳細を初期化しました - 従業員ID: {}, 年: {}", employeeID, currentYear);
         } else {
-            
+            // 既存detailあり
             isFinalized = "1".equals(detail.getUploadStatus());
         }
 
-        
+        // 画面に確定ステータスを渡す
         model.addAttribute("isFinalized", isFinalized);
         logger.debug("調整が確定されているか: {}", isFinalized);
-        
 
         // 履歴ファイルを年度ごとに取得しモデルに追加
         Map<Integer, List<AdjustmentFile>> historiesByYear = adjustmentService.getResultFilesGroupedByYear(employeeID);
         model.addAttribute("historiesByYear", historiesByYear);
         logger.debug("履歴ファイル取得完了: {}", historiesByYear);
 
-        // 現在の年度の申請書ファイルを取得しモデルに追加
+        // 申請書ファイルを取得しモデルに追加
         List<AdjustmentRequestFiles> requestFiles = adjustmentService.getRequestFilesForYear(currentYear);
         model.addAttribute("requestFiles", requestFiles);
         if (requestFiles != null) {
@@ -107,19 +112,19 @@ public class AdjustmentController {
             }
         }
 
-        // 現在の年度の結果ファイルを取得しモデルに追加
+        // 結果ファイルを取得しモデルに追加
         List<AdjustmentFile> resultFiles = adjustmentService.getFilesByTypeAndEmployee("resultType", employeeID, currentYear);
         model.addAttribute("resultFiles", resultFiles);
         logger.debug("現在年度のresultTypeファイル: {}", resultFiles);
 
-        // 現在の年度の詳細ファイルを取得しモデルに追加
+        // アップ済み詳細ファイルを取得しモデルに追加
         List<AdjustmentFile> detailFiles = adjustmentService.getFilesByTypeAndEmployee("detailType", employeeID, currentYear);
         model.addAttribute("detailFiles", detailFiles);
         logger.debug("現在年度のdetailTypeファイル: {}", detailFiles);
 
         // 現在の年度をモデルに追加
         model.addAttribute("currentYear", currentYear);
-        return "ems/adjustment"; // 調整ページのビュー名を返す
+        return "ems/adjustment"; // adjustment.htmlを返す
     }
 
     /**
@@ -142,7 +147,7 @@ public class AdjustmentController {
         }
 
         try {
-            // ファイルと詳細情報を保存するサービスメソッドを呼び出す
+            // サービスメソッドを呼び出して保存
             adjustmentService.saveFilesAndDetails(files, employeeID, employeeEmail, "detailType");
             return ResponseEntity.ok("{\"message\":\"ファイルのアップロードに成功しました。\"}");
         } catch (IOException e) {
@@ -224,28 +229,69 @@ public class AdjustmentController {
         // セッションから社員IDを取得
         String employeeID = (String) session.getAttribute("userEmoplyeeID");
         if (employeeID == null) {
-            // ログインしていない場合はエラーレスポンスを返す
+            // ログインしていない場合はエラーレスポンス
             return ResponseEntity.badRequest().body("{\"error\":\"ユーザーがログインしていません。\"}");
         }
 
-        // 現在の年度を取得
+        // 現在の年度
         int currentYear = java.time.LocalDate.now().getYear();
         try {
-            // 調整確定処理を実行するサービスメソッドを呼び出す
             adjustmentService.finalizeAdjustment(employeeID, currentYear);
             return ResponseEntity.ok("{\"message\":\"確定処理が完了しました。\"}");
         } catch (Exception e) {
-            // 例外が発生した場合はエラーレスポンスを返す
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("{\"error\":\"確定処理中にエラーが発生しました: " + e.getMessage() + "\"}");
         }
     }
+    
+    /**
+     * アップ済みファイルを削除するメソッド
+     * 
+     * @param payload リクエストボディ（JSON形式）
+     * @param session HTTPセッション
+     * @return 削除結果のレスポンスエンティティ
+     */
+    @PostMapping("/deleteFile")
+    @ResponseBody
+    public ResponseEntity<?> deleteFile(@RequestBody Map<String, Object> payload, HttpSession session) {
+        // JSONからパラメータを取得
+        String fileName   = (String) payload.get("fileName");
+        Object fileYearObj = payload.get("fileYear");
+        Integer fileYear  = null;
+        if (fileYearObj instanceof Number) {
+            fileYear = ((Number) fileYearObj).intValue();
+        } else if (fileYearObj instanceof String) {
+            try {
+                fileYear = Integer.parseInt((String) fileYearObj);
+            } catch (NumberFormatException e) {
+                logger.error("Invalid fileYear format: {}", fileYearObj);
+            }
+        }
+
+        String employeeID = (String) payload.get("employeeID");
+        String fileType   = (String) payload.get("fileType");
+
+        logger.debug("Delete request: fileName={}, fileYear={}, employeeID={}, fileType={}",
+                     fileName, fileYear, employeeID, fileType);
+
+        // fileYearがnullの場合のチェック
+        if (fileYear == null) {
+            return ResponseEntity.badRequest()
+                    .body(Collections.singletonMap("error", "fileYear が無効です。"));
+        }
+
+        try {
+            adjustmentService.deleteFile(employeeID, fileYear, fileName, fileType);
+            return ResponseEntity.ok(Collections.singletonMap("message", "削除が成功しました。"));
+        } catch (Exception e) {
+            logger.error("ファイル削除エラー: {}", e.getMessage(), e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Collections.singletonMap("error", "ファイルの削除中にエラーが発生しました。"));
+        }
+    }
 
     /**
-     * レスポンスメッセージを生成するメソッド
-     *
-     * @param message メッセージ内容
-     * @return メッセージを含むマップ
+     * レスポンスメッセージを生成するユーティリティメソッド
      */
     private Map<String, String> createResponse(String message) {
         Map<String, String> response = new HashMap<>();
