@@ -272,6 +272,16 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	        String joinedDate = employeeEditFormBean.getJoinedDate().replaceAll("-", "");
 	        employeeEditFormBean.setJoinedDate(joinedDate);
 	    }
+
+        if (employeeEditFormBean.getPostCode() != null) {
+            String postCode = employeeEditFormBean.getPostCode().replaceAll("-", ""); // 去掉 -
+            employeeEditFormBean.setPostCode(postCode);
+	    }
+
+        if (employeeEditFormBean.getPhoneNumber() != null) {
+            String phoneNumber = employeeEditFormBean.getPhoneNumber().replaceAll("-", ""); // 去掉 -
+            employeeEditFormBean.setPhoneNumber(phoneNumber);
+        }
 	   employeeMapper.update(employeeEditFormBean);
    }
 

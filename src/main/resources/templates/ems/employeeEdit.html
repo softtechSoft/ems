@@ -87,24 +87,23 @@
 				<tr style="background-color:#dcfeeb">
 					<th>部門</th>
 					<td>
-						<input type="radio" name="department" th:checked="${employeeEditFormBean.department == '1'}" value="1" />
-						1部
-						<input type="radio" name="department" th:checked="${employeeEditFormBean.department == '2'}" value="2" />
-						2部
+						<input type="radio" name="department" th:checked="${employeeEditFormBean.department == '1' or employeeEditFormBean.department == null}" value="1"/>
+						第一開発部
+
 					</td>
 				</tr>
 
 				<tr style="background-color:#dcfeeb">
 					<th>郵便番号</th>
 					<td>
-						例：1234567(-無し、半角7桁数字)
+					例：123-4567(-あり、半角7桁数字)
 					</td>
 				</tr>
 
 				<tr style="background-color:#dcfeeb">
 					<th>        </th>
 					<td>
-						<input id="postCode" class="" name="postCode" type="text" title="" th:value="${employeeEditFormBean.postCode}" />
+						<input id="postCode" class="" name="postCode" type="text" title="" th:value="${#strings.substring(employeeEditFormBean.postCode, 0, 3) + '-' + #strings.substring(employeeEditFormBean.postCode, 3, 7)}" pattern="\d{3}-\d{4}" required/>
 					</td>
 				</tr>
 
@@ -123,23 +122,19 @@
 				<tr style="background-color:#dcfeeb">
 					<th>電話番号</th>
 					<td>
-						例：08012345678(-無し、半角１５桁数字)
+						例：080-1234-5678(-あり、半角１５桁数字)
 					</td>
 				</tr>
 				<tr style="background-color:#dcfeeb">
 					<th>        </th>
 					<td>
-						<input id="phoneNumber" class="" name="phoneNumber" type="text" title="" th:value="${employeeEditFormBean.phoneNumber}" />
+						<input id="phoneNumber" class="" name="phoneNumber" type="text" title=""
+       th:value="${employeeEditFormBean.formattedPhoneNumber}"
+       pattern="\d{2,4}-\d{3,4}-\d{4}" required />
 					</td>
 				</tr>
 
-				<tr style="background-color:#bfe1ff">
-					<th>前回更新日</th>
-					<td>
-						<span class="name" th:text="${employeeEditFormBean.updateDate}"></span>
-					</td>
 
-				  </tr>
 				  <tr style="background-color:#bfe1ff">
 					<th>個人番号</th>
 					<td>
@@ -152,11 +147,21 @@
 						<input type="text" id="personNumber" class="subject" name="personNumber" title="個人番号" th:value="${employeeEditFormBean.personNumber}" />
 					</td>
 				</tr>
+
+				<tr style="background-color:#bfe1ff">
+					<th>前回更新日</th>
+					<td>
+						<span class="name" th:text="${employeeEditFormBean.updateDate}"></span>
+					</td>
+
+				</tr>
+
 				<tr>
 					<th></th>
 					<td><button type="submit" class="text-align:right" >更新</button></td>
 				</tr>
 			</table>
+			<input type="hidden" id="epType" name="epType" value="1">
 		</form>
 	</div>
 
