@@ -67,7 +67,7 @@ public class EmployeeEditController {
 	 */
 
 	@PostMapping("/btn-employeeEdit")
-	 public String update(@Validated @ModelAttribute  EmployeeEditFormBean employeeEditFormBean, BindingResult result, Model model) {
+	 public String update(@Validated @ModelAttribute  EmployeeEditFormBean employeeEditFormBean, BindingResult result, Model model,HttpSession session) {
         if (result.hasErrors()) {
             List<String> errorList = new ArrayList<String>();
             for (ObjectError error : result.getAllErrors()) {
@@ -78,6 +78,9 @@ public class EmployeeEditController {
         }
         // ユーザー情報の更新
         employeeEditService.update(employeeEditFormBean);
+        Employee employee = employeeEditService.queryEmployeeAll((String) session.getAttribute("userEmoplyeeID"));
+        EmployeeEditFormBean refreshedFormBean = employeeEditService.transferDbToUI(employee);
+        model.addAttribute("employeeEditFormBean", refreshedFormBean);
         model.addAttribute("successMessage", "更新完了");
         return "/ems/employeeEdit";
 

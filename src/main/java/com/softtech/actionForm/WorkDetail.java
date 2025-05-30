@@ -1,4 +1,7 @@
 package com.softtech.actionForm;
+
+import java.math.BigDecimal;
+
 /**
  * 概要：勤怠情報クラス
  *
@@ -14,7 +17,7 @@ public class WorkDetail {
 	// 対象年月
 	private String workMonth;
 	// 稼働時間
-	private float workTime;
+	private BigDecimal workTime;
 	//定期券
 	private String transportExpense;
 	//他の交通費(円)
@@ -58,13 +61,13 @@ public class WorkDetail {
 	/**
 	 * @return workTime
 	 */
-	public float getWorkTime() {
+	public BigDecimal getWorkTime() {
 		return workTime;
 	}
 	/**
 	 * @param workTime セットする workTime
 	 */
-	public void setWorkTime(float workTime) {
+	public void setWorkTime(BigDecimal workTime) {
 		this.workTime = workTime;
 	}
 

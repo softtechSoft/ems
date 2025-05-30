@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -124,7 +125,7 @@ public class FileUtil {
             	String employeeID = wl.getEmployeeID();
                 String employeeName = wl.getEmployeeName();
                 String workMonth = wl.getWorkMonth();
-                float workTime = wl.getWorkTime();
+                BigDecimal workTime = wl.getWorkTime();
                 String transportExpense =  wl.getTransportExpense();
                 String transportExpense2 = transportExpense.replace(",", "");
                 String transport = wl.getTransport();

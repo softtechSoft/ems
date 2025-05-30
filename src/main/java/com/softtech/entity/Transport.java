@@ -1,14 +1,17 @@
 package com.softtech.entity;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 /**
  * 概要：交通情報クラス
  *
  * 作成者：馬@ソフトテク
  * 作成日：2021/4/10
  */
-
 public class Transport {
 
-	private String flag ="2";
+	private String flag = "2";
 	private String workMonth = "0";
 	private String startDate = "";
 	private String startStation = "";
@@ -19,22 +22,18 @@ public class Transport {
 	private String midStation2 = "";
 	private String midStation3 = "";
 	private String state = "";
-	private String workStartDay;
-	private String workEndDay;
-	//定期券額（円)
-	private String transportExpense = "0";
-	private String businessTrip = "0";
+	private LocalDate workStartDay;
+	private LocalDate workEndDay;
+	private String transportExpense = "0";  // 画面表示用は文字列のまま
+	private String businessTrip = "0";      // 画面表示用は文字列のまま
 
 	// 社員ID
 	private String employeeID;
-	//社員氏名
+	// 社員氏名
 	private String employeeName;
-	// 交通費
-	private int transport;
-	// 1ヶ月分定期券
-	private float transportExpense1;
-	// 稼働時間
-	private float workTime;
+	private BigDecimal transport;
+	private BigDecimal transportExpense1;
+	private BigDecimal workTime;
 
 	public String getStartStation() {
 		return startStation;
@@ -113,7 +112,11 @@ public class Transport {
 	}
 
 	public void setWorkMonth(String workMonth) {
-		this.workMonth = String.format("%s/%s", workMonth.substring(0, 4), workMonth.substring(4, 6));
+		if (workMonth != null && workMonth.length() >= 6) {
+			this.workMonth = String.format("%s/%s", workMonth.substring(0, 4), workMonth.substring(4, 6));
+		} else {
+			this.workMonth = workMonth;
+		}
 	}
 
 	public String getStartDate() {
@@ -121,79 +124,43 @@ public class Transport {
 	}
 
 	public void setStartDate(String startDate) {
-		if(startDate != null && startDate.length()>4) {
-			this.startDate = String.format("%s/%s/%s", startDate.substring(0, 4), startDate.substring(4, 6),
+		if (startDate != null && startDate.length() >= 8) {
+			this.startDate = String.format("%s/%s/%s", 
+				startDate.substring(0, 4), 
+				startDate.substring(4, 6),
 				startDate.substring(6, 8));
+		} else {
+			this.startDate = startDate;
 		}
 	}
-
-	/**
-	 * @return transport
-	 */
-	public int getTransport() {
+	public BigDecimal getTransport() {
 		return transport;
 	}
-
-	/**
-	 * @param transport セットする transport
-	 */
-	public void setTransport(int transport) {
+	public void setTransport(BigDecimal transport) {
 		this.transport = transport;
 	}
-
-	/**
-	 * @return employeeID
-	 */
 	public String getEmployeeID() {
 		return employeeID;
 	}
-
-	/**
-	 * @param employeeID セットする employeeID
-	 */
 	public void setEmployeeID(String employeeID) {
 		this.employeeID = employeeID;
 	}
-
-	/**
-	 * @return employeeName
-	 */
 	public String getEmployeeName() {
 		return employeeName;
 	}
-
-	/**
-	 * @param employeeName セットする employeeName
-	 */
 	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
 	}
-
-	/**
-	 * @return transportExpense1
-	 */
-	public float getTransportExpense1() {
+	public BigDecimal getTransportExpense1() {
 		return transportExpense1;
 	}
-
-	/**
-	 * @param transportExpense1 セットする transportExpense1
-	 */
-	public void setTransportExpense1(float transportExpense1) {
+	public void setTransportExpense1(BigDecimal transportExpense1) {
 		this.transportExpense1 = transportExpense1;
 	}
-
-	/**
-	 * @return workTime
-	 */
-	public float getWorkTime() {
+	public BigDecimal getWorkTime() {
 		return workTime;
 	}
-
-	/**
-	 * @param workTime セットする workTime
-	 */
-	public void setWorkTime(float workTime) {
+	public void setWorkTime(BigDecimal workTime) {
 		this.workTime = workTime;
 	}
 
@@ -212,21 +179,28 @@ public class Transport {
 	public void setState(String state) {
 		this.state = state;
 	}
-
-	public String getWorkStartDay() {
+	public LocalDate getWorkStartDay() {
 		return workStartDay;
 	}
-
-	public void setWorkStartDay(String workStartDay) {
+	public void setWorkStartDay(LocalDate workStartDay) {
 		this.workStartDay = workStartDay;
 	}
-
-	public String getWorkEndDay() {
+	public LocalDate getWorkEndDay() {
 		return workEndDay;
 	}
-
-	public void setWorkEndDay(String workEndDay) {
+	public void setWorkEndDay(LocalDate workEndDay) {
 		this.workEndDay = workEndDay;
 	}
-
+	public String getFormattedWorkStartDay() {
+	    if (workStartDay != null) {
+	        return workStartDay.toString();
+	    }
+	    return "";
+	}
+	public String getFormattedWorkEndDay() {
+	    if (workEndDay != null) {
+	        return workEndDay.toString(); 
+	    }
+	    return "";
+	}
 }

@@ -4,11 +4,13 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.softtech.entity.WorkInfo;
+
 @Mapper
 public interface WorkInfoMapper {
 	int insertWorkInfo(Map<String, String> map);
 
-	String queryWorkinfo(String employeeID);
+	WorkInfo queryWorkInfo(Map<String, String> map);
 
-	int updateWorkInfo(Map<String,String> map);
+	int updateWorkInfo(Map<String, String> map);
 }

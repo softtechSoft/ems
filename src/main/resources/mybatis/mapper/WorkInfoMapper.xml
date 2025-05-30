@@ -4,58 +4,55 @@
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.softtech.mapper.WorkInfoMapper">
+
 	<insert id="insertWorkInfo" parameterType="map">
-	insert
-	into
-		workInfo
-	SELECT
-		contractID,
-		#{workMonth}as workMonth,
-    	#{workStartDay}as workStartDay ,
-   	 	#{workEndDay}as workEndDay,
-    	#{workTime}as workTime,
-   		null,
-    	date_format(now(),'%Y%m%d'),
-    	null
-    FROM
-    	contract
-    WHERE
-    	employeeID=#{employeeID}
- 	AND
- 		status = '1'
-	</insert>
+        INSERT INTO ems.workinfo
+          (contractID, workMonth, workStartDay, workEndDay, workTime,
+           workInfoFile, insertDate, updateDate)
+        SELECT
+          contractID,
+          #{workMonth},
+          #{workStartDay},
+          #{workEndDay},
+          #{workTime},
+          #{workInfoFile},
+          CURDATE(),
+          NULL
+        FROM ems.contract
+        WHERE employeeID = #{employeeID}
+          AND status = '1'
+    </insert>
 
-	<select id="queryWorkInfo" parameterType="map" resultType="WorkInfo">
-		select
-			w.workMonth as workMonth,
-			w.workInfoID as employeeID,
-			e.employeeName as employeeName,
-			w.workTime as workTime,
-			s.transportExpense as transportExpense,
-			t.transport as transport
+	<select id="queryWorkInfo" parameterType="map" resultType="com.softtech.entity.WorkInfo">
+        SELECT
+            c.contractID as contractID,
+            e.employeeID as employeeID,
+            e.employeeName as employeeName,
+            w.workMonth as workMonth,
+            w.workStartDay as workStartDay,
+            w.workEndDay as workEndDay,
+            w.workTime as workTime
+        FROM
+            ems.workinfo w
+            INNER JOIN ems.contract c ON w.contractID = c.contractID
+            INNER JOIN ems.employee e ON c.employeeID = e.employeeID
+        WHERE
+            e.employeeID = #{employeeID}
+            AND w.workMonth = #{workMonth}
+    </select>
 
-		from
-			ems.workinfo w
-            left join ems.employee e on w.workInfoID = e.employeeID
-            left join ems.salaryinfo s on w.workInfoID = s.employeeID
-            left join ems.transport t on w.workInfoID = t.employeeID
-		where
-			employeeID=#{employeeID}
-
-
-	</select>
-
-		<update id="updateWorkInfo" parameterType="map">
-			update
-				workInfo
-			set
-    			workStartDay=#{workStartDay},
-   	 			workEndDay=#{workEndDay},
-    			workTime=#{workTime},
-    			updateDate=date_format(now(),'%Y%m%d')
-			where
- 				workMonth=#{workMonth}
- 			  and contractID = (select contractID from contract where employeeID = #{employeeID} )
-	</update>
+	<update id="updateWorkInfo" parameterType="map">
+        UPDATE ems.workinfo
+        SET
+          workStartDay = #{workStartDay},
+          workEndDay   = #{workEndDay},
+          workTime     = #{workTime},
+          workInfoFile = #{workInfoFile},
+          updateDate   = CURDATE()
+        WHERE workMonth = #{workMonth}
+          AND contractID IN (
+                SELECT contractID FROM ems.contract WHERE employeeID = #{employeeID}
+          )
+    </update>
 
 </mapper>

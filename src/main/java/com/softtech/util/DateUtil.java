@@ -1,6 +1,7 @@
 
 package com.softtech.util;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -195,7 +196,7 @@ public class DateUtil {
 	 * @exception なし
 	 * @author 馬@ソフトテク
 	 */
-	public static String formatTosepara(float getTransportExpense1) {
+	public static String formatTosepara(BigDecimal getTransportExpense1) {
 		DecimalFormat df = new DecimalFormat("#,###.00");
 		return df.format(getTransportExpense1);
 	}
