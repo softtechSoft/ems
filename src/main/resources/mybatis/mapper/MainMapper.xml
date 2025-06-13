@@ -7,15 +7,12 @@
 <mapper namespace="com.softtech.mapper.MainMapper">
 	<select id="queryOfcfunction" parameterType="string" resultType="Ofcfunction">
 		select *
-		from
-			ems.ofcfunction
-		where deleteFlg='0'
-		<if test = "authority != 1">
-			and authority=#{authority}
-		</if>
-		<if test = "authority == 1">
-			and sysType = '1'
-		</if>
-		 order by displayNo
+        from ems.ofcfunction
+        where deleteFlg='0'
+        and sysType = '1'
+        <if test="authority != 1">
+            and authority = #{authority}
+        </if>
+        order by displayNo
 	</select>
 </mapper>
