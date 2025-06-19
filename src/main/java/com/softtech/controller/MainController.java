@@ -39,6 +39,12 @@ public class MainController {
 	public String emsMain(Model model, HttpSession session) throws JsonProcessingException {
 		if (session.getAttribute("userMailAdress") != null) {
 			List<Ofcfunction> list = mainService.queryOfcfunction((String) session.getAttribute("userAuthority"));
+			
+			String userAuthority = (String) session.getAttribute("userAuthority");
+			if (userAuthority == null || userAuthority.isEmpty() || list == null || list.isEmpty()) {
+	            list = mainService.queryOfcfunction("0");
+	        }
+			
 			model.addAttribute("list", list);
 			model.addAttribute("manager", (String) session.getAttribute("userAuthority"));
 			return "/main/main";
