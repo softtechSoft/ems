@@ -58,13 +58,13 @@ public class EmployeeEditFormBean {
 	//郵便番号
 	@NotEmpty(message = "郵便番号を入力してください。")
 	// @Size (min=7 , max=7, message = "郵便番号は　半角７桁数字で入力して下さい。")
-	@Pattern(regexp = "^[0-9]{3}-[0-9]{4}$", message = "郵便番号「xxx-xxxx」の形式で入力してください。")
+//	@Pattern(regexp = "^[0-9]{3}-[0-9]{4}$", message = "郵便番号「xxx-xxxx」の形式で入力してください。")
 	public String postCode;
 
 	//電話番号
 	@NotEmpty (message = "電話番号を入力してください")
 	//@Size (max = 15 , message = "電話番号は　半角１５桁数字以内で入力して下さい。")
-	@Pattern(regexp = "^[0-9]{2,4}-[0-9]{3,4}-[0-9]{4}$", message = "電話番号は「xxx-xxxx-xxxx」の形式で入力してください。")
+//	@Pattern(regexp = "^[0-9]{2,4}-[0-9]{3,4}-[0-9]{4}$", message = "電話番号は「xxx-xxxx-xxxx」の形式で入力してください。")
 	public String phoneNumber;
 
 	//入更新日
@@ -82,7 +82,7 @@ public class EmployeeEditFormBean {
 	}
 	//個人番号
 	@NotEmpty(message = "個人番号を入力してください。")
-	@Size(min = 12 , max = 12, message = "個人番号は半角１２桁数字で入力してください。")
+	@Size(min = 12 , max = 12, message = "個人番号は半角12桁数字で入力してください。")
 	@Pattern(regexp = "^[0-9]*$", message = "個人番号は半角数字で入力してください。")
 	private String personNumber;
 
@@ -202,13 +202,13 @@ public class EmployeeEditFormBean {
 	}
 
 	public String getFormattedPhoneNumber() {
-	    if (phoneNumber != null && phoneNumber.length() >= 10) {
-	        if (phoneNumber.length() == 10) {
-	            return phoneNumber.substring(0, 3) + "-" + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6);
-	        } else if (phoneNumber.length() == 11) {
-	            return phoneNumber.substring(0, 3) + "-" + phoneNumber.substring(3, 7) + "-" + phoneNumber.substring(7);
-	        }
-	    }
+//	    if (phoneNumber != null && phoneNumber.length() >= 10) {
+//	        if (phoneNumber.length() == 10) {
+//	            return phoneNumber.substring(0, 3) + "-" + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6);
+//	        } else if (phoneNumber.length() == 11) {
+//	            return phoneNumber.substring(0, 3) + "-" + phoneNumber.substring(3, 7) + "-" + phoneNumber.substring(7);
+//	        }
+//	    }
 	    return phoneNumber; // 防止空值报错
 	}
 

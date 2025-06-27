@@ -95,15 +95,23 @@
 
 				<tr style="background-color:#dcfeeb">
 					<th>郵便番号</th>
+					<!--
 					<td>
-					例：123-4567(-あり、半角7桁数字)
-					</td>
+				    例：123-4567(-あり、半角7桁数字)
+				    </td>
+				    -->
+					<td>
+				    例：1234567(半角7桁数字)
+				    </td>
 				</tr>
 
 				<tr style="background-color:#dcfeeb">
 					<th>        </th>
 					<td>
-						<input id="postCode" class="" name="postCode" type="text" title="" th:value="${#strings.substring(employeeEditFormBean.postCode, 0, 3) + '-' + #strings.substring(employeeEditFormBean.postCode, 3, 7)}" pattern="\d{3}-\d{4}" required/>
+						<!--<input id="postCode" class="" name="postCode" type="text" title="" th:value="${#strings.substring(employeeEditFormBean.postCode, 0, 3) + '-' + #strings.substring(employeeEditFormBean.postCode, 3, 7)}" pattern="\d{3}-\d{4}" required/>-->
+						<input id="postCode" class="" name="postCode" type="text" title="" 
+				               th:value="${employeeEditFormBean.postCode}" 
+				               pattern="\d{7}" maxlength="7" required/>
 					</td>
 				</tr>
 
@@ -121,25 +129,37 @@
 				</tr>
 				<tr style="background-color:#dcfeeb">
 					<th>電話番号</th>
+					<!--
 					<td>
 						例：080-1234-5678(-あり、半角１５桁数字)
 					</td>
+					-->
+					<td>
+				    例：08012345678(半角11桁数字)
+				    </td>
 				</tr>
 				<tr style="background-color:#dcfeeb">
 					<th>        </th>
 					<td>
-						<input id="phoneNumber" class="" name="phoneNumber" type="text" title=""
+						<!--<input id="phoneNumber" class="" name="phoneNumber" type="text" title=""
        th:value="${employeeEditFormBean.formattedPhoneNumber}"
-       pattern="\d{2,4}-\d{3,4}-\d{4}" required />
+       pattern="\d{2,4}-\d{3,4}-\d{4}" required />-->
+       				<input id="phoneNumber" class="" name="phoneNumber" type="text" title=""
+			               th:value="${employeeEditFormBean.phoneNumber}"
+			               pattern="\d{10,11}" maxlength="11" required />
 					</td>
 				</tr>
 
 
 				  <tr style="background-color:#bfe1ff">
 					<th>個人番号</th>
-					<td>
+					<!--<td>
 						例：1234567(-無し、半角12桁数字)
+					</td>-->
+					<td>
+						例：1234567(半角12桁数字)
 					</td>
+					
 				</tr>
 				<tr style="background-color:#bfe1ff">
 					<th>        </th>

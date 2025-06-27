@@ -96,10 +96,11 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 
 		employeeEditFormBean.setPostCode(employee.getPostCode());
 		employeeEditFormBean.setAddress(employee.getAddress());
+//		employeeEditFormBean.setPhoneNumber(employee.getPhoneNumber());
+//		if (employee.getUpdateDate()!=null && !"".equals(employee.getUpdateDate()) ){
+//			employeeEditFormBean.setUpdateDate(DateUtil.chgYMDToDate(employee.getUpdateDate()));
+//		}
 		employeeEditFormBean.setPhoneNumber(employee.getPhoneNumber());
-		if (employee.getUpdateDate()!=null && !"".equals(employee.getUpdateDate()) ){
-			employeeEditFormBean.setUpdateDate(DateUtil.chgYMDToDate(employee.getUpdateDate()));
-		}
 
 		// 社員タイプ
 		ArrayList<EptypeInfo> ep = mkEmployeeType();
@@ -273,15 +274,15 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 	        employeeEditFormBean.setJoinedDate(joinedDate);
 	    }
 
-        if (employeeEditFormBean.getPostCode() != null) {
-            String postCode = employeeEditFormBean.getPostCode().replaceAll("-", ""); // 去掉 -
-            employeeEditFormBean.setPostCode(postCode);
-	    }
-
-        if (employeeEditFormBean.getPhoneNumber() != null) {
-            String phoneNumber = employeeEditFormBean.getPhoneNumber().replaceAll("-", ""); // 去掉 -
-            employeeEditFormBean.setPhoneNumber(phoneNumber);
-        }
+//        if (employeeEditFormBean.getPostCode() != null) {
+//            String postCode = employeeEditFormBean.getPostCode().replaceAll("-", ""); // 去掉 -
+//            employeeEditFormBean.setPostCode(postCode);
+//	    }
+//
+//        if (employeeEditFormBean.getPhoneNumber() != null) {
+//            String phoneNumber = employeeEditFormBean.getPhoneNumber().replaceAll("-", ""); // 去掉 -
+//            employeeEditFormBean.setPhoneNumber(phoneNumber);
+//        }
 	   employeeMapper.update(employeeEditFormBean);
    }
 
