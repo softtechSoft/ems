@@ -16,7 +16,7 @@
           #{workEndDay},
           #{workTime},
           #{workInfoFile},
-          CURDATE(),
+          DATE_FORMAT(CURDATE(), '%Y%m%d'),
           NULL
         FROM ems.contract
         WHERE employeeID = #{employeeID}
@@ -48,7 +48,7 @@
           workEndDay   = #{workEndDay},
           workTime     = #{workTime},
           workInfoFile = #{workInfoFile},
-          updateDate   = CURDATE()
+          updateDate   = DATE_FORMAT(CURDATE(), '%Y%m%d')
         WHERE workMonth = #{workMonth}
           AND contractID IN (
                 SELECT contractID FROM ems.contract WHERE employeeID = #{employeeID}

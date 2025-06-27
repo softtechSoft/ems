@@ -127,6 +127,10 @@ public class TransportAllService {
 		} catch (Exception e) {
 			//追加失敗の場合、画面に下記メッセージを表示する。
 			//対象稼働月は既に入力です。
+			
+			e.printStackTrace();
+		    System.out.println("Transport insert error: " + e.getMessage());
+		    
 			model.addAttribute("upTransportInfo", "001");
 		}
 

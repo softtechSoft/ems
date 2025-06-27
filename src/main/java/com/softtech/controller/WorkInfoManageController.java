@@ -3,6 +3,7 @@ package com.softtech.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,10 +68,10 @@ public class WorkInfoManageController<WorkInfoComment> {
 	    transport.setState("0");
 
 	    LocalDate firstDayOfMonth = LocalDate.now().withDayOfMonth(1);
-	    transport.setWorkStartDay(firstDayOfMonth);
+	    transport.setWorkStartDay(firstDayOfMonth.format(DateTimeFormatter.BASIC_ISO_DATE));
 
 	    LocalDate lastDayOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
-	    transport.setWorkEndDay(lastDayOfMonth);
+	    transport.setWorkEndDay(lastDayOfMonth.format(DateTimeFormatter.BASIC_ISO_DATE));
 	  }else {
 	    transport.setState("1");
 
@@ -138,8 +139,8 @@ public class WorkInfoManageController<WorkInfoComment> {
 	    LocalDate firstDayOfMonth = LocalDate.of(year, monthValue, 1);
 	    LocalDate lastDayOfMonth = firstDayOfMonth.withDayOfMonth(firstDayOfMonth.lengthOfMonth());
 	    
-	    transport.setWorkStartDay(firstDayOfMonth);
-	    transport.setWorkEndDay(lastDayOfMonth);
+	    transport.setWorkStartDay(firstDayOfMonth.format(DateTimeFormatter.BASIC_ISO_DATE));
+	    transport.setWorkEndDay(lastDayOfMonth.format(DateTimeFormatter.BASIC_ISO_DATE));
 	  }else {
 	    transport.setState("1");
 	  }

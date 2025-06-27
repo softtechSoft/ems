@@ -1,7 +1,6 @@
 package com.softtech.entity;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 /**
  * 概要：交通情報クラス
@@ -22,8 +21,8 @@ public class Transport {
 	private String midStation2 = "";
 	private String midStation3 = "";
 	private String state = "";
-	private LocalDate workStartDay;
-	private LocalDate workEndDay;
+	private String workStartDay;
+	private String workEndDay;
 	private String transportExpense = "0";  // 画面表示用は文字列のまま
 	private String businessTrip = "0";      // 画面表示用は文字列のまま
 
@@ -179,16 +178,16 @@ public class Transport {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public LocalDate getWorkStartDay() {
+	public String getWorkStartDay() {
 		return workStartDay;
 	}
-	public void setWorkStartDay(LocalDate workStartDay) {
+	public void setWorkStartDay(String workStartDay) {
 		this.workStartDay = workStartDay;
 	}
-	public LocalDate getWorkEndDay() {
+	public String getWorkEndDay() {
 		return workEndDay;
 	}
-	public void setWorkEndDay(LocalDate workEndDay) {
+	public void setWorkEndDay(String workEndDay) {
 		this.workEndDay = workEndDay;
 	}
 	public String getFormattedWorkStartDay() {
