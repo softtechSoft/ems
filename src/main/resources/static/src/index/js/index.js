@@ -53,14 +53,29 @@ function()
 },false);
 function regularVerify(actor)
 {
-    var userName={id:"userMessage",pattern:/[A-Za-z0-9_]{1,15}@it-softtech.com/,message:"半角の社用メールアドレスの入力です"};
-    var password={id:"passwordMessage",pattern:/^[^ ]+$/,message:"パスワードを入力ください"};
+    // 修改邮箱验证规则，支持纯用户名或完整邮箱
+    var userName = {
+        id: "userMessage",
+        pattern: /^[A-Za-z0-9_]{1,15}(@it-softtech\.com)?$/,
+        message: "半角の社用メールアドレスまたはユーザー名を入力してください"
+    };
+    
+    var password = {
+        id: "passwordMessage",
+        pattern: /^[^ ]+$/,
+        message: "パスワードを入力ください"
+    };
+    
     var userStatus = true;
-    actor.style.borderColor='#0aada8';
-    switch(actor.id)
-    {
-        case "user": userStatus=verify(userName);break;
-        case "password":if(userStatus)verify(password);break;
+    actor.style.borderColor = '#0aada8';
+    
+    switch(actor.id) {
+        case "user": 
+            userStatus = verify(userName); 
+            break;
+        case "password": 
+            if(userStatus) verify(password);
+            break;
     }
     function verify(obj)
     {

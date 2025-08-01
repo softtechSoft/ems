@@ -61,12 +61,18 @@ public class LoginController {
 
 		// ログインSQLのパラメータ作成
 		Employee employeep = new Employee();
+		
+		// ユーザー入力値を取得
+	    String userInput = map.get("user");
+	    
+	    // メールアドレス形式チェックと補完
+	    String userMail = userInput.contains("@") ? userInput : userInput + "@it-softtech.com"; 
 		// 画面IDを設定する。
-		employeep.setMailAdress(map.get("user"));
+		employeep.setMailAdress(userMail);
 		// 画面パスワードを設定する
 		employeep.setPassword(map.get("password"));
 
-		String userMail = map.get("user");
+		//String userMail = map.get("user");
 
 		//ユーザ登録チェック
 		Employee employeeUser = employeeService.queryEmployee(userMail);

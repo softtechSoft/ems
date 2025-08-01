@@ -57,7 +57,16 @@
 				<tr style="background-color:#dcfeeb">
 					<th>生年月日</th>
 					<td>
-						<input id="birthday" class="form-control-lg" name="birthday" type="date" th:value="${employeeEditFormBean.birthday}" />
+				    例：1234-12-12(-あり、半角8桁数字)
+				    </td>
+					
+				</tr>
+				
+				<tr style="background-color:#dcfeeb">
+					<th> </th>
+					
+					<td>
+						<input id="birthday" class="form-control-lg" name="birthday" type="text" th:value="${employeeEditFormBean.birthday}" />
 					</td>
 				</tr>
 

@@ -97,9 +97,9 @@ public class EmployeeEditServicelmpl implements EmployeeEditService {
 		employeeEditFormBean.setPostCode(employee.getPostCode());
 		employeeEditFormBean.setAddress(employee.getAddress());
 //		employeeEditFormBean.setPhoneNumber(employee.getPhoneNumber());
-//		if (employee.getUpdateDate()!=null && !"".equals(employee.getUpdateDate()) ){
-//			employeeEditFormBean.setUpdateDate(DateUtil.chgYMDToDate(employee.getUpdateDate()));
-//		}
+		if (employee.getUpdateDate()!=null && !"".equals(employee.getUpdateDate()) ){
+			employeeEditFormBean.setUpdateDate(DateUtil.chgYMDToDate(employee.getUpdateDate()));
+		}
 		employeeEditFormBean.setPhoneNumber(employee.getPhoneNumber());
 
 		// 社員タイプ

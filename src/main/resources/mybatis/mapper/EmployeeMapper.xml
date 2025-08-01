@@ -50,7 +50,7 @@
     <update id="update" parameterType="map">
         update ems.employee set employeeName = #{employeeName},
         sex = #{sex}, birthday = #{birthday}, age = #{age}, joinedDate = #{joinedDate}, epType=#{epType}, department=#{department},
-        joinedTime = #{joinedTime}, postCode = #{postCode}, address = #{address}, phoneNumber = #{phoneNumber},personNumber = #{personNumber}
+        joinedTime = #{joinedTime}, postCode = #{postCode}, address = #{address}, phoneNumber = #{phoneNumber},personNumber = #{personNumber},updateDate = DATE_FORMAT(CURRENT_DATE, '%Y%m%d')
         where employeeID =#{employeeID}
     </update>
 

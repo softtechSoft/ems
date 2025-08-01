@@ -250,3 +250,8 @@ h3
 {
 	background-color: #484949;
 }
+/* 必须字段标识 */
+.required {
+    color: #dc3545;
+    font-weight: bold;
+}
