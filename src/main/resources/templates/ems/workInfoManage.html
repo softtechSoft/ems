@@ -40,7 +40,7 @@
 		<form th:object="${transport}" th:action="@{/transport-workinfo}" id='transpirt' name="transpirt"  class="wapper" method="POST" enctype="multipart/form-data">
 				<label>社員名</label><span class="name" th:text="${session.userEmployeeName}">USER</span>
 			<div>
-				<label>稼働月<span class="required">*</span></label><input class="workinfo-month" th:field="*{workMonth}" type="text" maxlength="7" title="稼働月" required onchange="changeMonth();"/>
+				<label>稼働月<span class="required">(*必須)</span></label><input class="workinfo-month" th:field="*{workMonth}" type="text" maxlength="7" title="稼働月" required onchange="changeMonth();"/>
 			</div>
 			<div class="workinfo">
 				<label>稼働開始日<span class="required">*</span></label><input class="workinfo-startDate"type="date" name="workStartDay" th:value="${transport.formattedWorkStartDay}"  required />
@@ -71,10 +71,10 @@
 			</div>
 				<label>中間駅3</label><input id="midStation3" class="station-a" name="midStation3" type="text" th:value="${transport.midStation3}" title="stationinfo"  >
 			<div>
-				<label>定期券金額(1ヶ月)(円)</label><input id="transportExpense1" class="amount" name="transportExpense1" type="text" pattern="[0-9]{0,7}" th:value="${transport.transportExpense1}" placeholder="例:5000" title="stationinfo"  required/>
+				<label>通勤(定期券1ヶ月)(円)<span class="required">*</span></label><input id="transportExpense1" class="amount" name="transportExpense1" type="text" pattern="[0-9]{0,7}" th:value="${transport.transportExpense1}" placeholder="例:5000" title="stationinfo"  required/>
 			</div>
 			<div>
-				<label>定期券以外交通費(円)<span class="required">*</span></label><input id="businessTrip" class="transportation" name="businessTrip" type="text" pattern="[0-9]{0,7}" th:value="${transport.businessTrip}" placeholder="例:500" autocomplete="off" title="stationinfo"  >
+				<label>定期券以外交通費(円)</label><input id="businessTrip" class="transportation" name="businessTrip" type="text" pattern="[0-9]{0,7}" th:value="${transport.businessTrip}" placeholder="例:500" autocomplete="off" title="stationinfo"  >
 			</div>
 
 			<table>

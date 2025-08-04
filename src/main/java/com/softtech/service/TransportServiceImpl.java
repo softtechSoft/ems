@@ -44,4 +44,10 @@ public  class TransportServiceImpl implements TransportService {
 	    return transportMapper.updateTransport(Map);
 	}
 
+	@Override
+	public String queryMaxWorkMonthTransport(String employeeID) {
+		
+		return transportMapper.queryMaxWorkMonthTransport(employeeID);
+	}
+
 }

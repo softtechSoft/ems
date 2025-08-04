@@ -14,4 +14,7 @@ public interface TransportService {
 
 	//更新と修正
 	int updateTransport(Map<String,String> Map);
+	
+	//最大月
+	String queryMaxWorkMonthTransport(String employeeID);
 }

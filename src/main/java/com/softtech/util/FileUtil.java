@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.util.StringUtils;
 
 import com.softtech.actionForm.WorkDetail;
 import com.softtech.entity.SalaryInfo;
@@ -38,7 +39,7 @@ public class FileUtil {
 	 */
 	public boolean uploadFile(MultipartFile file,String targetPath) {
 
-		if(targetPath == null) {
+		if(StringUtils.isEmpty(targetPath)) {
 			return true;
 		}
 

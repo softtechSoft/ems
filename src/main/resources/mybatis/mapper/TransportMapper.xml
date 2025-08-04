@@ -107,5 +107,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             employeeID = #{employeeID}
             AND workMonth = #{workMonth}
     </update>
+    
+    <select id="queryMaxWorkMonthTransport" resultType="string">
+    	select max(workMonth) 
+    	from ems.transport 
+    	where employeeID = #{employeeID}
+    </select>
 
 </mapper>

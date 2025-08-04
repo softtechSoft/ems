@@ -17,6 +17,8 @@ public interface TransportMapper {
 	Transport queryTransport(Map<String, String> map);
 	//更新
 	int updateTransport(Map<String,String> Map);
+	//最大月
+	String queryMaxWorkMonthTransport(String employeeID);
 
 
 }

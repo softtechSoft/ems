@@ -55,11 +55,16 @@ public class WorkInfoManageController<WorkInfoComment> {
 	  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 
 	  String month = sdf.format(cal.getTime());
+	  
 
 	  Map<String, String> sportMapper = new HashMap<String, String>();
+	  String employeeID = (String) session.getAttribute("userEmoplyeeID");
+	  String maxMonth =transportService.queryMaxWorkMonthTransport(employeeID);
+	  
 	  //　交通情報取得
 	  sportMapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
-	  sportMapper.put("workMonth", month);
+	  sportMapper.put("workMonth", maxMonth);
+	  
 	  Transport transport = transportService.queryTransport(sportMapper);
 	  if (transport == null) {
 	    transport = new Transport();
@@ -73,7 +78,12 @@ public class WorkInfoManageController<WorkInfoComment> {
 	    LocalDate lastDayOfMonth = LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth());
 	    transport.setWorkEndDay(lastDayOfMonth.format(DateTimeFormatter.BASIC_ISO_DATE));
 	  }else {
-	    transport.setState("1");
+		  if(month != maxMonth) {
+			  	transport.setState("0");	
+			}else {
+				transport.setState("1");
+			}  
+		  //transport.setState("1");
 
 	  }
 	  // 稼働月設定。
@@ -81,6 +91,7 @@ public class WorkInfoManageController<WorkInfoComment> {
 
 	  // 交通費を０に設定。
 	  transport.setBusinessTrip("0");
+	  
 
 	  //　画面へ戻す
 	  model.addAttribute("transport", transport);
@@ -95,7 +106,7 @@ public class WorkInfoManageController<WorkInfoComment> {
 	 *@param request　リクエスト
 	 * @param model　画面モデル
 	 * @return
-	 * @exception なし
+	 * @exception
 	 * @author 孫@ソフトテク
 	 */
 	@RequestMapping("/changeMonth")
@@ -230,67 +241,34 @@ public class WorkInfoManageController<WorkInfoComment> {
 	    }
 	  } // for
 
-	  // 定期券チェックボックスがチェックされない場合、テーブルから交通費を取得
-	  if(!flg) {
-	    Map<String, String> sportMapper = new HashMap<String, String>();
-	    //　交通情報取得
-	    sportMapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
-	    Transport transport = transportService.queryTransport(sportMapper);
-	    // 定期券開始日
-	    mapper.put("startDate", workStartDay);
-	    if(transport != null ) {
-	      //起点駅
-	      mapper.put("startStation", transport.getStartStation());
-	      //終点駅
-	      mapper.put("endStation", transport.getEndStation());
-	      //交通機関
-	      mapper.put("transportFacility", transport.getTransportFacility());
-	      //中間駅1
-	      mapper.put("midStation1", transport.getMidStation1());
-	      //交通機関1
-	      mapper.put("transportFacility1", transport.getTransportFacility1());
-	      //中間駅2
-	      mapper.put("midStation2", transport.getMidStation2());
-	      //中間駅3
-	      mapper.put("midStation3", transport.getMidStation3());
-	      //定期券金額(1ヶ月)
-	      mapper.put("transportExpense1", transport.getTransportExpense());
-	    } else {
-	      //起点駅
-	      mapper.put("startStation", "無し");
-	      //終点駅
-	      mapper.put("endStation", "無し");
-	      //交通機関
-	      mapper.put("transportFacility", "無し");
-	      //中間駅1
-	      mapper.put("midStation1", "無し");
-	      //交通機関1
-	      mapper.put("transportFacility1", "無し");
-	      //中間駅2
-	      mapper.put("midStation2", "無し");
-	      //中間駅3
-	      mapper.put("midStation3", "無し");
-	      //定期券金額(1ヶ月)
-	      mapper.put("transportExpense1", "0");
-	    }
-	    //出張交通費
-	    mapper.put("businessTrip", "0");
-	  }
+
 
 	  //勤怠追加処理
 	  Transport transport = new Transport();
+	
 
-	  transport = transportAllService.doTransport(file, mapper, model);
+	  try{
+		  transport = transportAllService.doTransport(file, mapper, model);
+	  }catch(Exception e) {
+		  
+	  } finally {
+		
+		  if (transport == null) {
+		    transport = new Transport();
+	
+		    transport.setState("0");
+		  }else {
+		    transport.setState("1");
+		  }
+	
+		  model.addAttribute("transport", transport);
+		//現在日付
+		  Calendar cal = Calendar.getInstance();
+		  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 
-	  if (transport == null) {
-	    transport = new Transport();
-
-	    transport.setState("0");
-	  }else {
-	    transport.setState("1");
+		  String month = sdf.format(cal.getTime());
 	  }
-
-	  model.addAttribute("transport", transport);
+	  
 	  return "/ems/workInfoManage";
 	}
 
@@ -364,17 +342,20 @@ public class WorkInfoManageController<WorkInfoComment> {
 	    } // forのEND
 
 	    //勤怠修正処理
+	    
 	    Transport transport = new Transport();
-
-	    transport = transportAllService.updateTransport(file, mapper, model);
-
-	    if (transport == null) {
-	        transport = new Transport();
-	        transport.setState("0");
-	    }else {
-	        transport.setState("1");
+		try {
+			transport = transportAllService.updateTransport(file, mapper, model);
+		}catch(Exception e) {
+			  
+	    } finally {
+		    if (transport == null) {
+		        transport = new Transport();
+		        transport.setState("0");
+		    }else {
+		        transport.setState("1");
+		    }
 	    }
-
 	    model.addAttribute("transport", transport);
 	    return "/ems/workInfoManage";
 	}

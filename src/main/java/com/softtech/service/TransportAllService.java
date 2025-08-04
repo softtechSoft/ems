@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,6 +13,8 @@ import com.softtech.com.SelectJyokenCommon;
 import com.softtech.entity.Contract;
 import com.softtech.entity.Transport;
 import com.softtech.entity.WorkInfo;
+import com.softtech.mapper.TransportMapper;
+import com.softtech.mapper.WorkInfoMapper;
 import com.softtech.util.FileUtil;
 
 /**
@@ -29,6 +32,10 @@ public class TransportAllService {
 	private WorkInfoService workinfoService;
 	@Autowired
 	private ContractService contractService;
+	@Autowired
+	private WorkInfoMapper workInfoMapper;
+	@Autowired
+	private TransportMapper transportMapper;
 
 	//画面に入力したデータ
 	Map<String, String> gamenParam = new HashMap<String, String>();
@@ -77,6 +84,7 @@ public class TransportAllService {
 	 *
 	 * @author 楊@ソフトテク
 	 */
+	@Transactional
 	public Transport doTransport(MultipartFile file,Map<String, String> mapper, Model model) throws Exception {
 
 		//画面に入力したデータ
@@ -93,54 +101,70 @@ public class TransportAllService {
 			//アップロードは失敗しました
 			model.addAttribute("uploadInfo", "001");
 		}
+		
+		  String employeeID = mapper.get("employeeID");
+		  String month = mapper.get("workMonth");
+		  Map<String, String> sportMap = new HashMap<String, String>();
+		//　交通情報取得
+		  sportMap.put("employeeID", employeeID);
+		  sportMap.put("workMonth", month);
+		  
+		  Transport trsp = transportService.queryTransport(sportMap);
+//		  String employeeID = (String) session.getAttribute("userEmoplyeeID");
+//		  Map<String, String> map = new HashMap<String, String>();
+//			Transport transport = transportService.queryTransport(sportMapper);
 
 		// 勤怠テーブルに新規追加
 		try {
-			int upWork = workinfoService.insertWorkInfo(mapper);
-			if (upWork == 1) {
-				//追加成功の場合、画面に下記メッセージを表示する。
-				//登録が成功しました
-				model.addAttribute("uploadInfo", "111");
-			}else {
-				//登録は失敗の場合、画面に下記メッセージを表示する。
-				//登録は失敗しました
-				model.addAttribute("uploadInfo", "002");
-			}
-		} catch (Exception e) {
-			//追加失敗の場合、画面に下記メッセージを表示する。
-			//対象稼働月は既に入力です
-			model.addAttribute("uploadInfo", "001");
-		}
-
-		// 交通費テーブル登録
-		try {
-			int uptransport = transportService.insertTransport(mapper);
-			if(uptransport == 1 ) {
-				//追加成功の場合、画面に下記メッセージを表示する。
-				//登録が成功しました
-				model.addAttribute("upTransportInfo", "111");
-			}else {
-				//登録は失敗の場合、画面に下記メッセージを表示する。
-				//登録は失敗しました
-				model.addAttribute("uploadInfo", "002");
-			}
-		} catch (Exception e) {
-			//追加失敗の場合、画面に下記メッセージを表示する。
-			//対象稼働月は既に入力です。
-			
-			e.printStackTrace();
-		    System.out.println("Transport insert error: " + e.getMessage());
+			if (trsp == null) {
+				// 両方の登録処理を実行
+			    int upWork = workInfoMapper.insertWorkInfo(mapper);
+			    int uptransport = transportMapper.insertTransport(mapper);
 		    
-			model.addAttribute("upTransportInfo", "001");
+			    
+			    // 結果判定
+			    if (upWork == 1 && uptransport == 1) {
+			        // 両方とも成功
+			        model.addAttribute("uploadInfo", "111");
+			        model.addAttribute("upTransportInfo", "111");
+			    } else {
+			        // どちらか（または両方）が失敗
+			        model.addAttribute("uploadInfo", "002");
+			    }
+			}else {
+				// 両方の更新処理を実行
+				int updateWork = workInfoMapper.updateWorkInfo(mapper);
+				int updatetransport = transportMapper.updateTransport(mapper);
+				if ((updateWork == 1)&&(updatetransport == 1 )) {
+					//修正成功の場合、画面に下記メッセージを表示する。
+					//修正が成功しました
+					model.addAttribute("updateloadInfo", "123");
+					model.addAttribute("updateTransportInfo", "222");
+				}else {
+					//修正は失敗の場合、画面に下記メッセージを表示する。
+					//修正は失敗しました
+					model.addAttribute("updateloadInfo", "012");
+					model.addAttribute("updateTransportInfo", "003");
+				}  
+			}
+			// 交通情報を取得し戻る
+			transport = getTransportInf(mapper);
+		} catch (Exception e) {
+			
+			// その他の例外処理
+	        e.printStackTrace();
+	        System.out.println("Insert error: " + e.getMessage());
+	        model.addAttribute("uploadInfo", "002");
+	        throw e;
 		}
 
-		// 交通情報を取得し戻る
-		transport = getTransportInf(mapper);
+		
 		return transport;
 	}
 
 
 	//修正機能
+	@Transactional
 	public Transport updateTransport(MultipartFile file,Map<String, String> mapper, Model model) throws Exception {
 
 		//画面に入力したデータ
@@ -151,48 +175,37 @@ public class TransportAllService {
 		//stateは非NULL状態、メッセージを表示する。
 		model.addAttribute("state", "1");
 
-		// ファイルアップロード
-		if (!uploadTimeReport(file)) {
-			//ファイルのアップロードに失敗の場合、画面に下記メッセージを表示する。
-			//アップロードは失敗しました
-			model.addAttribute("uploadInfo", "001");
-		}
-
+		
 		// 勤怠テーブルに修正
 		try {
-			int updateWork = workinfoService.updateWorkInfo(mapper);
-			if (updateWork == 1) {
+			// ファイルアップロード
+			if (!uploadTimeReport(file)) {
+				//ファイルのアップロードに失敗の場合、画面に下記メッセージを表示する。
+				//アップロードは失敗しました
+				model.addAttribute("uploadInfo", "001");
+			}
+
+			
+			int updateWork = workInfoMapper.updateWorkInfo(mapper);
+			int updatetransport = transportMapper.updateTransport(mapper);
+			if ((updateWork == 1)&&(updatetransport == 1 )) {
 				//修正成功の場合、画面に下記メッセージを表示する。
 				//修正が成功しました
 				model.addAttribute("updateloadInfo", "123");
-			}else {
-				//修正は失敗の場合、画面に下記メッセージを表示する。
-				//修正は失敗しました
-				model.addAttribute("updateloadInfo", "012");
-			}
-		} catch (Exception e) {
-			//追加失敗の場合、画面に下記メッセージを表示する。
-			//ファイルアプロードは失敗しました
-			model.addAttribute("uploadFile", "001");
-		}
-
-		// 交通費テーブル修正
-		try {
-			int updatetransport = transportService.updateTransport(mapper);
-			if(updatetransport == 1 ) {
-				//修正成功の場合、画面に下記メッセージを表示する。
-				//修正が成功しました
 				model.addAttribute("updateTransportInfo", "222");
 			}else {
 				//修正は失敗の場合、画面に下記メッセージを表示する。
 				//修正は失敗しました
+				model.addAttribute("updateloadInfo", "012");
 				model.addAttribute("updateTransportInfo", "003");
 			}
 		} catch (Exception e) {
 			//追加失敗の場合、画面に下記メッセージを表示する。
 			//ファイルアプロードは失敗しました
-			model.addAttribute("uploadFile", "001");
+			model.addAttribute("updateTransportInfo", "003");
+			throw e;
 		}
+
 
 		// 交通情報を取得し戻る
 		transport = getTransportInf(mapper);
