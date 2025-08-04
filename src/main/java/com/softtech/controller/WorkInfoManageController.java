@@ -55,16 +55,16 @@ public class WorkInfoManageController<WorkInfoComment> {
 	  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 
 	  String month = sdf.format(cal.getTime());
-	  
+
 
 	  Map<String, String> sportMapper = new HashMap<String, String>();
 	  String employeeID = (String) session.getAttribute("userEmoplyeeID");
 	  String maxMonth =transportService.queryMaxWorkMonthTransport(employeeID);
-	  
+
 	  //　交通情報取得
 	  sportMapper.put("employeeID", (String) session.getAttribute("userEmoplyeeID"));
 	  sportMapper.put("workMonth", maxMonth);
-	  
+
 	  Transport transport = transportService.queryTransport(sportMapper);
 	  if (transport == null) {
 	    transport = new Transport();
@@ -79,10 +79,10 @@ public class WorkInfoManageController<WorkInfoComment> {
 	    transport.setWorkEndDay(lastDayOfMonth.format(DateTimeFormatter.BASIC_ISO_DATE));
 	  }else {
 		  if(month != maxMonth) {
-			  	transport.setState("0");	
+			  	transport.setState("0");
 			}else {
 				transport.setState("1");
-			}  
+			}
 		  //transport.setState("1");
 
 	  }
@@ -91,7 +91,7 @@ public class WorkInfoManageController<WorkInfoComment> {
 
 	  // 交通費を０に設定。
 	  transport.setBusinessTrip("0");
-	  
+
 
 	  //　画面へ戻す
 	  model.addAttribute("transport", transport);
@@ -146,10 +146,10 @@ public class WorkInfoManageController<WorkInfoComment> {
 	    cal.setTime(monthDate);
 	    int year = cal.get(Calendar.YEAR);
 	    int monthValue = cal.get(Calendar.MONTH) + 1;
-	    
+
 	    LocalDate firstDayOfMonth = LocalDate.of(year, monthValue, 1);
 	    LocalDate lastDayOfMonth = firstDayOfMonth.withDayOfMonth(firstDayOfMonth.lengthOfMonth());
-	    
+
 	    transport.setWorkStartDay(firstDayOfMonth.format(DateTimeFormatter.BASIC_ISO_DATE));
 	    transport.setWorkEndDay(lastDayOfMonth.format(DateTimeFormatter.BASIC_ISO_DATE));
 	  }else {
@@ -234,41 +234,41 @@ public class WorkInfoManageController<WorkInfoComment> {
 	        continue;
 	      }
 	    }
-	    
+
 	    String paramValue = entry.getValue()[0];
 	    if (paramValue != null) {
 	      mapper.put(entry.getKey(), paramValue);
 	    }
 	  } // for
 
-
-
 	  //勤怠追加処理
 	  Transport transport = new Transport();
-	
+
 
 	  try{
 		  transport = transportAllService.doTransport(file, mapper, model);
 	  }catch(Exception e) {
-		  
+
 	  } finally {
-		
+
 		  if (transport == null) {
 		    transport = new Transport();
-	
+
 		    transport.setState("0");
 		  }else {
 		    transport.setState("1");
 		  }
-	
-		  model.addAttribute("transport", transport);
-		//現在日付
+
+		  //現在日付
 		  Calendar cal = Calendar.getInstance();
 		  SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
-
 		  String month = sdf.format(cal.getTime());
+		  transport.setWorkMonth(month);
+
+		  model.addAttribute("transport", transport);
+
 	  }
-	  
+
 	  return "/ems/workInfoManage";
 	}
 
@@ -342,12 +342,12 @@ public class WorkInfoManageController<WorkInfoComment> {
 	    } // forのEND
 
 	    //勤怠修正処理
-	    
+
 	    Transport transport = new Transport();
 		try {
 			transport = transportAllService.updateTransport(file, mapper, model);
 		}catch(Exception e) {
-			  
+
 	    } finally {
 		    if (transport == null) {
 		        transport = new Transport();
