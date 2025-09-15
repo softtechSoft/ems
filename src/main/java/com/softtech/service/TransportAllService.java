@@ -109,7 +109,6 @@ public class TransportAllService {
 		sportMap.put("employeeID", employeeID);
 		sportMap.put("workMonth", month);
 		Transport trsp = transportService.queryTransport(sportMap);
-
 		// 勤怠テーブルに新規追加
 		try {
 			if (trsp == null) {
