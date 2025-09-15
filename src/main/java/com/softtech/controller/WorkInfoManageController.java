@@ -164,8 +164,17 @@ public class WorkInfoManageController<WorkInfoComment> {
 	}
 
 
+
+	/*
+	 * 機能：勤怠新規追加
+	 *
+	 * @param request　リクエスト
+	 * @param model　画面モデル
+	 * @return
+	 * @exception
+	 * @author @ソフトテク
+	 */
 	@RequestMapping("/transport-workinfo")
-	//新規追加
 	public String insertTransport(HttpServletRequest request, HttpSession session,@RequestParam("file") MultipartFile file, Model model) throws Exception {
 
 	  Map<String, String> mapper = new HashMap<String, String>();
@@ -226,14 +235,14 @@ public class WorkInfoManageController<WorkInfoComment> {
 	      continue;
 	    }
 
-	    //定期券チェックボックスがチェックされた場合
-	    if(entry.getKey().equals("teiki")) {
-	      String en = entry.getValue()[0];
-	      if( en != null && en.equals("1")) {
-	        flg = true;
-	        continue;
-	      }
-	    }
+//	    //定期券チェックボックスがチェックされた場合
+//	    if(entry.getKey().equals("teiki")) {
+//	      String en = entry.getValue()[0];
+//	      if( en != null && en.equals("1")) {
+//	        flg = true;
+//	        continue;
+//	      }
+//	    }
 
 	    String paramValue = entry.getValue()[0];
 	    if (paramValue != null) {

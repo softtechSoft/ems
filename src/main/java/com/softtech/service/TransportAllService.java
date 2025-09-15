@@ -101,18 +101,14 @@ public class TransportAllService {
 			//アップロードは失敗しました
 			model.addAttribute("uploadInfo", "001");
 		}
-		
-		  String employeeID = mapper.get("employeeID");
-		  String month = mapper.get("workMonth");
-		  Map<String, String> sportMap = new HashMap<String, String>();
+
+		String employeeID = mapper.get("employeeID");
+		String month = mapper.get("workMonth");
+		Map<String, String> sportMap = new HashMap<String, String>();
 		//　交通情報取得
-		  sportMap.put("employeeID", employeeID);
-		  sportMap.put("workMonth", month);
-		  
-		  Transport trsp = transportService.queryTransport(sportMap);
-//		  String employeeID = (String) session.getAttribute("userEmoplyeeID");
-//		  Map<String, String> map = new HashMap<String, String>();
-//			Transport transport = transportService.queryTransport(sportMapper);
+		sportMap.put("employeeID", employeeID);
+		sportMap.put("workMonth", month);
+		Transport trsp = transportService.queryTransport(sportMap);
 
 		// 勤怠テーブルに新規追加
 		try {
@@ -120,8 +116,8 @@ public class TransportAllService {
 				// 両方の登録処理を実行
 			    int upWork = workInfoMapper.insertWorkInfo(mapper);
 			    int uptransport = transportMapper.insertTransport(mapper);
-		    
-			    
+
+
 			    // 結果判定
 			    if (upWork == 1 && uptransport == 1) {
 			        // 両方とも成功
@@ -145,12 +141,12 @@ public class TransportAllService {
 					//修正は失敗しました
 					model.addAttribute("updateloadInfo", "012");
 					model.addAttribute("updateTransportInfo", "003");
-				}  
+				}
 			}
 			// 交通情報を取得し戻る
 			transport = getTransportInf(mapper);
 		} catch (Exception e) {
-			
+
 			// その他の例外処理
 	        e.printStackTrace();
 	        System.out.println("Insert error: " + e.getMessage());
@@ -158,7 +154,7 @@ public class TransportAllService {
 	        throw e;
 		}
 
-		
+
 		return transport;
 	}
 
@@ -175,7 +171,7 @@ public class TransportAllService {
 		//stateは非NULL状態、メッセージを表示する。
 		model.addAttribute("state", "1");
 
-		
+
 		// 勤怠テーブルに修正
 		try {
 			// ファイルアップロード
@@ -185,7 +181,7 @@ public class TransportAllService {
 				model.addAttribute("uploadInfo", "001");
 			}
 
-			
+
 			int updateWork = workInfoMapper.updateWorkInfo(mapper);
 			int updatetransport = transportMapper.updateTransport(mapper);
 			if ((updateWork == 1)&&(updatetransport == 1 )) {
