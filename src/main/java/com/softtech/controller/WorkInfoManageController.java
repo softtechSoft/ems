@@ -125,6 +125,16 @@ public class WorkInfoManageController<WorkInfoComment> {
 	      break;
 	    }
 	  }
+	  int yearVlu = Integer.parseInt(month.substring(0, 4));
+	  int monthVlu = Integer.parseInt(month.substring(4, 6));
+
+	  if (monthVlu == 1) {
+		  	yearVlu--;
+		    monthVlu = 12;
+		} else {
+			monthVlu--;
+		}
+	  String lastMonth = yearVlu + String.format("%02d", monthVlu);
 
 	  //セッションからログインIDを取得する。
 	  String employeeID = (String) session.getAttribute("userEmoplyeeID");
@@ -133,12 +143,12 @@ public class WorkInfoManageController<WorkInfoComment> {
 	  Map<String, String> sportMapper = new HashMap<String, String>();
 	  //　交通情報取得
 	  sportMapper.put("employeeID", employeeID);
-	  sportMapper.put("workMonth", month);
+	  sportMapper.put("workMonth", lastMonth);
 	  Transport transport = transportService.queryTransport(sportMapper);
 	  if (transport == null) {
 	    transport = new Transport();
 
-	    transport.setState("0");
+	    //transport.setState("0");
 
 	    //指定年月の開始日と最終日をLocalDateで設定
 	    java.util.Date monthDate = sdFormat1.parse(month);
@@ -153,11 +163,12 @@ public class WorkInfoManageController<WorkInfoComment> {
 	    transport.setWorkStartDay(firstDayOfMonth.format(DateTimeFormatter.BASIC_ISO_DATE));
 	    transport.setWorkEndDay(lastDayOfMonth.format(DateTimeFormatter.BASIC_ISO_DATE));
 	  }else {
-	    transport.setState("1");
+	    //transport.setState("1");
 	  }
 
 	  // 稼働月設定。
 	  transport.setWorkMonth(month);
+	  transport.setState("0");
 
 	  model.addAttribute("transport", transport);
 	  return "/ems/workInfoManage";
