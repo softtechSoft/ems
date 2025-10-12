@@ -17,7 +17,6 @@ import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -27,6 +26,7 @@ import com.softtech.entity.AdjustmentDetail;
 import com.softtech.entity.AdjustmentFile;
 import com.softtech.entity.AdjustmentRequestFiles;
 import com.softtech.entity.Employee;
+import com.softtech.entity.SaveFolder;
 import com.softtech.mapper.AdjustmentDetailMapper;
 import com.softtech.mapper.AdjustmentFileMapper;
 import com.softtech.mapper.AdjustmentRequestFilesMapper;
@@ -34,27 +34,44 @@ import com.softtech.mapper.EmployeeMapper;
 
 /**
  * 年末調整サービスクラス
- * 
+ *
  * ファイルのアップロード、ダウンロード、保存、履歴管理など
  * 年末調整に関連するビジネスロジックを提供するクラス。
+ *
+ *
+ * 年末調整  opt/emsm/adjust  (m_file)
+ *    （システム-宮野）     /YYYY    #年度
+ *                                  /調整票１
+ *                                  /調整票2
+ *                                  /調整票3
+ *     (ems-社員）                  /社員１
+ *                                       /記載済み調整票１
+ *                                       /記載済み調整票２
+ *                                       /証跡ファイル１
+ *                                       /証跡ファイル１
+ *    （emsmー宮野さん）                 /源泉帳票票
+ *
+ *                                 /社員2
  */
 @Service
 public class AdjustmentService {
     private static final Logger logger = LoggerFactory.getLogger(AdjustmentService.class);
 
     @Autowired
-    private AdjustmentFileMapper adjustmentFileMapper; 
+    private AdjustmentFileMapper adjustmentFileMapper;
     @Autowired
     private AdjustmentDetailMapper adjustmentDetailMapper;
     @Autowired
     private EmployeeMapper employeeMapper;
     @Autowired
     private AdjustmentRequestFilesMapper adjustmentRequestFilesMapper;
+    @Autowired
+    SaveFolderService saveFolderService;
 
-    @Value("${file.storage.location}")
+    //@Value("${file.storage.location}")
     private String rootLocation; // ルートディレクトリパス
 
-    @Value("${file.request.location}")
+    //@Value("${file.request.location}")
     private String requestFilesLocation; // 申請書ファイル保存用ディレクトリパス
 
     /**
@@ -63,9 +80,14 @@ public class AdjustmentService {
     @PostConstruct
     public void init() {
         try {
+        	// 年度更新ルートフォルダーを取得
+        	SaveFolder saveFolder=saveFolderService .findFileTypeName("年度更新");
+        	rootLocation=saveFolder.getSaveFolder();
+        	requestFilesLocation=rootLocation;
+
             // 申請書ファイル保存用ディレクトリを作成
             Files.createDirectories(getRequestFilesLocation());
-            logger.debug("ファイル保存用ディレクトリの作成が完了: root={}, requestFilesLocation={}", 
+            logger.debug("ファイル保存用ディレクトリの作成が完了: root={}, requestFilesLocation={}",
                          getRootLocation(), getRequestFilesLocation());
         } catch (IOException e) {
             logger.error("ストレージディレクトリの作成に失敗しました！", e);
@@ -233,14 +255,14 @@ public class AdjustmentService {
             throw new RuntimeException("ファイルのロードに失敗しました: " + filename, e);
         }
     }
-    
+
     /**
      * ファイルを削除するメソッド
      */
     public void deleteFile(String employeeID, int fileYear, String fileName, String fileType) {
         logger.debug("ファイル削除開始 - employeeID: {}, fileYear: {}, fileName: {}, fileType: {}",
                      employeeID, fileYear, fileName, fileType);
-        
+
         // DBにファイルレコードを検索
         AdjustmentFile file = adjustmentFileMapper.findByEmployeeIDAndYearAndFileName(employeeID, fileYear, fileName, fileType);
         if (file == null) {
@@ -266,7 +288,7 @@ public class AdjustmentService {
         if (affectedRows == 0) {
             throw new RuntimeException("DBからファイルレコードを削除できませんでした: " + fileName);
         }
-        
+
         logger.debug("ファイル削除完了: {}", file.getFilePath());
     }
 
@@ -285,4 +307,19 @@ public class AdjustmentService {
             throw e;
         }
     }
+    /*
+      年末調整  opt/emsm/adjust  (m_file)
+     （システム-宮野さん）     /YYYY    #年度
+                                    /調整票１
+                                   /調整票2
+                                   /調整票3
+      (ems-社員）                  /社員１
+                                        /記載済み調整票１
+                                        /記載済み調整票２
+                                        /証跡ファイル１
+                                        /証跡ファイル１
+     （emsmー宮野さん）                 /源泉帳票票
+
+                                  /社員2
+     */
 }

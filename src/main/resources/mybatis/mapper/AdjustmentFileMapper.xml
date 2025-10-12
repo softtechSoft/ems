@@ -14,19 +14,19 @@
 
 	<!-- SQL Queries -->
 	<select id="selectAll" resultMap="AdjustmentFileResultMap">
-		SELECT * FROM adjustmentFile
+		SELECT * FROM adjustmentfile
 	</select>
 
 	<select id="findFilesByEmployeeID" parameterType="String"
 		resultMap="AdjustmentFileResultMap">
-		SELECT * FROM adjustmentFile WHERE employeeID =
+		SELECT * FROM adjustmentfile WHERE employeeID =
 		#{employeeID}
 	</select>
 
 
 	<select id="findByEmployeeIDAndYearAndFileName"
 		resultType="com.softtech.entity.AdjustmentFile">
-		SELECT * FROM AdjustmentFile
+		SELECT * FROM adjustmentfile
 		WHERE employeeID =
 		#{employeeID}
 		AND fileYear = #{fileYear}
@@ -37,7 +37,7 @@
 
 	<select id="findFilesByTypeAndEmployee" parameterType="map"
 		resultMap="AdjustmentFileResultMap">
-		SELECT * FROM adjustmentFile
+		SELECT * FROM adjustmentfile
 		WHERE fileType = #{fileType} AND
 		employeeID = #{employeeID} AND fileYear =
 		#{fileYear}
@@ -45,7 +45,7 @@
 
 	<select id="findResultFilesByEmployeeID" parameterType="String"
 		resultMap="AdjustmentFileResultMap">
-		SELECT * FROM adjustmentFile
+		SELECT * FROM adjustmentfile
 		WHERE employeeID = #{employeeID}
 		AND fileType = 'resultType'
 	</select>
@@ -54,7 +54,7 @@
 
 	<insert id="insert"
 		parameterType="com.softtech.entity.AdjustmentFile">
-		INSERT INTO adjustmentFile (employeeID, fileType,
+		INSERT INTO adjustmentfile (employeeID, fileType,
 		fileYear, fileName,
 		fileStatus, filePath)
 		VALUES (#{employeeID},
@@ -64,7 +64,7 @@
 
 	<update id="update"
 		parameterType="com.softtech.entity.AdjustmentFile">
-		UPDATE adjustmentFile SET employeeID = #{employeeID},
+		UPDATE adjustmentfile SET employeeID = #{employeeID},
 		fileType = #{fileType}, fileYear = #{fileYear}, fileName =
 		#{fileName},
 		fileStatus = #{fileStatus}, filePath = #{filePath}
@@ -72,7 +72,7 @@
 
 	<update id="updateFileStatusByEmployeeIDAndYear"
 		parameterType="map">
-		UPDATE adjustmentFile
+		UPDATE adjustmentfile
 		SET fileStatus = #{newStatus}
 		WHERE
 		employeeID = #{employeeID}
@@ -84,7 +84,7 @@
 
 	<update id="updateByEmployeeIDAndYearAndFileName"
 		parameterType="com.softtech.entity.AdjustmentFile">
-		UPDATE AdjustmentFile
+		UPDATE adjustmentfile
 		SET filePath = #{filePath},
 		fileType = #{fileType}
 		WHERE employeeID = #{employeeID}
@@ -95,7 +95,7 @@
 	</update>
 
 	<delete id="deletefile" parameterType="map">
-		DELETE FROM adjustmentFile
+		DELETE FROM adjustmentfile
 		WHERE employeeID = #{employeeID}
 		AND fileYear = #{fileYear}
 		AND fileName = #{fileName}

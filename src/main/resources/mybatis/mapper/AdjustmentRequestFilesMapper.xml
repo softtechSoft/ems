@@ -14,37 +14,37 @@
 
 
     <select id="selectAll" resultMap="AdjustmentRequestFilesResultMap">
-        SELECT * FROM ems.adjustmentRequestFiles
+        SELECT * FROM ems.adjustmentrequestfiles
     </select>
 
 
 
     <select id="findByYearAndStatus" resultMap="AdjustmentRequestFilesResultMap">
-        SELECT * FROM ems.adjustmentRequestFiles
+        SELECT * FROM ems.adjustmentrequestfiles
         WHERE fileYear = #{year} AND fileULStatus = #{status}
     </select>
 
 
     <select id="selectByFileNameAndEmployeeIDAndYear" parameterType="map" resultMap="AdjustmentRequestFilesResultMap">
-        SELECT * FROM ems.adjustmentRequestFiles
+        SELECT * FROM ems.adjustmentrequestfiles
         WHERE fileName = #{fileName} AND employeeID = #{employeeID} AND fileYear = #{fileYear}
     </select>
 
 
     <select id="selectByFileNameAndEmployeeIDAndYearSingle" parameterType="map" resultMap="AdjustmentRequestFilesResultMap">
-        SELECT * FROM ems.adjustmentRequestFiles
+        SELECT * FROM ems.adjustmentrequestfiles
         WHERE fileName = #{fileName} AND employeeID = #{employeeID} AND fileYear = #{fileYear}
         LIMIT 1
     </select>
 
     <insert id="insert" parameterType="com.softtech.entity.AdjustmentRequestFiles">
-        INSERT INTO ems.adjustmentRequestFiles (fileName, fileYear, fileULStatus, filePath)
+        INSERT INTO ems.adjustmentrequestfiles (fileName, fileYear, fileULStatus, filePath)
         VALUES (#{fileName}, #{fileYear}, #{fileULStatus}, #{filePath})
     </insert>
 
 
     <update id="update" parameterType="com.softtech.entity.AdjustmentRequestFiles">
-        UPDATE ems.adjustmentRequestFiles SET
+        UPDATE ems.adjustmentrequestfiles SET
         fileName = #{fileName},
         fileYear = #{fileYear},
         fileULStatus = #{fileULStatus},
@@ -54,6 +54,6 @@
 
 
     <delete id="deleteByFileName" parameterType="String">
-        DELETE FROM ems.adjustmentRequestFiles WHERE fileName = #{fileName}
+        DELETE FROM ems.adjustmentrequestfiles WHERE fileName = #{fileName}
     </delete>
 </mapper>
