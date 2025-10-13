@@ -348,7 +348,7 @@
                 formData.append('files', files[i]);
             }
 
-            fetch('/saveFileAndDetail', {
+            fetch('https://it-softtech.com/ems/saveFileAndDetail', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'
@@ -391,7 +391,7 @@
                 fileType: fileType
             };
 
-            fetch('/deleteFile', {
+            fetch('https://it-softtech.com/ems/deleteFile', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
@@ -420,7 +420,7 @@
             if (!confirm('注意：一旦確定すると、再アップロードはできなくなります。')) {
                 return;
             }
-            fetch('/finalizeAdjustment', {
+            fetch('https://it-softtech.com/ems/finalizeAdjustment', {
                 method: 'POST',
                 credentials: 'include'
             })
