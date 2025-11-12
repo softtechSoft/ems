@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.softtech.mapper.TransportMapper">
-    
+
     <select id="queryAllTransport" parameterType="string" resultType="Transport">
         SELECT * FROM ems.transport
     </select>
@@ -47,8 +47,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             NULL,
             NULL,
             NULL,
-            COALESCE(CAST(#{transportExpense} AS DECIMAL(10,2)), 0) + 
-            COALESCE(CAST(#{transportExpense1} AS DECIMAL(10,2)), 0) + 
+            COALESCE(CAST(#{transportExpense} AS DECIMAL(10,2)), 0) +
+            COALESCE(CAST(#{transportExpense1} AS DECIMAL(10,2)), 0) +
             COALESCE(CAST(#{transportExpense2} AS DECIMAL(10,2)), 0),
             #{businessTrip},
             '0',
@@ -77,19 +77,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             ems.transport t
         LEFT JOIN
             ems.workinfo w ON w.workMonth = t.workMonth
-        WHERE 
-            t.employeeID = #{employeeID} 
-            AND t.workMonth = #{workMonth} 
+        WHERE
+            t.employeeID = #{employeeID}
+            AND t.workMonth = #{workMonth}
             AND w.contractID = (
-                SELECT contractID 
-                FROM ems.contract 
+                SELECT contractID
+                FROM ems.contract
                 WHERE employeeID = #{employeeID}
                 AND status = '1'
             )
     </select>
 
     <update id="updateTransport" parameterType="map">
-        UPDATE transport 
+        UPDATE transport
         SET
             startDate = #{startDate},
             startStation = #{startStation},
@@ -100,17 +100,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             transportFacility1 = #{transportFacility1},
             midStation2 = #{midStation2},
             midStation3 = #{midStation3},
-            transport = COALESCE(CAST(#{transport} AS SIGNED), 0),
+            transport =  COALESCE(CAST(#{transportExpense} AS DECIMAL(10,2)), 0) +  COALESCE(CAST(#{transportExpense1} AS DECIMAL(10,2)), 0) +   COALESCE(CAST(#{transportExpense2} AS DECIMAL(10,2)), 0),
             businessTrip = COALESCE(CAST(#{businessTrip} AS SIGNED), 0),
             updateDate = DATE_FORMAT(CURDATE(), '%Y%m%d')
         WHERE
             employeeID = #{employeeID}
             AND workMonth = #{workMonth}
     </update>
-    
+
     <select id="queryMaxWorkMonthTransport" resultType="string">
-    	select max(workMonth) 
-    	from ems.transport 
+    	select max(workMonth)
+    	from ems.transport
     	where employeeID = #{employeeID}
     </select>
 
