@@ -25,6 +25,10 @@ public class Employee {
 	private String epType;
 	private String personNumber;
 	private String department;
+	private String position;
+	private String salaryFlg;
+	private String koyoFlg;
+	private String nenmatsuFlg;
 
 	public Employee() {
 	}
@@ -227,6 +231,62 @@ public class Employee {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	/**
+	 * @return position
+	 */
+	public String getPosition() {
+		return position;
+	}
+
+	/**
+	 * @param position セットする position
+	 */
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	/**
+	 * @return salaryFlg
+	 */
+	public String getSalaryFlg() {
+		return salaryFlg;
+	}
+
+	/**
+	 * @param salaryFlg セットする salaryFlg
+	 */
+	public void setSalaryFlg(String salaryFlg) {
+		this.salaryFlg = salaryFlg;
+	}
+
+	/**
+	 * @return koyoFlg
+	 */
+	public String getKoyoFlg() {
+		return koyoFlg;
+	}
+
+	/**
+	 * @param koyoFlg セットする koyoFlg
+	 */
+	public void setKoyoFlg(String koyoFlg) {
+		this.koyoFlg = koyoFlg;
+	}
+
+	/**
+	 * @return nenmatsuFlg
+	 */
+	public String getNenmatsuFlg() {
+		return nenmatsuFlg;
+	}
+
+	/**
+	 * @param nenmatsuFlg セットする nenmatsuFlg
+	 */
+	public void setNenmatsuFlg(String nenmatsuFlg) {
+		this.nenmatsuFlg = nenmatsuFlg;
 	}
 
 

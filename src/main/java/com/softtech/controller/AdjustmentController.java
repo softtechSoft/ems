@@ -71,6 +71,10 @@ public class AdjustmentController {
             return "redirect:/login";
         }
 
+        // 年末調整対象ではない方は、その旨を戻す。
+        if (adjustmentService.getEndYearAdmtFlg(employeeID).getNenmatsuFlg().equals("0")){
+        	return "ems/noAdjustment";
+        }
         // 現在の年度を取得
         int currentYear = java.time.LocalDate.now().getYear();
         logger.debug("調整ページ表示 - メールアドレス: {}, 従業員ID: {}, 年: {}", employeeEmail, employeeID, currentYear);

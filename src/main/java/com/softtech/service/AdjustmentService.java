@@ -322,4 +322,10 @@ public class AdjustmentService {
 
                                   /社員2
      */
+    /*
+     * 年末調整対象フラグを取得する
+     */
+    public Employee getEndYearAdmtFlg(String employeeID) {
+        return employeeMapper.queryEmployeeAll(employeeID) ;
+    }
 }
