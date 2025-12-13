@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -321,6 +324,28 @@ public class DateUtil {
 
 		return ml;
 
+	}
+
+	/**
+	 * 日付チェック
+	 * @param value 検証対象の値
+	 * @return 結果（true：日付、false：日付ではない）
+	 */
+	public static boolean isCheckDate(String value) {
+	    boolean result = false;
+
+	    if (value != null) {
+	        try {
+	            String checkDate = value.replace("-", "").replace("/", "");
+	            DateTimeFormatter.ofPattern("uuuuMMdd").withResolverStyle(ResolverStyle.STRICT).parse(checkDate, LocalDate::from);
+	            result = true;
+
+	        } catch (Exception e) {
+	            result = false;
+	        }
+	    }
+
+	    return result;
 	}
 
 

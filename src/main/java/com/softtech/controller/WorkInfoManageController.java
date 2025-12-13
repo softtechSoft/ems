@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.softtech.entity.Transport;
 import com.softtech.service.TransportAllService;
 import com.softtech.service.TransportService;
+import com.softtech.util.DateUtil;
 
 /**
  * 機能：勤怠管理コントロール
@@ -237,9 +238,15 @@ public class WorkInfoManageController<WorkInfoComment> {
 	      String startDateValue = entry.getValue()[0];
 	      if (startDateValue != null && !startDateValue.trim().isEmpty()) {
 	        String startDate = startDateValue;
-	        startDate = startDate.replace("/", "");
-	        startDate = startDate.replace("-", "");
-	        mapper.put(entry.getKey(), startDate);
+
+	        //日付チェック
+	        if (DateUtil.isCheckDate(startDate)) {
+		        startDate = startDate.replace("/", "");
+		        startDate = startDate.replace("-", "");
+		        mapper.put(entry.getKey(), startDate);
+	        } else {
+		        throw new IllegalArgumentException("定期券開始日には正しい日付を入力してください。");
+	        }
 	      } else {
 	        mapper.put(entry.getKey(), workStartDay);
 	      }
@@ -346,9 +353,15 @@ public class WorkInfoManageController<WorkInfoComment> {
 	            String startDateValue = entry.getValue()[0];
 	            if (startDateValue != null && !startDateValue.trim().isEmpty()) {
 	                String startDate = startDateValue;
-	                startDate = startDate.replace("/", "");
-	                startDate = startDate.replace("-", "");
-	                mapper.put(entry.getKey(), startDate);
+
+	    	        //日付チェック
+	    	        if (DateUtil.isCheckDate(startDate)) {
+	    		        startDate = startDate.replace("/", "");
+	    		        startDate = startDate.replace("-", "");
+	    		        mapper.put(entry.getKey(), startDate);
+	    	        } else {
+	    		        throw new IllegalArgumentException("定期券開始日には正しい日付を入力してください。");
+	    	        }
 	            } else {
 	                // null の場合は稼働開始日を使用
 	                mapper.put(entry.getKey(), workStartDay);

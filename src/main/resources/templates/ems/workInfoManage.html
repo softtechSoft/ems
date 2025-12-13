@@ -49,11 +49,11 @@
 			<div>
 				<label>稼働時間(h)<span class="required">*</span></label><input class="workinfo-time" type="number" step="0.1" min="0" th:field="*{workTime}" placeholder="例:150" title="稼働時間" required />
 			</div>
-			<div class="file">タイムレポート：
+			<div class="file" style="display:none;">タイムレポート：
 			<input id="file" type="file" name="file"/>
 			</div>
 			<div>
-				<label>定期券開始日</label><input id="startDate" class="start" name="startDate" value="" type="text" title="stationinfo" th:value="${transport.startDate}"  required />
+				<label>定期券開始日</label><input id="startDate" class="start" name="startDate" pattern="\d{4}-\d{2}-\d{2}" placeholder="YYYY-MM-DD" value="" type="text" title="stationinfo" th:value="${transport.startDate}"  required />
 			</div>
 			<div class="station">
 				<label>起点駅</label><input id="startStation" class="station-start" name="startStation" type="text" title="stationinfo" th:value="${transport.startStation}"  required />
