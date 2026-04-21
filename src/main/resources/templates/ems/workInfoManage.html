@@ -14,6 +14,16 @@
 		 */
 		function changeMonth()
 		{
+			const workMonth = document.querySelector("[name='workMonth']").value;
+
+		    if (!workMonth) {
+		        return;
+		    }
+		    const regex = /^\d{4}\/\d{2}$/;
+		    if (!regex.test(workMonth)) {
+		        return;
+		    }
+
 			document.getElementById('transpirt').action="changeMonth";
 			// Serverにリクエストをする
 			document.transpirt.submit();
@@ -37,6 +47,9 @@
 		<h3>稼働管理</h3>
     </header>
     <div id="boder" class="boder">
+    <div th:if="${errorMessage}" style="color:red; margin-bottom:10px;">
+	    <span th:text="${errorMessage}"></span>
+	</div>
 		<form th:object="${transport}" th:action="@{/transport-workinfo}" id='transpirt' name="transpirt"  class="wapper" method="POST" enctype="multipart/form-data">
 				<label>社員名</label><span class="name" th:text="${session.userEmployeeName}">USER</span>
 			<div>
@@ -53,14 +66,14 @@
 			<input id="file" type="file" name="file"/>
 			</div>
 			<div>
-				<label>定期券開始日</label><input id="startDate" class="start" name="startDate" pattern="\d{4}-\d{2}-\d{2}" placeholder="YYYY-MM-DD" value="" type="text" title="stationinfo" th:value="${transport.startDate}"  required />
+				<label>定期券開始日</label><input id="startDate" class="start" name="startDate" pattern="\d{4}-\d{2}-\d{2}" placeholder="YYYY-MM-DD" value="" type="text" title="stationinfo" th:value="${transport.startDate}" />
 			</div>
 			<div class="station">
-				<label>起点駅</label><input id="startStation" class="station-start" name="startStation" type="text" title="stationinfo" th:value="${transport.startStation}"  required />
+				<label>起点駅</label><input id="startStation" class="station-start" name="startStation" type="text" title="stationinfo" th:value="${transport.startStation}" />
 			</div>
-				<label>終点駅</label><input id="endStation" class="station-end" name="endStation" type="text" title="stationinfo" th:value="${transport.endStation}"  required />
+				<label>終点駅</label><input id="endStation" class="station-end" name="endStation" type="text" title="stationinfo" th:value="${transport.endStation}" />
 			<div>
-				<label>交通機関</label><input id="transportFacility" class="station-traffic" name="transportFacility" type="text" th:value="${transport.transportFacility}" title="stationinfo"  required />
+				<label>交通機関</label><input id="transportFacility" class="station-traffic" name="transportFacility" type="text" th:value="${transport.transportFacility}" title="stationinfo" />
 			</div>
 				<label>中間駅1</label><input id="midStation1" class="station-a" name="midStation1" type="text" th:value="${transport.midStation1}" title="stationinfo"  >
 			<div>

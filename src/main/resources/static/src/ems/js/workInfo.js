@@ -71,6 +71,21 @@ function chekMonth()
 }
 //判断ボタン
 function judge(flag){
+	const form = document.getElementById("transpirt");
+
+	if (!form.checkValidity()) {
+		form.reportValidity();
+		return;
+	}
+
+	const workMonth = document.querySelector("[name='workMonth']").value;
+    const regex = /^\d{4}\/\d{2}$/;
+
+    if (workMonth && !regex.test(workMonth)) {
+        alert("稼働月はYYYY/MM形式で入力してください");
+        return;
+    }
+
 	if (flag=="1"){
 	document.getElementById('transpirt').action="transport-update";
 	}else{

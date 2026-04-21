@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -84,7 +85,7 @@ public class WorkInfoManageController<WorkInfoComment> {
 			}else {
 				transport.setState("1");
 			}
-		  //transport.setState("1");
+//		  transport.setState("1");
 
 	  }
 	  // 稼働月設定。
@@ -126,6 +127,10 @@ public class WorkInfoManageController<WorkInfoComment> {
 	      break;
 	    }
 	  }
+	  if (month == null || month.length() < 6) {
+		    throw new IllegalArgumentException("稼働月が不正です");
+		  }
+
 	  int yearVlu = Integer.parseInt(month.substring(0, 4));
 	  int monthVlu = Integer.parseInt(month.substring(4, 6));
 
@@ -253,6 +258,20 @@ public class WorkInfoManageController<WorkInfoComment> {
 	      continue;
 	    }
 
+	    if ("workTime".equals(entry.getKey())) {
+	        String v = entry.getValue()[0];
+	        if (v == null || v.trim().isEmpty()) {
+	            throw new IllegalArgumentException("稼働時間が入力されていません");
+	        }
+	    }
+
+	    if ("transportExpense1".equals(entry.getKey())) {
+	        String v = entry.getValue()[0];
+	        if (v == null || v.trim().isEmpty()) {
+	            throw new IllegalArgumentException("通勤費が入力されていません");
+	        }
+	    }
+
 //	    //定期券チェックボックスがチェックされた場合
 //	    if(entry.getKey().equals("teiki")) {
 //	      String en = entry.getValue()[0];
@@ -263,6 +282,16 @@ public class WorkInfoManageController<WorkInfoComment> {
 //	    }
 
 	    String paramValue = entry.getValue()[0];
+
+	    if ("businessTrip".equals(entry.getKey())) {
+	        if (paramValue == null || paramValue.trim().isEmpty()) {
+	            mapper.put(entry.getKey(), "0");
+	        } else {
+	            mapper.put(entry.getKey(), paramValue);
+	        }
+	        continue;
+	    }
+
 	    if (paramValue != null) {
 	      mapper.put(entry.getKey(), paramValue);
 	    }
@@ -369,6 +398,15 @@ public class WorkInfoManageController<WorkInfoComment> {
 	            continue;
 	        }
 	        String paramValue = entry.getValue()[0];
+
+	        if ("businessTrip".equals(entry.getKey())) {
+		        if (paramValue == null || paramValue.trim().isEmpty()) {
+		            mapper.put(entry.getKey(), "0");
+		        } else {
+		            mapper.put(entry.getKey(), paramValue);
+		        }
+		        continue;
+		    }
 	        if (paramValue != null) {
 	            mapper.put(entry.getKey(), paramValue);
 	        }
@@ -390,6 +428,22 @@ public class WorkInfoManageController<WorkInfoComment> {
 		    }
 	    }
 	    model.addAttribute("transport", transport);
+	    return "/ems/workInfoManage";
+	}
+
+	/**
+     * 機能：IllegalArgumentException例外のハンドリング
+     * 　　　入力チェックエラーなど発生時にエラーメッセージを画面へ返却する
+     */
+	@ExceptionHandler(IllegalArgumentException.class)
+	public String handleIllegalArgument(IllegalArgumentException e, Model model) {
+
+	    model.addAttribute("errorMessage", e.getMessage());
+
+	    Transport transport = new Transport();
+	    transport.setState("0");
+	    model.addAttribute("transport", transport);
+
 	    return "/ems/workInfoManage";
 	}
 

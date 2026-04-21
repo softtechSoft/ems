@@ -122,16 +122,26 @@ public class Transport {
 		return startDate;
 	}
 
+//	public void setStartDate(String startDate) {
+//		if (startDate != null && startDate.length() >= 8) {
+//			this.startDate = String.format("%s/%s/%s",
+//				startDate.substring(0, 4),
+//				startDate.substring(4, 6),
+//				startDate.substring(6, 8));
+//		} else {
+//			this.startDate = startDate;
+//		}
+//	}
 	public void setStartDate(String startDate) {
-		if (startDate != null && startDate.length() >= 8) {
-			this.startDate = String.format("%s/%s/%s", 
-				startDate.substring(0, 4), 
-				startDate.substring(4, 6),
-				startDate.substring(6, 8));
-		} else {
-			this.startDate = startDate;
-		}
+	    if (startDate != null && startDate.length() == 8) {
+	        this.startDate = startDate.substring(0,4) + "-" +
+	                         startDate.substring(4,6) + "-" +
+	                         startDate.substring(6,8);
+	    } else {
+	        this.startDate = startDate;
+	    }
 	}
+
 	public BigDecimal getTransport() {
 		return transport;
 	}
@@ -198,7 +208,7 @@ public class Transport {
 	}
 	public String getFormattedWorkEndDay() {
 	    if (workEndDay != null) {
-	        return workEndDay.toString(); 
+	        return workEndDay.toString();
 	    }
 	    return "";
 	}
